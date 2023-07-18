@@ -47,6 +47,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
     this->skillPoints = skPoint;
 
     this->updateStats();
+   // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 }
 
 Player::Player(string name, int dt){
@@ -226,7 +227,7 @@ void Player::updateStats(){
     this->accuracy = (this->dexterity / 2) + intelligence;
     this->luck = this->intelligence;
 
-	this->hp = this->hpMax;
+	//this->hp = this->hpMax;
 }
 
 void Player::addStat(int stat, int value) {

@@ -79,6 +79,25 @@ void StateData::clearCharacters(){
     ///characters.clear();
 }
 
+void State::saveCharacters()
+{
+    std::string fileName = "characters.txt";
+ //   void Game::saveCharacters(){
+    ofstream outFile(fileName);
+    if(outFile.is_open()){
+        for(int i = 0; i < StateData::GetInstance()->characters.size(); i++){
+            outFile << StateData::GetInstance()->characters[i]->getStatsAsString() << "\n";
+			outFile << StateData::GetInstance()->characters[i]->getEquippedWeapon() << "\n";
+			outFile << StateData::GetInstance()->characters[i]->getEquippedArmour() << "\n";
+			outFile <<	StateData::GetInstance()->characters[i]->getInvAsStringSave() << "\n";
+		}
+    }
+
+    outFile.close();
+	cout << "Game Saved!\n\n";
+}
+
+
 void StateData::createCamera(int maxSize){
 
     int h = 0;

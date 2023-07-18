@@ -38,7 +38,7 @@ Game::Game() : State(){
 	menuOptions.push_back("Rest - Cost 10 Gold");   //4
 	menuOptions.push_back("Character Menu");        //5
 	menuOptions.push_back("Create Character");
-	menuOptions.push_back("Save Game");
+	menuOptions.push_back("Save Game");             //7
 	menuOptions.push_back("Load Character");
 	menuOptions.push_back("Character Switch");
 
@@ -72,6 +72,13 @@ void Game::updateEvents(SDL_Event& e){
         //updateMouseEvents(e.button);
         //GAME LOOP HERE
         if(gameMenu->isSelected()){
+
+            if(gameMenu->getChoice() == 0){
+
+                Engine::GetInstance()->PopState();
+
+                return;
+            }
             if(gameMenu->getChoice() == 1){
 
                 StateData::GetInstance()->mainText->setString("You travel into parts unknown...");
@@ -97,6 +104,12 @@ void Game::updateEvents(SDL_Event& e){
             if(gameMenu->getChoice() == 5){
 
                 Engine::GetInstance()->AddState(std::make_shared<CharacterMenu>());
+            }
+
+            if(gameMenu->getChoice() == 7){
+
+                saveCharacters();
+                StateData::GetInstance()->mainText->setString("Game Saved");
             }
         }
     }

@@ -128,6 +128,8 @@ public:
     inline void unpauseState() { paused = false; }
     inline bool isPaused() { return paused; }
 
+    void saveCharacters();
+
 private:
 
 protected:
