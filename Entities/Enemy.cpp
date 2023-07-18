@@ -42,6 +42,10 @@ string Enemy::getAsString() const{
 
 int Enemy::takeDamage(int damage) {
 	damage -= this->defence;
+
+	if(damage <= 0){
+        damage = 1;
+	}
 	this->hp -= damage;
 	if (this->hp <= 0) {
 		this->hp = 0;

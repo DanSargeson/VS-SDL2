@@ -91,6 +91,12 @@ void Game::updateEvents(SDL_Event& e){
                 Engine::GetInstance()->AddState(std::make_shared<Battle>());
             }
 
+            if(gameMenu->getChoice() == 3){
+
+                StateData::GetInstance()->getActiveCharacter()->levelUp();
+               // StateData::GetInstance()->mainText->setString("Levelled up!!");
+            }
+
             if(gameMenu->getChoice() == 4){
 
                 StateData::GetInstance()->getActiveCharacter()->resetHP();

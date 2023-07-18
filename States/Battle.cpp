@@ -333,7 +333,11 @@ void Battle::playerAttacks(){
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
+					std::cout << "DAMGE: " << damage << " >>>>>>>>>>>>> ";
 					int totalDmg = enemies[choice].takeDamage(damage);
+					if(totalDmg < 0){
+                        totalDmg = 1;
+					}
 					std::string dmgMsg = "HIT for " + std::to_string(totalDmg) + " damage!";
 					playerAttkTxt->setString(dmgMsg);
 					alpha = 255;

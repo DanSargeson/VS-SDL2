@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "State.h"
 
 Player::Player(){
     distanceTravelled = 0;
@@ -196,6 +197,8 @@ string Player::getInvAsStringSave() {
 
 void Player::levelUp(){
 
+    bool levelled;
+
     if(this->exp >= this->expNext){
         this->exp -= this->expNext;
         this->level++;
@@ -204,10 +207,14 @@ void Player::levelUp(){
         this->statPoints++;
         this->skillPoints++;
 
-        cout << "\n" << "You are now level " << this->level << "!" << "\n";
+        //return true;
+
+        std::string msg =  "You are now level " + std::to_string(this->level) + "!";
+        StateData::GetInstance()->mainText->setString(msg);
     }
     else{
-        cout << "\n" << "You do not have enough experience." << "\n";
+        StateData::GetInstance()->mainText->setString("You do not have enough experience.");
+        //return false;
     }
 
 	this->hp = this->hpMax;

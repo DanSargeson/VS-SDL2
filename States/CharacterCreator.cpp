@@ -338,6 +338,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 ///            std:: cout << "******* \n" << StateData::GetInstance()->characters[StateData::GetInstance()->activeCharacter]->getAttributeSheet();
 
 ///         SaveData::GetInstance()->saveAllCharacters(StateData::GetInstance()->characters, ac, 0, 0, false);
+            saveCharacters();
          Engine::GetInstance()->PopState();
            Engine::GetInstance()->AddState(std::make_shared<Game>());
           //  StateData::GetInstance()->push_state(std::make_shared<Game>());
