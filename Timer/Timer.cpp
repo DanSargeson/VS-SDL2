@@ -1,7 +1,11 @@
 #include "Timer.h"
 #include <SDL2/SDL.h>
 
-Timer* Timer::s_Instance = nullptr;
+//Timer* Timer::s_Instance = nullptr;
+
+Timer::Timer(){
+
+}
 
 void Timer::Tick(){
 

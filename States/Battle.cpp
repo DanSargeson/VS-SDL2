@@ -1,6 +1,7 @@
 #include "Battle.h"
 #include "Engine.h"
 #include "Input.h"
+#include "PlayerDeath.h"
 
 Battle::Battle() : State(){
 
@@ -212,6 +213,10 @@ if(playerDefeated){
 
     playerTurn = false;
     endTurn = true;
+
+    Engine::GetInstance()->PopState();
+    Engine::GetInstance()->AddState(std::make_shared<PlayerDeath>());
+
     return;
 }
 
@@ -238,6 +243,9 @@ if(playerDefeated){
             if (!StateData::GetInstance()->getActiveCharacter()->isAlive()) {
                 playerDefeated = true;
                 Engine::GetInstance()->PopState();
+                Engine::GetInstance()->AddState(std::make_shared<PlayerDeath>());
+
+                return;
             }
             else if (enemies.size() <= 0) {
                 enemyDefeated = true;

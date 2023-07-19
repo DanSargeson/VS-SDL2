@@ -5,14 +5,16 @@
 
 int main(int argc, char** argv){
 
+    auto gameTimer = std::make_unique<Timer>();
+
     Engine::GetInstance()->Init();
 
     while(Engine::GetInstance()->IsRunning()){
 
             Engine::GetInstance()->Events();
-            Engine::GetInstance()->Update(Timer::GetInstance()->GetDeltaTime());
+            Engine::GetInstance()->Update(gameTimer->GetDeltaTime());
             Engine::GetInstance()->Render();
-            Timer::GetInstance()->Tick();
+            gameTimer->Tick();
     }
 
     Engine::GetInstance()->Clean();
