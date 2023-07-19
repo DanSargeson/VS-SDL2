@@ -82,7 +82,6 @@ uint32_t GameTimer::getTicks(){
 		}
 		else {
 
-
 			time = SDL_GetTicks() - mStartTicks;
 		}
 	}

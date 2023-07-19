@@ -2,6 +2,7 @@
 #define BATTLE_H
 
 #include "State.h"
+#include "Timer.h"
 
 class Battle : public State{
 
@@ -24,6 +25,9 @@ class Battle : public State{
         std::shared_ptr<GUI::Menu> battleMenu;
         std::shared_ptr<GUI::Menu> enemyMenu;
         std::vector<Enemy> enemies;
+
+        std::unique_ptr<Timer> battleTxtTimer;
+        std::unique_ptr<GameTimer> battleGameTimer;
 
         bool playerTurn;
         int choice;

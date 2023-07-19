@@ -1,4 +1,4 @@
-Dan 30 2622 10 17968 7 7 8 7 5 12 0 9 
+Dan 30 2612 10 17968 7 7 8 7 67 12 0 9 
 0 Titanium 2 2 16 33 1 
 1 Rusty 1 0 3 1 1 Iron 1 1 23 2 1 Iron 6 1 13 3 
 0 Rusty 2 0 4 8 1 0 Iron 8 1 8 16 2 0 Rusty 3 0 6 12 1 0 Rusty 7 0 6 12 2 0 Rusty 4 0 5 11 2 0 Iron 12 1 13 26 0 0 Iron 4 1 8 16 1 0 Iron 6 1 11 22 1 0 Iron 3 1 9 18 2 

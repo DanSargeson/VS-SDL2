@@ -10,9 +10,13 @@ Battle::Battle() : State(){
     EXPERMINTAL
     */
 
+
     missCounter = 0;
     alpha = 255;
     alpha2 = 255;
+
+    battleTxtTimer = std::make_unique<Timer>();
+    battleGameTimer = std::make_unique<GameTimer>();
 
      seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
 
@@ -88,7 +92,7 @@ Battle::Battle() : State(){
 
      std::uniform_int_distribution<int> coinDistribution(1, 6);
      int coinToss = coinDistribution(generator);
-     std::cout << std::endl << std::to_string(coinToss);
+     //std::cout << std::endl << std::to_string(coinToss);
 	//int coinToss = rand() % 2 + 1;
 	if (coinToss <= 4)
 		playerTurn = true;
@@ -145,6 +149,8 @@ Battle::~Battle(){
 
 
 void Battle::initBattle(){
+
+battleGameTimer->start();
 
 if(!escape && !playerDefeated && !enemyDefeated) {
 
@@ -206,6 +212,8 @@ if(endTurn){
 
 battleMenu->update();
 
+battleTxtTimer->Tick();
+
 if(playerDefeated){
 
     StateData::GetInstance()->mainText->setColour(255, 0, 0, 0);
@@ -256,7 +264,11 @@ if(playerDefeated){
 
         if(!playerTurn && !playerDefeated){
 
-                enemyAttacks();
+                std::cout << "DT:  " << battleGameTimer->getTicks() << std::endl;
+                if(battleGameTimer->getTicks() > 300){
+                    enemyAttacks();
+                    battleGameTimer->stop();
+                }
         }
 	}
 
@@ -267,18 +279,18 @@ if(playerDefeated){
 
 void Battle::updateText(){
 
-
     if(playerAttkTxt){
 
 //      if(alpha > 5){
 //
 //            StateData::GetInstance()->dynamicText->render();
 //        }s
-        if(alpha >= 0){
+        if(alpha >= 0 && battleTxtTimer->GetDeltaTime() <= 3){
 
-            alpha -= 1;
+            alpha -= 5;
             //SDL_Delay(200);
             SDL_SetTextureAlphaMod(playerAttkTxt->getTexture(), alpha);
+            battleTxtTimer->Restart();
           //  SDL_Delay(20);
         }
         else{
@@ -298,7 +310,7 @@ void Battle::updateText(){
 
         if(alpha2 >= 0){
 
-            alpha2 -= 1;
+            alpha2 -= 5;
             //SDL_Delay(200);
             SDL_SetTextureAlphaMod(enemyAttkTxt->getTexture(), alpha2);
          //   SDL_Delay(20);
@@ -318,10 +330,6 @@ void Battle::playerAttacks(){
             enemyTotal = enemies[choice].getDefence() / (double)combatTotal * 100;
             playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
 
-            std::cout << "\nCombat total: " << combatTotal << std::endl;
-            std::cout << "player total: " << combatTotal << std::endl;
-            std::cout << "enemy total: " << combatTotal << std::endl;
-
             seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
              std::uniform_int_distribution<int> playerTotalDistribution(1, playerTotal);
@@ -332,16 +340,12 @@ void Battle::playerAttacks(){
              std::uniform_int_distribution<int> enemyTotalDistribution(1, enemyTotal);
              combatRollEnemy = enemyTotalDistribution(generator);
 
-             std::cout << "\n\nEnemy: " << combatRollEnemy;
-             std::cout << "\nPlayer: " << combatRollPlayer << std::endl << std::endl;
-            //combatRollPlayer = rand() % playerTotal + 1;
-            //combatRollEnemy = rand() % enemyTotal + 1;
 
 				if (combatRollPlayer > combatRollEnemy || missCounter >= 5) { //###########PLAYER HITS
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
-					std::cout << "DAMGE: " << damage << " >>>>>>>>>>>>> ";
+					//std::cout << "DAMGE: " << damage << " >>>>>>>>>>>>> ";
 					int totalDmg = enemies[choice].takeDamage(damage);
 					if(totalDmg < 0){
                         totalDmg = 1;
@@ -428,6 +432,9 @@ void Battle::playerAttacks(){
 					missCounter++;
 					cout << "MISSED ENEMY!\n\n";
 				}
+
+				battleGameTimer->start();
+				//endTurn = true;
 }
 
 void Battle::enemyAttacks(){
@@ -437,7 +444,7 @@ void Battle::enemyAttacks(){
     if(!playerTurn && !escape && !enemyDefeated){
 			//ENEMY TURN
 			//cout << "= ENEMY ATTACKS = \n\n";
-			for (size_t i = 0; i < enemies.size(); i++){
+			for (size_t i = 0; i < enemies.size(); i++){    //TIMER NEEDS TO GO AROUND HERE....
 				combatTotal = enemies[i].getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
 				enemyTotal = enemies[i].getAccuracy() / (double)combatTotal * 100;
 				playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
@@ -485,7 +492,7 @@ void Battle::enemyAttacks(){
 			//END TURN
 			//playerTurn = true;
 			 endTurn = true;
-			 std::cout << endl << endl << "END TURN: " << endTurn << " playerTurn: " << playerTurn << endl;
+			 //std::cout << endl << endl << "END TURN: " << endTurn << " playerTurn: " << playerTurn << endl;
 		}
 }
 
@@ -571,10 +578,10 @@ void Battle::render(){
     StateData::GetInstance()->enemyText->render();
     StateData::GetInstance()->dynamicText->render();
 
-    if(alpha2 > 0){
+    if(alpha2 > 10){
         enemyAttkTxt->render();
     }
-    if(alpha > 0){
+    if(alpha > 10){
         playerAttkTxt->render();
     }
 
