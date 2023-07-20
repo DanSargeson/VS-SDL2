@@ -287,7 +287,7 @@ void Battle::updateText(){
 //        }s
         if(alpha >= 0 && battleTxtTimer->GetDeltaTime() <= 3){
 
-            alpha -= 5;
+            alpha -= 2;
             //SDL_Delay(200);
             SDL_SetTextureAlphaMod(playerAttkTxt->getTexture(), alpha);
             battleTxtTimer->Restart();
