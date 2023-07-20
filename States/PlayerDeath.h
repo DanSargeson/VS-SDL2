@@ -2,7 +2,6 @@
 #define PLAYERDEATH_H
 
 #include "Timer.h"
-
 #include "State.h"
 
 class PlayerDeath : public State{
@@ -17,9 +16,9 @@ class PlayerDeath : public State{
 
     private:
 
-        std::unique_ptr<Timer> textTimer;
-        float alpha;
-
+        std::unique_ptr<GameTimer> textTimer;
+        int alpha;
+        std::shared_ptr<GUI::Text> deathMsg;
 };
 
 #endif

@@ -90,7 +90,8 @@ void Engine::UpdateEvents(SDL_Event &event){
 
 void Engine::Render(){
 
-
+    SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 0);
+    SDL_RenderClear(m_Renderer);
     if(!mStates.empty()){
 
         mStates[currentState]->render();

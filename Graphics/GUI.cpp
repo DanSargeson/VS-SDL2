@@ -298,7 +298,6 @@ void GUI::Text::setPositionF(int x, int y, int w, int h){
 		mFiller.y = GUI::p2pYi(y);
 		mFiller.w = GUI::p2pXi(w);
 		mFiller.h = GUI::p2pYi(h);
-
 }
 
 GUI::Text::~Text(){
@@ -342,7 +341,7 @@ void GUI::Text::render(){
 
 		if (mOutline.w != 0 && mOutline.h != 0) {
 
-			SDL_SetRenderDrawColor(mRend, 0, 255, 0, 255);
+			SDL_SetRenderDrawColor(mRend, mTextColour.r, mTextColour.g, mTextColour.b, mTextColour.a);
 			SDL_RenderDrawRect(mRend, &mOutline);
 		}
 	}
@@ -396,6 +395,7 @@ void GUI::Text::setColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
 void GUI::Text::setFontSize(int size) {
 
 	mFontSize = size;
+	initFont();
 }
 
 void GUI::Text::updateWindow(SDL_Window* wind) {
