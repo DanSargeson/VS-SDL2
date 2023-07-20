@@ -15,7 +15,7 @@ PlayerDeath::PlayerDeath() : State(){
    // int w = StateData::GetInstance()->mainText->getTextWidth();
     deathMsg->setColour(255, 0, 0, 0);
     //deathMsg->setBorder(false);
-    deathMsg->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+    deathMsg->setPosition(GUI::p2pX(22), GUI::p2pY(40));
    // deathMsg->clearText();
     deathMsg->setString("YOU DIED!!");
     SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
@@ -51,6 +51,6 @@ void PlayerDeath::render(){
     if(textTimer->getTicks() > 50){
         deathMsg->render();
     }
-    std::cout << deathMsg->getColour() << std::endl;
+//    std::cout << deathMsg->getColour() << std::endl;
 }
 
