@@ -114,6 +114,7 @@ void LoadGame::loadCharacters(){
     int stamina = 0;
     int statPoints = 0;
     int skillPoints = 0;
+    int corrupt = 0;
 
 	//ITEMS
 	Inventory tempItems;
@@ -149,10 +150,11 @@ void LoadGame::loadCharacters(){
 			strs >> stamina;
 			strs >> statPoints;
 			strs >> skillPoints;
+			strs >> corrupt;
 
 			auto temp = std::make_shared<Player> (name, disTravel, gold, level, exp,
 				str, vit, dex, intel, hp,
-				stamina, statPoints, skillPoints);
+				stamina, statPoints, skillPoints, corrupt);
 
 			strs.clear();
 			line.clear();

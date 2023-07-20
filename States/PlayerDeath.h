@@ -10,6 +10,7 @@ class PlayerDeath : public State{
     public:
 
         PlayerDeath();
+        ~PlayerDeath();
         void update(const float &dt);
         void updateEvents(SDL_Event &e);
         void render();

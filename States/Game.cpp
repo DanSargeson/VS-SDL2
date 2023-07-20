@@ -120,6 +120,12 @@ void Game::updateEvents(SDL_Event& e){
         }
     }
 
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
+
+        std::string msg = "Corruption: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getCorruption());
+        StateData::GetInstance()->enemyText->setString(msg);
+    }
+
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
         if(!StateData::GetInstance()->mainText->isEmpty()){
@@ -143,6 +149,7 @@ void Game::updateEvents(SDL_Event& e){
 
 void Game::render(){
 
+    SDL_RenderClear(Engine::GetInstance()->GetRenderer());
 
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);

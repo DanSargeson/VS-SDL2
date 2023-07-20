@@ -20,8 +20,19 @@ PlayerDeath::PlayerDeath() : State(){
     deathMsg->setString("YOU DIED!!");
     SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
 
+    StateData::GetInstance()->dynamicText->setString("Continue...");
+    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(60), GUI::p2pY(80));
+    StateData::GetInstance()->dynamicText->setColour(0, 255, 0, 0);
+
+    StateData::GetInstance()->getActiveCharacter()->increaseCorruption();
+
     textTimer->start();
    // std::cout << deathMsg->getColour() << std::endl;
+}
+
+PlayerDeath::~PlayerDeath(){
+
+    StateData::GetInstance()->dynamicText->clearText();
 }
 
 void PlayerDeath::update(const float& dt){
@@ -41,6 +52,14 @@ void PlayerDeath::update(const float& dt){
 
 void PlayerDeath::updateEvents(SDL_Event& e){
 
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+
+        if(textTimer->getTicks() > 4000){
+
+            StateData::GetInstance()->getActiveCharacter()->resetHP();
+            Engine::GetInstance()->PopState();
+        }
+    }
 }
 
 void PlayerDeath::render(){
@@ -51,6 +70,11 @@ void PlayerDeath::render(){
     if(textTimer->getTicks() > 50){
         deathMsg->render();
     }
+
+    if(textTimer->getTicks() > 4000){
+
+            StateData::GetInstance()->dynamicText->render();
+        }
 //    std::cout << deathMsg->getColour() << std::endl;
 }
 

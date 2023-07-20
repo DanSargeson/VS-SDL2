@@ -46,11 +46,13 @@ private:
 	int statPoints;
 	int skillPoints;
 
+	int corruption;
+
 public:
     Player();
     Player(string name, int dt);
     Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex, int intel, int hp,
-              int stam, int stPoint, int skPoint);
+              int stam, int stPoint, int skPoint, int corr);
     virtual ~Player();
 
     //Functions
@@ -82,6 +84,7 @@ public:
 	inline void setArmourChest(shared_ptr<Item> a) { this->activeChest = a; }
 	inline void setArmourArms(shared_ptr<Item> a) { this->activeArms = a; }
 	inline void setArmourLegs(shared_ptr<Item> a) { this->activeLegs = a; }
+	inline void increaseCorruption() { corruption++; }
 
 //Accessors
     inline const string& getName() const { return this->name;}
@@ -100,6 +103,7 @@ public:
 	inline const int& getStatPoints() const { return this->statPoints; }
 	inline const int& getGold() const { return this->gold; }
 	inline const bool isAlive() { return this->hp > 0;  }
+	inline const int& getCorruption() { return corruption; }
 
 
     //modifiers

@@ -29,10 +29,12 @@ Player::Player(){
 
     statPoints = 0;
     skillPoints = 0;
+
+    corruption = 0;
 }
 
 Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex,
-                     int intel, int hp, int stam, int stPoint, int skPoint){
+                     int intel, int hp, int stam, int stPoint, int skPoint, int corr){
     this->name = n;
     this->distanceTravelled = dt;
     this->gold = g;
@@ -46,6 +48,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
     this->stamina = stam;
     this->statPoints = stPoint;
     this->skillPoints = skPoint;
+    corruption = corr;
 
     this->updateStats();
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
@@ -83,7 +86,7 @@ void Player::initialise(string name){
     this->luck = this->intelligence;
 
 
-
+    corruption = 0;
     this->statPoints = 0;
     this->skillPoints = 0;
 }
@@ -175,7 +178,8 @@ string Player::getStatsAsString() const{
 		to_string(hp) + " " +
 		to_string(stamina) + " " +
 		to_string(statPoints) + " " +
-		to_string(skillPoints) + " ";
+		to_string(skillPoints) + " " +
+		to_string(corruption);
 }
 
 string Player::getInvAsString() {
