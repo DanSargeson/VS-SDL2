@@ -315,10 +315,21 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 ///            this->temp->finaliseAttributes();
 ///            this->temp->setPosition(128.f, 128.f);
             bool append = false;
+            StateData::GetInstance()->characters.push_back(temp);
 
-            if(std::filesystem::exists("Data/characters.txt")){
 
-                append = true;
+            int ac = StateData::GetInstance()->characters.size() - 1;
+            StateData::GetInstance()->activeCharacter = ac;
+
+            if(std::filesystem::exists("characters.txt")){
+
+                ofstream outFile("characters.txt", ios::app);
+
+                    outFile << StateData::GetInstance()->getActiveCharacter()->getStatsAsString() << "\n";
+                    outFile << StateData::GetInstance()->getActiveCharacter()->getEquippedWeapon() << "\n";
+                    outFile << StateData::GetInstance()->getActiveCharacter()->getEquippedArmour() << "\n";
+                    outFile <<	StateData::GetInstance()->getActiveCharacter()->getInvAsStringSave() << "\n";
+
                 //loadCharacters...
             }
 
@@ -328,11 +339,6 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
 ///            std:: cout << temp->getAttributeSheet() << endl;
 
-            StateData::GetInstance()->characters.push_back(temp);
-
-
-            int ac = StateData::GetInstance()->characters.size() - 1;
-            StateData::GetInstance()->activeCharacter = ac;
 
 
 ///            std:: cout << "******* \n" << StateData::GetInstance()->characters[StateData::GetInstance()->activeCharacter]->getAttributeSheet();

@@ -19,6 +19,7 @@ public:
 	void updateEvents(SDL_Event &e);
 //	void updateMouseEvents(SDL_MouseButtonEvent& e);
 //	void updateGUI();
+    void loadFiles();
 	void render();
 
 	//void updateTextInput(SDL_Event &e);

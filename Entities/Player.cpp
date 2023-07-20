@@ -75,7 +75,8 @@ void Player::initialise(string name){
     this->dexterity = 5;
     this->intelligence = 5;
 
-    this->hpMax = (this->vitality * 2) + (this->strength / 2);
+    //this->hpMax = (this->vitality * 2) + (this->strength / 2);
+    this->hpMax = (this->vitality * 2) + (this->strength / 2) + level;
     this->hp = hpMax;
     this->staminaMax = this->vitality + (this->strength / 2) + (this->dexterity / 3);
     this->stamina = this->staminaMax;
@@ -215,21 +216,20 @@ void Player::levelUp(){
 
         std::string msg =  "You are now level " + std::to_string(this->level) + "!";
         StateData::GetInstance()->mainText->setString(msg);
+
+        updateStats();
+        this->hp = this->hpMax;
     }
     else{
         StateData::GetInstance()->mainText->setString("You do not have enough experience.");
         //return false;
     }
-
-	this->hp = this->hpMax;
-
-
 }
 
 void Player::updateStats(){
     this->expNext = static_cast<int>((50/3)*((pow(level,3) - 6*pow(level,2)) + 17*level - 12)) + 100;
 
-    this->hpMax = (this->vitality * 2) + (this->strength / 2) + this->level*5;
+    this->hpMax = (this->vitality * 2) + (this->strength / 2) + this->level;
     this->staminaMax = this->vitality + (this->strength / 2) + (this->dexterity / 3);
 	this->stamina = this->staminaMax;
     this->damageMin = this->strength + this->level;

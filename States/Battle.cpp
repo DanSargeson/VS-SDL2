@@ -530,13 +530,17 @@ void Battle::updateEvents(SDL_Event& e){
                             escape = true;
                             //return;
                         }
-                        else
+                        else{
                             escape = false;
+                        }
 
                     if(!escape){
                         alpha = 255;
                         playerAttkTxt->setString("Failed to escape");
                         playerTurn = false;
+                        enemyAttacks();
+
+                        return;
                     }
                     else{
                         Engine::GetInstance()->PopState();

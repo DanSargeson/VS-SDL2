@@ -4,7 +4,7 @@
 
 LoadGame::LoadGame() : State(){
 
-
+    StateData::GetInstance()->clearCharacters();
     loadCharacters();
     std::vector<std::string> ops;
 
@@ -60,14 +60,15 @@ void LoadGame::updateEvents(SDL_Event& e){
 
 				for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
 
-                        int c = loadMenu->getChoice();
+                        int c = loadMenu->getChoice() - 1;
 //                        int d = StateData::GetInstance()->characters[i]->getID();
+                        std::cout << "You picked:::   " << std::to_string(c) << std::endl;
 
-                        StateData::GetInstance()->characters[loadMenu->getChoice()];
+                        StateData::GetInstance()->characters[c];
 
 					//if (loadMenu->getChoice() == StateData::GetInstance()->characters[i]->getID()) {
 
-						StateData::GetInstance()->activeCharacter = i;
+						StateData::GetInstance()->activeCharacter = c;
                         ///StateData::GetInstance()->currentMap->LoadFromFile("Data/Map1.txt");
                         Engine::GetInstance()->PopState();
 						Engine::GetInstance()->AddState(std::make_shared<Game>());
@@ -269,6 +270,12 @@ void LoadGame::loadCharacters(){
                 }*/
 
             }
+    }
+    else{
+
+        Engine::GetInstance()->PopState();
+
+        return;
     }
     inFile.close();
 

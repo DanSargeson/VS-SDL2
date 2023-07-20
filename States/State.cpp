@@ -81,9 +81,12 @@ void StateData::clearCharacters(){
 
 void State::saveCharacters()
 {
+
     std::string fileName = "characters.txt";
+
+        ofstream outFile(fileName);
+
  //   void Game::saveCharacters(){
-    ofstream outFile(fileName);
     if(outFile.is_open()){
         for(int i = 0; i < StateData::GetInstance()->characters.size(); i++){
             outFile << StateData::GetInstance()->characters[i]->getStatsAsString() << "\n";

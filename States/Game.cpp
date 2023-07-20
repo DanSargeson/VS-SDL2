@@ -3,6 +3,7 @@
 #include "Event.h"
 #include "Battle.h"
 #include "CharacterMenu.h"
+#include "LoadGame.h"
 
 Game::Game() : State(){
 
@@ -39,7 +40,7 @@ Game::Game() : State(){
 	menuOptions.push_back("Character Menu");        //5
 	menuOptions.push_back("Create Character");
 	menuOptions.push_back("Save Game");             //7
-	menuOptions.push_back("Load Character");
+	menuOptions.push_back("Load Character");        //8
 	menuOptions.push_back("Character Switch");
 
 	gameMenu->setMenuOptions(menuOptions, true);
@@ -99,12 +100,20 @@ void Game::updateEvents(SDL_Event& e){
 
             if(gameMenu->getChoice() == 4){
 
-                StateData::GetInstance()->getActiveCharacter()->resetHP();
-                StateData::GetInstance()->getActiveCharacter()->setGold(-10);
+                if(StateData::GetInstance()->getActiveCharacter()->getGold() >= 10){
 
-                StateData::GetInstance()->mainText->setString("You awake feeling well rested");
-                StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
-                StateData::GetInstance()->enemyText->setString("Lost 10 gold");
+                    StateData::GetInstance()->getActiveCharacter()->resetHP();
+                    StateData::GetInstance()->getActiveCharacter()->setGold(-10);
+
+                    StateData::GetInstance()->mainText->setString("You awake feeling well rested");
+                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+                    StateData::GetInstance()->enemyText->setString("Lost 10 gold");
+                }
+                else{
+
+                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+                    StateData::GetInstance()->enemyText->setString("You don't have enough gold.");
+                }
             }
 
             if(gameMenu->getChoice() == 5){
@@ -114,8 +123,19 @@ void Game::updateEvents(SDL_Event& e){
 
             if(gameMenu->getChoice() == 7){
 
+//                if(!std::filesystem::exists("characters.txt")){
+//                    std::ofstream { "characters.txt" };
+//                }
                 saveCharacters();
                 StateData::GetInstance()->mainText->setString("Game Saved");
+            }
+
+            if(gameMenu->getChoice() == 8){
+
+                Engine::GetInstance()->PopState();
+                Engine::GetInstance()->AddState(std::make_shared<LoadGame>());
+
+                return;
             }
         }
     }
