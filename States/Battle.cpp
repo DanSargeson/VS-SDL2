@@ -231,12 +231,14 @@ if(playerDefeated){
 
             std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
             StateData::GetInstance()->mainText->setString(msg);
+           /// StateData::GetInstance()->mainText->render();
             std::string enemyMsg = "";
             for(int i = 0; i < enemies.size(); i++){
 
                 enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHp()) + "/" + std::to_string(enemies[i].getHpMax()) + " ";
             }
             StateData::GetInstance()->enemyText->setString(enemyMsg);
+
     //############################START OF INIT BATTLE
     if(!escape && !playerDefeated && !enemyDefeated) {
 
@@ -279,7 +281,7 @@ if(playerDefeated){
 
 void Battle::updateText(){
 
-    if(playerAttkTxt){
+    if(playerAttkTxt && playerTurn){
 
 //      if(alpha > 5){
 //
@@ -287,7 +289,7 @@ void Battle::updateText(){
 //        }s
         if(alpha >= 0 && battleTxtTimer->GetDeltaTime() <= 3){
 
-            alpha -= 2;
+            alpha -= 5;
             //SDL_Delay(200);
             SDL_SetTextureAlphaMod(playerAttkTxt->getTexture(), alpha);
             battleTxtTimer->Restart();
@@ -489,6 +491,8 @@ void Battle::enemyAttacks(){
 				//fcin.get();
 			}
 
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            StateData::GetInstance()->mainText->setString(msg);
 			//END TURN
 			//playerTurn = true;
 			 endTurn = true;
