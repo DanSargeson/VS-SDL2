@@ -19,6 +19,7 @@ class PlayerDeath : public State{
 
         std::unique_ptr<GameTimer> textTimer;
         int alpha;
+        int alpha2;
         std::shared_ptr<GUI::Text> deathMsg;
 };
 

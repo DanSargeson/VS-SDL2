@@ -6,25 +6,35 @@ PlayerDeath::PlayerDeath() : State(){
 
     textTimer = std::make_unique<GameTimer>();
     alpha = 0;
+    alpha2 = 0;
+     int w;
+    SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, NULL);
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
 
     deathMsg = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), false);
 
-    deathMsg->setFontSize(150);
+    deathMsg->setFontSize(100);
    // int w = StateData::GetInstance()->mainText->getTextWidth();
     deathMsg->setColour(255, 0, 0, 0);
     //deathMsg->setBorder(false);
-    deathMsg->setPosition(GUI::p2pX(22), GUI::p2pY(40));
+    deathMsg->setString("Gift of Death received");
+    int dmX = (w / 2) - (deathMsg->getTextWidth() / 2);
+    deathMsg->setPosition(dmX, GUI::p2pY(40));
    // deathMsg->clearText();
-    deathMsg->setString("YOU DIED!!");
     SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
 
     StateData::GetInstance()->dynamicText->setString("Continue...");
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(60), GUI::p2pY(80));
+    int dynaX = (w / 2) - (StateData::GetInstance()->dynamicText->getTextWidth() / 2);
+    StateData::GetInstance()->dynamicText->setPosition(dynaX, GUI::p2pY(80));
     StateData::GetInstance()->dynamicText->setColour(0, 255, 0, 0);
 
     StateData::GetInstance()->getActiveCharacter()->increaseCorruption();
+
+    StateData::GetInstance()->enemyText->setString("Corruption has increased");
+    SDL_SetTextureAlphaMod(StateData::GetInstance()->enemyText->getTexture(), alpha);
+    int enemX = (w / 2) - (StateData::GetInstance()->enemyText->getTextWidth() / 2);
+    StateData::GetInstance()->enemyText->setPosition(enemX, GUI::p2pY(55));
 
     textTimer->start();
    // std::cout << deathMsg->getColour() << std::endl;
@@ -33,6 +43,7 @@ PlayerDeath::PlayerDeath() : State(){
 PlayerDeath::~PlayerDeath(){
 
     StateData::GetInstance()->dynamicText->clearText();
+    StateData::GetInstance()->enemyText->clearText();
 }
 
 void PlayerDeath::update(const float& dt){
@@ -46,7 +57,19 @@ void PlayerDeath::update(const float& dt){
             //textTimer->stop();
         }
 
+        if(textTimer->getTicks() > 1500){
+
+            alpha2 += 2;
+        }
+
+
+        if(alpha2 > 255){
+
+            alpha2 = 255;
+        }
+
         SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
+        SDL_SetTextureAlphaMod(StateData::GetInstance()->enemyText->getTexture(), alpha2);
     }
 }
 
@@ -69,6 +92,11 @@ void PlayerDeath::render(){
     ///SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     if(textTimer->getTicks() > 50){
         deathMsg->render();
+
+        if(textTimer->getTicks() > 1500){
+
+            StateData::GetInstance()->enemyText->render();
+        }
     }
 
     if(textTimer->getTicks() > 4000){
