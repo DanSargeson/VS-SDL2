@@ -443,6 +443,12 @@ void Battle::enemyAttacks(){
 
     std::string enemyMsg = "";
 
+    if(enemies.size() <= 0){
+
+        endTurn = true;
+        return;
+    }
+
     if(!playerTurn && !escape && !enemyDefeated){
 			//ENEMY TURN
 			//cout << "= ENEMY ATTACKS = \n\n";
