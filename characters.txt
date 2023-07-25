@@ -8,11 +8,11 @@ aklsjdakljsd 0 0 1 0 5 5 5 5 13 8 0 0 0
 
 
 
-Dan 11 755 4 11212 5 5 5 5 3 8 3 3 2
-0 Iron 2 1 5 10 1 
-1 Rusty 2 0 9 1 1 Rusty 2 0 3 2 
-0 Iron 1 1 5 10 1 0 Iron 5 1 8 16 0 0 Iron 2 1 8 16 0 0 Iron 4 1 7 14 1 
-1 Rusty 1 0 3 2 1 Rusty 1 0 9 0 
+Dan 12 977 4 13412 5 5 5 5 16 8 3 3 3
+0 Iron 5 1 8 16 0 
+1 Rusty 1 0 9 0 1 Rusty 2 0 9 1 1 Rusty 2 0 3 2 
+0 Iron 1 1 5 10 1 0 Iron 2 1 8 16 0 0 Iron 4 1 7 14 1 0 Iron 2 1 5 10 1 
+1 Rusty 1 0 3 2 1 Rusty 4 0 7 2 1 Rusty 5 0 6 1 
 Blsdiosid 0 0 1 0 5 5 5 5 13 8 0 0 0
 
 
@@ -23,3 +23,8 @@ Nodsdsdsd 0 0 1 0 5 5 5 5 13 8 0 0 0
 
 
 
+rkrkr 25 836 9 8792 5 5 5 5 21 8 8 8 10
+0 Iron 3 1 5 10 0 
+1 Rusty 2 0 5 3 
+0 Iron 2 1 7 14 0 0 Iron 2 1 7 14 1 0 Iron 2 1 7 14 2 0 Iron 1 1 6 12 1 0 Rusty 1 0 2 5 2 0 Iron 2 1 6 12 0 0 Iron 6 1 11 22 1 
+1 Rusty 7 0 11 0 
