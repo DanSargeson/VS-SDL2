@@ -3,18 +3,18 @@
 #include "Input.h"
 #include "PlayerDeath.h"
 
-Battle::Battle() : State(){
+Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>()), seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed), noOfEnemies(0) {
 
-    missCounter = 0;
-    alpha = 255;
-    alpha2 = 255;
+//    missCounter = 0;
+//    alpha = 255;
+//    alpha2 = 255;
+//
+//    battleTxtTimer = std::make_unique<Timer>();
+//    battleGameTimer = std::make_unique<GameTimer>();
 
-    battleTxtTimer = std::make_unique<Timer>();
-    battleGameTimer = std::make_unique<GameTimer>();
+//     seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
 
-     seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-
-     generator.seed(seed);
+//     generator.seed(seed);
 
      std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
      noOfEnemies = numEnemiesDistribution(generator);
@@ -274,7 +274,7 @@ void Battle::updateText(){
 }
 
 
-void Battle::playerAttacks(){
+const void Battle::playerAttacks(){
 
             combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
             enemyTotal = enemies[choice].getDefence() / (double)combatTotal * 100;
@@ -380,7 +380,7 @@ void Battle::playerAttacks(){
 				battleGameTimer->start();
 }
 
-void Battle::enemyAttacks(){
+const void Battle::enemyAttacks(){
 
     std::string enemyMsg = "";
 

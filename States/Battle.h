@@ -17,8 +17,8 @@ class Battle : public State{
         void initBattle();
         void updateMenu();
         void updateText();
-        void enemyAttacks();
-        void playerAttacks();
+        const void enemyAttacks();
+        const void playerAttacks();
         void render();
 
     private:
