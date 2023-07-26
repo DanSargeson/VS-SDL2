@@ -5,7 +5,7 @@
 
 Event::Event(){
     this->typeOfEvent = 2;
-    eventMenu = std::make_shared<GUI::Menu>(*StateData::GetInstance());
+    eventMenu = std::make_shared<GUI::Menu>();
 }
 
 Event::~Event(){

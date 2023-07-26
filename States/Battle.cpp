@@ -24,30 +24,30 @@ Battle::Battle() : State(){
     ops.push_back("Defend");
     ops.push_back("Use Item");
     battleMenu.reset();
-    battleMenu = std::make_shared<GUI::Menu>(*StateData::GetInstance());
+    battleMenu = std::make_shared<GUI::Menu>();
     battleMenu->setMenuOptions(ops, true);
 
     enemyMenu.reset();
-    enemyMenu = std::make_shared<GUI::Menu>(*StateData::GetInstance());
+    enemyMenu = std::make_shared<GUI::Menu>();
 
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 5, 10, 12, 8, true);
+    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
     StateData::GetInstance()->mainText->setString("Test");
 
-    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), false);
+    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>(false);
     StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(10));
     StateData::GetInstance()->dynamicText->setString("You are attacked: ");
 
-    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), true);
+    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>(true);
     StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
     StateData::GetInstance()->enemyText->setString("Selectaaaaa an option: ");
     StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
 
-    playerAttkTxt = std::make_unique<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), true);
+    playerAttkTxt = std::make_unique<GUI::Text>(true);
     playerAttkTxt->setColour(0, 0, 255, 0);
     playerAttkTxt->setPosition(GUI::p2pX(60), GUI::p2pY(20));
     playerAttkTxt->clearText();
 
-    enemyAttkTxt = std::make_unique<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), true);
+    enemyAttkTxt = std::make_unique<GUI::Text>(true);
     enemyAttkTxt->setColour(255, 0, 0, 0);
     enemyAttkTxt->setPosition(GUI::p2pX(60), GUI::p2pY(50));
     enemyAttkTxt->clearText();
@@ -109,7 +109,7 @@ Battle::~Battle(){
     playerAttkTxt.reset();
 
     StateData::GetInstance()->mainText->clearText();
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 5, 5, 89, 60, true);
+    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     if(!escape){
         StateData::GetInstance()->mainText->setString("Select an option: ");
     }

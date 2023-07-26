@@ -44,7 +44,7 @@ void CharacterCreator::initKeyBinds(){
 
 void CharacterCreator::initGUI(){
 
-    pointsMessage = std::make_unique<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 60, 20, 0, 0, false);
+    pointsMessage = std::make_unique<GUI::Text>(60, 20, 0, 0, false);
 
     this->spriteAddTexture = std::make_shared<Texture>();
     spriteAddTexture->loadFromFile("Assets/GUI/arrowPlus.png", Engine::GetInstance()->GetRenderer());
@@ -152,9 +152,9 @@ void CharacterCreator::initText(){
 
     unsigned charSize = GUI::calcCharSize(80);
 
-    this->charCreatorText = std::make_unique<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), /*18, 22, 0, 0,*/ false);
+    this->charCreatorText = std::make_unique<GUI::Text>(/*18, 22, 0, 0,*/ false);
 
-    this->nameMessage = std::make_unique<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), /*60, 50, 0, 0,*/ false);
+    this->nameMessage = std::make_unique<GUI::Text>(/*60, 50, 0, 0,*/ false);
 
     charCreatorText->setPositionF(18, 22);
     nameMessage->setPositionF(60, 50);
@@ -536,7 +536,7 @@ SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
  SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     for(auto &it : buttons){
 
-        it.second->renderButtons(Engine::GetInstance()->GetRenderer());
+        it.second->renderButtons();
     }
 
     if(menuPos == MENU_POS::ATTRIBUTES){

@@ -320,7 +320,7 @@ void MainMenu::render(){
 //
 	for (auto i : mButtons) {
 
-		i.second->renderButtons(Engine::GetInstance()->GetRenderer());
+		i.second->renderButtons();
 	}
 }
 

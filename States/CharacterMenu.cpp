@@ -4,22 +4,22 @@
 
 CharacterMenu::CharacterMenu(){
 
-    invMenu = std::make_shared<GUI::Menu>(*StateData::GetInstance());
+    invMenu = std::make_shared<GUI::Menu>();
 
     std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
     invMenu->setMenuOptions(ops, true);
-    invMenu2 = std::make_shared<GUI::Menu>(*StateData::GetInstance());
+    invMenu2 = std::make_shared<GUI::Menu>();
     invMenu2->setActive(false);
     choice = -1;
     //StateData::GetInstance()->mainText->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 5, 5, 89, 60, true);
+    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
 }
 
 CharacterMenu::~CharacterMenu(){
 
     StateData::GetInstance()->mainText->clearText();
     //StateData::GetInstance()->mainText->setString("Select an option: ");
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 5, 5, 89, 60, true);
+    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     StateData::GetInstance()->mainText->setString("Select an option: ");
 }
 

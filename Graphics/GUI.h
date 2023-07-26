@@ -30,7 +30,7 @@ namespace GUI{
 		Button();
 		virtual ~Button();
 		Button(float x, float y, float w, float h, unsigned int charSize);
-		void renderButtons(SDL_Renderer* renderTarget);
+		void renderButtons();
 
 		void update();
 
@@ -64,8 +64,8 @@ namespace GUI{
 
 	public:
 
-		Text(SDL_Renderer* rend, SDL_Window* wind, bool border = false);
-		Text(SDL_Renderer* rend, SDL_Window* wind, int x, int y, int w, int h, bool border = true);
+		Text(bool border = false);
+		Text(int x, int y, int w, int h, bool border = true);
 		virtual ~Text();
 
 		void update();
@@ -92,7 +92,7 @@ namespace GUI{
 
 		void setColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 		void setFontSize(int size);
-		void updateWindow(SDL_Window * wind);
+		void updateWindow();
 		void refreshGUI();
 		void setTextParameters(std::string txt, SDL_Color colour, TTF_Font* font, int size);
 		void setFontfile(std::string fontfile);
@@ -116,8 +116,8 @@ namespace GUI{
 
 		std::shared_ptr<Texture> mTextTexture;
 
-		SDL_Renderer* mRend;
-		SDL_Window* mWind;
+		//SDL_Renderer* mRend;
+		//SDL_Window* mWind;
 
 		int percentX, percentY, percentW, percentH;
 		std::string mMainText;
@@ -139,7 +139,7 @@ namespace GUI{
 
 		void updateKeyTime(const float& dt);
 		void update(SDL_MouseButtonEvent &e);
-		void render(SDL_Renderer* rend);
+		void render();
 
 	private:
 
@@ -161,7 +161,7 @@ namespace GUI{
 
 	public:
 
-		Tooltip(SDL_Renderer*, SDL_Window*);
+		Tooltip();
 		~Tooltip();
 
 		void setDisplayText(std::string txt);
@@ -171,7 +171,7 @@ namespace GUI{
 		bool getHidden();
 
 		void update(int x, int y);
-		void render(SDL_Renderer* rend);
+		void render();
 
 	private:
 
@@ -186,8 +186,8 @@ namespace GUI{
 
 		public:
 
-			Menu(class StateData &stateData);
-			Menu(class StateData &stateData, int type, bool test = false);
+			Menu();
+			Menu(int type, bool test = false);
 
 			virtual ~Menu();
 

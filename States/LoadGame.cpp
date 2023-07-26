@@ -9,7 +9,7 @@ LoadGame::LoadGame() : State(){
     std::vector<std::string> ops;
 
     loadMenu.reset();
-	loadMenu = make_unique<GUI::Menu>(*StateData::GetInstance());
+	loadMenu = make_unique<GUI::Menu>();
 
 
 

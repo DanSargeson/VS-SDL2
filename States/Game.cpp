@@ -14,9 +14,9 @@ Game::Game() : State(){
 //    mainText->setString("Select an option: ");
 
     //StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow());
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 5, 5, 89, 60, true);
-    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow());
-    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow());
+    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>();
+    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>();
 
     StateData::GetInstance()->mainText->setString("Select an option: ");
     //StateData::GetInstance()->mainText->setPosition(GUI::p2pX(20), GUI::p2pY(20));
@@ -30,7 +30,7 @@ Game::Game() : State(){
 	std::vector<std::string> menuOptions;
 
     gameMenu.reset();
-	gameMenu = make_unique<GUI::Menu>(*StateData::GetInstance());
+	gameMenu = make_unique<GUI::Menu>();
 
 	//menuOptions.push_back("0: Quit");
 	menuOptions.push_back("Travel");    //1
@@ -151,7 +151,7 @@ void Game::updateEvents(SDL_Event& e){
         if(!StateData::GetInstance()->mainText->isEmpty()){
 
             StateData::GetInstance()->mainText->clearText();
-            StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), 5, 5, 89, 60, true);
+            StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
             StateData::GetInstance()->mainText->setString("Select an option: ");
         }
 

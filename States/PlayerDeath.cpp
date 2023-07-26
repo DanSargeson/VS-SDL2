@@ -12,7 +12,7 @@ PlayerDeath::PlayerDeath() : State(){
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
 
-    deathMsg = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), false);
+    deathMsg = std::make_shared<GUI::Text>(false);
 
     deathMsg->setFontSize(100);
    // int w = StateData::GetInstance()->mainText->getTextWidth();

@@ -1,7 +1,6 @@
 #include "GUI.h"
 #include "Texture.h"
 #include "State.h"
-
 #include "Engine.h"
 
 
@@ -108,30 +107,30 @@ GUI::Button::Button(float x, float y, float w, float h, unsigned int charSize){
 	mInside = false;
 }
 
-void GUI::Button::renderButtons(SDL_Renderer * renderTarget){
+void GUI::Button::renderButtons(){
 
-	this->mTextureText->loadFromRenderedText(renderTarget, mRenderText, colour, *this->font);
+	this->mTextureText->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), mRenderText, colour, *this->font);
 
 	if (!this->active) {
 
-        SDL_SetRenderDrawBlendMode(renderTarget, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(renderTarget, 164, 251, 251, 1);
+        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 164, 251, 251, 1);
 	}
 	else if (mInside && mClicked) {
 
-		SDL_SetRenderDrawColor(renderTarget, 0, 0, 0, 10);
+		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 10);
 		mClicked = false;
 		mInside = false;
 	}
 	else {
 
-		SDL_SetRenderDrawColor(renderTarget, 164, 251, 251, 255);
+		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 164, 251, 251, 255);
 	}
 
-	SDL_RenderFillRect(renderTarget, &buttonShape);
+	SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &buttonShape);
 	if (active) {
 
-		this->mTextureText->render(renderTarget, buttonShape.x + 5, buttonShape.y + 5);
+		this->mTextureText->render(Engine::GetInstance()->GetRenderer(), buttonShape.x + 5, buttonShape.y + 5);
 	}
 }
 
@@ -193,11 +192,11 @@ SDL_Rect GUI::Button::getRect() {
 	return buttonShape;
 }
 
-GUI::Text::Text(SDL_Renderer* rend, SDL_Window* wind, bool border){
+GUI::Text::Text(bool border){
 
 	mBorder = border;
-	mRend = rend;
-	mWind = wind;
+//	mRend = rend;
+//	mWind = wind;
 	mMainText = "Debug text 1";
 
 	mFontFile = "Assets/Fonts/SF Atarian System.ttf";
@@ -233,10 +232,10 @@ GUI::Text::Text(SDL_Renderer* rend, SDL_Window* wind, bool border){
 	//mTextColour = { 0, 255, 0, 255 };
 }
 
-GUI::Text::Text(SDL_Renderer* rend, SDL_Window* wind, int x, int y, int w, int h, bool border){
+GUI::Text::Text(int x, int y, int w, int h, bool border){
 
-	mRend = rend;
-	mWind = wind;
+//	mRend = rend;
+//	mWind = wind;
 
 	mFontSize = 28;
 	mFontFile = "Assets/Fonts/SF Atarian System.ttf";
@@ -325,28 +324,28 @@ int GUI::Text::getTextHeight() {
 
 void GUI::Text::render(){
 
-	SDL_SetRenderDrawBlendMode(mRend, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
 
 	if (mBorder) {
 
 		SDL_Rect bg = mOutline;
-		SDL_SetRenderDrawColor(mRend, 0, 0, 0, 255);
-		SDL_RenderFillRect(mRend, &bg);
+		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
+		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &bg);
 
 		if (mFiller.w != 0 && mFiller.h != 0) {
 
-			SDL_SetRenderDrawColor(mRend, mTextColour.r, mTextColour.g, mTextColour.b, mTextColour.a);
-			SDL_RenderDrawRect(mRend, &mFiller);
+			SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), mTextColour.r, mTextColour.g, mTextColour.b, mTextColour.a);
+			SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &mFiller);
 		}
 
 		if (mOutline.w != 0 && mOutline.h != 0) {
 
-			SDL_SetRenderDrawColor(mRend, mTextColour.r, mTextColour.g, mTextColour.b, mTextColour.a);
-			SDL_RenderDrawRect(mRend, &mOutline);
+			SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), mTextColour.r, mTextColour.g, mTextColour.b, mTextColour.a);
+			SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &mOutline);
 		}
 	}
-	mTextTexture->render(mRend, mOutline.x + offsetX, mOutline.y + offsetY);
-	SDL_SetRenderDrawBlendMode(mRend, SDL_BLENDMODE_NONE);
+	mTextTexture->render(Engine::GetInstance()->GetRenderer(), mOutline.x + offsetX, mOutline.y + offsetY);
+	SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
 }
 
 void GUI::Text::setPosition(int x, int y) {
@@ -358,7 +357,7 @@ void GUI::Text::setPosition(int x, int y) {
 void GUI::Text::setString(std::string text, bool wrapped, int width){
 
 	mMainText = text;
-	mTextTexture->loadFromRenderedText(mRend, mMainText, mTextColour, *mFont, wrapped, width);
+	mTextTexture->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), mMainText, mTextColour, *mFont, wrapped, width);
 }
 
 SDL_Texture* GUI::Text::getTexture() {
@@ -398,9 +397,10 @@ void GUI::Text::setFontSize(int size) {
 	initFont();
 }
 
-void GUI::Text::updateWindow(SDL_Window* wind) {
+void GUI::Text::updateWindow() {
 
-	mWind = wind;
+    //TODO: OBSOLETE - REMOVE
+//	mWind = wind;
 }
 
 void GUI::Text::refreshGUI(){
@@ -435,7 +435,7 @@ void GUI::Text::setTextParameters(std::string txt, SDL_Color colour, TTF_Font * 
 	mFont = font;
 	//mFontSize = size;
 	mTextColour = colour;
-	mTextTexture->loadFromRenderedText(mRend, mMainText, colour, *font);
+	mTextTexture->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), mMainText, colour, *font);
 }
 
 
@@ -444,7 +444,7 @@ void GUI::Text::initTextures(){
 	mTextTexture = std::make_unique<Texture>();
 
 	mTextColour = { 0, 255, 0, 255 };
-	mTextTexture->loadFromRenderedText(mRend, mMainText, mTextColour, *mFont);
+	mTextTexture->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), mMainText, mTextColour, *mFont);
 }
 
 void GUI::Text::initGUI(){
@@ -600,20 +600,20 @@ void GUI::TextureSelector::update(SDL_MouseButtonEvent &e){
 	}
 }
 
-void GUI::TextureSelector::render(SDL_Renderer * rend){
+void GUI::TextureSelector::render(){
 
 
-	SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
-	SDL_RenderDrawRect(rend, &this->bounds);
-	SDL_RenderDrawRect(rend, &this->selector);
+	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
+	SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &this->bounds);
+	SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &this->selector);
 
-	this->sheet->render(rend, this->bounds.x, bounds.y);
+	this->sheet->render(Engine::GetInstance()->GetRenderer(), this->bounds.x, bounds.y);
 	//TODO
 }
 
-GUI::Tooltip::Tooltip(SDL_Renderer* rend, SDL_Window* wind){
+GUI::Tooltip::Tooltip(){
 
-	displayText = std::make_unique<Text>(rend, wind, false);
+	displayText = std::make_unique<Text>(false);
 	displayText->setColour(0, 0, 0, 255);
 
 	outline.x = 0;
@@ -655,21 +655,21 @@ void GUI::Tooltip::update(int x, int y){
 	outline.y = y;
 }
 
-void GUI::Tooltip::render(SDL_Renderer * rend){
+void GUI::Tooltip::render(){
 
 	if (!hidden) {
 
 		fillRect = outline;
-		SDL_SetRenderDrawColor(rend, 170, 255, 0, 255);
-		SDL_RenderFillRect(rend, &fillRect);
-		SDL_SetRenderDrawColor(rend, 225, 254, 167, 255);
-		SDL_RenderDrawRect(rend, &outline);
+		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 170, 255, 0, 255);
+		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &fillRect);
+		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 225, 254, 167, 255);
+		SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &outline);
 
 		displayText->render();
 	}
 }
 
-GUI::Menu::Menu(StateData &stateData){
+GUI::Menu::Menu(){
 
 //	this->hiddenCount = 0;
 	this->selection = -1;
@@ -679,14 +679,14 @@ GUI::Menu::Menu(StateData &stateData){
 	this->active = true;
 	this->scrollable = false;
 
-	this->mStateData = &stateData;
+//	this->mStateData = &stateData;
 
 	//TODO:: Add sprite for scrolling up/down when more than four options.
 }
 
 
 //OBSOLETE -  REMOVE
-GUI::Menu::Menu(StateData &stateData, int type, bool test){
+GUI::Menu::Menu(int type, bool test){
 
 }
 
