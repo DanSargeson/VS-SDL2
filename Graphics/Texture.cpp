@@ -57,6 +57,12 @@ bool Texture::loadFromFile(const std::string & fileName, SDL_Renderer* rend){
 bool Texture::loadFromRenderedText(SDL_Renderer* rend, const std::string & text, SDL_Color textColour, TTF_Font& font, bool wrapped, int width){
 
 	this->free();
+
+	if(text.length() <= 0){
+
+        return false;
+	}
+
 	SDL_Surface* surf;
 	if (!wrapped) {
 
@@ -65,8 +71,6 @@ bool Texture::loadFromRenderedText(SDL_Renderer* rend, const std::string & text,
 	else {
 
         surf = TTF_RenderText_Blended_Wrapped(&font, text.c_str(), textColour, width);
-
-
 	}
 	mRenderedText = text;
 	if (!surf) {
