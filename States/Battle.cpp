@@ -228,7 +228,7 @@ if(playerDefeated){
 
         if(!playerTurn && !playerDefeated){
 
-                std::cout << "DT:  " << battleGameTimer->getTicks() << std::endl;
+                //std::cout << "DT:  " << battleGameTimer->getTicks() << std::endl;
                 if(battleGameTimer->getTicks() > 300){
                     enemyAttacks();
                     battleGameTimer->stop();

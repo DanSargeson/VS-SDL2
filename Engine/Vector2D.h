@@ -27,10 +27,10 @@ class Vector2D{
 
         //inline Vector2D operator/(const float)
 
-        void Log(std::string msg = ""){
-
-            std::cout << msg << "(X Y) =  (" << X << " " << Y << ")" << std::endl;
-        }
+//        void Log(std::string msg = ""){
+//
+//            std::cout << msg << "(X Y) =  (" << X << " " << Y << ")" << std::endl;
+//        }
 };
 
 #endif // VECTOR2D_H

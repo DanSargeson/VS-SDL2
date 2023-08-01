@@ -17,9 +17,9 @@ bool Engine::Init(){
         return false;
     }
 
-    if(TTF_Init() == 0){
+    if(!TTF_Init() == 0){
 
-        std::cout << "Font works!" << std::endl;
+        std::cout << "Error loading TTF_Font" << std::endl;
     }
 
 
