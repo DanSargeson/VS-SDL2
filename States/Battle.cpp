@@ -77,11 +77,13 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
      std::uniform_int_distribution<int> coinDistribution(1, 6);
      int coinToss = coinDistribution(generator);
-	if (coinToss <= 4)
-		playerTurn = true;
-	else
-		playerTurn = false;
+//	if (coinToss <= 4)
+//		playerTurn = true;
+//	else
+//		playerTurn = false;
 
+
+	playerTurn = (coinToss <= 4);
 	escape = false;
 	playerDefeated = false;
 	enemyDefeated = false;
