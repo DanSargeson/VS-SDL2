@@ -21,6 +21,8 @@ private:
     std::unique_ptr<GUI::Menu> gameMenu;
     std::shared_ptr<GUI::Text> mainText;
 
+    std::shared_ptr<GUI::textBox> textBox;
+
 };
 
 

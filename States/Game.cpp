@@ -32,6 +32,8 @@ Game::Game() : State(){
     gameMenu.reset();
 	gameMenu = make_unique<GUI::Menu>();
 
+	textBox = std::make_shared<GUI::textBox>();
+
 	//menuOptions.push_back("0: Quit");
 	menuOptions.push_back("Travel");    //1
 	menuOptions.push_back("Shop");      //2
@@ -52,6 +54,14 @@ Game::~Game(){
 
 void Game::update(const float& dt){
 
+    if(textBox->getActive()){
+
+        gameMenu->setActive(false);
+    }
+    else{
+
+        gameMenu->setActive(true);
+    }
     gameMenu->update();
 }
 
@@ -121,11 +131,18 @@ void Game::updateEvents(SDL_Event& e){
                 Engine::GetInstance()->AddState(std::make_shared<CharacterMenu>());
             }
 
+            if(gameMenu->getChoice() == 6){
+
+                textBox->setActive(true);
+                textBox->setHeader("Header");
+                std::string txt = "Text 1. \nText 2.";
+                textBox->setText(txt);
+                textBox->setSize(200, 200);
+                textBox->setPosition(15, 15);
+            }
+
             if(gameMenu->getChoice() == 7){
 
-//                if(!std::filesystem::exists("characters.txt")){
-//                    std::ofstream { "characters.txt" };
-//                }
                 saveCharacters();
                 StateData::GetInstance()->mainText->setString("Game Saved");
             }
@@ -164,6 +181,11 @@ void Game::updateEvents(SDL_Event& e){
 
             StateData::GetInstance()->enemyText->clearText();
         }
+
+        if(textBox->getActive()){
+
+            textBox->setActive(false);
+        }
     }
 }
 
@@ -175,8 +197,11 @@ void Game::render(){
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     gameMenu->render();
-   // mainText->render();
     StateData::GetInstance()->mainText->render();
     StateData::GetInstance()->dynamicText->render();
     StateData::GetInstance()->enemyText->render();
+
+    if(textBox->getActive()){
+        textBox->render();
+    }
 }

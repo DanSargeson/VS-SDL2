@@ -250,6 +250,35 @@ namespace GUI{
 
 			void setPosition();
 	};
+
+	class textBox{
+
+        public:
+
+            textBox();
+            ~textBox();
+
+            void setHeader(std::string txt);
+            void setText(std::string txt);
+            void setSize(int h, int w);
+            void setPosition(int x, int y);
+            void render();
+
+            inline void setActive(bool a) { active = a; }
+            inline bool getActive() { return active; }
+        private:
+
+            GUI::Text header;
+            GUI::Text text;
+
+            int width;
+            int height;
+
+            bool active;
+
+            SDL_Rect outline;
+            SDL_Rect filler;
+	};
 };
 
 #endif

@@ -1083,3 +1083,65 @@ void GUI::Menu::refreshGUI(){
 
 	setPosition();
 }
+
+GUI::textBox::textBox(){
+
+    outline = { GUI::p2pX(20), GUI::p2pY(20), 50, 50 };
+    header = GUI::Text();
+    text = GUI::Text();
+
+    filler.x = outline.x - 2;
+    filler.y = outline.y - 2;
+    filler.w = outline.w + 4;
+    filler.h = outline.h + 4;
+
+    active = false;
+}
+
+GUI::textBox::~textBox(){
+
+    outline = { 0, 0, 0, 0};
+}
+
+void GUI::textBox::setHeader(std::string txt){
+
+    header.setString(txt);
+}
+
+void GUI::textBox::setText(std::string txt){
+
+    text.setString(txt, true);
+}
+
+void GUI::textBox::setSize(int h, int w){
+
+    outline.h = h;
+    outline.w = w;
+
+    filler.x = outline.x - 5;
+    filler.y = outline.y - 5;
+    filler.w = outline.w + 10;
+    filler.h = outline.h + 10;
+}
+
+void GUI::textBox::setPosition(int x, int y){
+
+    outline.x = GUI::p2pXi(x);
+    outline.y = GUI::p2pYi(y);
+
+    filler.x = outline.x - 5;
+    filler.y = outline.y - 5;
+    filler.w = outline.w + 10;
+    filler.h = outline.h + 10;
+
+    header.setPosition(outline.x + ((outline.w / 2) - header.getTextWidth() / 2), outline.y + 5);
+    text.setPosition(outline.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
+}
+
+void GUI::textBox::render(){
+
+    SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &outline);
+    SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &filler);
+    header.render();
+    text.render();
+}
