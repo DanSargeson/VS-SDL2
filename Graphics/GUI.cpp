@@ -86,10 +86,10 @@ GUI::Button::Button(float x, float y, float w, float h, unsigned int charSize){
 
 
 	active = true;
-	this->buttonShape.x = static_cast<int>(x);
-	this->buttonShape.y = static_cast<int>(y);
-	this->buttonShape.w = static_cast<int>(w);
-	this->buttonShape.h = static_cast<int>(h);
+	this->buttonShape.x = static_cast<int>(GUI::p2pX(x));
+	this->buttonShape.y = static_cast<int>(GUI::p2pY(y));
+	this->buttonShape.w = static_cast<int>(GUI::p2pX(w));
+	this->buttonShape.h = static_cast<int>(GUI::p2pY(h));
 
 	mTextureText = std::make_shared<Texture>();
 
@@ -130,7 +130,9 @@ void GUI::Button::renderButtons(){
 	SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &buttonShape);
 	if (active) {
 
-		this->mTextureText->render(Engine::GetInstance()->GetRenderer(), buttonShape.x + 5, buttonShape.y + 5);
+        int w = mTextureText->getWidth() / 2;
+        int h = mTextureText->getHeight() / 2;
+		this->mTextureText->render(Engine::GetInstance()->GetRenderer(), buttonShape.x + ((buttonShape.w / 2) - w), buttonShape.y + (buttonShape.h / 2) - h);
 	}
 }
 

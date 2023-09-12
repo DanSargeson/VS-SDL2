@@ -29,7 +29,7 @@ bool Engine::Init(){
 //        std::cout << "Mixer works!" << std::endl;
 //    }
 
-    m_Window = SDL_CreateWindow("Dan's Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    m_Window = SDL_CreateWindow("Dan's Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN);
     if(m_Window == nullptr){
 
         SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -43,7 +43,6 @@ bool Engine::Init(){
     }
 
 ///TESTING
-    mStates.push_back(std::make_shared<MainMenu>());
 
     return m_IsRunning = true;
 }
@@ -76,6 +75,10 @@ void Engine::Update(float dt){
 
             mStates[currentState]->update(dt);
         }
+    }
+    else{
+
+        mStates.push_back(std::make_shared<MainMenu>());
     }
 }
 

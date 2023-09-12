@@ -20,9 +20,9 @@ MainMenu::MainMenu() : State(){
 		printf("Unable to load BG Texture. MainMenuState.cpp line 12");
 	}
 
-	initButtons();
 
 	loadFiles();
+	initButtons();
 }
 
 MainMenu::~MainMenu(){
@@ -294,6 +294,11 @@ void MainMenu::updateEvents(SDL_Event & e){
 
 		return;
 	}
+
+	if(mButtons["QUIT"]->isPressed(e.button)){
+
+        Engine::GetInstance()->Quit();
+	}
 }
 
 //void MainMenu::updateGUI(){
@@ -356,7 +361,7 @@ void MainMenu::initButtons(){
 	///TODO: All need smart pointers...
 
 
-	mButtons["LOAD_GAME"] = new GUI::Button(GUI::p2pX(75.5f), GUI::p2pY(19.5f),
+	mButtons["LOAD_GAME"] = new GUI::Button(GUI::p2pXi(75), GUI::p2pY(19.5f),
 		GUI::p2pX(20.8f), GUI::p2pY(8.3f), charSize);
 	mButtons["LOAD_GAME"]->setRenderText("Continue Game");
 
@@ -369,14 +374,15 @@ void MainMenu::initButtons(){
 		mButtons["LOAD_GAME"]->setActive(true);
 	}
 
-	mButtons["GAME_STATE"] = new GUI::Button(GUI::p2pX(75.5f), GUI::p2pY(32.5f),
-		GUI::p2pX(20.8f), GUI::p2pY(8.3f), charSize);
+	mButtons["GAME_STATE"] = new GUI::Button(75, 32.5f, 20.8f, 8.3f, charSize);
 	mButtons["GAME_STATE"]->setRenderText("New Game");
 
-	mButtons["LOAD_CHAR"] = new GUI::Button(GUI::p2pX(75.f), GUI::p2pY(45.5f), GUI::p2pX(20.8f), GUI::p2pY(8.3f), charSize);
+	mButtons["LOAD_CHAR"] = new GUI::Button(75, 45.5f, 20.8f, 8.3f, charSize);
 	mButtons["LOAD_CHAR"]->setRenderText("Load Game");
 
-	mButtons["EDITOR_STATE"] = new GUI::Button(GUI::p2pX(75.5f), GUI::p2pY(58.5f),
-		GUI::p2pX(20.8f), GUI::p2pY(8.3f), charSize);
+	mButtons["EDITOR_STATE"] = new GUI::Button(75, 58.5f, 20.8f, 8.3f, charSize);
 	mButtons["EDITOR_STATE"]->setRenderText("Editor");
+
+	mButtons["QUIT"] = new GUI::Button(75, 71.5f, 20.8f, 8.3f, charSize);
+	mButtons["QUIT"]->setRenderText("Quit");
 }

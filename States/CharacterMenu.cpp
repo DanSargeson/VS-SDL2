@@ -88,7 +88,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
                 invMenu2->setActive(false);
                 invMenu->setActive(true);
-                choice = -1;
+                //choice = -1;
             }
 
             std::cout << "CHOICE: " << choice << std::endl;
