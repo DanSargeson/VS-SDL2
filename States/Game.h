@@ -13,7 +13,7 @@ public:
     	//void setStateData();
 //	void updateInput(const float &dt);
 
-	void update(const float &dt);
+    void update(const float &dt);
 	void updateEvents(SDL_Event &e);
 	void render();
 
@@ -23,6 +23,7 @@ private:
 
     std::shared_ptr<GUI::textBox> textBox;
 
+    int tutorialCount;
 };
 
 

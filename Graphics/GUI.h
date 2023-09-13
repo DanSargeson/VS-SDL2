@@ -278,6 +278,7 @@ namespace GUI{
 
             SDL_Rect outline;
             SDL_Rect filler;
+            SDL_Rect bg;
 	};
 };
 

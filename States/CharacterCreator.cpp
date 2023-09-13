@@ -101,13 +101,13 @@ void CharacterCreator::initGUI(){
 
     unsigned int charSize = GUI::calcCharSize(80);
 
-    this->buttons["ATTRIBUTES"] = std::make_unique<GUI::Button>(GUI::p2pX(4.f), GUI::p2pY(4.f), GUI::p2pX(18.8f), GUI::p2pY(8.3f), charSize);
+    this->buttons["ATTRIBUTES"] = std::make_unique<GUI::Button>(4.f, 4.f, 18.8f, 8.3f, charSize);
     this->buttons["ATTRIBUTES"]->setRenderText("Attributes");
 
-    this->buttons["SKILLS"] = std::make_unique<GUI::Button>(GUI::p2pX(24.f), GUI::p2pY(4.f), GUI::p2pX(18.8f), GUI::p2pY(8.3f), charSize);
+    this->buttons["SKILLS"] = std::make_unique<GUI::Button>(24.f, 4.f, 18.8f, 8.3f, charSize);
     this->buttons["SKILLS"]->setRenderText("Skills");
 
-    this->buttons["DONE"] = std::make_unique<GUI::Button>(GUI::p2pX(44.f), GUI::p2pY(4.f), GUI::p2pX(18.8f), GUI::p2pY(8.3f), charSize);
+    this->buttons["DONE"] = std::make_unique<GUI::Button>(44.f, 4.f, 18.8f, 8.3f, charSize);
     this->buttons["DONE"]->setRenderText("Done");
 
     mSprites["AGILITY_PLUS"] = spriteAddAgility;
@@ -345,8 +345,10 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
 ///         SaveData::GetInstance()->saveAllCharacters(StateData::GetInstance()->characters, ac, 0, 0, false);
             saveCharacters();
+//           StateData::GetInstance()->setTutorial(true);
          Engine::GetInstance()->PopState();
            Engine::GetInstance()->AddState(std::make_shared<Game>());
+
           //  StateData::GetInstance()->push_state(std::make_shared<Game>());
 ///            StateData::GetInstance()->push_state(std::make_shared<Game>(*StateData::GetInstance(), StateData::GetInstance()->currentMap));
 

@@ -1010,6 +1010,11 @@ void GUI::Menu::setClicked(){
 
 void GUI::Menu::scrollText(int direction){
 
+   if(active == false){
+
+        return;
+    }
+
 	float offsetY = GUI::p2pY(7.f);
 
 	if(direction == 0){
@@ -1097,6 +1102,11 @@ GUI::textBox::textBox(){
     filler.w = outline.w + 4;
     filler.h = outline.h + 4;
 
+    bg.x = outline.x + 1;
+    bg.y = outline.y + 1;
+    bg.w = outline.w - 2;
+    bg.h = outline.h - 2;
+
     active = false;
 }
 
@@ -1112,7 +1122,7 @@ void GUI::textBox::setHeader(std::string txt){
 
 void GUI::textBox::setText(std::string txt){
 
-    text.setString(txt, true);
+    text.setString(txt, true, outline.w - GUI::p2pXi(1));
 }
 
 void GUI::textBox::setSize(int h, int w){
@@ -1124,6 +1134,11 @@ void GUI::textBox::setSize(int h, int w){
     filler.y = outline.y - 5;
     filler.w = outline.w + 10;
     filler.h = outline.h + 10;
+
+    bg.x = outline.x + 1;
+    bg.y = outline.y + 1;
+    bg.w = outline.w - 1;
+    bg.h = outline.h - 1;
 }
 
 void GUI::textBox::setPosition(int x, int y){
@@ -1136,14 +1151,23 @@ void GUI::textBox::setPosition(int x, int y){
     filler.w = outline.w + 10;
     filler.h = outline.h + 10;
 
-    header.setPosition(outline.x + ((outline.w / 2) - header.getTextWidth() / 2), outline.y + 5);
-    text.setPosition(outline.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
+    bg.x = outline.x + 1;
+    bg.y = outline.y + 1;
+    bg.w = outline.w - 2;
+    bg.h = outline.h - 2;
+
+    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 5);
+    text.setPosition(bg.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
 }
 
 void GUI::textBox::render(){
 
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 192, 192, 192, 0);
+    SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &filler);
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 0);
+    SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &bg);
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 255, 0, 0);
     SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &outline);
-    SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &filler);
     header.render();
     text.render();
 }

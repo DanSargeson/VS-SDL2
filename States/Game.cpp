@@ -7,13 +7,7 @@
 
 Game::Game() : State(){
 
-    //gameMenu = std::make_shared<GUI::Menu>();
-
-//    mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow(), true);
-//    mainText->setPosition(GUI::p2pX(20), GUI::p2pY(20));
-//    mainText->setString("Select an option: ");
-
-    //StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(Engine::GetInstance()->GetRenderer(), Engine::GetInstance()->GetWindow());
+    tutorialCount = 0;
     StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>();
     StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>();
@@ -43,7 +37,7 @@ Game::Game() : State(){
 	menuOptions.push_back("Create Character");
 	menuOptions.push_back("Save Game");             //7
 	menuOptions.push_back("Load Character");        //8
-	menuOptions.push_back("Character Switch");
+	menuOptions.push_back("Help");                  //9
 
 	gameMenu->setMenuOptions(menuOptions, true);
 }
@@ -53,6 +47,31 @@ Game::~Game(){
 }
 
 void Game::update(const float& dt){
+
+    if(StateData::GetInstance()->getTutorial() == true){
+
+        switch(tutorialCount){
+
+        case 0:
+            textBox->setSize(400, 400);
+            textBox->setActive(true);
+            textBox->setHeader("Welcome to the tutorial!");
+            textBox->setText("Here I will explain some of the screens.\n\nPress ENTER to continue...");
+            textBox->setPosition(20, 20);
+            break;
+
+        case 1:
+            textBox->setSize(400, 400);
+            textBox->setActive(true);
+            textBox->setPosition(40, 10);
+            textBox->setHeader("Main Menu");
+            textBox->setText("Here is your main menu, scroll using the UP and DOWN arrow buttons\n\nPress ENTER to continue...");
+            break;
+
+        default:
+            break;
+        }
+    }
 
     if(textBox->getActive()){
 
@@ -131,15 +150,6 @@ void Game::updateEvents(SDL_Event& e){
                 Engine::GetInstance()->AddState(std::make_shared<CharacterMenu>());
             }
 
-            if(gameMenu->getChoice() == 6){
-
-                textBox->setActive(true);
-                textBox->setHeader("Header");
-                std::string txt = "Text 1. \nText 2.";
-                textBox->setText(txt);
-                textBox->setSize(200, 200);
-                textBox->setPosition(15, 15);
-            }
 
             if(gameMenu->getChoice() == 7){
 
@@ -153,6 +163,17 @@ void Game::updateEvents(SDL_Event& e){
                 Engine::GetInstance()->AddState(std::make_shared<LoadGame>());
 
                 return;
+            }
+
+            if(gameMenu->getChoice() == 9){
+
+//                textBox->setActive(true);
+//                std::string txt = "Text 1. \nText 2.";
+//                textBox->setSize(200, 200);
+//                textBox->setHeader("Header");
+//                textBox->setText(txt);
+//                textBox->setPosition(15, 15);
+                StateData::GetInstance()->setTutorial(true);
             }
         }
     }
@@ -185,6 +206,17 @@ void Game::updateEvents(SDL_Event& e){
         if(textBox->getActive()){
 
             textBox->setActive(false);
+
+            if(StateData::GetInstance()->getTutorial() == true){
+
+                if(tutorialCount < 1){
+
+                    tutorialCount++;
+
+                    return;
+                }
+                StateData::GetInstance()->setTutorial(false);
+            }
         }
     }
 }
@@ -201,7 +233,23 @@ void Game::render(){
     StateData::GetInstance()->dynamicText->render();
     StateData::GetInstance()->enemyText->render();
 
-    if(textBox->getActive()){
+       if(textBox->getActive()){
+
+       if(StateData::GetInstance()->getTutorial() == true){
+        int w, h;
+        SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, &h);
+        SDL_Rect overlay = { 0, 0, w, h };
+        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 211, 211, 211, 100);
+        SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &overlay);
+        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
+
+        if(tutorialCount == 1){
+
+            gameMenu->render();
+            textBox->render();
+        }
+       } //END TUTORIAL
         textBox->render();
     }
 }

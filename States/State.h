@@ -81,6 +81,8 @@ public:
 
     std::shared_ptr<class TileMap> currentMap;
 
+    inline void setTutorial(bool t) { tutorial = t; }
+    inline bool getTutorial() { return tutorial; }
 
     std::vector<Enemy*> enemies;
 
@@ -95,6 +97,7 @@ public:
     bool next = false;
     bool quit = false;
     bool gameOver = false;
+    bool tutorial = false;
 
 private:
     StateData() { };
