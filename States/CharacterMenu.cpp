@@ -14,6 +14,8 @@ CharacterMenu::CharacterMenu(){
     //StateData::GetInstance()->mainText->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
     StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
 
+    StateData::GetInstance()->mainText->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
+
     initButtons();
 }
 
@@ -32,7 +34,6 @@ void CharacterMenu::refreshGUI(){
 
 void CharacterMenu::update(const float& dt){
 
-    //StateData::GetInstance()->mainText->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
     invMenu->update();
     invMenu2->update();
 }
@@ -90,11 +91,12 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
             invMenu->setActive(true);
             invMenu2->setActive(false);
+            StateData::GetInstance()->mainText->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
 
-            invMenu->setActive(false);
+            invMenu->setActive(true);
             invMenu2->setActive(false);
 
             StateData::GetInstance()->mainText->setString("FACTIONS WOULD GO HERE...");
@@ -150,13 +152,13 @@ void CharacterMenu::render(){
 
 void CharacterMenu::initButtons(){
 
-    unsigned int charSize = GUI::calcCharSize(90);
+    unsigned int charSize = GUI::calcCharSize(85);
 
 
-    mButtons["INVENTORY"] = new GUI::Button(20.f, 65.6f, 11.8f, 4.3f, charSize);
+    mButtons["INVENTORY"] = new GUI::Button(20.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["INVENTORY"]->setRenderText("Inventory");
 
-    mButtons["FACTIONS"] = new GUI::Button(35.f, 65.6f, 11.8f, 4.3f, charSize);
+    mButtons["FACTIONS"] = new GUI::Button(35.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["FACTIONS"]->setRenderText("Factions");
 
 }
