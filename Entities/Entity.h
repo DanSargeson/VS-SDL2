@@ -1,13 +1,15 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include <memory>
+
 //#include "AttributeComponent.h"
 //#include "SkillComponent.h"
-#include "FactionComponent.h"
+class FactionComponent;
 //#include "DialogueComponent.h"
 //#include "AttackComponent.h"
 //DEFENCE COMPONENT HERE
-#include "Item.h"
+class Item;
 #include "Inventory.h"
 
 class Entity{
@@ -20,9 +22,9 @@ protected:
 
 
 	//EQUIPPED ITEMS
-	std::shared_ptr<Item> activeWeapon;
-	std::shared_ptr<Item> activeHead;
-	std::shared_ptr<Item> activeChest;
+	std::shared_ptr<class Item> activeWeapon;
+	std::shared_ptr<class Item> activeHead;
+	std::shared_ptr<class Item> activeChest;
 	std::shared_ptr<Item> activeArms;
 	std::shared_ptr<Item> activeLegs;
 	std::shared_ptr<Item> activeTool;
@@ -36,7 +38,7 @@ protected:
 	int faction;
 
 	std::vector<class Component*> mComponents;
-	Inventory inv;
+	class Inventory inv;
 
 public:
 
@@ -126,8 +128,8 @@ public:
 
 	//virtual int getDirection() = 0;
 
-	virtual void update() = 0;
-	virtual void render() = 0;
+	virtual void update();
+	virtual void render();
 };
 
 #endif

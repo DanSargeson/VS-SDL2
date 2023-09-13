@@ -354,7 +354,6 @@ void MainMenu::initSaveData() {
 
 void MainMenu::initButtons(){
 
-	auto wind = Engine::GetInstance()->GetWindow();
 	unsigned int charSize = GUI::calcCharSize(80);
 
 

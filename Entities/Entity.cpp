@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Entity.h"
 #include "Component.h"
+#include "FactionComponent.h"
 
 void Entity::InitVariables(){
 

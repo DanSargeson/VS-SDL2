@@ -5,12 +5,13 @@
 #include <vector>
 #include <string>
 
-using namespace std;
+#include "Entity.h"
 
-class Enemy{
+
+class Enemy : public Entity{
 
 private:
-	string name;
+	std::string name;
     int hp;
     int hpMax;
     int level;
@@ -25,7 +26,7 @@ public:
     virtual ~Enemy();
 
     inline bool isAlive() { return this->hp > 0;}
-    string getAsString() const;
+    std::string getAsString() const;
 	int takeDamage(int damage);
 
 	inline int getLevel() const { return this->level; }
@@ -37,7 +38,7 @@ public:
 	inline int getHpMax() const { return this->hpMax; }
 	inline int getDefence() const { return this->defence; }
 	inline int getAccuracy() const { return this->accuracy; }
-	inline string getName() { return this->name; }
+	inline std::string getName() { return this->name; }
 
 	static vector<string> enemyNames;
 	static void initNames();

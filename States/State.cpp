@@ -12,7 +12,7 @@ void StateData::initFonts(){
         font = TTF_OpenFont("Fonts/SF Atarian System.ttf", 24);
 
     }
-    catch(std::exception e){
+    catch(std::exception &e){
 
         std::ofstream outFile;
 
@@ -88,7 +88,7 @@ void State::saveCharacters()
 
  //   void Game::saveCharacters(){
     if(outFile.is_open()){
-        for(int i = 0; i < StateData::GetInstance()->characters.size(); i++){
+        for(unsigned i = 0; i < StateData::GetInstance()->characters.size(); i++){
             outFile << StateData::GetInstance()->characters[i]->getStatsAsString() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getEquippedWeapon() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getEquippedArmour() << "\n";

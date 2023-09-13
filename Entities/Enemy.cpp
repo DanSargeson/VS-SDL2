@@ -15,7 +15,7 @@ void Enemy::initNames() {
 }
 
 
-Enemy::Enemy(int level){
+Enemy::Enemy(int level) : Entity(){
     initNames();
 	this->name = Enemy::enemyNames[rand() % Enemy::enemyNames.size()];
     this->level = level; //TODO CHANGE BACK

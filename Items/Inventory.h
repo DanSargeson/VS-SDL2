@@ -21,11 +21,6 @@ public:
     void addItem(const Item &Item);
     void removeItem(int index);
 
-    inline void debugPrint() const {
-        for(size_t i = 0; i < this->noOfItems; i++){
-            cout << this->itemArray[i]->debugPrint() << endl;
-        }
-    }
 
     inline void debugVector(){
 		cout << "==INVENTORY==\n";

@@ -64,7 +64,7 @@ void LoadGame::updateEvents(SDL_Event& e){
 //                        int d = StateData::GetInstance()->characters[i]->getID();
                         std::cout << "You picked:::   " << std::to_string(c) << std::endl;
 
-                        StateData::GetInstance()->characters[c];
+                        //StateData::GetInstance()->characters[c];
 
 					//if (loadMenu->getChoice() == StateData::GetInstance()->characters[i]->getID()) {
 
