@@ -68,6 +68,8 @@ class Battle : public State{
 
         unsigned seed;
         std::default_random_engine generator;
+
+        std::shared_ptr<GUI::Tooltip> battleEyes;
 };
 
 #endif // BATTLE_H

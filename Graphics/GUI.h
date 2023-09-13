@@ -90,6 +90,8 @@ namespace GUI{
 
 		SDL_Rect getGlobalBounds() { return mOutline; }
 
+		SDL_Rect getPositionRect();
+
 		void setColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 		void setFontSize(int size);
 		void updateWindow();

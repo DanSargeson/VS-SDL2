@@ -350,6 +350,11 @@ void GUI::Text::render(){
 	SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
 }
 
+SDL_Rect GUI::Text::getPositionRect(){
+
+    return mTextTexture->getTextureRect();
+}
+
 void GUI::Text::setPosition(int x, int y) {
 
 	this->mOutline.x = x;

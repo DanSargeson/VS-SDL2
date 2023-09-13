@@ -99,6 +99,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	gainEXP = 0;
 	gainGold = 0;
 
+	battleEyes = std::make_shared<GUI::Tooltip>();
+
 	initBattle();
 }
 
@@ -173,6 +175,7 @@ void Battle::updateMenu(){
 }
 
 void Battle::update(const float& dt){
+
 
 if(endTurn){
 
@@ -535,4 +538,6 @@ void Battle::render(){
     else if(enemyMenu->getActive()){
         enemyMenu->render();
     }
+
+    battleEyes->render();
 }
