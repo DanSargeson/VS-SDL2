@@ -25,6 +25,9 @@ class Battle : public State{
         std::shared_ptr<GUI::Menu> battleMenu;
         std::shared_ptr<GUI::Menu> enemyMenu;
         std::vector<Enemy> enemies;
+        std::vector<GUI::textBox> enemyTextBoxes;
+        std::vector<GUI::Text> enemyText;
+        GUI::Text temp;
 
         std::unique_ptr<Timer> battleTxtTimer;
         std::unique_ptr<GameTimer> battleGameTimer;

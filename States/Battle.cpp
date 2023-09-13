@@ -88,8 +88,14 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	playerDefeated = false;
 	enemyDefeated = false;
 
+	noOfEnemies = 1;
+
 	for (size_t i = 0; i < noOfEnemies; i++){
 		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() + rand()%5));
+		//std::string msg = "test " + std::to_string(i);
+		temp.setString(enemies[i].getName());
+		temp.setPosition(GUI::p2pXi(10), GUI::p2pYi(25));
+		enemyText.push_back(temp);
 	}
 
 	//BATTLE VARIABLES
@@ -539,5 +545,10 @@ void Battle::render(){
         enemyMenu->render();
     }
 
-    battleEyes->render();
+    for(int i = 0; i < enemyText.size(); i++){
+
+        enemyText[i].render();
+    }
+
+    //battleEyes->render();
 }
