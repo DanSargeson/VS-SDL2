@@ -170,10 +170,6 @@ bool Entity::isAlive(){
 //	return this->attributeComponent->getHP() > 0;
 }
 
-void Entity::setMapID(int id){
-
-//	this->mapID = id;
-}
 
 
 //void Entity::createAttributeComponent(const unsigned level, const bool reset, bool enemy){
@@ -238,19 +234,6 @@ float Entity::getPositionYSave() {
 
 //Functions
 
-void Entity::setPosition(const float x, const float y){
-
-	//if (this->hitboxComponent) {
-
-	//	this->sprite.setPosition(x, y);
-	//	this->hitboxComponent->SetPosition(x, y, this->sprite);
-	//}
-	//else {
-
-	//	  this->sprite.setPosition(x, y);
-	//}
-}
-
 float Entity::calculateDefence(){
 
 	float total = 0.0f;
@@ -312,7 +295,7 @@ void Entity::update(){
 
 }
 
-void Entity::render(SDL_Renderer* target){
+void Entity::render(){
 
 	//if (this->hitboxComponent)
 	//	this->hitboxComponent->Render(target);

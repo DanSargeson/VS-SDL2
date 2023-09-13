@@ -74,8 +74,8 @@ public:
 
 	bool isAlive();
 
-	virtual int getCurrentMapID() = 0;
-	virtual void setMapID(int id);
+//	virtual int getCurrentMapID() = 0;
+//	virtual void setMapID(int id);
 
 //	void createAttributeComponent(const unsigned level, const bool reset, bool enemy = false);
 //	void createSkillComponent();
@@ -101,7 +101,7 @@ public:
 
 	//functions
 
-	virtual void setPosition(const float x, const float y);
+	//virtual void setPosition(const float x, const float y);
 	//virtual void move(const float x, const float y, const float& dt);
 	//sf::Vector2f getVelocity();
 	//sf::Vector2f getPreviousVelocity();
@@ -127,7 +127,7 @@ public:
 	//virtual int getDirection() = 0;
 
 	virtual void update() = 0;
-	virtual void render(SDL_Renderer* rend) = 0;
+	virtual void render() = 0;
 };
 
 #endif
