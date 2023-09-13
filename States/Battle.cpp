@@ -90,11 +90,13 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
 	noOfEnemies = 1;
 
+    int x = GUI::p2pXi(10);
+    int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
 		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() + rand()%5));
 		//std::string msg = "test " + std::to_string(i);
 		temp.setString(enemies[i].getName());
-		temp.setPosition(GUI::p2pXi(10), GUI::p2pYi(25));
+		temp.setPosition(x, y);
 		enemyText.push_back(temp);
 	}
 
@@ -520,6 +522,26 @@ void Battle::updateEvents(SDL_Event& e){
     }
 
     //std::cout << "THE CHOICE IS CURRENTLY: " << std::to_string(choice) << "\n";
+    if(e.type == SDL_MOUSEMOTION){
+
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        SDL_Rect r = enemyText[0].getPositionRect();
+        if(x > r.x &&
+           x < r.x + r.w &&
+           y > r.y &&
+           y < r.y + r.h){
+
+
+                battleEyes->setDisplayText("works");
+                battleEyes->update(x, y);
+                battleEyes->setHidden(false);
+           }
+           else{
+
+                battleEyes->setHidden(true);
+           }
+    }
 }
 
 void Battle::render(){
@@ -550,5 +572,5 @@ void Battle::render(){
         enemyText[i].render();
     }
 
-    //battleEyes->render();
+    battleEyes->render();
 }
