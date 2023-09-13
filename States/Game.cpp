@@ -173,6 +173,7 @@ void Game::updateEvents(SDL_Event& e){
 //                textBox->setHeader("Header");
 //                textBox->setText(txt);
 //                textBox->setPosition(15, 15);
+                tutorialCount = 0;
                 StateData::GetInstance()->setTutorial(true);
             }
         }
