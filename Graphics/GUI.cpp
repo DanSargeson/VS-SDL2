@@ -643,7 +643,7 @@ GUI::Tooltip::~Tooltip(){
 
 void GUI::Tooltip::setDisplayText(std::string txt) {
 
-	displayText->setString(txt);
+	displayText->setString(txt, true, 150);
 	outline.w = displayText->getTextWidth() + 10;
 	outline.h = displayText->getTextHeight() + 10;
 
