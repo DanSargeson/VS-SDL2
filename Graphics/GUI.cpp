@@ -234,6 +234,11 @@ GUI::Text::Text(bool border){
 	//mTextColour = { 0, 255, 0, 255 };
 }
 
+GUI::Text::Text(std::string n){
+
+    setString(n);
+}
+
 GUI::Text::Text(int x, int y, int w, int h, bool border){
 
 //	mRend = rend;

@@ -88,16 +88,23 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	playerDefeated = false;
 	enemyDefeated = false;
 
-	noOfEnemies = 1;
+	noOfEnemies = 2;
 
-    int x = GUI::p2pXi(10);
-    int y = GUI::p2pYi(25);
+    //int x = GUI::p2pXi(10);
+    //int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
 		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() + rand()%5));
 		//std::string msg = "test " + std::to_string(i);
-		temp.setString(enemies[i].getName());
-		temp.setPosition(x, y);
-		enemyText.push_back(temp);
+	//	y += (i * 2);
+        //temp.setString();
+		enemyText.push_back(GUI::Text());
+        SDL_Delay(19);
+	}
+
+	for(size_t i = 0; i < enemies.size(); i++){
+
+        enemyText[i].setString(enemies[i].getName());
+		enemyText[i].setPosition(96, 120 + (i * 40));
 	}
 
 	//BATTLE VARIABLES
@@ -526,21 +533,30 @@ void Battle::updateEvents(SDL_Event& e){
 
         int x, y;
         SDL_GetMouseState(&x, &y);
-        SDL_Rect r = enemyText[0].getPositionRect();
+        SDL_Rect r;
+
+        for(int i = 0; i < enemies.size(); i++){
+
+
+        r = enemyText[i].getPositionRect();
+
         if(x > r.x &&
            x < r.x + r.w &&
            y > r.y &&
            y < r.y + r.h){
 
 
-                battleEyes->setDisplayText("works");
+                battleEyes->setDisplayText(enemyText[i].getString());
                 battleEyes->update(x, y);
                 battleEyes->setHidden(false);
+
+                return;
            }
            else{
 
                 battleEyes->setHidden(true);
            }
+        }
     }
 }
 

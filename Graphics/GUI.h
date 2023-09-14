@@ -66,6 +66,7 @@ namespace GUI{
 
 		Text(bool border = false);
 		Text(int x, int y, int w, int h, bool border = true);
+		Text(std::string);
 		virtual ~Text();
 
 		void update();
