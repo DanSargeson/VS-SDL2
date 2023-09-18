@@ -390,11 +390,11 @@ const void Battle::playerAttacks(){
 						enemyText.erase(enemyText.begin() + choice);
 //						int s = enemies.size();
 //						std::cout << std::endl << std::to_string(s);
-//						for(size_t i = 0; i < enemies.size(); i++){
-//
-//                            enemyText[i].setString(enemies[i].getName());
-//                            enemyText[i].setPosition(96, 140 + (i * 40));
-//                        }
+						for(size_t i = 0; i < enemies.size(); i++){
+
+                            enemyText[i].setString(enemies[i].getName());
+                            enemyText[i].setPosition(96, 140 + (i * 40));
+                        }
 					} //####END PLAYER WINS
 				}
 				else {

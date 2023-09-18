@@ -3,11 +3,11 @@
 
 #include <memory>
 
-//#include "AttributeComponent.h"
-//#include "SkillComponent.h"
+class AttributeComponent;
+class SkillComponent;
 class FactionComponent;
 //#include "DialogueComponent.h"
-//#include "AttackComponent.h"
+class AttackComponent;
 //DEFENCE COMPONENT HERE
 class Item;
 #include "Inventory.h"
@@ -29,11 +29,11 @@ protected:
 	std::shared_ptr<Item> activeLegs;
 	std::shared_ptr<Item> activeTool;
 
-	//std::shared_ptr<AttributeComponent> attributeComponent;
-	//std::shared_ptr<SkillComponent> skillComponent;
+	std::shared_ptr<AttributeComponent> attributeComponent;
+	std::shared_ptr<SkillComponent> skillComponent;
 	std::shared_ptr<FactionComponent> factionComponent;
 	//std::shared_ptr<DialogueComponent> dialogueComponent;
-	//std::shared_ptr<AttackComponent> attackComponent;
+	std::shared_ptr<AttackComponent> attackComponent;
 
 	int faction;
 
@@ -60,7 +60,7 @@ public:
 	int getFaction(int faction);
 	int getAttribute(int attribute);
 	int checkDurability();
-	//float getAttributeFloat(int attribute);
+	float getAttributeFloat(int attribute);
 
 	void loseDurability();
 
@@ -79,11 +79,11 @@ public:
 //	virtual int getCurrentMapID() = 0;
 //	virtual void setMapID(int id);
 
-//	void createAttributeComponent(const unsigned level, const bool reset, bool enemy = false);
-//	void createSkillComponent();
+	void createAttributeComponent(const unsigned level, const bool reset, bool enemy = false);
+	void createSkillComponent();
 	void createFactionComponent();
 //	void createDialogueComponent();
-//	void createAttackComponent(std::shared_ptr<SkillComponent> skillComponent, std::shared_ptr<AttributeComponent> attributeComponent);
+	void createAttackComponent(std::shared_ptr<SkillComponent> skillComponent, std::shared_ptr<AttributeComponent> attributeComponent);
 
 
 	int getDamage();
@@ -119,7 +119,7 @@ public:
 		INVETORY FUNCTIONS
 	*/
 
-	//std::shared_ptr<Item> getItem(int index);
+	std::shared_ptr<Item> getItem(int index);
 	void removeItem(int index);
 
 	void addComponent(class Component* comp);

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <iostream>
 //#include "puzzle.h"
-#include "Player.h"
+#include "Enemy.h"
 //#include "dArray.h"
 #include "GUI.h"
 

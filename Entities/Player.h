@@ -2,21 +2,21 @@
 #define PLAYER_H
 
 #include "Inventory.h"
-#include "Enemy.h"
+#include "Entity.h"
 
 
 
 using namespace std;
 
-class Player{
+class Player : public Entity{
 private:
 	Inventory inventory;
 	Weapon weapon;
-	shared_ptr<Item> activeWeapon;
-	shared_ptr<Item> activeHead;
-	shared_ptr<Item> activeChest;
-	shared_ptr<Item> activeArms;
-	shared_ptr<Item> activeLegs;
+//	shared_ptr<Item> activeWeapon;
+//	shared_ptr<Item> activeHead;
+//	shared_ptr<Item> activeChest;
+//	shared_ptr<Item> activeArms;
+//	shared_ptr<Item> activeLegs;
 	Armour armourHead;
 	Armour armourChest;
 	Armour armourArms;

@@ -1,7 +1,12 @@
 #include "Player.h"
 #include "State.h"
+#include "FactionComponent.h"
+#include "AttributeComponent.h"
+#include "SkillComponent.h"
+#include "AttackComponent.h"
+#include "Entity.h"
 
-Player::Player(){
+Player::Player() : Entity(){
     distanceTravelled = 0;
 
     gold = 0;
@@ -26,6 +31,24 @@ Player::Player(){
     luck = 0;
 
 
+    this->createAttributeComponent(0, true);
+	this->createSkillComponent();
+	this->createFactionComponent();
+
+	/*
+		DEBUG - delete later
+	*/
+	//for (int i = 0; i < 5; i++) {
+
+	//	attributeComponent->increaseAttribute(ATTRIBUTE::STRENGTH);
+	//	attributeComponent->increaseAttribute(ATTRIBUTE::AGILITY);
+	//	attributeComponent->increaseAttribute(ATTRIBUTE::LUCK);
+	//}
+
+	this->skillComponent->calculateSkills(*this->attributeComponent);
+	//this->createAttackComponent(skillComponent, attributeComponent);
+	createAttackComponent(skillComponent, attributeComponent);
+
 
     statPoints = 0;
     skillPoints = 0;
@@ -34,7 +57,7 @@ Player::Player(){
 }
 
 Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex,
-                     int intel, int hp, int stam, int stPoint, int skPoint, int corr){
+                     int intel, int hp, int stam, int stPoint, int skPoint, int corr) : Entity(){
     this->name = n;
     this->distanceTravelled = dt;
     this->gold = g;
@@ -54,7 +77,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 }
 
-Player::Player(string name, int dt){
+Player::Player(string name, int dt) : Entity(){
     this->name = name;
     this->distanceTravelled = dt;
 }
