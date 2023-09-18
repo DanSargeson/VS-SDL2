@@ -104,7 +104,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	for(size_t i = 0; i < enemies.size(); i++){
 
         enemyText[i].setString(enemies[i].getName());
-		enemyText[i].setPosition(96, 120 + (i * 40));
+		enemyText[i].setPosition(96, 140 + (i * 40));
 	}
 
 	//BATTLE VARIABLES
@@ -387,6 +387,14 @@ const void Battle::playerAttacks(){
 							}
                         StateData::GetInstance()->dynamicText->setString(endMsg, true, GUI::p2pY(80));
 						enemies.erase(enemies.begin() + choice);
+						enemyText.erase(enemyText.begin() + choice);
+//						int s = enemies.size();
+//						std::cout << std::endl << std::to_string(s);
+//						for(size_t i = 0; i < enemies.size(); i++){
+//
+//                            enemyText[i].setString(enemies[i].getName());
+//                            enemyText[i].setPosition(96, 140 + (i * 40));
+//                        }
 					} //####END PLAYER WINS
 				}
 				else {
