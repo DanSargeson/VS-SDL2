@@ -75,11 +75,20 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
 
     this->updateStats();
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
+
+   this->createAttributeComponent(0, true);
+	this->createSkillComponent();
+	this->createFactionComponent();
+	createAttackComponent(skillComponent, attributeComponent);
 }
 
 Player::Player(string name, int dt) : Entity(){
     this->name = name;
     this->distanceTravelled = dt;
+
+    this->createAttributeComponent(0, true);
+	this->createSkillComponent();
+	this->createFactionComponent();
 }
 
 Player::~Player(){
@@ -204,6 +213,112 @@ string Player::getStatsAsString() const{
 		to_string(statPoints) + " " +
 		to_string(skillPoints) + " " +
 		to_string(corruption);
+}
+
+std::string Player::getStatsAsStringNEW(){
+
+	std::string deets;
+
+	int hp, hpMax;
+
+	hp = static_cast<int>(this->attributeComponent->getHP());
+	hpMax = static_cast<int>(this->attributeComponent->getHPMax());
+
+	int xp = static_cast<int>(this->attributeComponent->getEXP());
+	int xpNext = static_cast<int>(this->attributeComponent->getEXPNext());
+
+	deets += "Name: " + this->name + "\n";
+	deets += "Level: " + std::to_string(this->attributeComponent->getLevel()) + "\n";
+	deets += "HP: " + std::to_string(hp) + " / " + std::to_string(hpMax) + "\n";
+	deets += "XP: " + std::to_string(xp) + " / " + std::to_string(xpNext) + "\n";
+	deets += "Gold: " + std::to_string(this->getGold()) + "\n";
+
+	//deets += " = EQUIPPED ITEMS = \n";
+
+//	deets += "Tool: ";
+//
+//	if (this->activeTool != NULL) {
+//
+//		deets += this->activeTool->getTypeStr() + "\n";
+//	}
+//	else {
+//
+//		deets += "Empty\n";
+//	}
+//
+//	deets += "Weapon: ";
+//
+//	if (this->activeWeapon != NULL) {
+//
+//		deets += this->activeWeapon->getTypeStr() + "\n";
+//	}
+//	else {
+//
+//		deets += "Empty\n";
+//	}
+//
+//	deets += "Head Gear: ";
+//	if (this->activeHead != NULL) {
+//
+//		deets += this->activeHead->getTypeStr() + "\n";
+//	}
+//	else {
+//
+//		deets += "Empty\n";
+//	}
+//
+//	deets += "Arms Gear: ";
+//	if (this->activeArms != NULL) {
+//
+//		deets += this->activeArms->getTypeStr() + "\n";
+//	}
+//	else {
+//
+//		deets += "Empty\n";
+//	}
+//
+//	deets += "Chest Gear: ";
+//	if (this->activeChest != NULL) {
+//
+//		deets += this->activeChest->getTypeStr() + "\n";
+//	}
+//	else {
+//
+//		deets += "Empty\n";
+//	}
+//
+//	deets += "Legs Gear: ";
+//	if (this->activeLegs != NULL) {
+//
+//		deets += this->activeLegs->getTypeStr() + "\n";
+//	}
+//	else {
+//
+//		deets += "Empty\n";
+//	}
+
+	int defence = this->skillComponent->getSkill(SKILLS::DEFENCE);
+//	int armour = this->getArmourRating();
+
+
+	int minAttack = this->attackComponent->getBaseMinDamage();
+	int maxAttack = this->attackComponent->getBaseMaxDamage();
+
+
+	deets += "\nArmour Rating: " + std::to_string(defence);
+
+//	if (armour > 0) {
+//
+//	 deets += "  (+" + std::to_string(armour) + ")";
+//	}
+	deets += "\nAttack Rating: " +  std::to_string(minAttack) + " - " + std::to_string(maxAttack);
+
+	if (this->getMinDamageWithWeapon() > 0) {
+
+		deets += "  (+" + std::to_string(this->getMinDamageWithWeapon()) + " - " + std::to_string(this->getMaxDamageWithWeapon()) + ")";
+	}
+
+	return deets;
 }
 
 string Player::getInvAsString() {

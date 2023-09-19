@@ -98,8 +98,21 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
             invMenu->setActive(true);
             invMenu2->setActive(false);
+            std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
+            StateData::GetInstance()->mainText->setString(fact, true, 420);
+        }
 
-            StateData::GetInstance()->mainText->setString("FACTIONS WOULD GO HERE...");
+        if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
+
+            invMenu->setActive(true);
+            invMenu2->setActive(false);
+
+            std::cout << "Attrib pressed\n\n\n\n\n";
+
+           /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
+           /// StateData::GetInstance()->mainText->setString("ATTRIBUTES");
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAsStringNEW();
+            StateData::GetInstance()->mainText->setString(mmm, true, 420);
         }
 
 
@@ -160,5 +173,8 @@ void CharacterMenu::initButtons(){
 
     mButtons["FACTIONS"] = new GUI::Button(35.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["FACTIONS"]->setRenderText("Factions");
+
+    mButtons["ATTRIBUTES"] = new GUI::Button(50.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ATTRIBUTES"]->setRenderText("Attributes");
 
 }
