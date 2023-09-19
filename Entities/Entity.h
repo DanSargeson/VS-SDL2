@@ -62,6 +62,12 @@ public:
 	int checkDurability();
 	float getAttributeFloat(int attribute);
 
+
+	int getLevel();
+
+	int getHP();
+	int getHPMax();
+
 	void loseDurability();
 
 

@@ -27,6 +27,22 @@ Entity::~Entity(){
 
 //Component Functions
 
+int Entity::getLevel(){
+
+    int a = attributeComponent->getLevel();
+    return a;
+}
+
+int Entity::getHP(){
+
+    return attributeComponent->getHP();
+}
+
+int Entity::getHPMax(){
+
+    return attributeComponent->getHPMax();
+}
+
 void Entity::loseHP(int hp){
 
 	this->attributeComponent->loseHP(hp);

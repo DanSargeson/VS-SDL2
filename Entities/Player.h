@@ -4,8 +4,6 @@
 #include "Inventory.h"
 #include "Entity.h"
 
-
-
 using namespace std;
 
 class Player : public Entity{
@@ -89,7 +87,7 @@ public:
 
 //Accessors
     inline const string& getName() const { return this->name;}
-//    inline const int& getLevel() const { return this->level;}
+//    const int& getLevel() const;
 //    inline const int& getDistanceTravelled() const { return this->distanceTravelled;}
 //    inline const int& getExp() const { return this->exp;}
 //    inline const int& getExpNext() const { return this->expNext;}

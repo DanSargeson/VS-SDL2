@@ -19,6 +19,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
      std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
      noOfEnemies = numEnemiesDistribution(generator);
 
+     player = StateData::GetInstance()->getActiveCharacter();
+
     std::vector<std::string> ops;
     ops.push_back("Attack");
     ops.push_back("Defend");
@@ -93,7 +95,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
     //int x = GUI::p2pXi(10);
     //int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
-///		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getAttributeComponent()->getLevel() + rand()%5));
+		std::cout << "LEVEL:: " << std::to_string(StateData::GetInstance()->getActiveCharacter()->getLevel()) << "\n\n\n";
+		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() + rand()%5));
 		//std::string msg = "test " + std::to_string(i);
 	//	y += (i * 2);
         //temp.setString();
@@ -153,13 +156,13 @@ if(!escape && !playerDefeated && !enemyDefeated) {
             ops.push_back("Defend");
             ops.push_back("Use Item");
             battleMenu->setMenuOptions(ops, true);
-///            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
             std::string enemyMsg = "";
             if(battleMenu->getActive()){
 
                 for(int i = 0; i < enemies.size(); i++){
 
-                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHp()) + "/" + std::to_string(enemies[i].getHpMax()) + " ";
+                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
                 }
                 StateData::GetInstance()->enemyText->setString(enemyMsg);
             }
@@ -217,13 +220,13 @@ if(playerDefeated){
 }
 
 
-///            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
-            StateData::GetInstance()->mainText->setString("HP SHOULD BE HERE 2");
-           /// StateData::GetInstance()->mainText->render();
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
+            StateData::GetInstance()->mainText->setString(msg);
+            StateData::GetInstance()->mainText->render();
             std::string enemyMsg = "";
             for(int i = 0; i < enemies.size(); i++){
 
-                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHp()) + "/" + std::to_string(enemies[i].getHpMax()) + " ";
+                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
             }
             StateData::GetInstance()->enemyText->setString(enemyMsg);
 

@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "Timer.h"
+#include "Player.h"
 
 class Battle : public State{
 
@@ -72,6 +73,7 @@ class Battle : public State{
         unsigned seed;
         std::default_random_engine generator;
 
+        std::shared_ptr<Player> player;
         std::shared_ptr<GUI::Tooltip> battleEyes;
 };
 

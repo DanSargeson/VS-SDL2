@@ -612,6 +612,11 @@ string Player::getEquippedWeapon() {
 
 	return equipped;
 }
+//
+//const int& Player::getLevel() const{
+//
+//    return attributeComponent->getLevel();
+//}
 
 string Player::getEquippedArmour() {
 
