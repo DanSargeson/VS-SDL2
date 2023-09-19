@@ -459,8 +459,8 @@ const void Battle::enemyAttacks(){
 				}
 			}
 
-///            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
-            StateData::GetInstance()->mainText->setString("HP GOES HERE 3");
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
+            StateData::GetInstance()->mainText->setString(msg);
 			//END TURN
 			 endTurn = true;
 		}

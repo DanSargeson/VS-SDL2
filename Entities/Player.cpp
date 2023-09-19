@@ -72,16 +72,18 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
 //    this->statPoints = stPoint;
 //    this->skillPoints = skPoint;
     corruption = corr;
-    int agi, luck, charis = 0;
+    int agi = 0;
+    int luck = 0;
+    int charis = 0;
 
     this->updateStats();
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 
    this->createAttributeComponent(0, true);
 
-   attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
 	this->createSkillComponent();
 	this->createFactionComponent();
+   attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
 	createAttackComponent(skillComponent, attributeComponent);
 }
 
@@ -92,6 +94,7 @@ Player::Player(string name, int dt) : Entity(){
     this->createAttributeComponent(0, true);
 	this->createSkillComponent();
 	this->createFactionComponent();
+	createAttackComponent(skillComponent, attributeComponent);
 }
 
 Player::~Player(){
