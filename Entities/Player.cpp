@@ -9,26 +9,26 @@
 Player::Player() : Entity(){
     distanceTravelled = 0;
 
-    gold = 0;
-    name = "";
-    level = 0;
-    exp = 0;
-    expNext = 0;
-
-    strength = 0;
-    vitality = 0;
-    dexterity = 0;
-    intelligence = 0;
-
-    hp = 0;
-    hpMax = 0;
-    stamina = 0;
-    staminaMax = 0;
-    damageMin = 0;
-    damageMax = 0;
-    defence = 0;
-    accuracy = 0;
-    luck = 0;
+//    gold = 0;
+//    name = "";
+//    level = 0;
+//    exp = 0;
+//    expNext = 0;
+//
+//    strength = 0;
+//    vitality = 0;
+//    dexterity = 0;
+//    intelligence = 0;
+//
+//    hp = 0;
+//    hpMax = 0;
+//    stamina = 0;
+//    staminaMax = 0;
+//    damageMin = 0;
+//    damageMax = 0;
+//    defence = 0;
+//    accuracy = 0;
+//    luck = 0;
 
 
     this->createAttributeComponent(0, true);
@@ -50,8 +50,8 @@ Player::Player() : Entity(){
 	createAttackComponent(skillComponent, attributeComponent);
 
 
-    statPoints = 0;
-    skillPoints = 0;
+    //statPoints = 0;
+    //skillPoints = 0;
 
     corruption = 0;
 }

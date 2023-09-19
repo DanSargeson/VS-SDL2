@@ -24,27 +24,27 @@ private:
 	int gold;
 	int distanceTravelled;
 
-	string name;
-	int level;
-	int exp;
-	int expNext;
-	int hp;
-	int hpMax;
-	int stamina;
-	int staminaMax;
-	int damageMin;
-	int damageMax;
-	int defence;
-	int accuracy;
-	int luck;
-
-	int strength;
-	int vitality;
-	int dexterity;
-	int intelligence;
-
-	int statPoints;
-	int skillPoints;
+//	string name;
+//	int level;
+//	int exp;
+//	int expNext;
+//	int hp;
+//	int hpMax;
+//	int stamina;
+//	int staminaMax;
+//	int damageMin;
+//	int damageMax;
+//	int defence;
+//	int accuracy;
+//	int luck;
+//
+//	int strength;
+//	int vitality;
+//	int dexterity;
+//	int intelligence;
+//
+//	int statPoints;
+//	int skillPoints;
 
 	int corruption;
 
@@ -88,31 +88,31 @@ public:
 	inline void increaseCorruption() { corruption++; }
 
 //Accessors
-    inline const string& getName() const { return this->name;}
-    inline const int& getLevel() const { return this->level;}
-    inline const int& getDistanceTravelled() const { return this->distanceTravelled;}
-    inline const int& getExp() const { return this->exp;}
-    inline const int& getExpNext() const { return this->expNext;}
-    inline const int& getHP() const { return this->hp;}
-    inline const int& getHpMax() const { return this->hpMax;}
-    inline const int& getStamina() const { return this->stamina;}
-	//inline const int& getDamage() const { return rand() % this->damageMax + this->damageMin; }
-	inline const int& getDamageMax() const { return this->damageMax;}
-    inline const int& getDamageMin() const { return this->damageMin;}
-    inline const int& getDefence() const { return this->defence;}
-    inline const int& getAccuracy() const { return this->accuracy;}
-	inline const int& getStatPoints() const { return this->statPoints; }
-	inline const int& getGold() const { return this->gold; }
-	inline const bool isAlive() { return this->hp > 0;  }
+//    inline const string& getName() const { return this->name;}
+//    inline const int& getLevel() const { return this->level;}
+//    inline const int& getDistanceTravelled() const { return this->distanceTravelled;}
+//    inline const int& getExp() const { return this->exp;}
+//    inline const int& getExpNext() const { return this->expNext;}
+//    inline const int& getHP() const { return this->hp;}
+//    inline const int& getHpMax() const { return this->hpMax;}
+//    inline const int& getStamina() const { return this->stamina;}
+//	//inline const int& getDamage() const { return rand() % this->damageMax + this->damageMin; }
+//	inline const int& getDamageMax() const { return this->damageMax;}
+//    inline const int& getDamageMin() const { return this->damageMin;}
+//    inline const int& getDefence() const { return this->defence;}
+//    inline const int& getAccuracy() const { return this->accuracy;}
+//	inline const int& getStatPoints() const { return this->statPoints; }
+//	inline const int& getGold() const { return this->gold; }
+//	inline const bool isAlive() { return this->hp > 0;  }
 	inline const int& getCorruption() { return corruption; }
 
 
     //modifiers
     inline void setDistanceTravelled(const int &distance) { this->distanceTravelled += distance; }
     inline void travel() { this->distanceTravelled++; }
-    inline void setExp(int exp) { this->exp += exp;}
-	inline void setGold(int gold) { this->gold += gold; }
-	inline void resetHP() { this->hp = this->hpMax; }
+//    inline void setExp(int exp) { this->exp += exp;}
+//	inline void setGold(int gold) { this->gold += gold; }
+//	inline void resetHP() { this->hp = this->hpMax; }
 
 
 };

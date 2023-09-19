@@ -2,10 +2,13 @@
 #include "Game.h"
 #include "Engine.h"
 
+auto player = StateData::GetInstance()->getActiveCharacter();
 
 Event::Event(){
     this->typeOfEvent = 2;
     eventMenu = std::make_shared<GUI::Menu>();
+
+    player->getAttributeComponent()->getLevel();
 }
 
 Event::~Event(){

@@ -29,12 +29,12 @@ Entity::~Entity(){
 
 void Entity::loseHP(int hp){
 
-//	this->attributeComponent->loseHP(hp);
+	this->attributeComponent->loseHP(hp);
 }
 
 void Entity::gainHP(int hp){
 
-//	this->attributeComponent->gainHP(hp);
+	this->attributeComponent->gainHP(hp);
 
 }
 
@@ -141,8 +141,11 @@ float Entity::getAttributeFloat(int attribute){
 
 		return this->attributeComponent->getAttribute(attribute);
 	}
+	else{
 
-	return -1.f;
+        return -1.f;
+	}
+
 }
 
 std::string Entity::getFactionStr() {
