@@ -229,6 +229,9 @@ namespace GUI{
 			SDL_Rect outline;
 			SDL_Rect textSelector;
 
+			std::unique_ptr<Texture> scrollArrowDown;
+			std::unique_ptr<Texture> scrollArrowUp;
+
 			unsigned charSize;
 
 			int hiddenCount;

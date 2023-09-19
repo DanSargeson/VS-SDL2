@@ -691,6 +691,12 @@ GUI::Menu::Menu(){
 	this->active = true;
 	this->scrollable = false;
 
+	scrollArrowDown = std::make_unique<Texture>();
+	scrollArrowDown->loadFromFile("Assets/GUI/arrowDown.png", Engine::GetInstance()->GetRenderer());
+
+	scrollArrowUp = std::make_unique<Texture>();
+	scrollArrowUp->loadFromFile("Assets/GUI/arrowUp.png", Engine::GetInstance()->GetRenderer());
+
 //	this->mStateData = &stateData;
 
 	//TODO:: Add sprite for scrolling up/down when more than four options.
@@ -1002,6 +1008,21 @@ void GUI::Menu::render(){
 
 
 	}
+
+	if(options.size() >= 4){
+
+        if(hiddenCount < (options.size() - 4)){
+
+        scrollArrowDown->setPosition(GUI::p2pXi(46), GUI::p2pYi(94));
+        scrollArrowDown->render(Engine::GetInstance()->GetRenderer(), scrollArrowDown->getTextureRect().x, scrollArrowDown->getTextureRect().y);
+        }
+
+        if(hiddenCount > 0){
+
+            scrollArrowUp->setPosition(GUI::p2pXi(46),  GUI::p2pY(70));
+            scrollArrowUp->render(Engine::GetInstance()->GetRenderer(), scrollArrowUp->getTextureRect().x, scrollArrowUp->getTextureRect().y);
+        }
+	}
 	/*TODO Fix this.... see menu.cpp from myGAme for cheatz..
 	 *
 	 * if(hiddenCount > 0){
@@ -1040,6 +1061,7 @@ void GUI::Menu::scrollText(int direction){
 
 					y -= static_cast<int>(offsetY);
 
+					//options.insert(options.begin() + 3, t);
 					options[i]->setPosition(options[i]->getTextureRect().x, options[i]->getTextureRect().y - static_cast<int>(offsetY));
 				}
 
