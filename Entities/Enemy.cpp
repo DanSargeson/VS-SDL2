@@ -27,7 +27,7 @@ Enemy::Enemy(int level) : Entity(){
     this->defence = rand() % this->level*2 + 1;
     this->accuracy = rand() % this->level*2 + 1;
 
-    this->createAttributeComponent(this->level, false, true);
+    this->createAttributeComponent(this->level, true, true);
     createSkillComponent();
     createAttackComponent(skillComponent, attributeComponent);
 }
