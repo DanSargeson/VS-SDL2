@@ -85,6 +85,12 @@ public:
 //	void createDialogueComponent();
 	void createAttackComponent(std::shared_ptr<SkillComponent> skillComponent, std::shared_ptr<AttributeComponent> attributeComponent);
 
+    std::shared_ptr<AttributeComponent> getAttributeComponent() { return this->attributeComponent; }
+	std::shared_ptr<SkillComponent> getSkillComponent() { return skillComponent; };
+	std::shared_ptr<FactionComponent> getFactionComponent() { return factionComponent; }
+	//std::shared_ptr<DialogueComponent> dialogueComponent;
+	std::shared_ptr<AttackComponent> getAttackComponent() { return attackComponent; }
+
 
 	int getDamage();
 	int getDefence();

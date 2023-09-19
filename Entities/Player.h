@@ -24,7 +24,7 @@ private:
 	int gold;
 	int distanceTravelled;
 
-//	string name;
+	string name;
 //	int level;
 //	int exp;
 //	int expNext;
@@ -88,7 +88,7 @@ public:
 	inline void increaseCorruption() { corruption++; }
 
 //Accessors
-//    inline const string& getName() const { return this->name;}
+    inline const string& getName() const { return this->name;}
 //    inline const int& getLevel() const { return this->level;}
 //    inline const int& getDistanceTravelled() const { return this->distanceTravelled;}
 //    inline const int& getExp() const { return this->exp;}

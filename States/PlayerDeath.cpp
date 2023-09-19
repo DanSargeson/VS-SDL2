@@ -79,7 +79,7 @@ void PlayerDeath::updateEvents(SDL_Event& e){
 
         if(textTimer->getTicks() > 4000){
 
-            StateData::GetInstance()->getActiveCharacter()->resetHP();
+//            StateData::GetInstance()->getActiveCharacter()->getAttributeComponent()->setHP(100);
             Engine::GetInstance()->PopState();
         }
     }

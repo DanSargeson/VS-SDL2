@@ -93,7 +93,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
     //int x = GUI::p2pXi(10);
     //int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
-		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() + rand()%5));
+///		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getAttributeComponent()->getLevel() + rand()%5));
 		//std::string msg = "test " + std::to_string(i);
 	//	y += (i * 2);
         //temp.setString();
@@ -153,7 +153,7 @@ if(!escape && !playerDefeated && !enemyDefeated) {
             ops.push_back("Defend");
             ops.push_back("Use Item");
             battleMenu->setMenuOptions(ops, true);
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+///            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
             std::string enemyMsg = "";
             if(battleMenu->getActive()){
 
@@ -217,8 +217,8 @@ if(playerDefeated){
 }
 
 
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
-            StateData::GetInstance()->mainText->setString(msg);
+///            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            StateData::GetInstance()->mainText->setString("HP SHOULD BE HERE 2");
            /// StateData::GetInstance()->mainText->render();
             std::string enemyMsg = "";
             for(int i = 0; i < enemies.size(); i++){
@@ -296,9 +296,9 @@ void Battle::updateText(){
 
 const void Battle::playerAttacks(){
 
-            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
+///            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
             enemyTotal = enemies[choice].getDefence() / (double)combatTotal * 100;
-            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
+///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
 
             seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -325,9 +325,9 @@ const void Battle::playerAttacks(){
 					if (!enemies[choice].isAlive()) {
 						endMsg = " YOU DEFEATED!\n\n";
 						gainGold += rand() & enemies[choice].getLevel() * 10 + 1;
-						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
+///						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
 						gainEXP += enemies[choice].getExp();
-						StateData::GetInstance()->getActiveCharacter()->setExp(gainEXP);
+///						StateData::GetInstance()->getActiveCharacter()->setExp(gainEXP);
 						endMsg += " Gold Gained: " + std::to_string(gainGold) + "\n";
 						endMsg += " EXP Gained: " + std::to_string(gainEXP);
 
@@ -351,14 +351,14 @@ const void Battle::playerAttacks(){
 								rarity = 1; //UNCOMMON ITEM
                         }
 
-                        else if(r > 75 && r <= 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 20) {
+                        else if(r > 75 && r <= 85 /*&& StateData::GetInstance()->getActiveCharacter()->getLevel() > 20*/) {
                             rarity = 2; //RARE
                         }
 
-                        else if(r > 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 35){
+                        else if(r > 85 /*&& StateData::GetInstance()->getActiveCharacter()->getLevel() > 35*/){
                             rarity = 3;
                         }
-                        else if(r > 97 && StateData::GetInstance()->getActiveCharacter()->getLevel() >= 50){
+                        else if(r > 97 /*&& StateData::GetInstance()->getActiveCharacter()->getLevel() >= 50*/){
 
                             rarity = 4;
                         }
@@ -366,11 +366,12 @@ const void Battle::playerAttacks(){
                         seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
                         generator.seed(seed);
                         r = itemDistribution(generator);
+                        int lvl = 10;
 
 							if (r >= 50) {
 
 								if (r <= 75) {
-									int lvl = StateData::GetInstance()->getActiveCharacter()->getLevel();
+///									int lvl = StateData::GetInstance()->getActiveCharacter()->getLevel();
 									Weapon tempW(lvl, rarity);
 									auto tempWe = make_shared<Weapon>(tempW);
 									StateData::GetInstance()->getActiveCharacter()->addItem(tempWe);
@@ -378,7 +379,7 @@ const void Battle::playerAttacks(){
 									endMsg +=  tempWe->getName() + " " + tempWe->getTypeStr() + "\n";
 								}
 								else {
-									Armour tempA(StateData::GetInstance()->getActiveCharacter()->getLevel(), rarity);
+									Armour tempA(lvl, rarity);
 									auto tempAw = make_shared<Armour>(tempA);
 									StateData::GetInstance()->getActiveCharacter()->addItem(tempAw);
 									endMsg += "\nArmour dropped: ";
@@ -455,8 +456,8 @@ const void Battle::enemyAttacks(){
 				}
 			}
 
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
-            StateData::GetInstance()->mainText->setString(msg);
+///            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            StateData::GetInstance()->mainText->setString("HP GOES HERE 3");
 			//END TURN
 			 endTurn = true;
 		}
