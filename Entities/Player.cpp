@@ -544,26 +544,26 @@ void Player::equipItem(int index){
 	}
 }
 
-int Player::getDamage() {
-
-
-//    attackComponent->getDamage();
-	int minDmg = 0;
-	int maxDmg = 0;
-
-	if (this->activeWeapon != NULL) {
-		//minDmg = dynamic_cast<Weapon&>(*activeWeapon).getDamageMin();
-		//maxDmg = dynamic_cast<Weapon&>(*activeWeapon).getDamageMax();
-	///	attackComponent->calculateWeaponModifier(<Item>activeWeapon);
-	}
-
-	int minTotal = attackComponent->getBaseMinDamage() + minDmg;
-	int maxTotal = attackComponent->getBaseMaxDamage() + maxDmg;
-
-	int calculatedDamage = minTotal + rand() % ((maxTotal + 1) - minTotal);
-
-	return calculatedDamage;
-}
+//int Player::getDamage() {
+//
+//
+////    attackComponent->getDamage();
+//	int minDmg = 0;
+//	int maxDmg = 0;
+//
+//	if (this->activeWeapon != NULL) {
+//		//minDmg = dynamic_cast<Weapon&>(*activeWeapon).getDamageMin();
+//		//maxDmg = dynamic_cast<Weapon&>(*activeWeapon).getDamageMax();
+//	///	attackComponent->calculateWeaponModifier(<Item>activeWeapon);
+//	}
+//
+//	int minTotal = attackComponent->getBaseMinDamage() + minDmg;
+//	int maxTotal = attackComponent->getBaseMaxDamage() + maxDmg;
+//
+//	int calculatedDamage = minTotal + rand() % ((maxTotal + 1) - minTotal);
+//
+//	return calculatedDamage;
+//}
 
 int Player::getMinDamageWithWeapon(){
 	int min = 0;

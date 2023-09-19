@@ -319,11 +319,11 @@ const void Battle::playerAttacks(){
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
-					int totalDmg = enemies[choice].takeDamage(damage);
-					if(totalDmg < 0){
-                        totalDmg = 1;
-					}
-					std::string dmgMsg = "HIT for " + std::to_string(totalDmg) + " damage!";
+					enemies[choice].loseHP(damage);
+//					if(totalDmg < 0){
+//                        totalDmg = 1;
+//					}
+					std::string dmgMsg = "HIT for " + std::to_string(damage) + " damage!";
 					playerAttkTxt->setString(dmgMsg);
 					alpha = 255;
 
@@ -428,9 +428,13 @@ const void Battle::enemyAttacks(){
     if(!playerTurn && !escape && !enemyDefeated){
 			//ENEMY TURN
 			for (size_t i = 0; i < enemies.size(); i++){    //TIMER NEEDS TO GO AROUND HERE....
-				combatTotal = enemies[i].getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
-				enemyTotal = enemies[i].getAccuracy() / (double)combatTotal * 100;
-				playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
+				//combatTotal = enemies[i].getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
+				//enemyTotal = enemies[i].getAccuracy() / (double)combatTotal * 100;
+				//playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
+
+				enemyTotal = enemies[i].getSkill(0); //0 == MELEE
+				playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); //2 == DEFENCE
+                combatTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); // 2 == DEFENCE
 
 				seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -443,8 +447,8 @@ const void Battle::enemyAttacks(){
 				if (combatRollPlayer < combatRollEnemy) {
 					//HIT
 					damage = enemies[i].getDamage();
-					int totalDmg = StateData::GetInstance()->getActiveCharacter()->takeDamage(damage);
-					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(totalDmg) + " damage! ";
+					StateData::GetInstance()->getActiveCharacter()->loseHP(damage);
+					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(damage) + " damage! ";
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					if (!StateData::GetInstance()->getActiveCharacter()->isAlive()) {

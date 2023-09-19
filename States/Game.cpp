@@ -143,7 +143,8 @@ void Game::updateEvents(SDL_Event& e){
 //                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
 //                    StateData::GetInstance()->enemyText->setString("You don't have enough gold.");
 //                }
-                    StateData::GetInstance()->mainText->setString("GOLD USED TO GO HERE!!!");
+                    StateData::GetInstance()->mainText->setString("You awake feeling well rested!");
+                    StateData::GetInstance()->getActiveCharacter()->resetHP();
             }
 
             if(gameMenu->getChoice() == 5){

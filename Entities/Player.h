@@ -67,7 +67,7 @@ public:
 	int takeDamage(int damage);
 	void equipItem(int index);
 	int getDefenceTotal();
-	int getDamage();
+//	int getDamage();
 	int getMinDamageWithWeapon();
 	int getMaxDamageWithWeapon();
 	string getEquippedWeapon();

@@ -238,6 +238,11 @@ int Entity::getDamage(){
 //	return 0;
 }
 
+void Entity::resetHP(){
+
+    attributeComponent->updateStats(true);
+}
+
 int Entity::getDefence()
 {
 	return 0;

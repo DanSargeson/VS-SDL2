@@ -97,6 +97,8 @@ public:
 	//std::shared_ptr<DialogueComponent> dialogueComponent;
 	std::shared_ptr<AttackComponent> getAttackComponent() { return attackComponent; }
 
+	void resetHP();
+
 
 	int getDamage();
 	int getDefence();
