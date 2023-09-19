@@ -300,8 +300,11 @@ void Battle::updateText(){
 const void Battle::playerAttacks(){
 
 ///            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
-            enemyTotal = enemies[choice].getDefence() / (double)combatTotal * 100;
+            enemyTotal = enemies[choice].getSkill(2); /// / (double)combatTotal * 100;
 ///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
+
+            playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(0); //0 == MELEE
+            combatTotal = enemies[choice].getSkill(2); // 2 == DEFENCE
 
             seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -330,7 +333,7 @@ const void Battle::playerAttacks(){
 						gainGold += rand() & enemies[choice].getLevel() * 10 + 1;
 ///						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
 						gainEXP += enemies[choice].getExp();
-///						StateData::GetInstance()->getActiveCharacter()->setExp(gainEXP);
+						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
 						endMsg += " Gold Gained: " + std::to_string(gainGold) + "\n";
 						endMsg += " EXP Gained: " + std::to_string(gainEXP);
 
@@ -354,14 +357,14 @@ const void Battle::playerAttacks(){
 								rarity = 1; //UNCOMMON ITEM
                         }
 
-                        else if(r > 75 && r <= 85 /*&& StateData::GetInstance()->getActiveCharacter()->getLevel() > 20*/) {
+                        else if(r > 75 && r <= 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 20) {
                             rarity = 2; //RARE
                         }
 
-                        else if(r > 85 /*&& StateData::GetInstance()->getActiveCharacter()->getLevel() > 35*/){
+                        else if(r > 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 35){
                             rarity = 3;
                         }
-                        else if(r > 97 /*&& StateData::GetInstance()->getActiveCharacter()->getLevel() >= 50*/){
+                        else if(r > 97 && StateData::GetInstance()->getActiveCharacter()->getLevel() >= 50){
 
                             rarity = 4;
                         }
