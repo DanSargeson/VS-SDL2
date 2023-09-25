@@ -202,6 +202,8 @@ void Entity::createAttributeComponent(const unsigned level, const bool reset, bo
 void Entity::createSkillComponent(){
 
 	this->skillComponent = std::make_shared<SkillComponent>(this);
+
+	skillComponent->calculateSkills(*attributeComponent);
 }
 
 void Entity::createFactionComponent(){

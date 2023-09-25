@@ -106,7 +106,7 @@ int AttackComponent::getMagicDamage(int type) {
 
 
 void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
-	
+
 	//USED TO  DETERMINE WETHER THE WEAPON HITS WITH MIN - MAX DAMAGE..
 	auto seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine generator(static_cast<unsigned>(seed));
