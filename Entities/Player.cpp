@@ -57,7 +57,7 @@ Player::Player() : Entity(){
 }
 
 Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex,
-                     int intel, int hp, int stam, int stPoint, int skPoint, int corr) : Entity(){
+                     int intel, int hp, int stam, int stPoint, int skPoint, int corr, bool reset = true) : Entity(){
     this->name = n;
     this->level = lvl;
 //    this->distanceTravelled = dt;
@@ -80,11 +80,11 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
     this->updateStats();
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 
-   this->createAttributeComponent(level, true, false);
+   this->createAttributeComponent(level, reset, false);
 
 	this->createSkillComponent();
 	this->createFactionComponent();
-   attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
+   //attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
 	createAttackComponent(skillComponent, attributeComponent);
 }
 

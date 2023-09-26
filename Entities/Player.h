@@ -50,7 +50,7 @@ public:
     Player();
     Player(string name, int dt);
     Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex, int intel, int hp,
-              int stam, int stPoint, int skPoint, int corr);
+              int stam, int stPoint, int skPoint, int corr, bool reset);
     virtual ~Player();
 
     //Functions

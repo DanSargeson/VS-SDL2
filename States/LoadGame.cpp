@@ -155,7 +155,7 @@ void LoadGame::loadCharacters(){
 
 			auto temp = std::make_shared<Player> (name, disTravel, gold, level, exp,
 				str, vit, dex, intel, hp,
-				stamina, statPoints, skillPoints, corrupt);
+				stamina, statPoints, skillPoints, corrupt, false);
 
 			strs.clear();
 			line.clear();
