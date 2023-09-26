@@ -101,7 +101,7 @@ Player::~Player(){
 }
 
 void Player::initialise(string name){
-//    this->name = name;
+    this->name = name;
 //    this->gold = 0;
 //    this->distanceTravelled = 0;
 //    this->level = 1;
@@ -207,30 +207,43 @@ std::string Player::printPlayerDetails(){
 
 string Player::getStatsAsString() const{
 
-//	return name + " " +
-//		to_string(distanceTravelled) + " " +
-//		to_string(gold) + " " +
-//		to_string(level) + " " +
-//		to_string(exp) + " " +
-//		to_string(strength) + " " +
-//		to_string(vitality) + " " +
-//		to_string(dexterity) + " " +
-//		to_string(intelligence) + " " +
-//		to_string(hp) + " " +
+    std::string deets;
+
+    int hp, hpMax;
+
+	hp = static_cast<int>(this->attributeComponent->getHP());
+	hpMax = static_cast<int>(this->attributeComponent->getHPMax());
+
+	int xp = static_cast<int>(this->attributeComponent->getEXP());
+	int xpNext = static_cast<int>(this->attributeComponent->getEXPNext());
+
+	int level = attributeComponent->getLevel();
+
+	deets += name + " " +
+		to_string(distanceTravelled) + " " +
+		to_string(level) + " " +
+		to_string(hp) + " " +
+		to_string(xp) + " " +
+		to_string(gold) + " " +
+////		to_string(strength) + " " +
+////		to_string(vitality) + " " +
+////		to_string(dexterity) + " " +
+////		to_string(intelligence) + " " +
 //		to_string(stamina) + " " +
 //		to_string(statPoints) + " " +
 //		to_string(skillPoints) + " " +
-//		to_string(corruption);
+		to_string(corruption);
 
-    return "This is old statsAsString function....";
+    return deets;
 }
 
-std::string Player::getStatsAsStringNEW(){
+std::string Player::getStatsAttributeScreen(){
 
 	std::string deets;
 
 	int hp, hpMax;
 
+	gold = 0;
 	hp = static_cast<int>(this->attributeComponent->getHP());
 	hpMax = static_cast<int>(this->attributeComponent->getHPMax());
 
@@ -240,8 +253,8 @@ std::string Player::getStatsAsStringNEW(){
 	deets += "Name: " + this->name + "\n";
 	deets += "Level: " + std::to_string(this->attributeComponent->getLevel()) + "\n";
 	deets += "HP: " + std::to_string(hp) + " / " + std::to_string(hpMax) + "\n";
-	deets += "XP: " + std::to_string(xp) + " / " + std::to_string(xpNext) + "\n";
-	deets += "Gold: " + std::to_string(0) + "\n";
+	deets += "Exp: " + std::to_string(xp) + " / " + std::to_string(xpNext) + "\n";
+	deets += "Gold: " + std::to_string(gold);
 
 	//deets += " = EQUIPPED ITEMS = \n";
 

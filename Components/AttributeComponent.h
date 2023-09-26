@@ -64,6 +64,8 @@ private:
 	float mExpNext;
 	unsigned mAttributePoints;
 
+	float baseEXP;
+
 	std::vector<int> mAttributes;
 
 	int mHp;

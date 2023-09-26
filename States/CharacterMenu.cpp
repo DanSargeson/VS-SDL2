@@ -111,7 +111,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
            /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
            /// StateData::GetInstance()->mainText->setString("ATTRIBUTES");
-            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAsStringNEW();
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             StateData::GetInstance()->mainText->setString(mmm, true, 420);
         }
 

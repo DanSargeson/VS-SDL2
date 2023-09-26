@@ -140,17 +140,17 @@ void LoadGame::loadCharacters(){
 			strs.str(line);
 			strs >> name;
 			strs >> disTravel;
-			strs >> gold;
 			strs >> level;
-			strs >> exp;
-			strs >> str;
-			strs >> vit;
-			strs >> dex;
-			strs >> intel;
 			strs >> hp;
-			strs >> stamina;
-			strs >> statPoints;
-			strs >> skillPoints;
+			strs >> exp;
+			strs >> gold;
+			//strs >> vit;
+			//strs >> dex;
+			//strs >> intel;
+			//strs >> hp;
+			//strs >> stamina;
+			//strs >> statPoints;
+			//strs >> skillPoints;
 			strs >> corrupt;
 
 			auto temp = std::make_shared<Player> (name, disTravel, gold, level, exp,

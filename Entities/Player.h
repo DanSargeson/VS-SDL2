@@ -57,7 +57,7 @@ public:
     void initialise(string name);
     std::string printPlayerDetails();
     string getStatsAsString() const;
-    string getStatsAsStringNEW();
+    string getStatsAttributeScreen();
 	string getInvAsString();
 	string getInvAsStringSave();
 	std::vector<std::string> getInvAsVec();

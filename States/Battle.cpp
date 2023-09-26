@@ -90,13 +90,13 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	playerDefeated = false;
 	enemyDefeated = false;
 
-	noOfEnemies = 2;
+//	noOfEnemies = 2;
 
     //int x = GUI::p2pXi(10);
     //int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
 		std::cout << "LEVEL:: " << std::to_string(StateData::GetInstance()->getActiveCharacter()->getLevel()) << "\n\n\n";
-		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() - rand()%5));
+		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel()));
 		//std::string msg = "test " + std::to_string(i);
 	//	y += (i * 2);
         //temp.setString();

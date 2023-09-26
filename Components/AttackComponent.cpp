@@ -6,7 +6,7 @@ AttackComponent::AttackComponent(std::shared_ptr<SkillComponent> skillComp, std:
 	this->skillComponent = skillComp;
 	this->attributeComponent = attriComp;
 
-	this->baseDmg = this->skillComponent->getSkill(SKILLS::MELEE) + this->attributeComponent->getAttribute(ATTRIBUTE::STRENGTH);
+	this->baseDmg = (this->skillComponent->getSkill(SKILLS::MELEE) / 2) + (this->attributeComponent->getAttribute(ATTRIBUTE::STRENGTH) / 2);
 
 	this->magicTable["NORMAL"] = 5;
 	this->magicTable["FIRE"] = 5;
