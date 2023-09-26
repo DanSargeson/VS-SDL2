@@ -43,7 +43,7 @@ public:
     void push_state(std::shared_ptr<class State> s);
     void pop_state();
 
-    inline std::shared_ptr<Player> getActiveCharacter(){ return characters[activeCharacter]; }
+    inline std::shared_ptr<Player> getActiveCharacter(){ if(!characters.empty()) return characters[activeCharacter]; }
 
     //TO BE DETERMINED
     void createCamera(int maxSize);

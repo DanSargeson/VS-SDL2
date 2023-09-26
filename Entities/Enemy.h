@@ -25,12 +25,12 @@ public:
     Enemy(int level = 0);
     virtual ~Enemy();
 
-    inline bool isAlive() { return this->hp > 0;}
+//    inline bool isAlive() { return this->hp > 0;}
     std::string getAsString() const;
 	int takeDamage(int damage);
 
 	inline int getLevel() const { return this->level; }
-    inline int getDamage() const { return this->damageMin + rand() % ((this->damageMax + 1) - this->damageMin); }
+  //  inline int getDamage() const { return this->damageMin + rand() % ((this->damageMax + 1) - this->damageMin); }
 	inline int getDamageMin() const { return this->damageMin; }
 	inline int getDamageMax() const { return this->damageMax; }
 	inline int getExp() const { return this->level * 100; }

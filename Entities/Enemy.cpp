@@ -19,13 +19,19 @@ Enemy::Enemy(int level) : Entity(){
     initNames();
 	this->name = Enemy::enemyNames[rand() % Enemy::enemyNames.size()];
     this->level = level; //TODO CHANGE BACK
-    this->hpMax = level * 3;
-    this->hp = this->hpMax;
-    this->damageMin = this->level * 1;
-    this->damageMax = this->level * 2;
-    this->dropChance = rand() % 100 + 1;
-    this->defence = rand() % this->level*2 + 1;
-    this->accuracy = rand() % this->level*2 + 1;
+//    this->hpMax = level * 3;
+//    this->hp = this->hpMax;
+//    this->damageMin = this->level * 1;
+//    this->damageMax = this->level * 2;
+//    this->dropChance = rand() % 100 + 1;
+//    this->defence = rand() % this->level*2 + 1;
+//    this->accuracy = rand() % this->level*2 + 1;
+
+    this->createAttributeComponent(this->level, true, true);
+    createSkillComponent();
+    createAttackComponent(skillComponent, attributeComponent);
+
+ //   skillComponent->calculateSkills(attributeComponent);
 }
 
 Enemy::~Enemy(){

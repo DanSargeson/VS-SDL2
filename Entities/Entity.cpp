@@ -27,14 +27,30 @@ Entity::~Entity(){
 
 //Component Functions
 
+int Entity::getLevel(){
+
+    int a = attributeComponent->getLevel();
+    return a;
+}
+
+int Entity::getHP(){
+
+    return attributeComponent->getHP();
+}
+
+int Entity::getHPMax(){
+
+    return attributeComponent->getHPMax();
+}
+
 void Entity::loseHP(int hp){
 
-//	this->attributeComponent->loseHP(hp);
+	this->attributeComponent->loseHP(hp);
 }
 
 void Entity::gainHP(int hp){
 
-//	this->attributeComponent->gainHP(hp);
+	this->attributeComponent->gainHP(hp);
 
 }
 
@@ -141,8 +157,11 @@ float Entity::getAttributeFloat(int attribute){
 
 		return this->attributeComponent->getAttribute(attribute);
 	}
+	else{
 
-	return -1.f;
+        return -1.f;
+	}
+
 }
 
 std::string Entity::getFactionStr() {
@@ -183,6 +202,8 @@ void Entity::createAttributeComponent(const unsigned level, const bool reset, bo
 void Entity::createSkillComponent(){
 
 	this->skillComponent = std::make_shared<SkillComponent>(this);
+
+	skillComponent->calculateSkills(*attributeComponent);
 }
 
 void Entity::createFactionComponent(){
@@ -217,6 +238,11 @@ int Entity::getDamage(){
 
 	return this->attackComponent->getTotalDamage();
 //	return 0;
+}
+
+void Entity::resetHP(){
+
+    attributeComponent->updateStats(true);
 }
 
 int Entity::getDefence()

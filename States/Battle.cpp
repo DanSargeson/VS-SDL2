@@ -19,6 +19,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
      std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
      noOfEnemies = numEnemiesDistribution(generator);
 
+     player = StateData::GetInstance()->getActiveCharacter();
+
     std::vector<std::string> ops;
     ops.push_back("Attack");
     ops.push_back("Defend");
@@ -88,12 +90,13 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	playerDefeated = false;
 	enemyDefeated = false;
 
-	noOfEnemies = 2;
+//	noOfEnemies = 2;
 
     //int x = GUI::p2pXi(10);
     //int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
-		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel() + rand()%5));
+		std::cout << "LEVEL:: " << std::to_string(StateData::GetInstance()->getActiveCharacter()->getLevel()) << "\n\n\n";
+		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel()));
 		//std::string msg = "test " + std::to_string(i);
 	//	y += (i * 2);
         //temp.setString();
@@ -153,13 +156,13 @@ if(!escape && !playerDefeated && !enemyDefeated) {
             ops.push_back("Defend");
             ops.push_back("Use Item");
             battleMenu->setMenuOptions(ops, true);
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
             std::string enemyMsg = "";
             if(battleMenu->getActive()){
 
                 for(int i = 0; i < enemies.size(); i++){
 
-                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHp()) + "/" + std::to_string(enemies[i].getHpMax()) + " ";
+                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
                 }
                 StateData::GetInstance()->enemyText->setString(enemyMsg);
             }
@@ -217,13 +220,13 @@ if(playerDefeated){
 }
 
 
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
             StateData::GetInstance()->mainText->setString(msg);
-           /// StateData::GetInstance()->mainText->render();
+            StateData::GetInstance()->mainText->render();
             std::string enemyMsg = "";
             for(int i = 0; i < enemies.size(); i++){
 
-                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHp()) + "/" + std::to_string(enemies[i].getHpMax()) + " ";
+                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
             }
             StateData::GetInstance()->enemyText->setString(enemyMsg);
 
@@ -296,9 +299,12 @@ void Battle::updateText(){
 
 const void Battle::playerAttacks(){
 
-            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
-            enemyTotal = enemies[choice].getDefence() / (double)combatTotal * 100;
-            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
+///            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
+            enemyTotal = enemies[choice].getSkill(2); /// / (double)combatTotal * 100;
+///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
+
+            playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(0); //0 == MELEE
+            combatTotal = enemies[choice].getSkill(2); // 2 == DEFENCE
 
             seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -313,11 +319,11 @@ const void Battle::playerAttacks(){
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
-					int totalDmg = enemies[choice].takeDamage(damage);
-					if(totalDmg < 0){
-                        totalDmg = 1;
-					}
-					std::string dmgMsg = "HIT for " + std::to_string(totalDmg) + " damage!";
+					enemies[choice].loseHP(damage);
+//					if(totalDmg < 0){
+//                        totalDmg = 1;
+//					}
+					std::string dmgMsg = "HIT for " + std::to_string(damage) + " damage!";
 					playerAttkTxt->setString(dmgMsg);
 					alpha = 255;
 
@@ -325,9 +331,9 @@ const void Battle::playerAttacks(){
 					if (!enemies[choice].isAlive()) {
 						endMsg = " YOU DEFEATED!\n\n";
 						gainGold += rand() & enemies[choice].getLevel() * 10 + 1;
-						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
+///						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
 						gainEXP += enemies[choice].getExp();
-						StateData::GetInstance()->getActiveCharacter()->setExp(gainEXP);
+						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
 						endMsg += " Gold Gained: " + std::to_string(gainGold) + "\n";
 						endMsg += " EXP Gained: " + std::to_string(gainEXP);
 
@@ -366,11 +372,12 @@ const void Battle::playerAttacks(){
                         seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
                         generator.seed(seed);
                         r = itemDistribution(generator);
+                        int lvl = 10;
 
 							if (r >= 50) {
 
 								if (r <= 75) {
-									int lvl = StateData::GetInstance()->getActiveCharacter()->getLevel();
+///									int lvl = StateData::GetInstance()->getActiveCharacter()->getLevel();
 									Weapon tempW(lvl, rarity);
 									auto tempWe = make_shared<Weapon>(tempW);
 									StateData::GetInstance()->getActiveCharacter()->addItem(tempWe);
@@ -378,7 +385,7 @@ const void Battle::playerAttacks(){
 									endMsg +=  tempWe->getName() + " " + tempWe->getTypeStr() + "\n";
 								}
 								else {
-									Armour tempA(StateData::GetInstance()->getActiveCharacter()->getLevel(), rarity);
+									Armour tempA(lvl, rarity);
 									auto tempAw = make_shared<Armour>(tempA);
 									StateData::GetInstance()->getActiveCharacter()->addItem(tempAw);
 									endMsg += "\nArmour dropped: ";
@@ -421,9 +428,13 @@ const void Battle::enemyAttacks(){
     if(!playerTurn && !escape && !enemyDefeated){
 			//ENEMY TURN
 			for (size_t i = 0; i < enemies.size(); i++){    //TIMER NEEDS TO GO AROUND HERE....
-				combatTotal = enemies[i].getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
-				enemyTotal = enemies[i].getAccuracy() / (double)combatTotal * 100;
-				playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
+				//combatTotal = enemies[i].getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
+				//enemyTotal = enemies[i].getAccuracy() / (double)combatTotal * 100;
+				//playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
+
+				enemyTotal = enemies[i].getSkill(0); //0 == MELEE
+				playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); //2 == DEFENCE
+                combatTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); // 2 == DEFENCE
 
 				seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -436,8 +447,8 @@ const void Battle::enemyAttacks(){
 				if (combatRollPlayer < combatRollEnemy) {
 					//HIT
 					damage = enemies[i].getDamage();
-					int totalDmg = StateData::GetInstance()->getActiveCharacter()->takeDamage(damage);
-					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(totalDmg) + " damage! ";
+					StateData::GetInstance()->getActiveCharacter()->loseHP(damage);
+					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(damage) + " damage! ";
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					if (!StateData::GetInstance()->getActiveCharacter()->isAlive()) {
@@ -455,7 +466,7 @@ const void Battle::enemyAttacks(){
 				}
 			}
 
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
+            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
             StateData::GetInstance()->mainText->setString(msg);
 			//END TURN
 			 endTurn = true;

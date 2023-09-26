@@ -129,20 +129,22 @@ void Game::updateEvents(SDL_Event& e){
 
             if(gameMenu->getChoice() == 4){
 
-                if(StateData::GetInstance()->getActiveCharacter()->getGold() >= 10){
-
+//                if(StateData::GetInstance()->getActiveCharacter()->getGold() >= 10){
+//
+//                    StateData::GetInstance()->getActiveCharacter()->resetHP();
+//                    StateData::GetInstance()->getActiveCharacter()->setGold(-10);
+//
+//                    StateData::GetInstance()->mainText->setString("You awake feeling well rested");
+//                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+//                    StateData::GetInstance()->enemyText->setString("Lost 10 gold");
+//                }
+//                else{
+//
+//                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+//                    StateData::GetInstance()->enemyText->setString("You don't have enough gold.");
+//                }
+                    StateData::GetInstance()->mainText->setString("You awake feeling well rested!");
                     StateData::GetInstance()->getActiveCharacter()->resetHP();
-                    StateData::GetInstance()->getActiveCharacter()->setGold(-10);
-
-                    StateData::GetInstance()->mainText->setString("You awake feeling well rested");
-                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
-                    StateData::GetInstance()->enemyText->setString("Lost 10 gold");
-                }
-                else{
-
-                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
-                    StateData::GetInstance()->enemyText->setString("You don't have enough gold.");
-                }
             }
 
             if(gameMenu->getChoice() == 5){

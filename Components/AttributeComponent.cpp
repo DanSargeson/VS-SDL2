@@ -3,9 +3,11 @@
 
 AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset, bool enemy) : Component(owner){
 
+    baseEXP = 100.f;
 	mLevel = level;
 	mExp = 0;
-	mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
+	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
+	mExpNext = baseEXP * (mLevel + 1);
 	mAttributePoints = 2;
 	mHasLevelled = false;
 
@@ -22,7 +24,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 			low = 1;
 		}
 
-		int high = mLevel + 2;
+		int high = mLevel;
 
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
@@ -30,7 +32,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 		std::uniform_int_distribution<int> pointDistribution(0, 6);
 
 		mLevel = levelDistribution(generator);
-		int point = 10;
+		int point = 5;
 
 		for (int i = 0; i < point; i++) {
 
@@ -100,7 +102,7 @@ void AttributeComponent::increaseAttribute(int attr){
 	case ATTRIBUTE::CHARISMA:
 		mAttributes[CHARISMA] += 1;
 		break;
-		
+
 	case ATTRIBUTE::DEXTERITY:
 		mAttributes[DEXTERITY] += 1;
 		break;
@@ -146,7 +148,7 @@ void AttributeComponent::decreaseAttribute(int attr){
 	case ATTRIBUTE::CHARISMA:
 		mAttributes[CHARISMA] -= 1;
 		break;
-		
+
 	case ATTRIBUTE::DEXTERITY:
 		mAttributes[DEXTERITY] -= 1;
 		break;
