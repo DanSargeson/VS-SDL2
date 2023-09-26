@@ -23,7 +23,7 @@ private:
 	int distanceTravelled;
 
 	string name;
-//	int level;
+	int level;
 //	int exp;
 //	int expNext;
 //	int hp;

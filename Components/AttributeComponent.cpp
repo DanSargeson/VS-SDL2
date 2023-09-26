@@ -32,7 +32,11 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 		std::uniform_int_distribution<int> pointDistribution(0, 6);
 
 		mLevel = levelDistribution(generator);
-		int point = 5;
+
+		int point = 0;
+		if(mLevel > 1){
+            int point = 5;
+		}
 
 		for (int i = 0; i < point; i++) {
 
