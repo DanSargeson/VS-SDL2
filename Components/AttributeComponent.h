@@ -40,6 +40,8 @@ public:
 	void gainEXP(const float exp);
 	void loseEXP(const float exp);
 
+	inline void setHP(int hp) { mHp = hp; }
+
 	void gainHP(const int hp);
 	void loseHP(const int hp);
 

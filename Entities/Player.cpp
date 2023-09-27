@@ -86,6 +86,8 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
 	this->createFactionComponent();
    //attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
 	createAttackComponent(skillComponent, attributeComponent);
+
+	attributeComponent->setHP(hp);
 }
 
 Player::Player(string name, int dt) : Entity(){

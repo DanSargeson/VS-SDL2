@@ -17,6 +17,9 @@ CharacterMenu::CharacterMenu(){
     StateData::GetInstance()->mainText->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
 
     initButtons();
+
+    std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+    StateData::GetInstance()->mainText->setString(mmm, true, 420);
 }
 
 CharacterMenu::~CharacterMenu(){
@@ -107,7 +110,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             invMenu->setActive(true);
             invMenu2->setActive(false);
 
-            std::cout << "Attrib pressed\n\n\n\n\n";
+            //std::cout << "Attrib pressed\n\n\n\n\n";
 
            /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
            /// StateData::GetInstance()->mainText->setString("ATTRIBUTES");
