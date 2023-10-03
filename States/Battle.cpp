@@ -96,7 +96,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
     //int y = GUI::p2pYi(25);
 	for (size_t i = 0; i < noOfEnemies; i++){
 		std::cout << "LEVEL:: " << std::to_string(StateData::GetInstance()->getActiveCharacter()->getLevel()) << "\n\n\n";
-		enemies.push_back(Enemy(StateData::GetInstance()->getActiveCharacter()->getLevel()));
+		int lvl = StateData::GetInstance()->getActiveCharacter()->getLevel();
+		enemies.push_back(Enemy(lvl));
 		//std::string msg = "test " + std::to_string(i);
 	//	y += (i * 2);
         //temp.setString();
@@ -140,6 +141,7 @@ Battle::~Battle(){
     }
     StateData::GetInstance()->enemyText->clearText();
     StateData::GetInstance()->dynamicText->clearText();
+    enemies.clear();
 }
 
 
@@ -213,6 +215,7 @@ if(playerDefeated){
     playerTurn = false;
     endTurn = true;
 
+//    ~Battle();
     Engine::GetInstance()->PopState();
     Engine::GetInstance()->AddState(std::make_shared<PlayerDeath>());
 
@@ -237,6 +240,7 @@ if(playerDefeated){
         //#############FINALISE TURN
             if (!StateData::GetInstance()->getActiveCharacter()->isAlive()) {
                 playerDefeated = true;
+//                ~Battle();
                 Engine::GetInstance()->PopState();
                 Engine::GetInstance()->AddState(std::make_shared<PlayerDeath>());
 
@@ -245,6 +249,7 @@ if(playerDefeated){
             else if (enemies.size() <= 0) {
                 enemyDefeated = true;
                 cout << "All enemies defeated!\n\n";
+  //              ~Battle();
                 Engine::GetInstance()->PopState();
             }
         }

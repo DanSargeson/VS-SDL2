@@ -3,7 +3,7 @@
 
 AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset, bool enemy) : Component(owner){
 
-    baseEXP = 100.f;
+    baseEXP = 50.f;
 	mLevel = level;
 	mExp = 0;
 	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
@@ -18,20 +18,20 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 
 	if (enemy) {
 
-		int low = mLevel - 2;
-		if (low <= 0) {
-
-			low = 1;
-		}
-
-		int high = mLevel;
-
+//		int low = mLevel;
+//		if (low <= 0) {
+//
+//			low = 1;
+//		}
+//
+//		int high = mLevel;
+//
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
-		std::uniform_int_distribution<int> levelDistribution(low, high);
+//		std::uniform_int_distribution<int> levelDistribution(low, high);
 		std::uniform_int_distribution<int> pointDistribution(0, 6);
-
-		mLevel = levelDistribution(generator);
+//
+//		mLevel = levelDistribution(generator);
 
 		int point = 0;
 		if(mLevel > 1){
@@ -85,7 +85,8 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 		std::cout << "Enemy agi: " << mAttributes[ATTRIBUTE::AGILITY] << "\n";
 		std::cout << "Enemy cha: " << mAttributes[ATTRIBUTE::CHARISMA] << "\n";
 		std::cout << "Enemy int: " << mAttributes[ATTRIBUTE::INTELLIGENCE] << "\n";
-		std::cout << "Enemy luck: " << mAttributes[ATTRIBUTE::LUCK] << "\n\n";
+		std::cout << "Enemy luck: " << mAttributes[ATTRIBUTE::LUCK] << "\n";
+		std::cout << "EXP NEXT: " << std::to_string(mExpNext) << "\n\n";
 	}
 
 	updateLevel();
@@ -93,6 +94,8 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 }
 
 AttributeComponent::~AttributeComponent(){
+
+    mExp = 0;
 }
 
 void AttributeComponent::increaseAttribute(int attr){
@@ -283,8 +286,9 @@ void AttributeComponent::updateLevel(){
 	if (mLevel == 0) {
 
 		mLevel = 1;
-		mExpNext = 50;
 	}
+
+    mExpNext = baseEXP * (mLevel + 1);
 
 	while (mExp >= mExpNext && mExpNext != 0) {
 

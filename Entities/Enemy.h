@@ -8,6 +8,7 @@
 #include "Entity.h"
 
 
+
 class Enemy : public Entity{
 
 private:
@@ -33,7 +34,7 @@ public:
   //  inline int getDamage() const { return this->damageMin + rand() % ((this->damageMax + 1) - this->damageMin); }
 	inline int getDamageMin() const { return this->damageMin; }
 	inline int getDamageMax() const { return this->damageMax; }
-	inline int getExp() const { return this->level * 100; }
+	int getExp() const;
 	inline int getHp() const { return this->hp; }
 	inline int getHpMax() const { return this->hpMax; }
 	inline int getDefence() const { return this->defence; }
