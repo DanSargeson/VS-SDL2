@@ -569,7 +569,7 @@ void Battle::updateEvents(SDL_Event& e){
            y > r.y &&
            y < r.y + r.h){
 
-                std::string msg = "HP: " + std::to_string(enemies[i].getHp()) + "/" + std::to_string(enemies[i].getHpMax())
+                std::string msg = "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax())
                     + "\nAttack: ????\nDefence: ????";
                 battleEyes->setDisplayText(msg);
                 battleEyes->update(x, y);

@@ -6,11 +6,12 @@
 #include <SDL2/SDL.h>
 
 Engine* Engine::s_Instance = nullptr;
-//Warrior* player = nullptr;
 
 bool Engine::Init(){
 
-    if(SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0){
+    currentState = 0;
+
+    if(SDL_Init(SDL_INIT_EVERYTHING) != 0 && IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0){
 
         SDL_Log("Failed to initialise SDL: %s", SDL_GetError());
 
@@ -22,12 +23,19 @@ bool Engine::Init(){
         std::cout << "Error loading TTF_Font" << std::endl;
     }
 
+    if(SDL_Init(SDL_INIT_AUDIO) != 0){
 
+        std:: cout << "Failed to initialise audio!" << std::endl;
+    }
 
-//    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0){
-//
-//        std::cout << "Mixer works!" << std::endl;
-//    }
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == 0){
+
+        std::cout << "Mixer works!" << std::endl;
+    }
+    else{
+
+        std::cerr << "Mix open audio failed: " << Mix_GetError() << std::endl;
+    }
 
     m_Window = SDL_CreateWindow("Dan's Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     if(m_Window == nullptr){

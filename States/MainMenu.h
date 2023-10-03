@@ -36,6 +36,7 @@ private:
 	//SDL_Surface* bg;
 	std::unique_ptr<class Texture> mBgTexture;
 	std::unordered_map<std::string, GUI::Button*> mButtons;
+    Mix_Music *music;
 	//StateData* stateData;
 };
 

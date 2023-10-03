@@ -8,6 +8,7 @@
 //#include "Texture.h"
 #include "Engine.h"
 #include <filesystem>
+#include <SDL2/SDL_mixer.h>
 
 MainMenu::MainMenu() : State(){
 
@@ -20,9 +21,27 @@ MainMenu::MainMenu() : State(){
 		printf("Unable to load BG Texture. MainMenuState.cpp line 12");
 	}
 
+	//music = std::make_unique<Mix_Music>("");
+	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
+
+	if(music == NULL){
+
+        printf("Unable to load main menu music..");
+	}
+
 
 	loadFiles();
 	initButtons();
+
+	//If there is no music playing
+                    if( Mix_PlayingMusic() == 0 )
+                    {
+                        //Play the music
+                        if( Mix_PlayMusic( music, -1) == -1 )
+                        {
+                            printf("ERROR PLAYING MUSIC mainMenu.cpp line 69.");
+                        }
+                    }
 }
 
 MainMenu::~MainMenu(){
@@ -37,7 +56,7 @@ MainMenu::~MainMenu(){
 //	mBgTexture->~Texture();
 //	delete mBgTexture;
 
-
+Mix_FreeMusic(music);
 }
 
 //void MainMenu::setStateData()
@@ -50,7 +69,6 @@ MainMenu::~MainMenu(){
 //}
 
 void MainMenu::update(const float & dt){
-
 
 //	if (!std::filesystem::exists("Data/Characters.DATA")) {
 //
@@ -307,8 +325,6 @@ void MainMenu::updateEvents(SDL_Event & e){
 //}
 
 void MainMenu::render(){
-
-
 
 //        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 255, 0, 25);
         SDL_RenderClear(Engine::GetInstance()->GetRenderer());

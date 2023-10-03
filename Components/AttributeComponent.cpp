@@ -18,14 +18,6 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 
 	if (enemy) {
 
-//		int low = mLevel;
-//		if (low <= 0) {
-//
-//			low = 1;
-//		}
-//
-//		int high = mLevel;
-//
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
 //		std::uniform_int_distribution<int> levelDistribution(low, high);
