@@ -291,7 +291,8 @@ void AttributeComponent::updateLevel(){
 		++mLevel;
 		mExp -= mExpNext;
 
-		mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
+		//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
+		mExpNext = baseEXP * (mLevel + 1);
 		updateStats(false);
 
 		mHasLevelled = true;

@@ -87,6 +87,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
    //attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
 	createAttackComponent(skillComponent, attributeComponent);
 
+	attributeComponent->updateLevel();
 	attributeComponent->setHP(hp);
 	attributeComponent->setXP(exp);
 }
