@@ -24,6 +24,7 @@ private:
     std::shared_ptr<GUI::textBox> textBox;
 
     int tutorialCount;
+    //Mix_Music *music;
 };
 
 

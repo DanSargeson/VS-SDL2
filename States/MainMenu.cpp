@@ -22,7 +22,7 @@ MainMenu::MainMenu() : State(){
 	}
 
 	//music = std::make_unique<Mix_Music>("");
-	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
+	music = Mix_LoadMUS("Assets/Audio/Bell.wav");
 
 	if(music == NULL){
 
@@ -36,6 +36,7 @@ MainMenu::MainMenu() : State(){
 	//If there is no music playing
                     if( Mix_PlayingMusic() == 0 )
                     {
+                        Mix_VolumeMusic(70);
                         //Play the music
                         if( Mix_PlayMusic( music, -1) == -1 )
                         {
@@ -276,6 +277,17 @@ void MainMenu::loadFiles(){
 void MainMenu::updateEvents(SDL_Event & e){
 
 
+if( Mix_PlayingMusic() == 0 )
+                    {
+                        Mix_VolumeMusic(70);
+                        music = Mix_LoadMUS("Assets/Audio/Bell.wav");
+
+                        //Play the music
+                        if( Mix_PlayMusic( music, -1) == -1 )
+                        {
+                            printf("ERROR PLAYING MUSIC mainMenu.cpp line 69.");
+                        }
+                    }
 	if (mButtons["LOAD_GAME"]->isPressed(e.button)) {
 
             std::cout << "LOAD GAME" << std::endl;
@@ -296,6 +308,7 @@ void MainMenu::updateEvents(SDL_Event & e){
 
         if(std::filesystem::exists("characters.txt")){
             Engine::GetInstance()->AddState(std::make_shared<LoadGame>());
+
         }
 
         ///Engine::GetInstance()->AddState(std::make_shared<LoadCharacter>());

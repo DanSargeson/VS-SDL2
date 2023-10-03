@@ -9,6 +9,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "Player.h"
 #include "Enemy.h"
@@ -146,6 +147,7 @@ protected:
 
     bool gameOver;
     bool resolutionChange;
+    Mix_Music *music;
 };
 
 #endif // STATE_H

@@ -7,6 +7,7 @@
 
 Game::Game() : State(){
 
+  ///  Mix_HaltMusic();
     tutorialCount = 0;
     StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>();
@@ -40,13 +41,39 @@ Game::Game() : State(){
 	menuOptions.push_back("Help");                  //9
 
 	gameMenu->setMenuOptions(menuOptions, true);
+
+	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
+
+	Mix_VolumeMusic(10);
+
+	if(music == NULL){
+
+        printf("Unable to load GAME music..");
+	}
+
+                        //Play the music
+                        if( Mix_PlayMusic( music, -1) == -1 )
+                        {
+                            printf("ERROR PLAYING MUSIC Game.cpp line 57.");
+                        }
+
 }
 
 Game::~Game(){
 
+ Mix_FreeMusic(music);
 }
 
 void Game::update(const float& dt){
+
+    //Play the music
+        if(Mix_PlayingMusic() == 0){
+
+                        if( Mix_PlayMusic( music, -1) == -1 )
+                        {
+                            printf("ERROR PLAYING MUSIC Game.cpp line 57.");
+                        }
+        }
 
     if(StateData::GetInstance()->getTutorial() == true){
 
