@@ -91,13 +91,44 @@ Weapon::~Weapon(){
 }
 
 string Weapon::toString(){
+
+std::string rarityStr;
+
+    switch(this->getRarity()){
+
+        case rarity::COMMON:
+            rarityStr = "Common";
+            break;
+
+        case rarity::UNCOMMON:
+            rarityStr = "Uncommon";
+            break;
+
+        case rarity::RARE:
+            rarityStr = "Rare";
+            break;
+
+        case rarity::MYTHIC:
+            rarityStr = "Mythic";
+            break;
+
+        case rarity::LEGENDARY:
+            rarityStr = "Legendary";
+            break;
+
+        default:
+            rarityStr = "ERROR FINDING ITEM RARITY";
+            break;
+    }
+
+
 	string str = this->getName() + " " + this->strType
-		+ " | Level: " + to_string(this->getLevel()) + " "
-		+ "| Rarity: " + to_string(this->getRarity()) + " "
-		+ "| Damage: " + to_string(this->damageMin) + " - "
+		+ "\nLevel: " + to_string(this->getLevel()) + " "
+		+ "\nRarity: " + rarityStr + " "
+		+ "\nDamage: " + to_string(this->damageMin) + " - "
 		+ to_string(this->damageMax) + " " +
-		+ "| Buy Value: " + to_string(this->getBuyValue()) + " "
-		+ "| Sell Value: " + to_string(this->getSellValue());
+		+ "\nBuy Value: " + to_string(this->getBuyValue()) + " "
+		+ "\nSell Value: " + to_string(this->getSellValue());
 
     return str;
 }

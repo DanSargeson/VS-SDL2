@@ -34,19 +34,32 @@ public:
 		string str = "";
 
 		for (this->smrtInvIt = smrtInv.begin(); smrtInvIt != smrtInv.end(); smrtInvIt++) {
-			str += to_string(smrtInvIt - smrtInv.begin()+1) + ": ";
 			str += (*smrtInvIt)->toString() + "\n";
 		}
 
 		return str + "\n";
 	}
 
+	inline std::string getInvItemAsString(int choice){
+
+        string str = "";
+        choice--;
+        std::advance(smrtInvIt, choice);
+
+        str = smrtInv[choice]->toString();
+		return str + "\n";
+	}
+
 	inline std::vector<std::string> getInvAsVecOps(){
 
         std::vector<std::string> result;
+        std::string str;
         for(smrtInvIt = smrtInv.begin(); smrtInvIt != smrtInv.end(); smrtInvIt++){
 
-            result.push_back((*smrtInvIt)->toString());
+            str += to_string(smrtInvIt - smrtInv.begin()+1) + ": ";
+            str += (*smrtInvIt)->getName() + " " + (*smrtInvIt)->getTypeStr();
+            result.push_back(str);
+            str = "";
         }
 
         return result;

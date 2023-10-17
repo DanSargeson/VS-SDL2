@@ -85,6 +85,9 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 invMenu2->setMenuOptions(ops, true);
                 invMenu2->setActive(true);
 
+                std::string msg = StateData::GetInstance()->getActiveCharacter()->getInvItemAsString(choice);
+                StateData::GetInstance()->mainText->setString(msg, true, 420);
+                //mStateData::getInstane
                     std::cout << invMenu->getChoice() << std::endl;
             }
 
@@ -104,7 +107,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             mButtons["FACTIONS"]->setSelected(false);
 
             std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
-            StateData::GetInstance()->mainText->setString(msg, true, GUI::p2pY(120));
+            StateData::GetInstance()->mainText->setString(msg, true, GUI::p2pY(420));
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
@@ -155,13 +158,15 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
         //BUTTONS END HERE
 
-
+        //INV MENU2 STARTS HERE
         if(invMenu2->isSelected()){
 
             if(invMenu2->getChoice() == 0){
 
                 invMenu2->setActive(false);
                 invMenu->setActive(true);
+                std::string msg = "Choose an item from the menu: ";
+            StateData::GetInstance()->mainText->setString(msg, true, 420);
                 //choice = -1;
             }
 

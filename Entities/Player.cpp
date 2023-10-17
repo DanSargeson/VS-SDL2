@@ -349,6 +349,11 @@ std::string Player::getStatsAttributeScreen(){
 	return deets;
 }
 
+std::string Player::getInvItemAsString(int choice){
+
+    return this->inventory.getInvItemAsString(choice);
+}
+
 string Player::getInvAsString() {
 
 	return this->inventory.getInvAsString();

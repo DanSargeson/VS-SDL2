@@ -59,6 +59,7 @@ public:
     string getStatsAsString() const;
     string getStatsAttributeScreen();
 	string getInvAsString();
+	std::string getInvItemAsString(int choice);
 	string getInvAsStringSave();
 	std::vector<std::string> getInvAsVec();
     void levelUp();

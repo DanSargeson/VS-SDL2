@@ -94,12 +94,42 @@ Armour* Armour::clone()const{
 
 
 string Armour::toString(){
+
+    std::string rarityStr;
+
+    switch(this->getRarity()){
+
+        case rarity::COMMON:
+            rarityStr = "Common";
+            break;
+
+        case rarity::UNCOMMON:
+            rarityStr = "Uncommon";
+            break;
+
+        case rarity::RARE:
+            rarityStr = "Rare";
+            break;
+
+        case rarity::MYTHIC:
+            rarityStr = "Mythic";
+            break;
+
+        case rarity::LEGENDARY:
+            rarityStr = "Legendary";
+            break;
+
+        default:
+            rarityStr = "ERROR FINDING ITEM RARITY";
+            break;
+    }
+
     string str = this->getName() + " " + this->strType
-		+ " | Level: " + to_string(this->getLevel()) + " "
-		+ "| Rarity: " + to_string(this->getRarity()) + " "
-		+ "| Defence: " + to_string(this->defence) + " " +
-		+"| Buy Value: " + to_string(this->getBuyValue()) + " "
-		+ "| Sell Value: " + to_string(this->getSellValue());
+		+ "\n Level: " + to_string(this->getLevel()) + " "
+		+ "\n Rarity: " + rarityStr + " "
+		+ "\n Defence: " + to_string(this->defence) + " " +
+		+"\n Buy Value: " + to_string(this->getBuyValue()) + " "
+		+ "\n Sell Value: " + to_string(this->getSellValue());
 
     return str;
 }

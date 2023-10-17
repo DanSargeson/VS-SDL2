@@ -14,7 +14,7 @@ class Armour : public Item{
 
 private:
     int type;
-	string strType;
+	//string strType;
     int defence;
 
 public:
@@ -31,8 +31,8 @@ public:
 	//ACCESSORS
 	inline int getDefence() const { return this->defence; }
 	inline int getType() const { return this->type; }
-	inline string getTypeStr() { return this->strType; }
-	inline string getArmourName() { string n = this->getName(); n += " " + this->strType; return n; }
+//	inline string getTypeStr() { return this->strType; }
+	inline string getArmourName() { string n = this->getName(); n += " " + getTypeStr(); return n; }
 
 	//static
 	///static dArray<string> names;

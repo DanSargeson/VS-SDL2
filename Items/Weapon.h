@@ -15,7 +15,7 @@ private:
     int damageMin;
     int damageMax;
 	int type;
-	string strType;
+	//string strType;
 
 public:
 	Weapon();
@@ -31,8 +31,8 @@ public:
 	//ACCESSORS
 	inline int getDamageMin() const { return this->damageMin; }
 	inline int getDamageMax() const { return this->damageMax; }
-	inline string getTypeStr() const { return this->strType; }
-	inline string getWeaponName() { string n = this->getName(); n += " " + this->strType; return n; }
+	//inline string getTypeStr() const { return getTypeStr(); }
+	inline string getWeaponName() { string n = this->getName(); n += " " + getTypeStr(); return n; }
 
 	//static
 //	static dArray<string> names;

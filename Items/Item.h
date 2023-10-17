@@ -44,6 +44,7 @@ public:
     inline const int& getSellValue() const { return this->sellValue; }
     inline const int& getRarity() const { return this->rarity; }
 	inline const int& getItemType() { return this->itemType; }
+	inline std::string getTypeStr() { return this->strType; }
 
     //Modifiers
 	inline void setName(string name) { this->name = name; }
@@ -60,5 +61,8 @@ private:
     int level;
     int rarity;
 	int itemType;
+
+protected:
+	std::string strType;
 };
 #endif // ITEM_H
