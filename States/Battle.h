@@ -60,6 +60,8 @@ class Battle : public State{
         int defendRoll;
         int damage;
         int gainEXP;
+        int totalEXP;
+        int totalGold;
         int gainGold;
 
         int missCounter;

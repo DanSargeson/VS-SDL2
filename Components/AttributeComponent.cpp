@@ -3,7 +3,7 @@
 
 AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset, bool enemy) : Component(owner){
 
-    baseEXP = 50.f;
+    baseEXP = 500.f;
 	mLevel = level;
 	mExp = 0;
 	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
@@ -18,6 +18,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 
 	if (enemy) {
 
+        baseEXP = 50.f;
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
 //		std::uniform_int_distribution<int> levelDistribution(low, high);

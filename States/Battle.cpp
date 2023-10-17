@@ -19,6 +19,9 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
      std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
      noOfEnemies = numEnemiesDistribution(generator);
 
+     totalEXP = 0;
+     totalGold = 0;
+
      player = StateData::GetInstance()->getActiveCharacter();
 
     std::vector<std::string> ops;
@@ -335,12 +338,21 @@ const void Battle::playerAttacks(){
 					//#####PLAYER WINS
 					if (!enemies[choice].isAlive()) {
 						endMsg = " YOU DEFEATED!\n\n";
-						gainGold += rand() & enemies[choice].getLevel() * 10 + 1;
+						gainGold = rand() & enemies[choice].getLevel() * 10 + 1;
+						totalGold += gainGold;
 ///						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
-						gainEXP += enemies[choice].getExp();
+						gainEXP = enemies[choice].getExp();
+						totalEXP += gainEXP;
 						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
-						endMsg += " Gold Gained: " + std::to_string(gainGold) + "\n";
-						endMsg += " EXP Gained: " + std::to_string(gainEXP);
+
+
+                        endMsg += "Gold Gained: " + std::to_string(gainGold) + "\n";
+                        endMsg += "EXP Gained: " + std::to_string(gainEXP);
+						if(enemies.size() == 1){
+
+                            endMsg += "\n\nTotal EXP Gained: " + std::to_string(totalEXP);
+                            endMsg += "\n Total Gold Gained: " + std::to_string(totalGold);
+						}
 
 						//ITEM ROLL
 						seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
