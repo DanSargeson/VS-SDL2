@@ -60,6 +60,7 @@ GUI::Button::Button(){
 
 	this->font = nullptr;
 
+	mSelected = false;
 	//Button text colour
 	colour = { 0, 77, 0, 255 };
 
@@ -84,7 +85,7 @@ GUI::Button::Button(float x, float y, float w, float h, unsigned int charSize){
 	//Button text colour
 	colour = { 0, 117, 117, 255 };
 
-
+    mSelected = false;
 	active = true;
 	this->buttonShape.x = static_cast<int>(GUI::p2pX(x));
 	this->buttonShape.y = static_cast<int>(GUI::p2pY(y));
@@ -121,6 +122,10 @@ void GUI::Button::renderButtons(){
 		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 10);
 		mClicked = false;
 		mInside = false;
+	}
+	else if(mSelected){
+
+        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 164, 164, 164, 100);
 	}
 	else {
 

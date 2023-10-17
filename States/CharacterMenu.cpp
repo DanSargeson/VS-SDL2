@@ -19,6 +19,8 @@ CharacterMenu::CharacterMenu(){
 
     initButtons();
 
+    mButtons["ATTRIBUTES"]->setSelected(true);
+
     std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
     StateData::GetInstance()->mainText->setString(mmm, true, 420);
 }
@@ -96,11 +98,21 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             invMenu->setActive(false);
             invMenu2->setActive(false);
 
+            mButtons["SKILLS"]->setSelected(true);
+            mButtons["ATTRIBUTES"]->setSelected(false);
+            mButtons["INVENTORY"]->setSelected(false);
+            mButtons["FACTIONS"]->setSelected(false);
+
             std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
             StateData::GetInstance()->mainText->setString(msg, true, GUI::p2pY(120));
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
+
+            mButtons["SKILLS"]->setSelected(false);
+            mButtons["ATTRIBUTES"]->setSelected(false);
+            mButtons["INVENTORY"]->setSelected(false);
+            mButtons["FACTIONS"]->setSelected(true);
 
             invMenu->setActive(false);
             invMenu2->setActive(false);
@@ -109,6 +121,11 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         }
 
         if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
+
+            mButtons["SKILLS"]->setSelected(false);
+            mButtons["ATTRIBUTES"]->setSelected(true);
+            mButtons["INVENTORY"]->setSelected(false);
+            mButtons["FACTIONS"]->setSelected(false);
 
             invMenu->setActive(false);
             invMenu2->setActive(false);
@@ -123,6 +140,11 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
 
          if (mButtons["INVENTORY"]->isPressed(e.button)) {
+
+            mButtons["SKILLS"]->setSelected(false);
+            mButtons["ATTRIBUTES"]->setSelected(false);
+            mButtons["INVENTORY"]->setSelected(true);
+            mButtons["FACTIONS"]->setSelected(false);
 
             invMenu->setActive(true);
             invMenu2->setActive(false);

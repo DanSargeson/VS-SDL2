@@ -43,6 +43,9 @@ namespace GUI{
 		void setActive(bool val) { this->active = val; }
 		bool isActive() { return this->active; }
 
+		void setSelected(bool s) { mSelected = s; }
+		bool getSelected() { return mSelected; }
+
 	private:
 		unsigned short buttonState;
 		unsigned short id;
@@ -50,6 +53,8 @@ namespace GUI{
 		SDL_Rect buttonShape;
 		TTF_Font* font;
 		SDL_Colour colour;
+
+		bool mSelected;
 
 		bool mClicked;
 		bool mInside;	//Checks mouse is inside this button
