@@ -259,7 +259,7 @@ std::string Player::getStatsAttributeScreen(){
 	deets += "Level: " + std::to_string(this->attributeComponent->getLevel()) + "\n";
 	deets += "HP: " + std::to_string(hp) + " / " + std::to_string(hpMax) + "\n";
 	deets += "Exp: " + std::to_string(xp) + " / " + std::to_string(xpNext) + "\n";
-	deets += "Gold: " + std::to_string(gold);
+	deets += "Gold: " + std::to_string(gold) + "\n";
 
 	//deets += " = EQUIPPED ITEMS = \n";
 
@@ -274,56 +274,56 @@ std::string Player::getStatsAttributeScreen(){
 //		deets += "Empty\n";
 //	}
 //
-//	deets += "Weapon: ";
-//
-//	if (this->activeWeapon != NULL) {
-//
-//		deets += this->activeWeapon->getTypeStr() + "\n";
-//	}
-//	else {
-//
-//		deets += "Empty\n";
-//	}
-//
-//	deets += "Head Gear: ";
-//	if (this->activeHead != NULL) {
-//
-//		deets += this->activeHead->getTypeStr() + "\n";
-//	}
-//	else {
-//
-//		deets += "Empty\n";
-//	}
-//
-//	deets += "Arms Gear: ";
-//	if (this->activeArms != NULL) {
-//
-//		deets += this->activeArms->getTypeStr() + "\n";
-//	}
-//	else {
-//
-//		deets += "Empty\n";
-//	}
-//
-//	deets += "Chest Gear: ";
-//	if (this->activeChest != NULL) {
-//
-//		deets += this->activeChest->getTypeStr() + "\n";
-//	}
-//	else {
-//
-//		deets += "Empty\n";
-//	}
-//
-//	deets += "Legs Gear: ";
-//	if (this->activeLegs != NULL) {
-//
-//		deets += this->activeLegs->getTypeStr() + "\n";
-//	}
-//	else {
-//
-//		deets += "Empty\n";
-//	}
+	deets += "Weapon: ";
+
+	if (this->activeWeapon != NULL) {
+
+		deets += this->activeWeapon->getName() + " " + this->activeWeapon->getTypeStr() + "\n";
+	}
+	else {
+
+		deets += "Empty\n";
+	}
+
+	deets += "Head Gear: ";
+	if (this->activeHead != NULL) {
+
+		deets +=this->activeHead->getName() + " " +  this->activeHead->getTypeStr() + "\n";
+	}
+	else {
+
+		deets += "Empty\n";
+	}
+
+	deets += "Arms Gear: ";
+	if (this->activeArms != NULL) {
+
+		deets += this->activeArms->getName() + " " +  this->activeArms->getTypeStr() + "\n";
+	}
+	else {
+
+		deets += "Empty\n";
+	}
+
+	deets += "Chest Gear: ";
+	if (this->activeChest != NULL) {
+
+		deets += this->activeChest->getName() + " " + this->activeChest->getTypeStr() + "\n";
+	}
+	else {
+
+		deets += "Empty\n";
+	}
+
+	deets += "Legs Gear: ";
+	if (this->activeLegs != NULL) {
+
+		deets += this->activeLegs->getName() + " " + this->activeLegs->getTypeStr() + "\n";
+	}
+	else {
+
+		deets += "Empty\n";
+	}
 
 	int defence = this->skillComponent->getSkill(SKILLS::DEFENCE);
 //	int armour = this->getArmourRating();
