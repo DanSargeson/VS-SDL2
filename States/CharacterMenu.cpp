@@ -9,6 +9,7 @@ CharacterMenu::CharacterMenu(){
     std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
     invMenu->setMenuOptions(ops, true);
     invMenu2 = std::make_shared<GUI::Menu>();
+    invMenu->setActive(false);
     invMenu2->setActive(false);
     choice = -1;
     //StateData::GetInstance()->mainText->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
@@ -101,7 +102,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
 
-            invMenu->setActive(true);
+            invMenu->setActive(false);
             invMenu2->setActive(false);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
             StateData::GetInstance()->mainText->setString(fact, true, 420);
@@ -109,7 +110,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
         if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
 
-            invMenu->setActive(true);
+            invMenu->setActive(false);
             invMenu2->setActive(false);
 
             //std::cout << "Attrib pressed\n\n\n\n\n";
@@ -118,6 +119,15 @@ void CharacterMenu::updateEvents(SDL_Event& e){
            /// StateData::GetInstance()->mainText->setString("ATTRIBUTES");
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             StateData::GetInstance()->mainText->setString(mmm, true, 420);
+        }
+
+
+         if (mButtons["INVENTORY"]->isPressed(e.button)) {
+
+            invMenu->setActive(true);
+            invMenu2->setActive(false);
+            std::string msg = "Choose an item from the menu: ";
+            StateData::GetInstance()->mainText->setString(msg, true, 420);
         }
 
 
@@ -181,5 +191,8 @@ void CharacterMenu::initButtons(){
 
     mButtons["ATTRIBUTES"] = new GUI::Button(50.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["ATTRIBUTES"]->setRenderText("Attributes");
+
+    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["INVENTORY"]->setRenderText("Inventory");
 
 }
