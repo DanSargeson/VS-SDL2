@@ -7,7 +7,7 @@ CharacterMenu::CharacterMenu(){
     invMenu = std::make_shared<GUI::Menu>();
 
     std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
-    invMenu->setMenuOptions(ops, true);
+    invMenu->setMenuOptions(ops, true, true);
     invMenu2 = std::make_shared<GUI::Menu>();
     invMenu->setActive(false);
     invMenu2->setActive(false);

@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <math.h>
 #include <vector>
+#include <SDL2/SDL.h>
 //#include "dArray.h"
 
 using namespace std;
@@ -14,8 +15,8 @@ enum rarity {
 	COMMON = 0,
 	UNCOMMON,
 	RARE,
-	LEGENDARY,
-	MYTHIC
+	MYTHIC,
+	LEGENDARY
 };
 
 enum itemTypes {
@@ -46,6 +47,8 @@ public:
 	inline const int& getItemType() { return this->itemType; }
 	inline std::string getTypeStr() { return this->strType; }
 
+	inline SDL_Colour getItemColour() { return this->itemColour; }
+
     //Modifiers
 	inline void setName(string name) { this->name = name; }
 	inline void setItemType(int type) { this->itemType = type; }
@@ -59,10 +62,11 @@ private:
     int buyValue;
     int sellValue;
     int level;
-    int rarity;
 	int itemType;
 
 protected:
+    int rarity;
 	std::string strType;
+	SDL_Color itemColour;
 };
 #endif // ITEM_H

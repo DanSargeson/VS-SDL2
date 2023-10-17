@@ -771,7 +771,7 @@ void GUI::Menu::setPosition(){
 	}
 }
 
-void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic){
+void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, bool item){
 
 
     hiddenCount = 0;
@@ -791,6 +791,9 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic){
 		for(size_t i = 0; i < strings.size(); i++){
 
 			options.push_back(new Texture());
+			if(item){
+                colour = StateData::GetInstance()->getActiveCharacter()->getItemColour(i+1);
+			}
 			this->options[i+1]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), strings[i], colour, *font);
 		}
 	}
@@ -800,6 +803,9 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic){
 
             std::cout << strings[i];
 			this->options.push_back(new Texture());
+			if(item){
+                colour = StateData::GetInstance()->getActiveCharacter()->getItemColour(i+1);
+			}
 			this->options[i]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), strings[i], colour, *font);
 
 			if(i > 3){

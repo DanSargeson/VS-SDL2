@@ -226,7 +226,7 @@ namespace GUI{
 			void setDialogueMenu(std::string percent = " ");
 			void setDynamicMenu(std::vector<std::string> ops, int type);
 
-			void setMenuOptions(std::vector<std::string> options, bool dynamic = false); //ONLY ONE YOU NEED I BELIEVE!!!!
+			void setMenuOptions(std::vector<std::string> options, bool dynamic = false, bool item = false); //ONLY ONE YOU NEED I BELIEVE!!!!
 
 		private:
 

@@ -374,6 +374,8 @@ const void Battle::playerAttacks(){
                             rarity = 4;
                         }
 
+                        //TODO DEBUG REMOVE!!!!
+
                         seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
                         generator.seed(seed);
                         r = itemDistribution(generator);

@@ -50,6 +50,13 @@ public:
 		return str + "\n";
 	}
 
+	inline SDL_Color getInvItemColour(int choice){
+
+        choice--;
+
+        return smrtInv[choice]->getItemColour();
+	}
+
 	inline std::vector<std::string> getInvAsVecOps(){
 
         std::vector<std::string> result;

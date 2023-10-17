@@ -60,6 +60,7 @@ public:
     string getStatsAttributeScreen();
 	string getInvAsString();
 	std::string getInvItemAsString(int choice);
+	SDL_Color getItemColour(int choice);
 	string getInvAsStringSave();
 	std::vector<std::string> getInvAsVec();
     void levelUp();

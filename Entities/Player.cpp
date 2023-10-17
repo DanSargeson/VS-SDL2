@@ -354,6 +354,11 @@ std::string Player::getInvItemAsString(int choice){
     return this->inventory.getInvItemAsString(choice);
 }
 
+SDL_Color Player::getItemColour(int choice){
+
+    return this->inventory.getInvItemColour(choice);
+}
+
 string Player::getInvAsString() {
 
 	return this->inventory.getInvAsString();

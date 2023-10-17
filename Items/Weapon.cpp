@@ -53,6 +53,7 @@ Weapon::Weapon(int type, int damageMin, int damageMax, string name, int level, i
 
 Weapon::Weapon(int level, int rarity): Item(level, rarity) {
 
+    this->rarity = rarity;
 	this->setItemType(WEAPON);
 	this->damageMax = rand() % level * (this->getRarity()+1);
 	this->damageMax += (this->getRarity()+1) * 5;
@@ -64,6 +65,33 @@ Weapon::Weapon(int level, int rarity): Item(level, rarity) {
 	}
 	else if (this->getRarity() == 4) {
 		this->damageMax += level * 10;
+	}
+
+	switch(rarity){
+
+        case rarity::COMMON:
+            itemColour = { 255, 255, 255};
+            break;
+
+        case rarity::UNCOMMON:
+            itemColour = { 0, 255, 0};
+            break;
+
+        case rarity::RARE:
+            itemColour = { 0, 0, 255};
+            break;
+
+        case rarity::MYTHIC:
+            itemColour = {255, 0, 255};
+            break;
+
+        case rarity::LEGENDARY:
+            itemColour = {255, 215, 0};
+            break;
+
+        default:
+            itemColour = {0, 255, 0};
+            break;
 	}
 
 	this->damageMin = damageMax / 2;
