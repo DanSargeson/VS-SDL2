@@ -353,23 +353,23 @@ const void Battle::playerAttacks(){
 
 						//int r = rand() % 100 + 1;
 						int rarity = -1;
-						if (r <= 50) {
+						if (r <= 70) {
 							//GET ITEM
 							rarity = 0; //COMMON ITEM
 							//int newRoll = rand() % 100 + 1;
                         }
-                        else if (r > 50 && r <= 75) {
+                        else if (r > 70 && r <= 80) {
 								rarity = 1; //UNCOMMON ITEM
                         }
 
-                        else if(r > 75 && r <= 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 20) {
+                        else if(r > 80 && r <= 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 20) {
                             rarity = 2; //RARE
                         }
 
-                        else if(r > 85 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 35){
+                        else if(r > 85 && r < 95 && StateData::GetInstance()->getActiveCharacter()->getLevel() > 35){
                             rarity = 3;
                         }
-                        else if(r > 97 && StateData::GetInstance()->getActiveCharacter()->getLevel() >= 50){
+                        else if(r > 95 && StateData::GetInstance()->getActiveCharacter()->getLevel() >= 50){
 
                             rarity = 4;
                         }
