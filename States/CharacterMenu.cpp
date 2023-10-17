@@ -9,7 +9,7 @@ CharacterMenu::CharacterMenu(){
     std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
     invMenu->setMenuOptions(ops, true, true);
     invMenu2 = std::make_shared<GUI::Menu>();
-    invMenu->setActive(false);
+    invMenu->setActive(true);
     invMenu2->setActive(false);
     choice = -1;
     //StateData::GetInstance()->mainText->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
@@ -98,12 +98,12 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         //BUTTONS START HERE
         if (mButtons["SKILLS"]->isPressed(e.button)) {
 
-            invMenu->setActive(false);
+            invMenu->setActive(true);
             invMenu2->setActive(false);
 
             mButtons["SKILLS"]->setSelected(true);
             mButtons["ATTRIBUTES"]->setSelected(false);
-            mButtons["INVENTORY"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
             mButtons["FACTIONS"]->setSelected(false);
 
             std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
@@ -114,10 +114,10 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
             mButtons["SKILLS"]->setSelected(false);
             mButtons["ATTRIBUTES"]->setSelected(false);
-            mButtons["INVENTORY"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
             mButtons["FACTIONS"]->setSelected(true);
 
-            invMenu->setActive(false);
+            invMenu->setActive(true);
             invMenu2->setActive(false);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
             StateData::GetInstance()->mainText->setString(fact, true, 420);
@@ -127,10 +127,10 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
             mButtons["SKILLS"]->setSelected(false);
             mButtons["ATTRIBUTES"]->setSelected(true);
-            mButtons["INVENTORY"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
             mButtons["FACTIONS"]->setSelected(false);
 
-            invMenu->setActive(false);
+            invMenu->setActive(true);
             invMenu2->setActive(false);
 
             //std::cout << "Attrib pressed\n\n\n\n\n";
@@ -142,18 +142,18 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         }
 
 
-         if (mButtons["INVENTORY"]->isPressed(e.button)) {
-
-            mButtons["SKILLS"]->setSelected(false);
-            mButtons["ATTRIBUTES"]->setSelected(false);
-            mButtons["INVENTORY"]->setSelected(true);
-            mButtons["FACTIONS"]->setSelected(false);
-
-            invMenu->setActive(true);
-            invMenu2->setActive(false);
-            std::string msg = "Choose an item from the menu: ";
-            StateData::GetInstance()->mainText->setString(msg, true, 420);
-        }
+//         if (mButtons["INVENTORY"]->isPressed(e.button)) {
+//
+//            mButtons["SKILLS"]->setSelected(false);
+//            mButtons["ATTRIBUTES"]->setSelected(false);
+//            mButtons["INVENTORY"]->setSelected(true);
+//            mButtons["FACTIONS"]->setSelected(false);
+//
+//            invMenu->setActive(true);
+//            invMenu2->setActive(false);
+//            std::string msg = "Choose an item from the menu: ";
+//            StateData::GetInstance()->mainText->setString(msg, true, 420);
+//        }
 
 
         //BUTTONS END HERE
@@ -210,16 +210,16 @@ void CharacterMenu::initButtons(){
     unsigned int charSize = GUI::calcCharSize(85);
 
 
-    mButtons["SKILLS"] = new GUI::Button(20.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["SKILLS"]->setRenderText("Skills");
 
-    mButtons["FACTIONS"] = new GUI::Button(35.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["FACTIONS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["FACTIONS"]->setRenderText("Factions");
 
-    mButtons["ATTRIBUTES"] = new GUI::Button(50.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["ATTRIBUTES"]->setRenderText("Attributes");
 
-    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["INVENTORY"]->setRenderText("Inventory");
+//    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
+//    mButtons["INVENTORY"]->setRenderText("Inventory");
 
 }
