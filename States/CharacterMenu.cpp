@@ -90,11 +90,13 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
 
         //BUTTONS START HERE
-        if (mButtons["INVENTORY"]->isPressed(e.button)) {
+        if (mButtons["SKILLS"]->isPressed(e.button)) {
 
-            invMenu->setActive(true);
+            invMenu->setActive(false);
             invMenu2->setActive(false);
-            StateData::GetInstance()->mainText->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
+
+            std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
+            StateData::GetInstance()->mainText->setString(msg, true, GUI::p2pY(120));
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
@@ -171,8 +173,8 @@ void CharacterMenu::initButtons(){
     unsigned int charSize = GUI::calcCharSize(85);
 
 
-    mButtons["INVENTORY"] = new GUI::Button(20.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["INVENTORY"]->setRenderText("Inventory");
+    mButtons["SKILLS"] = new GUI::Button(20.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["SKILLS"]->setRenderText("Skills");
 
     mButtons["FACTIONS"] = new GUI::Button(35.f, 65.5f, 11.8f, 4.1f, charSize);
     mButtons["FACTIONS"]->setRenderText("Factions");

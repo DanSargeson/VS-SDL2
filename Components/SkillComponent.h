@@ -32,7 +32,9 @@ public:
 	std::string getSkillName(int skill);
 
 	void assignRandomSkills(int level);
-	void calculateSkills(class AttributeComponent& ac);
+	void calculateSkills(std::shared_ptr<class AttributeComponent> ac);
+
+	std::string displaySkills();
 
 private:
 
@@ -62,6 +64,54 @@ private:
 		const int& getLevel() { return level; }
 		const float& getExp() { return exp; }
 		const float& getExpNext() { return expNext; }
+		std::string getTypeAsString() {
+
+            switch(this->skillType){
+
+                case SKILLS::ACCURACY:
+                    return "Accuracy";
+                    break;
+
+                case SKILLS::DEFENCE:
+                    return "Defence";
+                    break;
+
+                case SKILLS::LOCKPICKING:
+                    return "Lockpicking";
+                    break;
+
+                case SKILLS::MAGIC:
+                    return "Magic";
+                    break;
+
+                case SKILLS::MELEE:
+                    return "Melee";
+                    break;
+
+                case SKILLS::PERCEPTION:
+                    return "Perception";
+                    break;
+
+                case SKILLS::PERSUASION:
+                    return "Persuasion";
+                    break;
+
+                case SKILLS::RANGED:
+                    return "Ranged";
+                    break;
+
+                case SKILLS::STEALTH:
+                    return "Stealth";
+                    break;
+
+                default:
+                    "Error";
+                    break;
+
+            }
+
+
+		 }
 
 		//Modifiers
 		void setLevel(int lvl) { level = lvl; }

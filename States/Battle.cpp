@@ -571,6 +571,8 @@ void Battle::updateEvents(SDL_Event& e){
 
                 std::string msg = "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax())
                     + "\nAttack: ????\nDefence: ????";
+                msg += "\nSkills: \nDefence Sk: " + std::to_string(enemies[i].getSkill(2));
+                msg += "\nMelee Sk: " + std::to_string(enemies[i].getSkill(0));
                 battleEyes->setDisplayText(msg);
                 battleEyes->update(x, y);
                 battleEyes->setHidden(false);

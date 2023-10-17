@@ -45,7 +45,7 @@ Player::Player() : Entity(){
 	//	attributeComponent->increaseAttribute(ATTRIBUTE::LUCK);
 	//}
 
-	this->skillComponent->calculateSkills(*this->attributeComponent);
+	this->skillComponent->calculateSkills(attributeComponent);
 	//this->createAttackComponent(skillComponent, attributeComponent);
 	createAttackComponent(skillComponent, attributeComponent);
 

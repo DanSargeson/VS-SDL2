@@ -203,7 +203,7 @@ void Entity::createSkillComponent(){
 
 	this->skillComponent = std::make_shared<SkillComponent>(this);
 
-	skillComponent->calculateSkills(*attributeComponent);
+	skillComponent->calculateSkills(attributeComponent);
 }
 
 void Entity::createFactionComponent(){
@@ -330,4 +330,9 @@ void Entity::render(){
 	//	this->hitboxComponent->Render(target);
 	//
 	//target.draw(this->sprite);
+}
+
+std::string Entity::displaySkills(){
+
+    return skillComponent->displaySkills();
 }

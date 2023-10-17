@@ -6,19 +6,19 @@ SkillComponent::SkillComponent(Entity* owner) : Component(owner) {
 
 
 	/*
-	
+
 	Split colours into two skills each, if the player joins the red team they will gain extra vit and melee, blue is extra ranged and defence,
-	
+
 	green/yellow is accuracy and endurance???
 
 
 	Possibly reblance.
 
 
-				
-				
 
-	
+
+
+
 	*/
 	mSkills.push_back(Skill(SKILLS::MELEE));			//UNARMED AND MELEE WEAPONS
 	mSkills.push_back(Skill(SKILLS::RANGED));			//BOWS AND THROWING WEAPONS
@@ -37,7 +37,7 @@ SkillComponent::~SkillComponent(){
 }
 
 int SkillComponent::getSkill(const unsigned int skill) {
-	
+
 	try {
 
 		if (skill < 0 || skill >= mSkills.size()) {
@@ -113,7 +113,7 @@ void SkillComponent::loadSkills(int skill, int value){
 	switch (skill) {
 
 	case SKILLS::ACCURACY:
-		
+
 		mSkills[SKILLS::ACCURACY].setLevel(value);
 		break;
 
@@ -225,7 +225,7 @@ void SkillComponent::assignRandomSkills(int level){
 
 
 	/*
-	
+
 	lvl 1 = 5
 	lvl 2 = 0
 	lvl 3 = 10
@@ -299,53 +299,78 @@ void SkillComponent::assignRandomSkills(int level){
 	//mSkills[SKILLS::DEFENCE].setLevel(1);
 }
 
-void SkillComponent::calculateSkills(AttributeComponent& ac) {
+void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
+
+     unsigned seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+
+     default_random_engine generator;
+
+     generator.seed(seed);
+
+     std::uniform_int_distribution<int> skillDist1(1, 5);
+     int skill1 = skillDist1(generator);
+
+     std::uniform_int_distribution<int> skillDist2(2, 4);
+     int skill2 = skillDist2(generator);
 
 	/*
 		LUCK HAS AN AFFECT ON ALL ABILITIES, SLIGHTLY
 	*/
 
-	int luckLevel = ac.getAttribute(LUCK);
-	int level = ac.getLevel();
+	int luckLevel = ac->getAttribute(LUCK);
+	int level = ac->getLevel();
 
 	/*
 		AGILITY
 	*/
-	int agilityLevel = ac.getAttribute(AGILITY);
+	int agilityLevel = ac->getAttribute(AGILITY);
 
-	int rangeLvl = ((agilityLevel * 5 + agilityLevel / 4) + (luckLevel));
+	int rangeLvl = ((agilityLevel * skill1 + agilityLevel / skill2) + (luckLevel));
 	mSkills[SKILLS::RANGED].setLevel(rangeLvl + level);
-	int accuLvl = (agilityLevel * 5 + agilityLevel / 4) + (luckLevel);
+
+	skill1 = skillDist1(generator);
+	skill2 = skillDist2(generator);
+
+	int accuLvl = (agilityLevel * skill1 + agilityLevel / skill2) + (luckLevel);
 	mSkills[SKILLS::ACCURACY].setLevel(accuLvl + level);
 
 
 	/*
 		CHARISMA
 	*/
-	
-	int charismaLevel = ac.getAttribute(ATTRIBUTE::CHARISMA);
-	int persuLvl = (charismaLevel * 5 + charismaLevel / 4) + luckLevel;
+
+    skill1 = skillDist1(generator);
+	skill2 = skillDist2(generator);
+
+	int charismaLevel = ac->getAttribute(ATTRIBUTE::CHARISMA);
+	int persuLvl = (charismaLevel * skill1 + charismaLevel / skill2) + luckLevel;
 	mSkills[SKILLS::PERSUASION].setLevel(persuLvl + level);
 
 
 	/*
 		VITALITY
 	*/
-	
-	int vitLevel = ac.getAttribute(ATTRIBUTE::VITALITY);
-	int defenceLvl = (vitLevel * 5 + vitLevel / 4) + luckLevel;
+
+	skill1 = skillDist1(generator);
+	skill2 = skillDist2(generator);
+
+	int vitLevel = ac->getAttribute(ATTRIBUTE::VITALITY);
+	int defenceLvl = (vitLevel * skill1 + vitLevel / skill2) + luckLevel;
 	mSkills[SKILLS::DEFENCE].setLevel(defenceLvl + level);
 
 
 	/*
 		DEXTERITY
 	*/
-	
-	int dexLevel = ac.getAttribute(ATTRIBUTE::DEXTERITY);
 
-	int LockLvl = (dexLevel * 5 + dexLevel / 4) + luckLevel;
-	int stealthLvl = (dexLevel * 5 + dexLevel / 4) + luckLevel;
+	skill1 = skillDist1(generator);
+	skill2 = skillDist2(generator);
+
+	int dexLevel = ac->getAttribute(ATTRIBUTE::DEXTERITY);
+
+	int LockLvl = (dexLevel * skill1 + dexLevel / skill2) + luckLevel;
+	int stealthLvl = (dexLevel * skill1 + dexLevel / skill2) + luckLevel;
 	mSkills[SKILLS::STEALTH].setLevel(stealthLvl + level);
 	mSkills[SKILLS::LOCKPICKING].setLevel(LockLvl + level);
 
@@ -353,21 +378,26 @@ void SkillComponent::calculateSkills(AttributeComponent& ac) {
 	/*
 		INTELLIGENCE
 	*/
-	
-	int intLevel = ac.getAttribute(ATTRIBUTE::INTELLIGENCE);
 
-	int magLvl = (intLevel * 5 + intLevel / 4) + luckLevel;
-	int percepLvl = (intLevel * 5 + intLevel / 4) + luckLevel;
+	skill1 = skillDist1(generator);
+	skill2 = skillDist2(generator);
+	int intLevel = ac->getAttribute(ATTRIBUTE::INTELLIGENCE);
+
+	int magLvl = (intLevel * skill1 + intLevel / skill2) + luckLevel;
+	int percepLvl = (intLevel * skill1 + intLevel / skill2) + luckLevel;
 	mSkills[SKILLS::MAGIC].setLevel(magLvl + level);
 	mSkills[SKILLS::PERCEPTION].setLevel(percepLvl + level);
 
 	/*
 		STRENGTH
 	*/
-	
-	int strLevel = ac.getAttribute(ATTRIBUTE::STRENGTH);
 
-	int meleeLvl = (strLevel * 5 + strLevel / 4) + luckLevel;
+	skill1 = skillDist1(generator);
+	skill2 = skillDist2(generator);
+
+	int strLevel = ac->getAttribute(ATTRIBUTE::STRENGTH);
+
+	int meleeLvl = (strLevel * skill1 + strLevel / skill2) + luckLevel;
 	mSkills[SKILLS::MELEE].setLevel(meleeLvl + level);
 
 
@@ -386,3 +416,14 @@ void SkillComponent::calculateSkills(AttributeComponent& ac) {
 }
 
 
+std::string SkillComponent::displaySkills(){
+
+    std::string msg = "";
+    for(int i = 0; i < mSkills.size(); i++){
+
+        msg += mSkills[i].getTypeAsString() + ": " + std::to_string(mSkills[i].getLevel()) + "\n";
+    }
+
+
+    return msg;
+}

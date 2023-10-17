@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "AttributeComponent.h"
+#include "SkillComponent.h"
 #include <random>
 
 vector<string> Enemy::enemyNames;
@@ -47,7 +48,7 @@ Enemy::Enemy(int lvl) : Entity(){
     createSkillComponent();
     createAttackComponent(skillComponent, attributeComponent);
 
- //   skillComponent->calculateSkills(attributeComponent);
+    skillComponent->calculateSkills(attributeComponent);
 }
 
 Enemy::~Enemy(){
