@@ -31,6 +31,9 @@ CharacterMenu::~CharacterMenu(){
     //StateData::GetInstance()->mainText->setString("Select an option: ");
     StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     StateData::GetInstance()->mainText->setString("Select an option: ");
+
+    invMenu.reset();
+    invMenu2.reset();
 }
 
 void CharacterMenu::refreshGUI(){
@@ -165,7 +168,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
                 invMenu2->setActive(false);
                 invMenu->setActive(true);
-                std::string msg = "Choose an item from the menu: ";
+                std::string msg = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             StateData::GetInstance()->mainText->setString(msg, true, 420);
                 //choice = -1;
             }
@@ -180,8 +183,10 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 invMenu2->setActive(false);
                 invMenu->setActive(true);
                 std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
-                invMenu->setMenuOptions(ops, true);
+                invMenu->setMenuOptions(ops, true, true);
                 choice = -1;
+                 std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+                StateData::GetInstance()->mainText->setString(mmm, true, 420);
                 //}
             }
         }

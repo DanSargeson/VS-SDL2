@@ -793,6 +793,7 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, b
 			options.push_back(new Texture());
 			if(item){
                 colour = StateData::GetInstance()->getActiveCharacter()->getItemColour(i+1);
+                std::cout << "\nR:" + std::to_string(colour.r) + " G:" + std::to_string(colour.g) + " B:" + std::to_string(colour.b);
 			}
 			this->options[i+1]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), strings[i], colour, *font);
 		}
