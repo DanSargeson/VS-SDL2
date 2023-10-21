@@ -22,7 +22,8 @@ MainMenu::MainMenu() : State(){
 	}
 
 	//music = std::make_unique<Mix_Music>("");
-	music = Mix_LoadMUS("Assets/Audio/Bell.wav");
+	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
+	Mix_VolumeMusic(10);
 
 	if(music == NULL){
 
@@ -36,7 +37,7 @@ MainMenu::MainMenu() : State(){
 	//If there is no music playing
                     if( Mix_PlayingMusic() == 0 )
                     {
-                        Mix_VolumeMusic(70);
+                        Mix_VolumeMusic(10);
                         //Play the music
                         if( Mix_PlayMusic( music, -1) == -1 )
                         {
@@ -279,8 +280,8 @@ void MainMenu::updateEvents(SDL_Event & e){
 
 if( Mix_PlayingMusic() == 0 )
                     {
-                        Mix_VolumeMusic(70);
-                        music = Mix_LoadMUS("Assets/Audio/Bell.wav");
+                        Mix_VolumeMusic(10);
+                        music = Mix_LoadMUS("Assets/Audio/Intro.wav");
 
                         //Play the music
                         if( Mix_PlayMusic( music, -1) == -1 )

@@ -61,7 +61,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
     this->name = n;
     this->level = lvl;
 //    this->distanceTravelled = dt;
-//    this->gold = g;
+    this->gold = g;
 //    this->level = lvl;
 //    this->exp = exp;
 //    this->strength = str;

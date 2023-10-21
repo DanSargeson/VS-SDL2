@@ -43,9 +43,9 @@ Game::Game() : State(){
 
 	gameMenu->setMenuOptions(menuOptions, true);
 
-	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
-
-	Mix_VolumeMusic(10);
+//	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
+//
+//	Mix_VolumeMusic(10);
 
 	if(music == NULL){
 
@@ -53,10 +53,10 @@ Game::Game() : State(){
 	}
 
                         //Play the music
-                        if( Mix_PlayMusic( music, -1) == -1 )
-                        {
-                            printf("ERROR PLAYING MUSIC Game.cpp line 57.");
-                        }
+//                        if( Mix_PlayMusic( music, -1) == -1 )
+//                        {
+//                            printf("ERROR PLAYING MUSIC Game.cpp line 57.");
+//                        }
 
 }
 

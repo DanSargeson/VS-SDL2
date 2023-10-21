@@ -11,8 +11,8 @@ Settings::Settings(){
     settingsTxt = std::make_unique<GUI::Text>();
     volume = std::make_unique<GUI::Text>();
 
-    settingsTxt->setString("Testing 123");
-    settingsTxt->setPosition(GUI::p2pX(20), GUI::p2pY(10));
+    settingsTxt->setString("Settings:");
+    settingsTxt->setPosition(GUI::p2pX(30), GUI::p2pY(10));
 
     volume->setString("Volume");
     volume->setPosition(GUI::p2pX(15), GUI::p2pY(20));
@@ -22,6 +22,13 @@ Settings::Settings(){
 
     volDown = std::make_unique<GUI::Button>(23.f, 20.5f, 4.f, 4.f, 20);
     volDown->setRenderText("<");
+
+    musicTxt = std::make_unique<GUI::Text>();
+    musicTxt->setPosition(GUI::p2pX(15), GUI::p2pY(25));
+    musicTxt->setString("Music");
+
+    musicButton = std::make_unique<GUI::Button>(23.f, 25.5f, 4.f, 4.f, 20);
+    musicButton->setRenderText("OFF");
 }
 
 Settings::~Settings()
@@ -83,6 +90,20 @@ void Settings::updateEvents(SDL_Event& e){
             StateData::GetInstance()->dynamicText->setString(txt);
         }
     }
+
+    if(musicButton->isPressed(e.button)){
+
+        if(Mix_PausedMusic() == 1){
+            musicButton->setRenderText("OFF");
+            Mix_ResumeMusic();
+        }
+        else{
+
+            musicButton->setRenderText("ON");
+            Mix_PauseMusic();
+        }
+
+    }
 }
 
 void Settings::render(){
@@ -90,6 +111,8 @@ void Settings::render(){
 
     settingsTxt->render();
     volume->render();
+    musicTxt->render();
+    musicButton->renderButtons();
     volumeButton->renderButtons();
     volDown->renderButtons();
     StateData::GetInstance()->dynamicText->render();
