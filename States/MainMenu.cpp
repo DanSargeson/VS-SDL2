@@ -4,7 +4,7 @@
 //#include "GameState.h"
 #include "CharacterCreator.h"
 #include "LoadGame.h"
-///#include "Editor.h"
+#include "Settings.h"
 //#include "Texture.h"
 #include "Engine.h"
 #include <filesystem>
@@ -315,11 +315,11 @@ if( Mix_PlayingMusic() == 0 )
 		return;
 	}
 
-	if (mButtons["EDITOR_STATE"]->isPressed(e.button)) {
+	if (mButtons["SETTINGS"]->isPressed(e.button)) {
 
 
-        ///Engine::GetInstance()->AddState(std::make_shared<Editor>());
-        std::cout << "EDITOR" << std::endl;
+        Engine::GetInstance()->AddState(std::make_shared<Settings>());
+        std::cout << "settings" << std::endl;
 
 		SDL_Delay(400);
 
@@ -408,8 +408,8 @@ void MainMenu::initButtons(){
 	mButtons["LOAD_CHAR"] = new GUI::Button(75, 45.5f, 20.8f, 8.3f, charSize);
 	mButtons["LOAD_CHAR"]->setRenderText("Load Game");
 
-	mButtons["EDITOR_STATE"] = new GUI::Button(75, 58.5f, 20.8f, 8.3f, charSize);
-	mButtons["EDITOR_STATE"]->setRenderText("Editor");
+	mButtons["SETTINGS"] = new GUI::Button(75, 58.5f, 20.8f, 8.3f, charSize);
+	mButtons["SETTINGS"]->setRenderText("Settings");
 
 	mButtons["QUIT"] = new GUI::Button(75, 71.5f, 20.8f, 8.3f, charSize);
 	mButtons["QUIT"]->setRenderText("Quit");

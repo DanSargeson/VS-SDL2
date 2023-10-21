@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Engine.h"
 #include "Event.h"
+#include "Settings.h"
 #include "Battle.h"
 #include "CharacterMenu.h"
 #include "LoadGame.h"
@@ -35,7 +36,7 @@ Game::Game() : State(){
 	menuOptions.push_back("Level Up");  //3
 	menuOptions.push_back("Rest - Cost 10 Gold");   //4
 	menuOptions.push_back("Character Menu");        //5
-	menuOptions.push_back("Create Character");
+	menuOptions.push_back("Settings");
 	menuOptions.push_back("Save Game");             //7
 	menuOptions.push_back("Load Character");        //8
 	menuOptions.push_back("Help");                  //9
@@ -177,6 +178,11 @@ void Game::updateEvents(SDL_Event& e){
             if(gameMenu->getChoice() == 5){
 
                 Engine::GetInstance()->AddState(std::make_shared<CharacterMenu>());
+            }
+
+            if(gameMenu->getChoice() == 6){
+
+                Engine::GetInstance()->AddState(std::make_shared<Settings>());
             }
 
 
