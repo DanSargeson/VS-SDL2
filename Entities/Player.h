@@ -102,7 +102,7 @@ public:
 //    inline const int& getDefence() const { return this->defence;}
 //    inline const int& getAccuracy() const { return this->accuracy;}
 //	inline const int& getStatPoints() const { return this->statPoints; }
-//	inline const int& getGold() const { return this->gold; }
+	inline const int& getGold() const { return this->gold; }
 //	inline const bool isAlive() { return this->hp > 0;  }
 	inline const int& getCorruption() { return corruption; }
 
@@ -111,7 +111,7 @@ public:
     inline void setDistanceTravelled(const int &distance) { this->distanceTravelled += distance; }
     inline void travel() { this->distanceTravelled++; }
 //    inline void setExp(int exp) { this->exp += exp;}
-//	inline void setGold(int gold) { this->gold += gold; }
+	inline void setGold(int gold) { this->gold += gold; }
 //	inline void resetHP() { this->hp = this->hpMax; }
 
 

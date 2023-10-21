@@ -248,7 +248,7 @@ std::string Player::getStatsAttributeScreen(){
 
 	int hp, hpMax;
 
-	gold = 0;
+	//gold = 0;
 	hp = static_cast<int>(this->attributeComponent->getHP());
 	hpMax = static_cast<int>(this->attributeComponent->getHPMax());
 
