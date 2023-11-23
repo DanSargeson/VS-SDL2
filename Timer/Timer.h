@@ -12,7 +12,7 @@ class Timer
         Timer();
         void Tick();
         inline float GetDeltaTime() { return m_DeltaTime; }
-        inline float Restart() { m_DeltaTime = 0; m_LastTime = 0; }
+        inline void Restart() { m_DeltaTime = 0; m_LastTime = 0; }
         //inline static Timer* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Timer(); }
 
     private:

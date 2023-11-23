@@ -255,6 +255,11 @@ std::string Player::getStatsAttributeScreen(){
 	int xp = static_cast<int>(this->attributeComponent->getEXP());
 	int xpNext = static_cast<int>(this->attributeComponent->getEXPNext());
 
+	if(gold < 0){
+
+        gold = 0;
+	}
+
 	deets += "Name: " + this->name + "\n";
 	deets += "Level: " + std::to_string(this->attributeComponent->getLevel()) + "\n";
 	deets += "HP: " + std::to_string(hp) + " / " + std::to_string(hpMax) + "\n";
