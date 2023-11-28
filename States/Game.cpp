@@ -98,6 +98,13 @@ void Game::update(const float& dt){
             textBox->setText("Here is your main menu, scroll using the UP and DOWN arrow buttons\n\nPress ENTER to continue...");
             break;
 
+        case 2:
+            textBox->setActive(true);
+            textBox->setPosition(40, 30);
+            textBox->setHeader("Information Screen");
+            textBox->setText("Here you will find information about the area you are currently in\n\nPress ENTER to close");
+            break;
+
         default:
             break;
         }
@@ -258,7 +265,7 @@ void Game::updateEvents(SDL_Event& e){
 
             if(StateData::GetInstance()->getTutorial() == true){
 
-                if(tutorialCount < 1){
+                if(tutorialCount < 2){
 
                     tutorialCount++;
 
@@ -297,6 +304,12 @@ void Game::render(){
 
             gameMenu->render();
             textBox->render();
+        }
+        if(tutorialCount == 2){
+
+            StateData::GetInstance()->mainText->render();
+            textBox->render();
+
         }
        } //END TUTORIAL
         textBox->render();
