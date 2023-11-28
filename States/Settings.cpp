@@ -28,7 +28,14 @@ Settings::Settings(){
     musicTxt->setString("Music");
 
     musicButton = std::make_unique<GUI::Button>(23.f, 25.5f, 4.f, 4.f, 20);
-    musicButton->setRenderText("OFF");
+    //musicButton->setRenderText("OFF");
+
+    if(Mix_PausedMusic() == 1){
+        musicButton->setRenderText("OFF");
+    }
+    else{
+        musicButton->setRenderText("ON");
+    }
 }
 
 Settings::~Settings()
@@ -94,12 +101,12 @@ void Settings::updateEvents(SDL_Event& e){
     if(musicButton->isPressed(e.button)){
 
         if(Mix_PausedMusic() == 1){
-            musicButton->setRenderText("OFF");
+            musicButton->setRenderText("ON");
             Mix_ResumeMusic();
         }
         else{
 
-            musicButton->setRenderText("ON");
+            musicButton->setRenderText("OFF");
             Mix_PauseMusic();
         }
 

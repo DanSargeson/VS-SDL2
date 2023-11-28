@@ -23,6 +23,8 @@ private:
 
     std::shared_ptr<GUI::textBox> textBox;
 
+    std::shared_ptr<Entity> testNpc;
+
     int tutorialCount;
     //Mix_Music *music;
 };

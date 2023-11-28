@@ -6,7 +6,7 @@
 class AttributeComponent;
 class SkillComponent;
 class FactionComponent;
-//#include "DialogueComponent.h"
+class DialogueComponent;
 class AttackComponent;
 //DEFENCE COMPONENT HERE
 class Item;
@@ -32,7 +32,7 @@ protected:
 	std::shared_ptr<AttributeComponent> attributeComponent;
 	std::shared_ptr<SkillComponent> skillComponent;
 	std::shared_ptr<FactionComponent> factionComponent;
-	//std::shared_ptr<DialogueComponent> dialogueComponent;
+	std::shared_ptr<DialogueComponent> dialogueComponent;
 	std::shared_ptr<AttackComponent> attackComponent;
 
 	int faction;
@@ -88,13 +88,13 @@ public:
 	void createAttributeComponent(const unsigned level, const bool reset, bool enemy = false);
 	void createSkillComponent();
 	void createFactionComponent();
-//	void createDialogueComponent();
+	void createDialogueComponent();
 	void createAttackComponent(std::shared_ptr<SkillComponent> skillComponent, std::shared_ptr<AttributeComponent> attributeComponent);
 
     std::shared_ptr<AttributeComponent> getAttributeComponent() { return this->attributeComponent; }
 	std::shared_ptr<SkillComponent> getSkillComponent() { return skillComponent; };
 	std::shared_ptr<FactionComponent> getFactionComponent() { return factionComponent; }
-	//std::shared_ptr<DialogueComponent> dialogueComponent;
+	std::shared_ptr<DialogueComponent> getDialogueComponent() { return dialogueComponent; };
 	std::shared_ptr<AttackComponent> getAttackComponent() { return attackComponent; }
 
 
@@ -142,6 +142,10 @@ public:
 	void addComponent(class Component* comp);
 	void removeComponent(class Component* comp);
 	void updateComponents();
+
+	bool getDialogueActive();
+	void setDialogueActive(bool n);
+	void renderDialogue();
 
 	//virtual int getDirection() = 0;
 

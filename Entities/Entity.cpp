@@ -5,12 +5,13 @@
 #include "AttributeComponent.h"
 #include "SkillComponent.h"
 #include "AttackComponent.h"
+#include "DialogueComponent.h"
 
 void Entity::InitVariables(){
 
 	this->attributeComponent = NULL;
 	this->skillComponent = NULL;
-//	this->dialogueComponent = NULL;
+	this->dialogueComponent = NULL;
 	this->factionComponent = NULL;
 }
 
@@ -211,11 +212,11 @@ void Entity::createFactionComponent(){
 	this->factionComponent = std::make_shared<FactionComponent>(this);
 }
 
-//void Entity::createDialogueComponent(){
-//
-//	this->dialogueComponent = std::make_shared<DialogueComponent>(this);
-//}
-//
+void Entity::createDialogueComponent(){
+
+	this->dialogueComponent = std::make_shared<DialogueComponent>(this);
+}
+
 void Entity::createAttackComponent(std::shared_ptr<SkillComponent> skillComp, std::shared_ptr<AttributeComponent> attriComp){
 
 	this->attackComponent =  std::make_shared<AttackComponent>(skillComp, attriComp);
@@ -323,6 +324,36 @@ void Entity::update(){
 
 
 }
+
+bool Entity::getDialogueActive(){
+
+    if(dialogueComponent != nullptr){
+
+        return dialogueComponent->getTextBoxActive();
+    }
+    else{
+
+        return false;
+    }
+}
+
+void Entity::setDialogueActive(bool n){
+
+    if(dialogueComponent){
+
+        dialogueComponent->setTextBoxActive(n);
+    }
+}
+
+
+void Entity::renderDialogue(){
+
+    if(dialogueComponent->getTextBoxActive()){
+
+        dialogueComponent->render();
+    }
+}
+
 
 void Entity::render(){
 

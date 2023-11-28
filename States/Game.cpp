@@ -30,6 +30,8 @@ Game::Game() : State(){
 
 	textBox = std::make_shared<GUI::textBox>();
 
+	testNpc = std::make_shared<Entity>();
+
 	//menuOptions.push_back("0: Quit");
 	menuOptions.push_back("Travel");    //1
 	menuOptions.push_back("Shop");      //2
@@ -62,7 +64,7 @@ Game::Game() : State(){
 
 Game::~Game(){
 
- Mix_FreeMusic(music);
+ //Mix_FreeMusic(music);
 }
 
 void Game::update(const float& dt){
@@ -101,7 +103,7 @@ void Game::update(const float& dt){
         }
     }
 
-    if(textBox->getActive()){
+    if(textBox->getActive() || testNpc->getDialogueActive()){
 
         gameMenu->setActive(false);
     }
@@ -214,6 +216,12 @@ void Game::updateEvents(SDL_Event& e){
         }
     }
 
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_L)){
+
+        //testNpc
+        testNpc->createDialogueComponent();
+    }
+
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
 
         std::string msg = "Corruption: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getCorruption());
@@ -237,6 +245,11 @@ void Game::updateEvents(SDL_Event& e){
         if(!StateData::GetInstance()->enemyText->isEmpty()){
 
             StateData::GetInstance()->enemyText->clearText();
+        }
+
+        if(testNpc->getDialogueActive()){
+
+            testNpc->setDialogueActive(false);
         }
 
         if(textBox->getActive()){
@@ -287,5 +300,10 @@ void Game::render(){
         }
        } //END TUTORIAL
         textBox->render();
+    }
+
+    if(testNpc->getDialogueActive()){
+
+        testNpc->renderDialogue();
     }
 }

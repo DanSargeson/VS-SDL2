@@ -10,6 +10,7 @@ Component::Component(Entity* owner, int updateOrder) : mOwner(owner), mUpdateOrd
 Component::~Component(){
 
 //	if (mOwner != nullptr) {
+//	if (mOwner) {
 //
 //		mOwner->removeComponent(this);
 //	}
