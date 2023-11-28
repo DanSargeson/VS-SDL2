@@ -40,6 +40,8 @@ protected:
 	std::vector<class Component*> mComponents;
 	class Inventory inv;
 
+	std::string m_name;
+
 public:
 
 	Entity();
@@ -77,6 +79,8 @@ public:
 	std::string getFactionName(int faction);
 
 	//std::vector<std::string> getDialogueOptions();
+
+	void setCharacterName(std::string name);
 
 	std::string getItemString(int index);
 
@@ -145,6 +149,7 @@ public:
 
 	bool getDialogueActive();
 	void setDialogueActive(bool n);
+	void setDialogueText(std::string);
 	void renderDialogue();
 
 	//virtual int getDirection() = 0;

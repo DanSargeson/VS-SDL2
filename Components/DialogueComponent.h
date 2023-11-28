@@ -12,6 +12,10 @@ class DialogueComponent : public Component{
 
         void setTextBoxActive(bool n) { text->setActive(n); }
 
+        void setDialogueText(std::string txt);
+
+        void setHeader(std::string n) { if(text != nullptr) { text->setHeader(n); } }
+
         void render();
 
     private:

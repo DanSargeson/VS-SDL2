@@ -31,6 +31,8 @@ Game::Game() : State(){
 	textBox = std::make_shared<GUI::textBox>();
 
 	testNpc = std::make_shared<Entity>();
+    file = std::make_shared<LoadFiles>("Assets/factionDiag.txt");
+///    testNpc->setFaction(file->loadFaction());
 
 	//menuOptions.push_back("0: Quit");
 	menuOptions.push_back("Travel");    //1
@@ -227,6 +229,8 @@ void Game::updateEvents(SDL_Event& e){
 
         //testNpc
         testNpc->createDialogueComponent();
+        testNpc->setCharacterName(file->loadName());
+        testNpc->setDialogueText(file->loadDialogue());
     }
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){

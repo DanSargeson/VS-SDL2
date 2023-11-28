@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "GUI.h"
+#include "LoadFiles.h"
 
 class Game : public State{
 
@@ -24,6 +25,8 @@ private:
     std::shared_ptr<GUI::textBox> textBox;
 
     std::shared_ptr<Entity> testNpc;
+
+    std::shared_ptr<LoadFiles> file;
 
     int tutorialCount;
     //Mix_Music *music;

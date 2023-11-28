@@ -345,6 +345,22 @@ void Entity::setDialogueActive(bool n){
     }
 }
 
+void Entity::setDialogueText(std::string txt){
+
+    dialogueComponent->setDialogueText(txt);
+}
+
+void Entity::setCharacterName(std::string name){
+
+    m_name = name;
+
+    if(dialogueComponent != nullptr){
+
+        dialogueComponent->setHeader(m_name);
+    }
+}
+
+
 
 void Entity::renderDialogue(){
 

@@ -24,3 +24,8 @@ void DialogueComponent::render(){
     }
 }
 
+void DialogueComponent::setDialogueText(std::string txt){
+
+    text->setText(txt);
+}
+
