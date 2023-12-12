@@ -1,0 +1,6 @@
+1. Welcome, what would you like to know?
+1. How are you?
+1. Who are you?
+1. Who am I?
+1. YES
+1. NO

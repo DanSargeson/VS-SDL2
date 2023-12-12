@@ -42,6 +42,8 @@ protected:
 
 	std::string m_name;
 
+	static std::vector<std::string> entityNames;
+
 public:
 
 	Entity();
@@ -50,6 +52,9 @@ public:
 	//Component Functions
 
 	//Attribute functions
+
+	void initNames();
+
 	void loseHP(int hp);
 	void gainHP(int hp);
 	void loseXP(float xp);
@@ -106,6 +111,7 @@ public:
 
 	void resetHP();
 
+    std::string getName() { return m_name; }
 
 	int getDamage();
 	int getDefence();

@@ -7,6 +7,21 @@
 #include "AttackComponent.h"
 #include "DialogueComponent.h"
 
+vector<string> Entity::entityNames;
+
+void Entity::initNames() {
+	Entity::entityNames.push_back("Goblin");
+	Entity::entityNames.push_back("Warlock");
+	Entity::entityNames.push_back("Wolf");
+	Entity::entityNames.push_back("Ghost");
+	Entity::entityNames.push_back("Skeleton");
+	Entity::entityNames.push_back("Rat");
+	Entity::entityNames.push_back("Harpy");
+	Entity::entityNames.push_back("Gremlin");
+	Entity::entityNames.push_back("Berserker");
+}
+
+
 void Entity::InitVariables(){
 
 	this->attributeComponent = NULL;
@@ -17,7 +32,9 @@ void Entity::InitVariables(){
 
 Entity::Entity(){
 
+    initNames();
 	this->InitVariables();
+	this->m_name = Entity::entityNames[rand() % Entity::entityNames.size()];
 
 }
 
