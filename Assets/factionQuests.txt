@@ -1,6 +1,28 @@
-1. Welcome, what would you like to know?
-1. How are you?
-1. Who are you?
-1. Who am I?
-1. YES
-1. NO
+1. WHITE Faction intro
+1. Nice
+1. Rude
+1. More Info
+2. RED FACTION
+2. Nice
+2. Rude
+2. etc
+3. AQUA FACTION
+3. n
+3. r
+3. more
+4. BLUE
+4. Nice
+4. r
+4. more
+5. GREEN
+5. nice
+5. rude
+5. more
+6. BROWN
+6. nice
+6. rude
+6. more
+7. PURPLE
+7. Nice
+7. rude
+7. more

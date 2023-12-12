@@ -11,6 +11,8 @@ FactionComponent::FactionComponent(Entity* owner) : Component(owner){
 	mFactions.push_back(Faction(FACTIONS::GREEN));
 	mFactions.push_back(Faction(FACTIONS::BROWN));
 	mFactions.push_back(Faction(FACTIONS::PURPLE));
+
+
 }
 
 FactionComponent::~FactionComponent(){
@@ -44,7 +46,7 @@ int FactionComponent::getReputation(unsigned int faction){
 			outFile.close();
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -150,7 +152,7 @@ std::string FactionComponent::getFactionsStr() {
 
 	std::string msg;
 
-	
+
 
 	for (int i = 0; i < TOTAL_FACTIONS; i++) {
 

@@ -111,6 +111,8 @@ string LoadFiles::loadFactionDialogue(int id)
 {
     if(m_filename == "Assets/factionQuests.txt"){
 
+        m_dialogueArray.clear();
+
         std::ifstream file(m_filename);
         std::vector<std::string> matchingLines;
 
@@ -125,7 +127,7 @@ string LoadFiles::loadFactionDialogue(int id)
         std::istringstream iss(line);
 
         // Read the integer at the beginning of the line
-        int number;
+        int number = id;
         if (iss >> number) {
 
         if(number == id){
