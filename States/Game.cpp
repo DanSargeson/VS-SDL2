@@ -150,14 +150,31 @@ void Game::updateEvents(SDL_Event& e){
             }
             if(gameMenu->getChoice() == 1){
 
+
+                seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+
+                generator.seed(seed);
+
+                std::uniform_int_distribution<int> eventDistribution(1, 6);
+                int eventToss = eventDistribution(generator);
+
                 StateData::GetInstance()->mainText->setString("You travel into parts unknown...");
                 SDL_Delay(200);
                 StateData::GetInstance()->getActiveCharacter()->travel();
                // Event e;
 
+               if(eventToss <= 3){
+
+                    Engine::GetInstance()->AddState(std::make_shared<Battle>());
+               }
+               else{
+
+                    //CREATE FACTION ENCOUNTER STATE
+
+               }
+
                // e.createEvent();
                 //StateData::GetInstance()->push_state(std::make_shared<Battle>());
-                Engine::GetInstance()->AddState(std::make_shared<Battle>());
             }
 
             if(gameMenu->getChoice() == 3){

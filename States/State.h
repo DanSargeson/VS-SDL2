@@ -104,9 +104,6 @@ private:
     StateData() { };
 
      static StateData* s_Instance;
-
-
-
 };
 
 class State{
@@ -148,6 +145,14 @@ protected:
     bool gameOver;
     bool resolutionChange;
     Mix_Music *music;
+
+    unsigned seed;
+    std::default_random_engine generator;
+
+    ///TODO: Replace StateData Test with this...
+///    std::shared_ptr<GUI::Text> mainText;
+///    std::shared_ptr<GUI::Text> dynamicText;
+///    std::shared_ptr<GUI::Text> enemyText;
 };
 
 #endif // STATE_H

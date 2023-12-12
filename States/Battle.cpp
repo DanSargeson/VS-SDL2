@@ -76,6 +76,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
 	//COIN TOSS DETERMINES TURN
 
+
 	seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
 
      generator.seed(seed);
