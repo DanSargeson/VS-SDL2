@@ -72,8 +72,8 @@ class Battle : public State{
         std::unique_ptr<GUI::Text> enemyAttkTxt;
 
 
-        unsigned seed;
-        std::default_random_engine generator;
+//        unsigned seed;
+//        std::default_random_engine generator;
 
         std::shared_ptr<Player> player;
         std::shared_ptr<GUI::Tooltip> battleEyes;

@@ -3,7 +3,7 @@
 #include "Input.h"
 #include "PlayerDeath.h"
 
-Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>()), seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed), noOfEnemies(0) {
+Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>())/*, seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed)*/, noOfEnemies(0) {
 
 //    missCounter = 0;
 //    alpha = 255;

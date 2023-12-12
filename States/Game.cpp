@@ -170,7 +170,6 @@ void Game::updateEvents(SDL_Event& e){
                else{
 
                     //CREATE FACTION ENCOUNTER STATE
-
                }
 
                // e.createEvent();
