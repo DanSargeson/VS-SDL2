@@ -81,14 +81,14 @@ void FactionEncounter::updateEvents(SDL_Event& e)
             std::string msg = "Gained favour with " + npc->getFactionName(npc->getFaction()) + " faction";
             StateData::GetInstance()->dynamicText->setString(msg);
 
-            StateData::GetInstance()->getActiveCharacter()->gainRep(npc->getFaction(), 500);
+            StateData::GetInstance()->getActiveCharacter()->gainRep(npc->getFaction(), 5);
             m_menu->setActive(false);
         }
         else if(m_menu->getChoice() == 2){
 
             std::string msg = "Lost favour with " + npc->getFactionName(npc->getFaction()) + " faction";
             StateData::GetInstance()->enemyText->setString(msg);
-            StateData::GetInstance()->getActiveCharacter()->loseRep(npc->getFaction(), 500);
+            StateData::GetInstance()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
             m_menu->setActive(false);
         }
         else{
