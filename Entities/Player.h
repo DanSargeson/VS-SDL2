@@ -112,6 +112,7 @@ public:
     inline void travel() { this->distanceTravelled++; }
 //    inline void setExp(int exp) { this->exp += exp;}
 	inline void setGold(int gold) { this->gold += gold; }
+	void loadFactions(int black, int white, int red, int blue, int green, int brown, int aqua, int purple);
 //	inline void resetHP() { this->hp = this->hpMax; }
 
 

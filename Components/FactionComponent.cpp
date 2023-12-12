@@ -194,7 +194,7 @@ std::string FactionComponent::getFactionsStr() {
 
 std::string FactionComponent::getFactionsStrSave() {
 
-	std::string deets = " ";
+	std::string deets = "";
 
 	for (int i = 0; i < FACTIONS::TOTAL_FACTIONS; i++) {
 

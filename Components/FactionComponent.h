@@ -3,15 +3,16 @@
 
 #include "Component.h"
 
+
 enum FACTIONS {
 
 	BLACK = 0,
 	WHITE,
 	RED,
-	AQUA,
 	BLUE,
 	GREEN,
 	BROWN,
+	AQUA,
 	PURPLE,
 	TOTAL_FACTIONS
 };

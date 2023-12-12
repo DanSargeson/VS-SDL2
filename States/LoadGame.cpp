@@ -131,6 +131,16 @@ void LoadGame::loadCharacters(){
 	int sellValue = 0;
 	int rarity = 0;
 
+	//Factions
+	int black = 0;
+    int white = 0;
+    int red = 0;
+    int blue = 0;
+    int green = 0;
+    int brown = 0;
+    int aqua = 0;
+    int purple = 0;
+
     string line = "";
     stringstream strs;
 
@@ -162,6 +172,26 @@ void LoadGame::loadCharacters(){
 			getline(inFile, line);
 			strs.str(line);
 
+			while (
+
+				strs >> black
+				>> white
+				>> red
+				>> blue
+				>> green
+				>> brown
+				>> aqua
+				>> purple
+				)
+
+				///HERE FAC
+				temp->loadFactions(black, white, red, blue, green, brown, aqua, purple);
+
+            strs.clear();
+			line.clear();
+			getline(inFile, line);
+			strs.str(line);
+
 			while (strs >> itemType
 				>> itemName
 				>> itemLevel
@@ -176,6 +206,8 @@ void LoadGame::loadCharacters(){
 					temp->setWeapon(awv);
 				}
 			}
+
+
 			//ACTIVE ITEMS
 			strs.clear();
 			line.clear();

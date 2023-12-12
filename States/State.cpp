@@ -91,6 +91,7 @@ void State::saveCharacters()
     if(outFile.is_open()){
         for(unsigned i = 0; i < StateData::GetInstance()->characters.size(); i++){
             outFile << StateData::GetInstance()->characters[i]->getStatsAsString() << "\n";
+			outFile << StateData::GetInstance()->characters[i]->getFactionStrSave() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getEquippedWeapon() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getEquippedArmour() << "\n";
 			outFile <<	StateData::GetInstance()->characters[i]->getInvAsStringSave() << "\n";

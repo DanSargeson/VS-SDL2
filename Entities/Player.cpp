@@ -364,6 +364,15 @@ SDL_Color Player::getItemColour(int choice){
     return this->inventory.getInvItemColour(choice);
 }
 
+void Player::loadFactions(int black, int white, int red, int blue, int green, int brown, int aqua, int purple)
+{
+    if(factionComponent != nullptr){
+
+        factionComponent->loadFactions(black, white, red, blue, green, brown, aqua, purple);
+    }
+}
+
+
 string Player::getInvAsString() {
 
 	return this->inventory.getInvAsString();

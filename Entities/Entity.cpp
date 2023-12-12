@@ -187,6 +187,11 @@ std::string Entity::getFactionStr() {
 	return this->factionComponent->getFactionsStr();
 }
 
+std::string Entity::getFactionStrSave(){
+
+    return this->factionComponent->getFactionsStrSave();
+}
+
 std::string Entity::getFactionName(int faction){
 
 	return factionComponent->getFactionName(faction);

@@ -81,6 +81,7 @@ public:
 	//bool checkEntityCollision(Entity* entity);
 
 	std::string getFactionStr();
+	std::string getFactionStrSave();
 	std::string getFactionName(int faction);
 
 	//std::vector<std::string> getDialogueOptions();
