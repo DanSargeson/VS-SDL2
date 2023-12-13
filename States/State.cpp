@@ -33,6 +33,16 @@ this->quit = false;
 //currentState = 0;
 keyTimeMax = 0.5f;
 keyTime = 0.f;
+
+    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>(false);
+    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(30));
+    StateData::GetInstance()->dynamicText->clearText();
+
+    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>(true);
+    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    StateData::GetInstance()->enemyText->clearText();
+    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+
 }
 
 State::~State(){

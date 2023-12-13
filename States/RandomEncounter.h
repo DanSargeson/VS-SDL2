@@ -16,6 +16,10 @@ class RandomEncounter : public State{
         void updateEvents(SDL_Event& e);
         void render();
 
+        bool charm();
+        bool rob();
+        void barter();
+
     private:
 
         std::shared_ptr<NPC> npc;
