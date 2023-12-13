@@ -124,12 +124,16 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                         int check = static_cast<int>(getData()->getActiveCharacter()->getHP() * percentage);
                         getData()->getActiveCharacter()->loseHP(check);
                         msg = "You don't have enough to pay the fine. You are beaten. " + std::to_string(check) + " HP lost.";
+                        msg += "\n\n" + npc->getFactionStr() + " faction rep down";
+                        getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }
                     else{
                         msg = "You are caught and lose " + std::to_string(gold) + " gold";
                         getData()->getActiveCharacter()->setGold(-gold);
+                        msg += "\n\n" + npc->getFactionStr() + " faction rep down";
+                        getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }
-                    getData()->enemyText->setString(msg);
+                    getData()->enemyText->setString(msg, true, 880);
                 }
 
                 menu->setActive(false);
