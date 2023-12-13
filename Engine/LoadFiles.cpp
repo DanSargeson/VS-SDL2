@@ -362,7 +362,11 @@ return ops;
 
 void LoadFiles::selectResponse(std::string faction, int id, int respID){
 
+///TODO more hacky stuff
+if(id == 0){
 
+    faction = "Red";
+}
 
 auto factionIter = dialogueMap.find(faction);
     if (factionIter != dialogueMap.end()) {
@@ -435,6 +439,12 @@ std::pair<std::string, std::vector<Response>> LoadFiles::getDialogueAndResponses
 
 std::vector<std::string> LoadFiles::getFirstResponses(const std::string& faction, int dialogueId) {
     std::vector<std::string> firstResponses;
+
+    ///TODO HACKZ
+    if(dialogueId == 0){
+
+        return std::vector<std::string>();
+    }
 
     auto factionIter = dialogueMap.find(faction);
     if (factionIter != dialogueMap.end()) {

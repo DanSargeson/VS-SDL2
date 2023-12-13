@@ -18,7 +18,6 @@ FactionEncounter::FactionEncounter(){
 
     json_file = "Assets/diag.json";
 
-
     int random = rand() % 6 + 2;
     npc = std::make_shared<NPC>(random); // RED
     file = std::make_shared<LoadFiles>(m_fileName, 1);
@@ -43,7 +42,7 @@ FactionEncounter::FactionEncounter(){
 FactionEncounter::~FactionEncounter(){
 
     StateData::GetInstance()->mainText->setString("Select an option: ");
-
+    npc.reset();
 }
 
 void FactionEncounter::update(const float& dt){

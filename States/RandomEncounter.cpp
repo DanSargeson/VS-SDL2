@@ -12,7 +12,7 @@ RandomEncounter::RandomEncounter(){
     StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
 
-    int random = rand() % 7 + 2;
+    int random = rand() % 6 + 2;
     npc = std::make_shared<NPC>(random); // RED
     file = std::make_shared<LoadFiles>(filename, 0);
 
