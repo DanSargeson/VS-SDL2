@@ -5,8 +5,14 @@ RandomEncounter::RandomEncounter(){
 
     filename = "Assets/newDialogue.txt";
 
+    StateData::GetInstance()->enemyText->setString("");
+    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
-    int random = rand() % 7 + 1;
+    StateData::GetInstance()->dynamicText->setString("");
+    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+
+
+    int random = rand() % 7 + 2;
     npc = std::make_shared<NPC>(random); // RED
     file = std::make_shared<LoadFiles>(filename, 0);
 
@@ -20,7 +26,9 @@ RandomEncounter::RandomEncounter(){
     npc->createAttributeComponent(npcLevel, true, true);
     npc->createSkillComponent();
 
-    getData()->mainText->setString(file->loadRandomDialogue(), true, 880);
+    std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
+    msg += "\"" + file->loadRandomDialogue() +  "\"";
+    getData()->mainText->setString(msg, true, 880);
     menu = std::make_shared<GUI::Menu>();
 
     std::vector<std::string> ops;
@@ -62,6 +70,12 @@ void RandomEncounter::updateEvents(SDL_Event& e){
         }
     }
 
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
+
+        std::string ss = getData()->getActiveCharacter()->printPlayerDetails();
+        std::cout << ss << std::endl;
+    }
+
     if(e.type == SDL_MOUSEBUTTONDOWN){
         if(menu->isSelected()){
 
@@ -79,10 +93,12 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                 if(charm()){
 
                     getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
+                    getData()->getActiveCharacter()->gainRep(npc->getFaction(), 1);
                 }
                 else{
 
                     getData()->dynamicText->setString("The stranger isn't fooled by false flattery. Faction rep decreased.");
+                    getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
                 }
 
                 menu->setActive(false);
@@ -97,10 +113,22 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
                     std::string msg = "You succeed in robbing the stranger, gold increased by " + std::to_string(gold);
                     getData()->dynamicText->setString(msg);
+                    getData()->getActiveCharacter()->setGold(gold);
                 }
                 else{
 
-                    std::string msg = "You are caught and lose " + std::to_string(gold) + " gold";
+                    std::string msg = "";
+                    if(getData()->getActiveCharacter()->getGold() - gold < 0){
+
+                        double percentage = 0.20;
+                        int check = static_cast<int>(getData()->getActiveCharacter()->getHP() * percentage);
+                        getData()->getActiveCharacter()->loseHP(check);
+                        msg = "You don't have enough to pay the fine. You are beaten. " + std::to_string(check) + " HP lost.";
+                    }
+                    else{
+                        msg = "You are caught and lose " + std::to_string(gold) + " gold";
+                        getData()->getActiveCharacter()->setGold(-gold);
+                    }
                     getData()->enemyText->setString(msg);
                 }
 

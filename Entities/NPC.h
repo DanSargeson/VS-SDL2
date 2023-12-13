@@ -113,6 +113,8 @@ public:
 
 	void initBackground(SDL_Renderer* r);
 
+	virtual std::string getFactionStr();
+
 
 	//FUNCTIONS
 	int getFaction();

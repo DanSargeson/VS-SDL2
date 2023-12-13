@@ -10,7 +10,7 @@ FactionEncounter::FactionEncounter(){
     StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     StateData::GetInstance()->dynamicText->setString("");
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     m_fileName = "Assets/factionQuests.txt";
 

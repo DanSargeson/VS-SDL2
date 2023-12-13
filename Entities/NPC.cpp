@@ -10,6 +10,13 @@ void NPC::generateID(){
 	this->characterID++;
 }
 
+std::string NPC::getFactionStr(){
+
+    std::string fact = factionComponent->getFactionName(faction);
+
+    return fact;
+}
+
 NPC::NPC(int faction){
 
 	this->type = NPC_TYPE::PEASANT;

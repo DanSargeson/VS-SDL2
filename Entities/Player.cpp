@@ -205,7 +205,8 @@ std::string Player::printPlayerDetails(){
 
 	//cout << "\n";
 
-	msg += "Nothing to show, see other tab..";
+
+	msg += factionComponent->getFactionsStrSave();
 
 	return msg;
 }
