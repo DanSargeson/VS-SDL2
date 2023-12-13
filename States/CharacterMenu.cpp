@@ -169,7 +169,11 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 invMenu2->setActive(false);
                 invMenu->setActive(true);
                 std::string msg = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-            StateData::GetInstance()->mainText->setString(msg, true, 420);
+                StateData::GetInstance()->mainText->setString(msg, true, 420);
+                 mButtons["SKILLS"]->setSelected(false);
+                 mButtons["ATTRIBUTES"]->setSelected(true);
+            //mButtons["INVENTORY"]->setSelected(false);
+                 mButtons["FACTIONS"]->setSelected(false);
                 //choice = -1;
             }
 
@@ -187,6 +191,10 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 choice = -1;
                  std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
                 StateData::GetInstance()->mainText->setString(mmm, true, 420);
+                 mButtons["SKILLS"]->setSelected(false);
+                mButtons["ATTRIBUTES"]->setSelected(true);
+            //mButtons["INVENTORY"]->setSelected(false);
+                mButtons["FACTIONS"]->setSelected(false);
                 //}
             }
         }
