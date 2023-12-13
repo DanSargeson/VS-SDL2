@@ -10,6 +10,7 @@ class RandomEncounter : public State{
     public:
 
         RandomEncounter();
+        ~RandomEncounter();
 
         void update(const float& dt);
         void updateEvents(SDL_Event& e);

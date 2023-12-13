@@ -165,6 +165,9 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->getActiveCharacter()->travel();
                // Event e;
 
+               ///TODO DEBUG: REMOVE
+               eventToss = 3;
+
                if(eventToss < 2){
 
                     Engine::GetInstance()->AddState(std::make_shared<Battle>());
@@ -172,11 +175,11 @@ void Game::updateEvents(SDL_Event& e){
                else if( eventToss >= 2 && eventToss < 4){
 
                     //CREATE FACTION ENCOUNTER STATE
-                    Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>());
+                    Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>());
                }
                else{
 
-                    Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>());
+                    Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>());
                }
 
                // e.createEvent();

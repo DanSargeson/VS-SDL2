@@ -21,6 +21,10 @@ class FactionEncounter : public State{
          std::shared_ptr<LoadFiles> file;
          std::shared_ptr<NPC> npc;
          std::string m_fileName;
+         std::string json_file;
          std::shared_ptr<GUI::Menu> m_menu;
          static int position;
+
+         std::map<std::string, std::map<int, Dialogue>> dialogueMap;
+
 };

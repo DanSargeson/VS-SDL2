@@ -1,0 +1,88 @@
+{
+  "dialogues": [
+    {
+    	"id" : 0,
+    	"faction": "red",
+    	"dialogueId" : 0,
+    	"text" : "Goodbye",
+    	"responses":[]
+    },
+    {
+      "id": 1,
+      "faction": "red",
+      "dialogueId": 1,
+      "text": "Welcome, I am the leader of the RED faction",
+      "responses": [
+        {
+          "id": 1,
+          "text": "Nice to meet you.",
+          "nextDialogue": 2
+        },
+        {
+          "id": 2,
+          "text": "So?",
+          "nextDialogue": 3
+        }
+      ]
+    },
+    
+    {
+      "id": 2,
+      "faction": "red",
+      "dialogueId": 2,
+      "text": "I like you, have some gold.",
+      "responses": [
+        {
+          "id": 1,
+          "text": "Thank you",
+          "nextDialogue": 5
+        },
+        {
+          "id": 2,
+          "text": "Is that all?",
+          "nextDialogue": 3
+        }
+      ]
+    },
+
+    {
+        "id" : 3,
+        "faction" : "red",
+        "dialogueId" : 3,
+        "text" : "You are very rude,",
+        "responses":[
+            {
+                "id" : 1,
+                "text": "I am sorry",
+                "nextDialogue": 4
+            },
+            {
+                "id" : 2,
+                "text" : "Fuck you",
+                "nextDialogue" : 0
+            }
+        ]
+    },
+    
+    {
+    	
+    	"id": 4,
+    	"faction": "red",
+    	"dialogueId" : 4,
+    	"text" : "Hmmm, perhaps next time you won't be so rude",
+    	"nextDialogue": 0,
+    	"responses" : []
+    },
+    
+    {
+    	"id": 5,
+    	"faction": "red",
+    	"dialogueId":5,
+    	"text": "I hope to meet you again soon",
+    	"nextDialogue": 0,
+    	"responses": []
+    }
+    
+  ]
+}
+
