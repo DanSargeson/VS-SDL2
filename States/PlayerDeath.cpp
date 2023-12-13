@@ -36,6 +36,8 @@ PlayerDeath::PlayerDeath() : State(){
     int enemX = (w / 2) - (StateData::GetInstance()->enemyText->getTextWidth() / 2);
     StateData::GetInstance()->enemyText->setPosition(enemX, GUI::p2pY(55));
 
+    //HERE SAVEGAME
+    saveCharacters();
     textTimer->start();
    // std::cout << deathMsg->getColour() << std::endl;
 }
