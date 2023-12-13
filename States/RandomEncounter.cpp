@@ -12,6 +12,7 @@ RandomEncounter::RandomEncounter(){
 
     int high = getData()->getActiveCharacter()->getLevel() + 8;
     int low = getData()->getActiveCharacter()->getLevel() - 1;
+
     int npcLevel = rand() % high + low;
 
     npc->createDialogueComponent();
@@ -91,7 +92,19 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
                 //Steal
                 getData()->dynamicText->clearText();
-                getData()->enemyText->setString("You try to rob the stranger...");
+                int gold = rand() % 100 + 1;
+                if(rob()){
+
+                    std::string msg = "You succeed in robbing the stranger, gold increased by " + std::to_string(gold);
+                    getData()->dynamicText->setString(msg);
+                }
+                else{
+
+                    std::string msg = "You are caught and lose " + std::to_string(gold) + " gold";
+                    getData()->enemyText->setString(msg);
+                }
+
+                menu->setActive(false);
             }
 
             if(menu->getChoice() == 3){
@@ -139,7 +152,22 @@ bool RandomEncounter::charm(){
 
 bool RandomEncounter::rob()
 {
-    return false;
+    bool success = false;
+
+    int playerTotal = getData()->getActiveCharacter()->getSkill(5);
+    playerTotal += getData()->getActiveCharacter()->getAttribute(2);
+    int npcTotal = npc->getAttribute(3);
+    npcTotal += npc->getSkill(8);
+
+    int luck = rand() % getData()->getActiveCharacter()->getAttribute(6) + 1;
+    playerTotal += luck;
+
+    if(playerTotal > npcTotal){
+
+        success = true;
+    }
+
+    return success;
 }
 
 void RandomEncounter::barter()
