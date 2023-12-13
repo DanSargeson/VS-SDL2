@@ -98,6 +98,14 @@ LoadFiles::LoadFiles(std::string filename, int type) : m_filename(filename){
     }
 }
 
+LoadFiles::~LoadFiles(){
+
+    this->currDiagID = 0;
+    this->dialogueMap.clear();
+    this->playerOps.clear();
+
+}
+
 int LoadFiles::loadFaction(){
 
     return m_faction;
@@ -302,9 +310,14 @@ void LoadFiles::readJsonFile2(const std::string& filename)
 
 std::string LoadFiles::getDialogue(std::string faction, int id){
 
-    std::string msg = "non";
+    std::string msg = "";
     //msg = dialogueMap.at(faction).at(id);
 
+    ///TODO Hacky as fuck, fix this
+    if(id == 0){
+
+        faction = "Red";
+    }
     auto factionIter = dialogueMap.find(faction);
     if (factionIter != dialogueMap.end()) {
         auto dialogueIter = factionIter->second.find(id);

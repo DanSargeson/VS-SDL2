@@ -19,7 +19,7 @@ FactionEncounter::FactionEncounter(){
     json_file = "Assets/diag.json";
 
 
-    int random = rand() % 7 + 1;
+    int random = rand() % 6 + 2;
     npc = std::make_shared<NPC>(random); // RED
     file = std::make_shared<LoadFiles>(m_fileName, 1);
 
@@ -32,10 +32,11 @@ FactionEncounter::FactionEncounter(){
     ///file->loadFactionDialogue(npc->getFaction());
     file->readJsonFile2(json_file);
    // std::pair msg1 = file->getDialogueAndResponses(npc->getFactionStr(), 1, 0);
-    StateData::GetInstance()->mainText->setString(file->getDialogue("red", 1));
+   std::string check = npc->getFactionStr();
+    StateData::GetInstance()->mainText->setString(file->getDialogue(check, 1));
     m_menu = std::make_shared<GUI::Menu>();
 
-    m_menu->setMenuOptions(file->getFirstResponses("red", 1), true);
+    m_menu->setMenuOptions(file->getFirstResponses(check, 1), true);
 
 }
 
@@ -69,45 +70,19 @@ void FactionEncounter::updateEvents(SDL_Event& e)
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
 
-    if(m_menu->isSelected()){
+        if(m_menu->isSelected()){
 
-        if(m_menu->getChoice() == 0){
-            Engine::GetInstance()->PopState();
+            if(m_menu->getChoice() == 0){
+                Engine::GetInstance()->PopState();
+            }
+            else{
+
+                file->selectResponse(npc->getFactionStr(), 1, m_menu->getChoice());
+                std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
+                StateData::GetInstance()->mainText->setString(msg2);
+                m_menu->setMenuOptions(file->getPlayerOps(), true);
+            }
         }
-        else{
-
-//            npc->getFaction();
-///            std::string msg = "Gained favour with " + npc->getFactionName(npc->getFaction()) + " faction";
-///            StateData::GetInstance()->dynamicText->setString(msg);
-///
-///            StateData::GetInstance()->getActiveCharacter()->gainRep(npc->getFaction(), 1);
-///           m_menu->setActive(false);
-              file->selectResponse("red", 1, m_menu->getChoice());
-              std::string msg2 = file->getDialogue("red", file->getCurrDiagID());
-              StateData::GetInstance()->mainText->setString(msg2);
-              m_menu->setMenuOptions(file->getPlayerOps(), true);
-
-//              if(file->getCurrDiagID() == 0){
-//
-//                getData()->mainText->setString("Goodbye");
-//                Engine::GetInstance()->PopState();
-//              }
-        }
-//        else if(m_menu->getChoice() == 2){
-//
-//            std::string msg = "Lost favour with " + npc->getFactionName(npc->getFaction()) + " faction";
-//            StateData::GetInstance()->enemyText->setString(msg);
-//            StateData::GetInstance()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
-//            m_menu->setActive(false);
-//        }
-//        else{
-//
-//            file->loadFactionDialogue(2);
-//            StateData::GetInstance()->mainText->setString(file->loadQuestDialogue(1));
-//            m_menu = std::make_shared<GUI::Menu>();
-//            m_menu->setMenuOptions(file->loadPlayerOptions(), true);
-//        }
-    }
     }
 }
 

@@ -93,6 +93,7 @@ private:
 		int getRepLevel() { return repLevel; }
 		std::string getName() { return name; }
 
+
 		//setters
 		void gainRep(int rep) { repLevel += rep; }
 		void loseRep(int rep) { repLevel -= rep; }

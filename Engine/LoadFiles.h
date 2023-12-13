@@ -27,7 +27,7 @@ class LoadFiles{
     public:
 
         LoadFiles(std::string filename, int type = -1);
-       // virtual ~LoadFiles();
+        ~LoadFiles();
 
         int loadFaction();
         std::string loadDialogue();

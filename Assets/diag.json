@@ -2,14 +2,14 @@
   "dialogues": [
     {
     	"id" : 0,
-    	"faction": "red",
+    	"faction": "Red",
     	"dialogueId" : 0,
     	"text" : "Goodbye",
     	"responses":[]
     },
     {
       "id": 1,
-      "faction": "red",
+      "faction": "Red",
       "dialogueId": 1,
       "text": "Welcome, I am the leader of the RED faction",
       "responses": [
@@ -28,7 +28,7 @@
     
     {
       "id": 2,
-      "faction": "red",
+      "faction": "Red",
       "dialogueId": 2,
       "text": "I like you, have some gold.",
       "responses": [
@@ -47,7 +47,7 @@
 
     {
         "id" : 3,
-        "faction" : "red",
+        "faction" : "Red",
         "dialogueId" : 3,
         "text" : "You are very rude,",
         "responses":[
@@ -67,7 +67,7 @@
     {
     	
     	"id": 4,
-    	"faction": "red",
+    	"faction": "Red",
     	"dialogueId" : 4,
     	"text" : "Hmmm, perhaps next time you won't be so rude",
     	"nextDialogue": 0,
@@ -76,11 +76,88 @@
     
     {
     	"id": 5,
-    	"faction": "red",
+    	"faction": "Red",
     	"dialogueId":5,
     	"text": "I hope to meet you again soon",
     	"nextDialogue": 0,
     	"responses": []
+    },
+    {
+
+    
+        "id" : 1,
+        "faction": "Blue",
+        "dialogueId" : 1,
+        "text": "blue leader",
+        "nextDialogue" : 2,
+        "responses": [
+            {
+                "id" : 1,
+                "text": "okay",
+                "nextDialogue": 0 
+            }
+        ]
+    },
+    {
+
+        "id" : 1,
+        "faction": "Green",
+        "dialogueId" : 1,
+        "text": "green leader",
+        "nextDialogue" : 2,
+        "responses": [
+            {
+                "id" : 1,
+                "text": "okay",
+                "nextDialogue": 0 
+            }
+        ]
+    },
+    {
+
+        "id" : 1,
+        "faction": "Aqua",
+        "dialogueId" : 1,
+        "text": "aqua leader",
+        "nextDialogue" : 2,
+        "responses": [
+            {
+                "id" : 1,
+                "text": "okay",
+                "nextDialogue": 0 
+            }
+        ]
+    },
+    {
+
+
+        "id" : 1,
+        "faction": "Brown",
+        "dialogueId" : 1,
+        "text": "brown leader",
+        "nextDialogue" : 2,
+        "responses": [
+            {
+                "id" : 1,
+                "text": "okay",
+                "nextDialogue": 0 
+            }
+        ]
+    },
+    {
+
+        "id" : 1,
+        "faction": "Purple",
+        "dialogueId" : 1,
+        "text": "I am the purple leader",
+        "nextDialogue" : 2,
+        "responses": [
+            {
+                "id" : 1,
+                "text": "okay",
+                "nextDialogue": 0 
+            }
+        ]
     }
   ]
 }
