@@ -56,6 +56,9 @@ class LoadFiles{
         std::vector<std::string> getPlayerOps() { return playerOps; };
         inline int getCurrDiagID() { return currDiagID; }
 
+        inline void setFaction(int i) { m_faction = i; }
+        inline int getFaction() { return m_faction; }
+
     private:
 
         std::string m_filename;

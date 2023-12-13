@@ -165,9 +165,6 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->getActiveCharacter()->travel();
                // Event e;
 
-               ///TODO DEBUG: REMOVE
-               eventToss = 3;
-
                if(eventToss < 2){
 
                     Engine::GetInstance()->AddState(std::make_shared<Battle>());
