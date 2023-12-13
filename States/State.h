@@ -39,8 +39,6 @@ public:
 
     void initFonts();
 
-
-
     void push_state(std::shared_ptr<class State> s);
     void pop_state();
 
@@ -121,6 +119,7 @@ public:
    virtual void updateEvents(SDL_Event &e) = 0;
     virtual void render() = 0;
 
+    StateData* getData() { return StateData::GetInstance(); }
 
     bool getQuit();
     const bool getKeyTime();

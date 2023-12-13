@@ -16,6 +16,8 @@ RandomEncounter::RandomEncounter(){
 
     StateData::GetInstance()->mainText->setString(file->loadRandomDialogue());
     menu = std::make_shared<GUI::Menu>();
+
+    getData()->mainText->setString("TESTING");
 }
 
 void RandomEncounter::update(const float& dt)
