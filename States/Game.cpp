@@ -4,6 +4,7 @@
 #include "Settings.h"
 #include "Battle.h"
 #include "FactionEncounter.h"
+#include "RandomEncounter.h"
 #include "CharacterMenu.h"
 #include "LoadGame.h"
 
@@ -171,11 +172,11 @@ void Game::updateEvents(SDL_Event& e){
                else if( eventToss >= 2 && eventToss < 4){
 
                     //CREATE FACTION ENCOUNTER STATE
-                    Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(eventToss));
+                    Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>());
                }
                else{
 
-                    Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(eventToss));
+                    Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>());
                }
 
                // e.createEvent();
