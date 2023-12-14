@@ -508,6 +508,8 @@ void CharacterCreator::updateEvents(SDL_Event& e){
         }
 
     }
+
+    State::updateEvents(e);
 }
 
 void CharacterCreator::updateMouseEvents(SDL_MouseButtonEvent& e){

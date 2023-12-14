@@ -56,8 +56,6 @@ public:
 
     SDL_Rect getCamera();
 
-
-
     std::string saveName;
 
     int activeCharacter;
@@ -116,7 +114,7 @@ public:
     void setData(StateData& StateData);
 
     virtual void update(const float &dt) = 0;
-    virtual void updateEvents(SDL_Event &e) = 0;
+    virtual void updateEvents(SDL_Event &e);
     virtual void render() = 0;
 
     void loadCharacters();

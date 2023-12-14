@@ -43,7 +43,7 @@ public:
 	inline std::string getInvItemAsString(int choice){
 
         string str = "";
-        choice--;
+        //choice--;
         std::advance(smrtInvIt, choice);
 
         str = smrtInv[choice]->toString();
@@ -52,7 +52,7 @@ public:
 
 	inline SDL_Color getInvItemColour(int choice){
 
-        choice--;
+        choice--;/// SEARCH THIS...
 
         return smrtInv[choice]->getItemColour();
 	}

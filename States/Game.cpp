@@ -147,13 +147,13 @@ void Game::updateEvents(SDL_Event& e){
         //GAME LOOP HERE
         if(gameMenu->isSelected()){
 
+//            if(gameMenu->getChoice() == 0){
+//
+//                Engine::GetInstance()->PopState();
+//
+//                return;
+//            }
             if(gameMenu->getChoice() == 0){
-
-                Engine::GetInstance()->PopState();
-
-                return;
-            }
-            if(gameMenu->getChoice() == 1){
 
 
                 seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
@@ -239,13 +239,13 @@ void Game::updateEvents(SDL_Event& e){
                 //StateData::GetInstance()->push_state(std::make_shared<Battle>());
             }
 
-            if(gameMenu->getChoice() == 3){
+            if(gameMenu->getChoice() == 2){
 
                 StateData::GetInstance()->getActiveCharacter()->levelUp();
                // StateData::GetInstance()->mainText->setString("Levelled up!!");
             }
 
-            if(gameMenu->getChoice() == 4){
+            if(gameMenu->getChoice() == 3){
 
                 if(StateData::GetInstance()->getActiveCharacter()->getGold() >= 10){
 
@@ -265,24 +265,24 @@ void Game::updateEvents(SDL_Event& e){
 ///                    StateData::GetInstance()->getActiveCharacter()->resetHP();
             }
 
-            if(gameMenu->getChoice() == 5){
+            if(gameMenu->getChoice() == 4){
 
                 Engine::GetInstance()->AddState(std::make_shared<CharacterMenu>());
             }
 
-            if(gameMenu->getChoice() == 6){
+            if(gameMenu->getChoice() == 5){
 
                 Engine::GetInstance()->AddState(std::make_shared<Settings>());
             }
 
 
-            if(gameMenu->getChoice() == 7){
+            if(gameMenu->getChoice() == 6){
 
                 saveCharacters();
                 StateData::GetInstance()->mainText->setString("Game Saved");
             }
 
-            if(gameMenu->getChoice() == 8){
+            if(gameMenu->getChoice() == 7){
 
                 Engine::GetInstance()->PopState();
                 Engine::GetInstance()->AddState(std::make_shared<LoadGame>());
@@ -290,7 +290,7 @@ void Game::updateEvents(SDL_Event& e){
                 return;
             }
 
-            if(gameMenu->getChoice() == 9){
+            if(gameMenu->getChoice() == 8){
 
 //                textBox->setActive(true);
 //                std::string txt = "Text 1. \nText 2.";
@@ -358,6 +358,9 @@ void Game::updateEvents(SDL_Event& e){
             }
         }
     }
+
+
+     State::updateEvents(e);
 }
 
 void Game::render(){

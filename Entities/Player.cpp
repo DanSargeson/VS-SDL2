@@ -508,7 +508,6 @@ int Player::takeDamage(int damage) {
 }
 
 void Player::equipItem(int index){
-	index--;
 	if (index < 0 || index >= this->inventory.smrtSize()) {
 		cout << "Equip item out of bounds error!\n\n";
 	}

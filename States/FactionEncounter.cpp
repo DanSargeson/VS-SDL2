@@ -69,18 +69,20 @@ void FactionEncounter::updateEvents(SDL_Event& e)
 
         if(m_menu->isSelected()){
 
-            if(m_menu->getChoice() == 0){
-                Engine::GetInstance()->PopState();
-            }
-            else{
+//            if(m_menu->getChoice() == 0){
+//                Engine::GetInstance()->PopState();
+//            }
+           // else{
 
                 file->selectResponse(npc->getFactionStr(), 1, m_menu->getChoice());
                 std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
                 StateData::GetInstance()->mainText->setString(msg2);
                 m_menu->setMenuOptions(file->getPlayerOps(), true);
-            }
+ //           }
         }
     }
+
+    State::updateEvents(e);
 }
 
 void FactionEncounter::render()

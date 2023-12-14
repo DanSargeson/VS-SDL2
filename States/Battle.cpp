@@ -5,17 +5,6 @@
 
 Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>())/*, seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed)*/, noOfEnemies(0) {
 
-//    missCounter = 0;
-//    alpha = 255;
-//    alpha2 = 255;
-//
-//    battleTxtTimer = std::make_unique<Timer>();
-//    battleGameTimer = std::make_unique<GameTimer>();
-
-//     seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-
-//     generator.seed(seed);
-
      std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
      noOfEnemies = numEnemiesDistribution(generator);
 
@@ -525,7 +514,11 @@ void Battle::updateEvents(SDL_Event& e){
         if(battleMenu->isSelected() && battleMenu->getActive()){
 
                 choice = 12;
-                if(battleMenu->getChoice() == 0 && playerTurn){
+
+
+                /** THIS IS THE RUN AWAY FROM BATTLE CODE         */
+
+                if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_ESCAPE) && playerTurn){
 
                     int coinToss = rand() % 2 + 1;
                         if (coinToss == 2){
@@ -550,7 +543,10 @@ void Battle::updateEvents(SDL_Event& e){
                         return;
                     }
                 }
-                if(battleMenu->getChoice() == 1 && playerTurn){ //PLAYER PICKS ATTACK ON THEIR TURN
+
+                /*  END OF RUNNING FROM BATTLE  */
+
+                if(battleMenu->getChoice() == 0 && playerTurn){ //PLAYER PICKS ATTACK ON THEIR TURN
 
                     updateMenu();   //SETS BATTLEMENU TO ACTIVE
                 }
@@ -558,7 +554,7 @@ void Battle::updateEvents(SDL_Event& e){
 
         if(enemyMenu->isSelected() && enemyMenu->getActive()){
 
-            choice = enemyMenu->getChoice() - 1;
+            choice = enemyMenu->getChoice();
             if(choice == -1){
                 enemyMenu->setActive(false);
                 battleMenu->setActive(true);
@@ -610,6 +606,8 @@ void Battle::updateEvents(SDL_Event& e){
            }
         }
     }
+
+    State::updateEvents(e);
 }
 
 void Battle::render(){

@@ -14,7 +14,7 @@ class LoadGame : public State{
         void updateEvents(SDL_Event &e);
         void render();
 
-        void loadCharacters();
+//        void loadCharacters();
 
     private:
             std::shared_ptr<GUI::Menu> loadMenu;

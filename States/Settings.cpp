@@ -111,6 +111,8 @@ void Settings::updateEvents(SDL_Event& e){
         }
 
     }
+
+    State::updateEvents(e);
 }
 
 void Settings::render(){

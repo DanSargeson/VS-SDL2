@@ -74,7 +74,7 @@ public:
 	int getMaxDamageWithWeapon();
 	string getEquippedWeapon();
 	string getEquippedArmour();
-	inline shared_ptr<Item> findItem(int index) { index--; return this->inventory.findItemSmart(index); }
+	inline shared_ptr<Item> findItem(int index) { return this->inventory.findItemSmart(index); }
 	inline void removeItem(shared_ptr<Item> w) { this->inventory.removeItemVectorSmart(w); }
 	inline void addItem(shared_ptr<Item>item) { this->inventory.addItemVectorSmart(item); }
 	inline void getInv() { this->inventory.debugVector(); }

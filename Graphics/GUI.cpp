@@ -785,8 +785,8 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, b
 	font = TTF_OpenFont("Assets/Fonts/SF Atarian System.ttf", 28);
 	if(dynamic){
 
-		this->options.push_back(new Texture());
-		this->options[0]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), "Back", colour, *font);
+///		this->options.push_back(new Texture());
+///		this->options[0]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), "Back", colour, *font);
 
 		for(size_t i = 0; i < strings.size(); i++){
 
@@ -795,7 +795,7 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, b
                 colour = StateData::GetInstance()->getActiveCharacter()->getItemColour(i+1);
                 std::cout << "\nR:" + std::to_string(colour.r) + " G:" + std::to_string(colour.g) + " B:" + std::to_string(colour.b);
 			}
-			this->options[i+1]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), strings[i], colour, *font);
+			this->options[i]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), strings[i], colour, *font);
 		}
 	}
 	else{
@@ -805,7 +805,7 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, b
             std::cout << strings[i];
 			this->options.push_back(new Texture());
 			if(item){
-                colour = StateData::GetInstance()->getActiveCharacter()->getItemColour(i+1);
+                colour = StateData::GetInstance()->getActiveCharacter()->getItemColour(i);
 			}
 			this->options[i]->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), strings[i], colour, *font);
 
@@ -843,9 +843,7 @@ bool GUI::Menu::isSelected(){
 			}
 		}
 	}
-
 	return false;
-
 }
 
 void GUI::Menu::setActive(bool active){
@@ -1062,9 +1060,9 @@ void GUI::Menu::scrollText(int direction){
 
 	if(direction == 0){
 
-		if(options.size() >= 4){
+		if(options.size() > 4){
 
-			if((size_t)hiddenCount < this->options.size() - 4){
+			if((size_t)hiddenCount < this->options.size() - 3){
 
 				for(size_t i = 0; i < this->options.size(); i++){
 
@@ -1083,7 +1081,7 @@ void GUI::Menu::scrollText(int direction){
 	}
 	else{
 
-		int w = this->options.size() - 4;
+		int w = this->options.size() - 3;
 
 		if(hiddenCount > 0){
 

@@ -85,6 +85,16 @@ void StateData::pop_state(){
     currentState--;
 }
 
+void State::updateEvents(SDL_Event& e){
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_ESCAPE)){
+
+        Engine::GetInstance()->PopState();
+
+        return;
+    }
+}
+
 void StateData::clearCharacters(){
 
     ///characters.clear();

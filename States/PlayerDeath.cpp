@@ -76,6 +76,7 @@ void PlayerDeath::update(const float& dt){
 
 void PlayerDeath::updateEvents(SDL_Event& e){
 
+
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
         if(textTimer->getTicks() > 4000){

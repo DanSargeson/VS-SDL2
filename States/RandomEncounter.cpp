@@ -90,14 +90,14 @@ void RandomEncounter::updateEvents(SDL_Event& e){
     if(e.type == SDL_MOUSEBUTTONDOWN){
         if(menu->isSelected()){
 
+//            if(menu->getChoice() == 0){
+//
+//                Engine::GetInstance()->PopState();
+//
+//                return;
+//            }
+
             if(menu->getChoice() == 0){
-
-                Engine::GetInstance()->PopState();
-
-                return;
-            }
-
-            if(menu->getChoice() == 1){
 
                     getData()->getActiveCharacter()->gainRep(npc->getFaction(), 1);
                     std::string msg = "You have a pleasant chat with the stranger.\nFaction rep slightly increased.";
@@ -110,7 +110,7 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                 menu->setActive(false);
             }
 
-            if(menu->getChoice() == 2){
+            if(menu->getChoice() == 1){
 
             //Charm
                 if(unlockedCharm){
@@ -182,7 +182,7 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                 menu->setActive(false);
             }
 
-            if(menu->getChoice() == 3){
+            if(menu->getChoice() == 2){
 
                 //barter
                 getData()->enemyText->clearText();
@@ -190,6 +190,8 @@ void RandomEncounter::updateEvents(SDL_Event& e){
             }
         }
     }
+
+    State::updateEvents(e);
 }
 
 void RandomEncounter::render(){

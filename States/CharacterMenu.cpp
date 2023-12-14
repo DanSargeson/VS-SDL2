@@ -59,25 +59,16 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         invMenu->scrollText(1);
     }
 
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_ESCAPE)){
-
-        Engine::GetInstance()->PopState();
-
-        return;
-    }
-
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
-        if(invMenu->isSelected()){
+        if(invMenu->isSelected() && invMenu->getActive()){
 
-            if(invMenu->getChoice() == 0){
-
-                Engine::GetInstance()->PopState();
-
-                return;
-            }
-
-            if(invMenu->getChoice() != 0){
+//            if(invMenu->getChoice() == 0){
+//
+//                Engine::GetInstance()->PopState();
+//
+//                return;
+//            }
 
                 choice = invMenu->getChoice();
                 std::vector<std::string> ops;
@@ -92,9 +83,41 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->mainText->setString(msg, true, 420);
                 //mStateData::getInstane
                     std::cout << invMenu->getChoice() << std::endl;
-            }
 
         }   //FIRST MENU ENDS HERE
+
+    ///THIS IS THE ONE111 else{
+
+     //INV MENU2 STARTS HERE
+
+
+        if(invMenu2->getActive() && invMenu2->isSelected()){
+            std::cout << "CHOICE: " << choice << std::endl;
+            auto wv = StateData::GetInstance()->getActiveCharacter()->findItem(choice);
+            int cc = invMenu2->getChoice();
+            //if(invMenu2->getChoice() == 0){
+
+                //if(wv->getItemType() == WEAPON){
+                StateData::GetInstance()->getActiveCharacter()->equipItem(choice);
+
+                //invMenu2->setActive(false);
+                //invMenu->setActive(true);
+                std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+                invMenu->setMenuOptions(ops, true, true);
+                 std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+                StateData::GetInstance()->mainText->setString(mmm, true, 420);
+                 mButtons["SKILLS"]->setSelected(false);
+                mButtons["ATTRIBUTES"]->setSelected(true);
+            //mButtons["INVENTORY"]->setSelected(false);
+                mButtons["FACTIONS"]->setSelected(false);
+                //}
+            ///}
+
+            ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+            invMenu->setMenuOptions(ops, true, true);
+            invMenu->setActive(true);
+            invMenu2->setActive(false);
+    }
 
 
 
@@ -144,60 +167,12 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             StateData::GetInstance()->mainText->setString(mmm, true, 420);
         }
 
-
-//         if (mButtons["INVENTORY"]->isPressed(e.button)) {
-//
-//            mButtons["SKILLS"]->setSelected(false);
-//            mButtons["ATTRIBUTES"]->setSelected(false);
-//            mButtons["INVENTORY"]->setSelected(true);
-//            mButtons["FACTIONS"]->setSelected(false);
-//
-//            invMenu->setActive(true);
-//            invMenu2->setActive(false);
-//            std::string msg = "Choose an item from the menu: ";
-//            StateData::GetInstance()->mainText->setString(msg, true, 420);
-//        }
-
-
         //BUTTONS END HERE
+    }
 
-        //INV MENU2 STARTS HERE
-        if(invMenu2->isSelected()){
 
-            if(invMenu2->getChoice() == 0){
-
-                invMenu2->setActive(false);
-                invMenu->setActive(true);
-                std::string msg = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-                StateData::GetInstance()->mainText->setString(msg, true, 420);
-                 mButtons["SKILLS"]->setSelected(false);
-                 mButtons["ATTRIBUTES"]->setSelected(true);
-            //mButtons["INVENTORY"]->setSelected(false);
-                 mButtons["FACTIONS"]->setSelected(false);
-                //choice = -1;
-            }
-
-            std::cout << "CHOICE: " << choice << std::endl;
-            auto wv = StateData::GetInstance()->getActiveCharacter()->findItem(choice);
-            if(invMenu2->getChoice() == 1){
-
-                //if(wv->getItemType() == WEAPON){
-                StateData::GetInstance()->getActiveCharacter()->equipItem(choice);
-
-                invMenu2->setActive(false);
-                invMenu->setActive(true);
-                std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
-                invMenu->setMenuOptions(ops, true, true);
-                choice = -1;
-                 std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-                StateData::GetInstance()->mainText->setString(mmm, true, 420);
-                 mButtons["SKILLS"]->setSelected(false);
-                mButtons["ATTRIBUTES"]->setSelected(true);
-            //mButtons["INVENTORY"]->setSelected(false);
-                mButtons["FACTIONS"]->setSelected(false);
-                //}
-            }
-        }
+    if(invMenu2->getActive() == false){
+        State::updateEvents(e);
     }
 }
 

@@ -34,6 +34,7 @@ void LoadGame::update(const float& dt){
 
 void LoadGame::updateEvents(SDL_Event& e){
 
+    State::updateEvents(e);
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
 
@@ -51,17 +52,17 @@ void LoadGame::updateEvents(SDL_Event& e){
 
             if (this->loadMenu->isSelected()) {
 
-			if (this->loadMenu->getChoice() == 0) {
-
-              //  StateData::GetInstance()->characters.clear();
-                Engine::GetInstance()->PopState();
-				//StateData::GetInstance()->pop_state();
-			}
-			else {
+//			if (this->loadMenu->getChoice() == 0) {
+//
+//              //  StateData::GetInstance()->characters.clear();
+//                Engine::GetInstance()->PopState();
+//				//StateData::GetInstance()->pop_state();
+//			}
+//			else {
 
 				for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
 
-                        int c = loadMenu->getChoice() - 1;
+                        int c = loadMenu->getChoice();
 //                        int d = StateData::GetInstance()->characters[i]->getID();
                         std::cout << "You picked:::   " << std::to_string(c) << std::endl;
 
@@ -80,7 +81,7 @@ void LoadGame::updateEvents(SDL_Event& e){
 					//}
 				}
 
-			}
+//			}
 		}
         }
     }
@@ -95,7 +96,7 @@ void LoadGame::render(){
     loadMenu->render();
 }
 
-
+/*
 void LoadGame::loadCharacters(){
 
     std::string fileName = "characters.txt";
@@ -302,17 +303,18 @@ void LoadGame::loadCharacters(){
 					cout << "Loaded Character: " << this->characters[i].getName() << endl;
                 }*/
 
-            }
-    }
-    else{
+//            }
+//    }
+//    else{
+//
+//        Engine::GetInstance()->PopState();
+//
+//        return;
+//    }
+//    inFile.close();
+//
+//    if(StateData::GetInstance()->characters.size() <= 0){
+//        throw "ERROR LOADING FILE!";
+//    }
+//}
 
-        Engine::GetInstance()->PopState();
-
-        return;
-    }
-    inFile.close();
-
-    if(StateData::GetInstance()->characters.size() <= 0){
-        throw "ERROR LOADING FILE!";
-    }
-}
