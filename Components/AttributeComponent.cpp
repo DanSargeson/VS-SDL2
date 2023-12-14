@@ -7,7 +7,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 	mLevel = level;
 	mExp = 0;
 	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
-	mExpNext = baseEXP * (mLevel + 1);
+	mExpNext = baseEXP * (mLevel);
 	mAttributePoints = 2;
 	mHasLevelled = false;
 
@@ -82,7 +82,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 		std::cout << "EXP NEXT: " << std::to_string(mExpNext) << "\n\n";
 	}
 
-	updateLevel();
+	//updateLevel();
 	updateStats(reset);
 }
 
@@ -267,7 +267,7 @@ void AttributeComponent::calculateNextEXP()
 
 void AttributeComponent::updateStats(const bool reset){
 
-	mHpMax = ((mAttributes[VITALITY] * 4) + mLevel * 10);
+	mHpMax = ((mAttributes[VITALITY] * 4) + mLevel  * 10);
 
 	if (reset) {
 
@@ -282,7 +282,7 @@ void AttributeComponent::updateLevel(){
 		mLevel = 1;
 	}
 
-    mExpNext = baseEXP * (mLevel + 1);
+    mExpNext = baseEXP * (mLevel);
 
 	while (mExp >= mExpNext && mExpNext != 0) {
 
@@ -290,7 +290,7 @@ void AttributeComponent::updateLevel(){
 		mExp -= mExpNext;
 
 		//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
-		mExpNext = baseEXP * (mLevel + 1);
+		mExpNext = baseEXP * (mLevel);
 		updateStats(false);
 
 		mHasLevelled = true;

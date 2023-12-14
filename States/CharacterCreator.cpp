@@ -328,7 +328,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
                     outFile << StateData::GetInstance()->getActiveCharacter()->getStatsAsString() << "\n";
                     outFile << StateData::GetInstance()->getActiveCharacter()->getEquippedWeapon() << "\n";
                     outFile << StateData::GetInstance()->getActiveCharacter()->getEquippedArmour() << "\n";
-                    outFile <<	StateData::GetInstance()->getActiveCharacter()->getInvAsStringSave();
+                    outFile <<	StateData::GetInstance()->getActiveCharacter()->getInvAsStringSave() << "\n";
 
                 //loadCharacters...
             }

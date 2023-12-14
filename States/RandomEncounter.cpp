@@ -131,7 +131,6 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                         }
 
                         getData()->dynamicText->setString(msg);
-
                     }
                 }
                 else{

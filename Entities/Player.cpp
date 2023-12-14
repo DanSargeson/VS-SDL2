@@ -31,7 +31,7 @@ Player::Player() : Entity(){
 //    luck = 0;
 
 
-    this->createAttributeComponent(0, true);
+    this->createAttributeComponent(1, true);
 	this->createSkillComponent();
 	this->createFactionComponent();
 
@@ -52,6 +52,8 @@ Player::Player() : Entity(){
 
     //statPoints = 0;
     //skillPoints = 0;
+
+    //attributeComponent->updateStats(true);
 
     corruption = 0;
 }
@@ -87,7 +89,8 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
    //attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
 	createAttackComponent(skillComponent, attributeComponent);
 
-	attributeComponent->updateLevel();
+	//attributeComponent->updateLevel();
+	//attributeComponent->updateStats(true);
 	attributeComponent->setHP(hp);
 	attributeComponent->setXP(exp);
 }
