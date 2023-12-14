@@ -6,13 +6,11 @@ FactionComponent::FactionComponent(Entity* owner) : Component(owner){
 	mFactions.push_back(Faction(FACTIONS::BLACK));
 	mFactions.push_back(Faction(FACTIONS::WHITE));
 	mFactions.push_back(Faction(FACTIONS::RED));
-	mFactions.push_back(Faction(FACTIONS::AQUA));
 	mFactions.push_back(Faction(FACTIONS::BLUE));
 	mFactions.push_back(Faction(FACTIONS::GREEN));
 	mFactions.push_back(Faction(FACTIONS::BROWN));
+	mFactions.push_back(Faction(FACTIONS::AQUA));
 	mFactions.push_back(Faction(FACTIONS::PURPLE));
-
-
 }
 
 FactionComponent::~FactionComponent(){

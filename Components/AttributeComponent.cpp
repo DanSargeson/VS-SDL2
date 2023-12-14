@@ -240,6 +240,7 @@ void AttributeComponent::loseEXP(const float exp){
 	}
 }
 
+
 void AttributeComponent::gainHP(const int hp){
 
 	mHp += hp;

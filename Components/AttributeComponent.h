@@ -43,6 +43,7 @@ public:
 	inline void setHP(int hp) { mHp = hp; }
 	inline void setXP(int xp) { mExp = xp; }
 
+//	void setHP(int hp);
 	void gainHP(const int hp);
 	void loseHP(const int hp);
 

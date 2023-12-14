@@ -19,6 +19,7 @@ std::string NPC::getFactionStr(){
 
 NPC::NPC(int faction){
 
+	this->createFactionComponent();
 	this->type = NPC_TYPE::PEASANT;
 
 	this->faction = faction;
@@ -43,7 +44,6 @@ NPC::NPC(int faction){
 //	dialogueComponent->setDialogueOptions("Resources/Text/randomNews.txt", total);
 
 	textFileName = "Resources/Text/randomNews.txt";
-	this->createFactionComponent();
 
 	this->createInventory();
 

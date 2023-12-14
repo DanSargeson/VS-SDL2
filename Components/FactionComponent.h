@@ -4,6 +4,12 @@
 #include "Component.h"
 
 
+///RED
+///BLUE
+///GREEN
+
+///SECONDARY == CYAN, MAGENTA, YELLOW
+
 enum FACTIONS {
 
 	BLACK = 0,

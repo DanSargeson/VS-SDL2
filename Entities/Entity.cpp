@@ -237,6 +237,11 @@ void Entity::createSkillComponent(){
 	skillComponent->calculateSkills(attributeComponent);
 }
 
+void Entity::setHP(int hp){
+
+    attributeComponent->setHP(hp);
+}
+
 void Entity::createFactionComponent(){
 
 	this->factionComponent = std::make_shared<FactionComponent>(this);

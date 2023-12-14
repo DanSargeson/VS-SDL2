@@ -94,6 +94,8 @@ public:
 
 	bool isAlive();
 
+	void setHP(int l);
+
 //	virtual int getCurrentMapID() = 0;
 //	virtual void setMapID(int id);
 

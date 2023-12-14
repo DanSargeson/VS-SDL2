@@ -291,7 +291,7 @@ void LoadGame::loadCharacters(){
 
                 StateData::GetInstance()->characters.push_back(temp);
 
-				cout << "Character: " << temp->getName() << " loaded" << "\n";
+				///cout << "Character: " << temp->getName() << " loaded" << "\n";
 				temp->setInv(tempItems);
 				//cout << "Loaded Inv: " << temp.getInvAsString() << "\n";
 				//cout << "tempItems: " << tempItems.getInvAsString() << "\n";

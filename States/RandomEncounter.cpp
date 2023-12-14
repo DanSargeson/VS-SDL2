@@ -11,14 +11,9 @@ RandomEncounter::RandomEncounter(int faction){
     StateData::GetInstance()->dynamicText->setString("");
     StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
-    if(faction == -1){
-        int random = rand() % 6 + 2;
-        npc = std::make_shared<NPC>(random); // RED
-    }
-    else{
 
-        npc = std::make_shared<NPC>(faction);
-    }
+    npc = std::make_shared<NPC>(faction);
+
     file = std::make_shared<LoadFiles>(filename, 0);
 
     int high = getData()->getActiveCharacter()->getLevel() + 8;
@@ -140,24 +135,36 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
                     std::string msg = "You succeed in robbing the stranger, gold increased by " + std::to_string(gold);
                     getData()->dynamicText->setString(msg);
-                    getData()->getActiveCharacter()->setGold(gold);
+                    getData()->getActiveCharacter()->gainGold(gold);
                 }
                 else{
 
                     std::string msg = "";
-                    if(getData()->getActiveCharacter()->getGold() - gold < 0){
+                    if((getData()->getActiveCharacter()->getGold() - gold) < 0){
 
                         double percentage = 0.20;
                         getData()->getActiveCharacter()->setGold(0);
-                        int check = static_cast<int>(getData()->getActiveCharacter()->getHP() * percentage);
+                        double check = static_cast<int>(getData()->getActiveCharacter()->getHP() * percentage);
+                        if(check < 1){
+
+                            check = 1;
+                        }
                         getData()->getActiveCharacter()->loseHP(check);
-                        msg = "You don't have enough to pay the fine.\nYou lose what you have and are beaten. " + std::to_string(check) + " HP lost.";
+                        if(getData()->getActiveCharacter()->getHP() <= 0){
+
+                            msg = "You don't have enough to pay the fine.\nYou lose what you have and are beaten to within an inch of your life.";
+                            getData()->getActiveCharacter()->setHP(1);
+                        }
+                        else{
+                            msg = "You don't have enough to pay the fine.\nYou lose what you have and are beaten. " + std::to_string(static_cast<int>(check)) + " HP lost.";
+                        }
+
                         msg += "\n" + npc->getFactionStr() + " faction rep down";
                         getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }
                     else{
                         msg = "You are caught and lose " + std::to_string(gold) + " gold";
-                        getData()->getActiveCharacter()->setGold(-gold);
+                        getData()->getActiveCharacter()->gainGold(-gold);
                         msg += "\n\n" + npc->getFactionStr() + " faction rep down";
                         getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }

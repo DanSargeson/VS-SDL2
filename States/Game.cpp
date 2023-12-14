@@ -168,27 +168,70 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->getActiveCharacter()->travel();
                // Event e;
 
+               std::vector<int> numbers = {2, 3, 4};
+
+                // Use std::random_device to obtain a seed for the random number generator
+                std::random_device rd;
+
+                // Use std::mt19937 as the random number generator
+                std::mt19937 gen(rd());
+
+                // Use std::uniform_int_distribution to generate random indices
+                std::uniform_int_distribution<> dis(0, numbers.size() - 1);
+
+                // Generate a random index
+                int randomIndex = dis(gen);
+
+                // Access the corresponding element in the set
+                int randomValue = numbers[randomIndex];
+
+                if(getData()->getActiveCharacter()->getRep(randomValue) >= 110){
+
+                    switch(randomValue){
+
+                        case 2:
+                            //RED, can include
+                            numbers.push_back(5);   //BROWN, NEEDS TO CHANGE!!
+                            break;
+
+                        case 3:
+                            //BLUE
+                            numbers.push_back(6);     //AQUA NEED TO CHANGE!!
+                            break;
+
+                        case 4:
+                            //GREEN;
+                            numbers.push_back(7); //PURPLE NEED TO CHANGE!!
+                            break;
+                    }
+                }
+
+                std::uniform_int_distribution<> dis2(0, numbers.size() - 1);
+                randomIndex = dis2(gen);
+                randomValue = numbers[randomIndex];
+
                if(eventToss < 2){
 
                     Engine::GetInstance()->AddState(std::make_shared<Battle>());
                }
+
                else if( eventToss >= 2 && eventToss < 4){
 
                     //CREATE FACTION ENCOUNTER STATE
-                    int random = rand() % 6 + 2;
-                    if(getData()->getActiveCharacter()->getRep(random) >= 160){      ///TODO: Magic number
+                    ///int random = rand() % 6 + 2;
+                    if(getData()->getActiveCharacter()->getRep(randomValue) >= 160){      ///TODO: Magic number
 
 
-                        Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(random));
+                        Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(randomValue));
                     }
                     else{
 
-                        Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>(random));
+                        Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>(randomValue));
                     }
                }
                else{
 
-                    Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>());
+                    Engine::GetInstance()->AddState(std::make_shared<RandomEncounter>(randomValue));
                }
 
                // e.createEvent();
@@ -206,7 +249,7 @@ void Game::updateEvents(SDL_Event& e){
                 if(StateData::GetInstance()->getActiveCharacter()->getGold() >= 10){
 
                     StateData::GetInstance()->getActiveCharacter()->resetHP();
-                    StateData::GetInstance()->getActiveCharacter()->setGold(-10);
+                    StateData::GetInstance()->getActiveCharacter()->gainGold(-10);
 
                     StateData::GetInstance()->mainText->setString("You awake feeling well rested");
                     StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
