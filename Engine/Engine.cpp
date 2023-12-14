@@ -87,6 +87,7 @@ void Engine::Update(float dt){
     else{
 
         mStates.push_back(std::make_shared<MainMenu>());
+        //currentState++;
     }
 }
 

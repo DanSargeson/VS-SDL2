@@ -116,9 +116,10 @@ public:
     void setData(StateData& StateData);
 
     virtual void update(const float &dt) = 0;
-   virtual void updateEvents(SDL_Event &e) = 0;
+    virtual void updateEvents(SDL_Event &e) = 0;
     virtual void render() = 0;
 
+    void loadCharacters();
     StateData* getData() { return StateData::GetInstance(); }
 
     bool getQuit();

@@ -31,7 +31,7 @@ MainMenu::MainMenu() : State(){
 	}
 
 
-	loadFiles();
+	loadCharacters();
 	initButtons();
 
 	//If there is no music playing
