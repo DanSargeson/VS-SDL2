@@ -3,7 +3,7 @@
 
 int FactionEncounter::position = 1;
 
-FactionEncounter::FactionEncounter(){
+FactionEncounter::FactionEncounter(int faction){
 
 
     StateData::GetInstance()->enemyText->setString("");
@@ -18,10 +18,8 @@ FactionEncounter::FactionEncounter(){
 
     json_file = "Assets/diag.json";
 
-    int random = rand() % 6 + 2;
-    npc = std::make_shared<NPC>(random); // RED
+    npc = std::make_shared<NPC>(faction); // RED
     file = std::make_shared<LoadFiles>(m_fileName, 1);
-
 
     npc->createDialogueComponent();
     npc->createFactionComponent();

@@ -90,6 +90,8 @@ public:
 
 	std::string getItemString(int index);
 
+	int getRep(int faction);
+
 	bool isAlive();
 
 //	virtual int getCurrentMapID() = 0;

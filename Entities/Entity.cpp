@@ -187,6 +187,14 @@ std::string Entity::getFactionStr() {
 	return this->factionComponent->getFactionsStr();
 }
 
+int Entity::getRep(int faction){
+
+    if(factionComponent != nullptr){
+
+        return factionComponent->getReputation(faction);
+    }
+}
+
 std::string Entity::getFactionStrSave(){
 
     return this->factionComponent->getFactionsStrSave();

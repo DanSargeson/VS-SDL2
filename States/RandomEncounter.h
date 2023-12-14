@@ -9,7 +9,7 @@ class RandomEncounter : public State{
 
     public:
 
-        RandomEncounter();
+        RandomEncounter(int faction = -1);
         ~RandomEncounter();
 
         void update(const float& dt);

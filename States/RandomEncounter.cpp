@@ -1,7 +1,7 @@
 #include "RandomEncounter.h"
 
 
-RandomEncounter::RandomEncounter(){
+RandomEncounter::RandomEncounter(int faction){
 
     filename = "Assets/newDialogue.txt";
 
@@ -11,9 +11,14 @@ RandomEncounter::RandomEncounter(){
     StateData::GetInstance()->dynamicText->setString("");
     StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
+    if(faction == -1){
+        int random = rand() % 6 + 2;
+        npc = std::make_shared<NPC>(random); // RED
+    }
+    else{
 
-    int random = rand() % 6 + 2;
-    npc = std::make_shared<NPC>(random); // RED
+        npc = std::make_shared<NPC>(faction);
+    }
     file = std::make_shared<LoadFiles>(filename, 0);
 
     int high = getData()->getActiveCharacter()->getLevel() + 8;
@@ -121,9 +126,10 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                     if(getData()->getActiveCharacter()->getGold() - gold < 0){
 
                         double percentage = 0.20;
+                        getData()->getActiveCharacter()->setGold(0);
                         int check = static_cast<int>(getData()->getActiveCharacter()->getHP() * percentage);
                         getData()->getActiveCharacter()->loseHP(check);
-                        msg = "You don't have enough to pay the fine. You are beaten. " + std::to_string(check) + " HP lost.";
+                        msg = "You don't have enough to pay the fine. You lose what you have and are beaten. " + std::to_string(check) + " HP lost.";
                         msg += "\n\n" + npc->getFactionStr() + " faction rep down";
                         getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }

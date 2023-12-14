@@ -9,7 +9,7 @@ class FactionEncounter : public State{
 
     public:
 
-        FactionEncounter();
+        FactionEncounter(int faction);
         virtual ~FactionEncounter();
 
         void update(const float &dt);

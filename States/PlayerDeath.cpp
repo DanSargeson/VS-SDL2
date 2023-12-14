@@ -37,7 +37,6 @@ PlayerDeath::PlayerDeath() : State(){
     StateData::GetInstance()->enemyText->setPosition(enemX, GUI::p2pY(55));
 
     //HERE SAVEGAME
-    saveCharacters();
     textTimer->start();
    // std::cout << deathMsg->getColour() << std::endl;
 }
@@ -82,6 +81,7 @@ void PlayerDeath::updateEvents(SDL_Event& e){
         if(textTimer->getTicks() > 4000){
 
             StateData::GetInstance()->getActiveCharacter()->resetHP(); //resets maxHP
+            saveCharacters();
             Engine::GetInstance()->PopState();
         }
     }
