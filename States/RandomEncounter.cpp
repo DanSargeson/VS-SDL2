@@ -122,8 +122,16 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                     }
                     else{
 
-                        getData()->dynamicText->setString("The stranger isn't fooled by false flattery. Faction rep decreased.");
-                        getData()->getActiveCharacter()->loseRep(npc->getFaction(), 2);
+                        std::string msg = "The stranger isn't fooled by false flattery.";
+
+                        if(getData()->getActiveCharacter()->getRep(npc->getFaction()) >= 112){
+
+                            msg += "\nFaction rep decreased slightly.";
+                            getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
+                        }
+
+                        getData()->dynamicText->setString(msg);
+
                     }
                 }
                 else{
