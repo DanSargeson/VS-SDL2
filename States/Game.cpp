@@ -46,7 +46,6 @@ Game::Game() : State(){
 	menuOptions.push_back("Character Menu");        //5
 	menuOptions.push_back("Settings");
 	menuOptions.push_back("Save Game");             //7
-	menuOptions.push_back("Load Character");        //8
 	menuOptions.push_back("Help");                  //9
 
 	gameMenu->setMenuOptions(menuOptions, true);
@@ -147,12 +146,6 @@ void Game::updateEvents(SDL_Event& e){
         //GAME LOOP HERE
         if(gameMenu->isSelected()){
 
-//            if(gameMenu->getChoice() == 0){
-//
-//                Engine::GetInstance()->PopState();
-//
-//                return;
-//            }
             if(gameMenu->getChoice() == 0){
 
 
@@ -211,12 +204,12 @@ void Game::updateEvents(SDL_Event& e){
                 randomValue = numbers[randomIndex];
 
 
-               if(eventToss < 2){
+               if(eventToss <= 2){
 
                     Engine::GetInstance()->AddState(std::make_shared<Battle>());
                }
 
-               else if( eventToss >= 2 && eventToss < 4){
+               else if( eventToss > 2){
 
                     //CREATE FACTION ENCOUNTER STATE
                     ///int random = rand() % 6 + 2;
@@ -261,8 +254,6 @@ void Game::updateEvents(SDL_Event& e){
                     StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
                     StateData::GetInstance()->enemyText->setString("You don't have enough gold.");
                 }
-///                    StateData::GetInstance()->mainText->setString("You awake feeling well rested!");
-///                    StateData::GetInstance()->getActiveCharacter()->resetHP();
             }
 
             if(gameMenu->getChoice() == 4){
@@ -284,20 +275,6 @@ void Game::updateEvents(SDL_Event& e){
 
             if(gameMenu->getChoice() == 7){
 
-                Engine::GetInstance()->PopState();
-                Engine::GetInstance()->AddState(std::make_shared<LoadGame>());
-
-                return;
-            }
-
-            if(gameMenu->getChoice() == 8){
-
-//                textBox->setActive(true);
-//                std::string txt = "Text 1. \nText 2.";
-//                textBox->setSize(200, 200);
-//                textBox->setHeader("Header");
-//                textBox->setText(txt);
-//                textBox->setPosition(15, 15);
                 tutorialCount = 0;
                 StateData::GetInstance()->setTutorial(true);
             }

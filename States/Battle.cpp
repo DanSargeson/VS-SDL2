@@ -24,6 +24,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
     enemyMenu.reset();
     enemyMenu = std::make_shared<GUI::Menu>();
 
+    enemyMenu->setActive(false);
+
     StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
     StateData::GetInstance()->mainText->setString("Test");
 
@@ -494,7 +496,6 @@ const void Battle::enemyAttacks(){
 
 void Battle::updateEvents(SDL_Event& e){
 
-    //choice = -1;
     battleMenu->update();
     enemyMenu->update();
 
@@ -545,31 +546,45 @@ void Battle::updateEvents(SDL_Event& e){
     if(e.type == SDL_MOUSEBUTTONDOWN){
 //                choice = 12;
 //
-//                if(battleMenu->getChoice() == 0 && playerTurn){ //PLAYER PICKS ATTACK ON THEIR TURN
 //
-//                    updateMenu();   //SETS BATTLEMENU TO ACTIVE
-//                }
 //            }
 
-        if(enemyMenu->isSelected() && enemyMenu->getActive()){
+        if(battleMenu->isSelected()){
+
+        int choice = battleMenu->getChoice();
+
+        if(battleMenu->getChoice() == 0){
+
+
+            ///THIS NEEDS TO BE THE ENEMY MENU
+
+            std::vector<std::string> ops;
+
+            for(int i = 0; i < enemies.size(); i++){
+
+                ops.push_back(enemies[i].getName());
+            }
+
+            enemyMenu->setMenuOptions(ops, true);
+            enemyMenu->setActive(true);
+            battleMenu->setActive(false);
+
+            }
+        }
+
+        if(enemyMenu->isSelected() && playerTurn){
 
             choice = enemyMenu->getChoice();
-            if(choice == -1){
-                enemyMenu->setActive(false);
-                battleMenu->setActive(true);
-            }
-            else{
-                playerAttacks();
-                //TODO: Should go below so defence, items etc work
-                playerTurn = false;
-                enemyMenu->setActive(false);
-                battleMenu->setActive(true);
-            }
 
-         //       playerTurn = false;
-                enemyMenu->setActive(false);
-                battleMenu->setActive(true);
+            ///THIS GOES IN THE SELECTED ENEMY
+            playerAttacks();
+            //TODO: Should go below so defence, items etc work
+            playerTurn = false;
+            enemyMenu->setActive(false);
+            battleMenu->setActive(true);
+
         }
+            ///END IN ENEMY
     }
 
     //std::cout << "THE CHOICE IS CURRENTLY: " << std::to_string(choice) << "\n";
