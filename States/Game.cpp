@@ -11,6 +11,8 @@
 Game::Game() : State(){
 
   ///  Mix_HaltMusic();
+  LoadGame lg;
+  lg.loadCharacters();
     tutorialCount = 0;
     StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>();
