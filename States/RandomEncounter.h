@@ -26,4 +26,6 @@ class RandomEncounter : public State{
         std::shared_ptr<GUI::Menu> menu;
         std::shared_ptr<LoadFiles> file;
         std::string filename;
+
+        bool unlockedCharm;
 };

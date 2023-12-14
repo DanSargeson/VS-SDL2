@@ -36,11 +36,22 @@ RandomEncounter::RandomEncounter(int faction){
     getData()->mainText->setString(msg, true, 880);
     menu = std::make_shared<GUI::Menu>();
 
+    unlockedCharm = false;
+
     std::vector<std::string> ops;
-    ops.push_back("Charm");
+    ops.push_back("Chat");
+
+    int check = npc->getFaction();
+    int repCheck = getData()->getActiveCharacter()->getRep(check);
+    if(getData()->getActiveCharacter()->getRep(npc->getFaction()) >= 110){
+
+        ops.push_back("Charm");
+        unlockedCharm = true;
+    }
+
+
     ops.push_back("Steal");
     ops.push_back("Barter");
-
 
     menu->setMenuOptions(ops, true);
 
@@ -93,23 +104,34 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
             if(menu->getChoice() == 1){
 
-                //Charm
-                getData()->enemyText->clearText();
-                if(charm()){
-
-                    getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
                     getData()->getActiveCharacter()->gainRep(npc->getFaction(), 1);
-                }
-                else{
+                    std::string msg = "You have a pleasant chat with the stranger.\nFaction rep slightly increased.";
+                    if(getData()->getActiveCharacter()->getRep(npc->getFaction()) == 110){
 
-                    getData()->dynamicText->setString("The stranger isn't fooled by false flattery. Faction rep decreased.");
-                    getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
-                }
+                        msg += "\n**New interaction unlocked!**";
+                    }
+                    getData()->dynamicText->setString(msg, true);
 
                 menu->setActive(false);
             }
 
             if(menu->getChoice() == 2){
+
+            //Charm
+                if(unlockedCharm){
+                    getData()->enemyText->clearText();
+                    if(charm()){
+
+                        getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
+                        getData()->getActiveCharacter()->gainRep(npc->getFaction(), 5);
+                    }
+                    else{
+
+                        getData()->dynamicText->setString("The stranger isn't fooled by false flattery. Faction rep decreased.");
+                        getData()->getActiveCharacter()->loseRep(npc->getFaction(), 2);
+                    }
+                }
+                else{
 
                 //Steal
                 getData()->dynamicText->clearText();
@@ -129,8 +151,8 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                         getData()->getActiveCharacter()->setGold(0);
                         int check = static_cast<int>(getData()->getActiveCharacter()->getHP() * percentage);
                         getData()->getActiveCharacter()->loseHP(check);
-                        msg = "You don't have enough to pay the fine. You lose what you have and are beaten. " + std::to_string(check) + " HP lost.";
-                        msg += "\n\n" + npc->getFactionStr() + " faction rep down";
+                        msg = "You don't have enough to pay the fine.\nYou lose what you have and are beaten. " + std::to_string(check) + " HP lost.";
+                        msg += "\n" + npc->getFactionStr() + " faction rep down";
                         getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }
                     else{
@@ -140,6 +162,7 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                         getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }
                     getData()->enemyText->setString(msg, true, 880);
+                }
                 }
 
                 menu->setActive(false);
