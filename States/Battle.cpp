@@ -509,16 +509,10 @@ void Battle::updateEvents(SDL_Event& e){
         }
     }
 
-    if(e.type == SDL_MOUSEBUTTONDOWN){
-
-        if(battleMenu->isSelected() && battleMenu->getActive()){
-
-                choice = 12;
-
-
-                /** THIS IS THE RUN AWAY FROM BATTLE CODE         */
+    /** THIS IS THE RUN AWAY FROM BATTLE CODE         */
 
                 if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_ESCAPE) && playerTurn){
+
 
                     int coinToss = rand() % 2 + 1;
                         if (coinToss == 2){
@@ -542,15 +536,20 @@ void Battle::updateEvents(SDL_Event& e){
                         Engine::GetInstance()->PopState();
                         return;
                     }
+
                 }
+
 
                 /*  END OF RUNNING FROM BATTLE  */
 
-                if(battleMenu->getChoice() == 0 && playerTurn){ //PLAYER PICKS ATTACK ON THEIR TURN
-
-                    updateMenu();   //SETS BATTLEMENU TO ACTIVE
-                }
-            }
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+//                choice = 12;
+//
+//                if(battleMenu->getChoice() == 0 && playerTurn){ //PLAYER PICKS ATTACK ON THEIR TURN
+//
+//                    updateMenu();   //SETS BATTLEMENU TO ACTIVE
+//                }
+//            }
 
         if(enemyMenu->isSelected() && enemyMenu->getActive()){
 
@@ -606,8 +605,6 @@ void Battle::updateEvents(SDL_Event& e){
            }
         }
     }
-
-    State::updateEvents(e);
 }
 
 void Battle::render(){
