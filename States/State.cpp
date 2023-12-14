@@ -109,7 +109,7 @@ void State::saveCharacters()
     }
 
     outFile.close();
-	cout << "Game Saved!\n\n";
+	//cout << "Game Saved!\n\n";
 }
 
 

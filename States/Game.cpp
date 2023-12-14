@@ -123,6 +123,7 @@ void Game::update(const float& dt){
         gameMenu->setActive(true);
     }
     gameMenu->update();
+    saveCharacters();
 }
 
 void Game::updateEvents(SDL_Event& e){
