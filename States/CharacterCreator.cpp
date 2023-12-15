@@ -1,5 +1,6 @@
 #include "CharacterCreator.h"
 #include "Game.h"
+#include "AttributeComponent.h"
 
 //void CharacterCreator::initFonts(){
 //
@@ -152,11 +153,28 @@ void CharacterCreator::initText(){
 
     unsigned charSize = GUI::calcCharSize(80);
 
-    this->charCreatorText = std::make_unique<GUI::Text>(/*18, 22, 0, 0,*/ false);
+    this->charCreatorText = std::make_unique<GUI::Text>(18, 22, 0, 0, false);
 
-    this->nameMessage = std::make_unique<GUI::Text>(/*60, 50, 0, 0,*/ false);
+    this->nameMessage = std::make_unique<GUI::Text>(60, 50, 0, 0, false);
 
-    charCreatorText->setPositionF(18, 22);
+    //charCreatorText->setPositionF(18, 22);
+
+    strengthText->setString("STRENGTH : " + to_string(temp->getAttribute(STRENGTH)));
+    dexText->setString("DEXTERITY : " + to_string(temp->getAttribute(DEXTERITY)));
+    agiText->setString("AGILITY : " + to_string(temp->getAttribute(AGILITY)));
+    intText->setString("INTELLIGENCE : " + to_string(temp->getAttribute(INTELLIGENCE)));
+    charText->setString("CHARISMA : " + to_string(temp->getAttribute(CHARISMA)));
+    luckText->setString("LUCK : " + to_string(temp->getAttribute(LUCK)));
+    vitText->setString("VITALITY : " + to_string(temp->getAttribute(VITALITY)));
+
+    strengthText->setPositionF(18, 78);
+    agiText->setPositionF(18, 31);
+    charText->setPositionF(18, 40);
+    dexText->setPositionF(18, 50);
+    intText->setPositionF(18, 59);
+    vitText->setPositionF(18, 87);
+    luckText->setPositionF(18, 69);
+
     nameMessage->setPositionF(60, 50);
     nameMessage->setString("Enter Character name: ");
 
@@ -168,6 +186,15 @@ void CharacterCreator::initText(){
 CharacterCreator::CharacterCreator() : State(){
 
 
+    strengthText = std::make_shared<GUI::Text>();
+    dexText = std::make_shared<GUI::Text>();
+    agiText = std::make_shared<GUI::Text>();
+    intText = std::make_shared<GUI::Text>();
+    charText = std::make_shared<GUI::Text>();
+    luckText = std::make_shared<GUI::Text>();
+    vitText = std::make_shared<GUI::Text>();
+
+
     lastMenuPos = MENU_POS::ATTRIBUTES;
 
     textEditDone = false;
@@ -175,8 +202,9 @@ CharacterCreator::CharacterCreator() : State(){
     textInput = true;
 
     temp = std::make_shared<Player>();
+    temp->createAttributeComponent(1, true, false);
 
-    pointsToSpend = 0;
+    pointsToSpend = 17;
 
     const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";
 
@@ -215,21 +243,21 @@ void CharacterCreator::updateButtons(const float &dt){
 void CharacterCreator::updateInput(const float& dt){
 
 
-//        if(pointsToSpend > 0){
-//
-//            textInput = false;
-//        }
-//
-//        //DECREASE
-//        if(pointsToSpend > 17){
-//
-//            pointsToSpend = 17;
-//        }
-//        if(pointsToSpend <= 0){
-//
-//            pointsToSpend = 0;
-//            textInput = true;
-//        }
+        if(pointsToSpend > 0){
+
+            textInput = false;
+        }
+
+        //DECREASE
+        if(pointsToSpend > 17){
+
+            pointsToSpend = 17;
+        }
+        if(pointsToSpend <= 0){
+
+            pointsToSpend = 0;
+            textInput = true;
+        }
 }
 
 void CharacterCreator::updateText(const float& dt){
@@ -237,7 +265,7 @@ void CharacterCreator::updateText(const float& dt){
     if(this->menuPos == MENU_POS::ATTRIBUTES){
 
         std::string msg = " ";
-        ///msg = temp->getAttributeSheet();
+//        msg = getAttributeSheet();
 
         charCreatorText->setString(msg, true, 250);
 
@@ -313,8 +341,19 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
 ///            this->temp->setFactionRep(100, 100, 100, 100, 100, 100, 100, 100);
 ///            this->temp->finaliseAttributes();
-///            this->temp->setPosition(128.f, 128.f);
+///            this->temp->f(128.f, 128.f);
             bool append = false;
+            ///temp->createAttributeComponent(1, true, false);
+
+            int strength = temp->getAttribute(ATTRIBUTE::STRENGTH);
+            int agi = temp->getAttribute(ATTRIBUTE::AGILITY);
+            int charis = temp->getAttribute(ATTRIBUTE::CHARISMA);
+            int dex = temp->getAttribute(ATTRIBUTE::DEXTERITY);
+            int intell = temp->getAttribute(ATTRIBUTE::INTELLIGENCE);
+            int luck = temp->getAttribute(ATTRIBUTE::LUCK);
+            int vit = temp->getAttribute(ATTRIBUTE::VITALITY);
+
+            temp->updateStats();
             StateData::GetInstance()->characters.push_back(temp);
 
 
@@ -364,70 +403,84 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
             if(e.button.button == SDL_BUTTON_LEFT){
 
-//                if(mSprites["AGILITY_PLUS"]->intersects(x, y)){
-//
-//                    //Increase Skill
-//                    if(temp->getAttribute(AGILITY) < 10){
-//
-//                        temp->increaseAttribute(AGILITY);
-//                        pointsToSpend--;
-//                    }
-//                }
-//
-//                if(mSprites["CHA_PLUS"]->intersects(x, y)){
-//
-//                    //Increase Skill
-//                    if(temp->getAttribute(CHARISMA) < 10){
-//
-//                        temp->increaseAttribute(CHARISMA);
-//                        pointsToSpend--;
-//                    }
-//                }
-//
-//                if(mSprites["DEX_PLUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(DEXTERITY) < 10){
-//
-//                        temp->increaseAttribute(DEXTERITY);
-//                        pointsToSpend--;
-//                    }
-//                }
-//
-//                if(mSprites["INT_PLUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(INTELLIGENCE) < 10){
-//
-//                        temp->increaseAttribute(INTELLIGENCE);
-//                        pointsToSpend--;
-//                    }
-//                }
-//
-//                if(mSprites["LUCK_PLUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(LUCK) < 10){
-//
-//                        temp->increaseAttribute(LUCK);
-//                        pointsToSpend--;
-//                    }
-//                }
-//
-//                if(mSprites["STR_PLUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(STRENGTH) < 10){
-//
-//                        temp->increaseAttribute(STRENGTH);
-//                        pointsToSpend--;
-//                    }
-//                }
-//
-//                if(mSprites["VIT_PLUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(VITALITY) < 10){
-//
-//                        temp->increaseAttribute(VITALITY);
-//                        pointsToSpend--;
-//                    }
-//                }
+                if(mSprites["AGILITY_PLUS"]->intersects(x, y)){
+
+                    //Increase Skill
+                    if(temp->getAttribute(ATTRIBUTE::AGILITY) < 10){
+
+                        temp->increaseAttribute(AGILITY);
+                        pointsToSpend--;
+                        std::string m = "AGILITY : " + std::to_string(temp->getAttribute(ATTRIBUTE::AGILITY));
+                        agiText->setString(m);
+                    }
+                }
+
+                if(mSprites["CHA_PLUS"]->intersects(x, y)){
+
+                    //Increase Skill
+                    if(temp->getAttribute(CHARISMA) < 10){
+
+                        temp->increaseAttribute(CHARISMA);
+                        pointsToSpend--;
+                        std::string m = "CHARISMA : " + std::to_string(temp->getAttribute(ATTRIBUTE::CHARISMA));
+                        charText->setString(m);
+                    }
+                }
+
+                if(mSprites["DEX_PLUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(DEXTERITY) < 10){
+
+                        temp->increaseAttribute(DEXTERITY);
+                        pointsToSpend--;
+                        std::string m = "DEXTERITY : " + std::to_string(temp->getAttribute(ATTRIBUTE::DEXTERITY));
+                        dexText->setString(m);
+                    }
+                }
+
+                if(mSprites["INT_PLUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(INTELLIGENCE) < 10){
+
+                        temp->increaseAttribute(INTELLIGENCE);
+                        pointsToSpend--;
+                        std::string m = "INTELLIGENCE : " + std::to_string(temp->getAttribute(ATTRIBUTE::INTELLIGENCE));
+                        intText->setString(m);
+                    }
+                }
+
+                if(mSprites["LUCK_PLUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(LUCK) < 10){
+
+                        temp->increaseAttribute(LUCK);
+                        pointsToSpend--;
+                        std::string m = "LUCK : " + std::to_string(temp->getAttribute(ATTRIBUTE::LUCK));
+                        luckText->setString(m);
+                    }
+                }
+
+                if(mSprites["STR_PLUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(STRENGTH) < 10){
+
+                        temp->increaseAttribute(STRENGTH);
+                        pointsToSpend--;
+                        std::string m = "STRENGTH : " + std::to_string(temp->getAttribute(ATTRIBUTE::STRENGTH));
+                        strengthText->setString(m);
+                    }
+                }
+
+                if(mSprites["VIT_PLUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(VITALITY) < 10){
+
+                        temp->increaseAttribute(VITALITY);
+                        pointsToSpend--;
+                        std::string m = "VITALITY : " + std::to_string(temp->getAttribute(ATTRIBUTE::VITALITY));
+                        vitText->setString(m);
+                    }
+                }
             }
         }
 
@@ -440,73 +493,86 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
             if(e.button.button == SDL_BUTTON_LEFT){
 
-//                if(mSprites["AGILITY_MINUS"]->intersects(x, y)){
-//
-//                    //Increase Skill
-//                    if(temp->getAttribute(AGILITY) > 0){
-//
-//                        temp->decreaseAttribute(AGILITY);
-//                        pointsToSpend++;
-//                    }
-//                }
-//
-//                if(mSprites["CHA_MINUS"]->intersects(x, y)){
-//
-//                    //Increase Skill
-//                    if(temp->getAttribute(CHARISMA) > 0){
-//
-//                        temp->decreaseAttribute(CHARISMA);
-//                        pointsToSpend++;
-//                    }
-//                }
-//
-//                if(mSprites["DEX_MINUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(DEXTERITY) > 0){
-//
-//                        temp->decreaseAttribute(DEXTERITY);
-//                        pointsToSpend++;
-//                    }
-//                }
-//
-//                if(mSprites["INT_MINUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(INTELLIGENCE) > 0){
-//
-//                        temp->decreaseAttribute(INTELLIGENCE);
-//                        pointsToSpend++;
-//                    }
-//                }
-//
-//                if(mSprites["LUCK_MINUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(LUCK) > 0){
-//
-//                        temp->decreaseAttribute(LUCK);
-//                        pointsToSpend++;
-//                    }
-//                }
-//
-//                if(mSprites["STR_MINUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(STRENGTH) > 0){
-//
-//                        temp->decreaseAttribute(STRENGTH);
-//                        pointsToSpend++;
-//                    }
-//                }
-//
-//                if(mSprites["VIT_MINUS"]->intersects(x, y)){
-//
-//                    if(temp->getAttribute(VITALITY) > 0){
-//
-//                        temp->decreaseAttribute(VITALITY);
-//                        pointsToSpend++;
-//                    }
-//                }
+                if(mSprites["AGILITY_MINUS"]->intersects(x, y)){
+
+                    //Increase Skill
+                    if(temp->getAttribute(AGILITY) > 0){
+
+                        temp->decreaseAttribute(AGILITY);
+                        pointsToSpend++;
+                        std::string m = "AGILITY : " + std::to_string(temp->getAttribute(ATTRIBUTE::AGILITY));
+                        agiText->setString(m);
+                    }
+                }
+
+                if(mSprites["CHA_MINUS"]->intersects(x, y)){
+
+                    //Increase Skill
+                    if(temp->getAttribute(CHARISMA) > 0){
+
+                        temp->decreaseAttribute(CHARISMA);
+                        pointsToSpend++;
+                        std::string m = "CHARISMA : " + std::to_string(temp->getAttribute(ATTRIBUTE::CHARISMA));
+                        charText->setString(m);
+                    }
+                }
+
+                if(mSprites["DEX_MINUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(DEXTERITY) > 0){
+
+                        temp->decreaseAttribute(DEXTERITY);
+                        pointsToSpend++;
+                        std::string m = "DEXTERITY : " + std::to_string(temp->getAttribute(ATTRIBUTE::DEXTERITY));
+                        dexText->setString(m);
+                    }
+                }
+
+                if(mSprites["INT_MINUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(INTELLIGENCE) > 0){
+
+                        temp->decreaseAttribute(INTELLIGENCE);
+                        pointsToSpend++;
+                        std::string m = "INTELLIGENCE : " + std::to_string(temp->getAttribute(ATTRIBUTE::INTELLIGENCE));
+                        intText->setString(m);
+                    }
+                }
+
+                if(mSprites["LUCK_MINUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(LUCK) > 0){
+
+                        temp->decreaseAttribute(LUCK);
+                        pointsToSpend++;
+                        std::string m = "LUCK : " + std::to_string(temp->getAttribute(ATTRIBUTE::LUCK));
+                        luckText->setString(m);
+                    }
+                }
+
+                if(mSprites["STR_MINUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(STRENGTH) > 0){
+
+                        temp->decreaseAttribute(STRENGTH);
+                        pointsToSpend++;
+                        std::string m = "STRENGTH : " + std::to_string(temp->getAttribute(ATTRIBUTE::STRENGTH));
+                        strengthText->setString(m);
+                    }
+                }
+
+                if(mSprites["VIT_MINUS"]->intersects(x, y)){
+
+                    if(temp->getAttribute(VITALITY) > 0){
+
+                        temp->decreaseAttribute(VITALITY);
+                        pointsToSpend++;
+                        std::string m = "VITALITY : " + std::to_string(temp->getAttribute(ATTRIBUTE::VITALITY));
+                        vitText->setString(m);
+                    }
+                }
             }
         }
-
     }
 
     State::updateEvents(e);
@@ -567,7 +633,14 @@ SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
 
             pointsMessage->render();
         }
-        charCreatorText->render();
+        std::string name = charCreatorText->getString();
+        strengthText->render();
+        agiText->render();
+        dexText->render();
+        intText->render();
+        charText->render();
+        vitText->render();
+        luckText->render();
 
         for(auto &it : mSprites){
 

@@ -87,6 +87,11 @@ public:
 	inline void setArmourLegs(shared_ptr<Item> a) { this->activeLegs = a; }
 	inline void increaseCorruption() { corruption++; }
 
+	void increaseAttribute(int i);
+	void decreaseAttribute(int i);
+
+	std::string getAttributeSheet();
+
 //Accessors
     inline const string& getName() const { return this->name;}
 //    const int& getLevel() const;

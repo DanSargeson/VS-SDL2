@@ -35,6 +35,14 @@ public:
     void updateText(const float& dt);
     void update(const float& dt);
 
+    std::shared_ptr<GUI::Text> strengthText;
+    std::shared_ptr<GUI::Text> dexText;
+    std::shared_ptr<GUI::Text> agiText;
+    std::shared_ptr<GUI::Text> intText;
+    std::shared_ptr<GUI::Text> charText;
+    std::shared_ptr<GUI::Text> luckText;
+    std::shared_ptr<GUI::Text> vitText;
+
     void updateEvents(SDL_Event& e);
     void updateMouseEvents(SDL_MouseButtonEvent& e);
     void updateTextInput(SDL_Event& e);

@@ -61,6 +61,8 @@ public:
 
 	int getAttribute(const int attr);
 
+	inline void setAttribute(int attr, int value) { mAttributes[attr] = value; }
+
 private:
 
 	unsigned mLevel;

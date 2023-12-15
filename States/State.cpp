@@ -315,7 +315,7 @@ void State::loadCharacters(){
     }
     inFile.close();
 
-    if(StateData::GetInstance()->characters.size() <= 0){
+    if(StateData::GetInstance()->characters.size() < 0){
         throw "ERROR LOADING FILE!";
     }
 }

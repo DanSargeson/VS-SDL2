@@ -6,6 +6,23 @@
 #include "AttackComponent.h"
 #include "Entity.h"
 
+std::string Player::getAttributeSheet(){
+
+    std::string msg = "STRENGTH\nDEXTERITY\nAGILITY\nINTELLIGENCE\nCHARISMA\nLUCK";
+
+    return msg;
+}
+
+void Player::increaseAttribute(int i ){
+
+    attributeComponent->increaseAttribute(i);
+}
+
+void Player::decreaseAttribute(int i ){
+
+    attributeComponent->decreaseAttribute(i);
+}
+
 Player::Player() : Entity(){
     distanceTravelled = 0;
 
@@ -79,7 +96,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
     int luck = 0;
     int charis = 0;
 
-    this->updateStats();
+///    this->updateStats();
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 
    this->createAttributeComponent(level, reset, false);
@@ -423,18 +440,8 @@ void Player::levelUp(){
 }
 
 void Player::updateStats(){
-//    this->expNext = static_cast<int>((50/3)*((pow(level,3) - 6*pow(level,2)) + 17*level - 12)) + 100;
-//
-//    this->hpMax = (this->vitality * 2) + (this->strength / 2) + this->level;
-//    this->staminaMax = this->vitality + (this->strength / 2) + (this->dexterity / 3);
-//	this->stamina = this->staminaMax;
-//    this->damageMin = this->strength + this->level;
-//    this->damageMax = this->strength + this->level * 2;
-//    this->defence = this->dexterity + (this->intelligence / 2);
-//    this->accuracy = (this->dexterity / 2) + intelligence;
-//    this->luck = this->intelligence;
 
-	//this->hp = this->hpMax;
+    attributeComponent->updateStats(true);
 }
 
 void Player::addStat(int stat, int value) {

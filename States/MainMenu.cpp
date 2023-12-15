@@ -30,8 +30,6 @@ MainMenu::MainMenu() : State(){
         printf("Unable to load main menu music..");
 	}
 
-
-	loadCharacters();
 	initButtons();
 
 	//If there is no music playing
@@ -44,6 +42,9 @@ MainMenu::MainMenu() : State(){
                             printf("ERROR PLAYING MUSIC mainMenu.cpp line 69.");
                         }
                     }
+
+
+                    State::loadCharacters();
 }
 
 MainMenu::~MainMenu(){
