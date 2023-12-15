@@ -74,7 +74,7 @@ void FactionEncounter::updateEvents(SDL_Event& e)
 //            }
            // else{
 
-                file->selectResponse(npc->getFactionStr(), 1, m_menu->getChoice());
+                file->selectResponse(npc->getFactionStr(), 1, (m_menu->getChoice() + 1));
                 std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
                 StateData::GetInstance()->mainText->setString(msg2);
                 m_menu->setMenuOptions(file->getPlayerOps(), true);

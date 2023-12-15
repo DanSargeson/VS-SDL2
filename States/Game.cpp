@@ -203,7 +203,6 @@ void Game::updateEvents(SDL_Event& e){
                 randomIndex = dis2(gen);
                 randomValue = numbers[randomIndex];
 
-
                if(eventToss <= 2){
 
                     Engine::GetInstance()->AddState(std::make_shared<Battle>());
@@ -211,10 +210,7 @@ void Game::updateEvents(SDL_Event& e){
 
                else if( eventToss > 2){
 
-                    //CREATE FACTION ENCOUNTER STATE
-                    ///int random = rand() % 6 + 2;
-                    if(getData()->getActiveCharacter()->getRep(randomValue) >= 160){      ///TODO: Magic number
-
+                   if(getData()->getActiveCharacter()->getRep(randomValue) >= 160){      ///TODO: Magic number
 
                         Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(randomValue));
                     }

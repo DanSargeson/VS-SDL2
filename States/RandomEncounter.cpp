@@ -130,7 +130,7 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                             getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
                         }
 
-                        getData()->dynamicText->setString(msg);
+                        getData()->dynamicText->setString(msg, true);
                     }
                 }
                 else{
