@@ -204,7 +204,7 @@ CharacterCreator::CharacterCreator() : State(){
     temp = std::make_shared<Player>();
     temp->createAttributeComponent(1, true, false);
 
-    pointsToSpend = 17;
+    pointsToSpend = 20;
 
     const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";
 
@@ -249,9 +249,9 @@ void CharacterCreator::updateInput(const float& dt){
         }
 
         //DECREASE
-        if(pointsToSpend > 17){
+        if(pointsToSpend > 20){
 
-            pointsToSpend = 17;
+            pointsToSpend = 20;
         }
         if(pointsToSpend <= 0){
 
@@ -485,7 +485,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
         }
 
         //DECREASE
-        if(menuPos == MENU_POS::ATTRIBUTES && pointsToSpend <= 17){
+        if(menuPos == MENU_POS::ATTRIBUTES && pointsToSpend <= 20){
 
             int x, y;
 
@@ -508,7 +508,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
                 if(mSprites["CHA_MINUS"]->intersects(x, y)){
 
                     //Increase Skill
-                    if(temp->getAttribute(CHARISMA) > 0){
+                    if(temp->getAttribute(CHARISMA) > 1){
 
                         temp->decreaseAttribute(CHARISMA);
                         pointsToSpend++;
@@ -519,7 +519,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
                 if(mSprites["DEX_MINUS"]->intersects(x, y)){
 
-                    if(temp->getAttribute(DEXTERITY) > 0){
+                    if(temp->getAttribute(DEXTERITY) > 1){
 
                         temp->decreaseAttribute(DEXTERITY);
                         pointsToSpend++;
@@ -530,7 +530,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
                 if(mSprites["INT_MINUS"]->intersects(x, y)){
 
-                    if(temp->getAttribute(INTELLIGENCE) > 0){
+                    if(temp->getAttribute(INTELLIGENCE) > 1){
 
                         temp->decreaseAttribute(INTELLIGENCE);
                         pointsToSpend++;
@@ -541,7 +541,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
                 if(mSprites["LUCK_MINUS"]->intersects(x, y)){
 
-                    if(temp->getAttribute(LUCK) > 0){
+                    if(temp->getAttribute(LUCK) > 1){
 
                         temp->decreaseAttribute(LUCK);
                         pointsToSpend++;
@@ -552,7 +552,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
                 if(mSprites["STR_MINUS"]->intersects(x, y)){
 
-                    if(temp->getAttribute(STRENGTH) > 0){
+                    if(temp->getAttribute(STRENGTH) > 1){
 
                         temp->decreaseAttribute(STRENGTH);
                         pointsToSpend++;
@@ -563,7 +563,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
                 if(mSprites["VIT_MINUS"]->intersects(x, y)){
 
-                    if(temp->getAttribute(VITALITY) > 0){
+                    if(temp->getAttribute(VITALITY) > 1){
 
                         temp->decreaseAttribute(VITALITY);
                         pointsToSpend++;

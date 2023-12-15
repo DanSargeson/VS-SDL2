@@ -99,7 +99,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
 ///    this->updateStats();
    // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 
-   this->createAttributeComponent(level, reset, false);
+   this->createAttributeComponent(level, true, false);
 
 	this->createSkillComponent();
 	this->createFactionComponent();
