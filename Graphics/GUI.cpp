@@ -1062,7 +1062,7 @@ void GUI::Menu::scrollText(int direction){
 
 		if(options.size() > 4){
 
-			if((size_t)hiddenCount < this->options.size() - 3){
+			if((size_t)hiddenCount < this->options.size() - 4){
 
 				for(size_t i = 0; i < this->options.size(); i++){
 
@@ -1081,7 +1081,7 @@ void GUI::Menu::scrollText(int direction){
 	}
 	else{
 
-		int w = this->options.size() - 3;
+		int w = this->options.size() - 4;
 
 		if(hiddenCount > 0){
 
