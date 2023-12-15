@@ -197,7 +197,19 @@ void AttributeComponent::loadAttribute(int level, float xp, int hp, int vit, int
 	updateLevel();
 	updateStats(true);
 
-	mHp = hp;
+	//mHp = hp;
+}
+
+void AttributeComponent::setAttributes(int vit, int str, int dex, int agi, int intel, int charis, int luck){
+
+mAttributes[ATTRIBUTE::VITALITY] = vit;
+	mAttributes[STRENGTH] = str;
+	mAttributes[DEXTERITY] = dex;
+	mAttributes[AGILITY] = agi;
+	mAttributes[INTELLIGENCE] = intel;
+	mAttributes[CHARISMA] = charis;
+	mAttributes[LUCK] = luck;
+
 }
 
 int AttributeComponent::getHP(){

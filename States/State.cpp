@@ -111,10 +111,10 @@ void State::loadCharacters(){
     int gold = 0;
     int level = 0;
     int exp = 0;
-    int str = 0;
-    int vit = 0;
-    int dex = 0;
-    int intel = 0;
+    //int str = 0;
+    //int vit = 0;
+    //int dex = 0;
+    //int intel = 0;
     int hp = 0;
     int stamina = 0;
     int statPoints = 0;
@@ -145,6 +145,14 @@ void State::loadCharacters(){
     int aqua = 0;
     int purple = 0;
 
+    int vit;
+    int str;
+    int dex;
+    int agi;
+    int intel;
+    int charis;
+    int luck;
+
     string line = "";
     stringstream strs;
 
@@ -158,18 +166,19 @@ void State::loadCharacters(){
 			strs >> hp;
 			strs >> exp;
 			strs >> gold;
-			//strs >> vit;
-			//strs >> dex;
-			//strs >> intel;
-			//strs >> hp;
-			//strs >> stamina;
-			//strs >> statPoints;
-			//strs >> skillPoints;
 			strs >> corrupt;
+			strs >> vit;
+			strs >> str;
+			strs >> dex;
+			strs >> agi;
+			strs >> intel;
+			strs >> charis;
+			strs >> luck;
 
 			auto temp = std::make_shared<Player> (name, disTravel, gold, level, exp,
-				str, vit, dex, intel, hp,
-				stamina, statPoints, skillPoints, corrupt, false);
+				vit, str, dex, agi, intel, charis, luck, hp,
+                corrupt, true);
+
 
 			strs.clear();
 			line.clear();
@@ -330,7 +339,8 @@ void State::saveCharacters()
  //   void Game::saveCharacters(){
     if(outFile.is_open()){
         for(unsigned i = 0; i < StateData::GetInstance()->characters.size(); i++){
-            outFile << StateData::GetInstance()->characters[i]->getStatsAsString() << "\n";
+            outFile << StateData::GetInstance()->characters[i]->getStatsAsString() << " ";
+			outFile << getData()->getActiveCharacter()->saveAttributes() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getFactionStrSave() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getEquippedWeapon() << "\n";
 			outFile << StateData::GetInstance()->characters[i]->getEquippedArmour() << "\n";

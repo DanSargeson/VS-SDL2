@@ -6,11 +6,30 @@
 #include "AttackComponent.h"
 #include "Entity.h"
 
-std::string Player::getAttributeSheet(){
+std::string Player::saveAttributes(){
 
-    std::string msg = "STRENGTH\nDEXTERITY\nAGILITY\nINTELLIGENCE\nCHARISMA\nLUCK";
+    std::string msg = "";
+
+    msg += std::to_string(getAttribute(ATTRIBUTE::VITALITY)) + " ";
+    msg += std::to_string(getAttribute(ATTRIBUTE::STRENGTH)) + " ";
+    msg += std::to_string(getAttribute(ATTRIBUTE::DEXTERITY)) + " ";
+    msg += std::to_string(getAttribute(ATTRIBUTE::AGILITY)) + " ";
+    msg += std::to_string(getAttribute(ATTRIBUTE::INTELLIGENCE)) + " ";
+    msg += std::to_string(getAttribute(ATTRIBUTE::CHARISMA)) + " ";
+    msg += std::to_string(getAttribute(ATTRIBUTE::LUCK)) + " ";
 
     return msg;
+}
+
+void Player::setAttributes(int v, int s, int d, int a, int i, int c, int l){
+
+    attributeComponent->setAttribute(ATTRIBUTE::VITALITY, v);
+    attributeComponent->setAttribute(ATTRIBUTE::STRENGTH, s);
+    attributeComponent->setAttribute(ATTRIBUTE::DEXTERITY, d);
+    attributeComponent->setAttribute(ATTRIBUTE::AGILITY, a);
+    attributeComponent->setAttribute(ATTRIBUTE::INTELLIGENCE, i);
+    attributeComponent->setAttribute(ATTRIBUTE::CHARISMA, c);
+    attributeComponent->setAttribute(ATTRIBUTE::LUCK, l);
 }
 
 void Player::increaseAttribute(int i ){
@@ -75,29 +94,12 @@ Player::Player() : Entity(){
     corruption = 0;
 }
 
-Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex,
-                     int intel, int hp, int stam, int stPoint, int skPoint, int corr, bool reset = true) : Entity(){
+Player::Player(string n, int dt, int g, int lvl, int exp, int vit, int str, int dex, int agi,
+                     int intel, int charis, int luck, int hp, int corr, bool reset) : Entity(){
     this->name = n;
     this->level = lvl;
-//    this->distanceTravelled = dt;
     this->gold = g;
-//    this->level = lvl;
-//    this->exp = exp;
-//    this->strength = str;
-//    this->vitality = vit;
-//    this->dexterity = dex;
-//    this->intelligence = intel;
-//    this->hp = hp;
-//    this->stamina = stam;
-//    this->statPoints = stPoint;
-//    this->skillPoints = skPoint;
     corruption = corr;
-    int agi = 0;
-    int luck = 0;
-    int charis = 0;
-
-///    this->updateStats();
-   // this->hpMax = (this->vitality * 2) + (this->strength / 2);
 
    this->createAttributeComponent(level, true, false);
 
@@ -108,6 +110,8 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int 
 
 	//attributeComponent->updateLevel();
 	//attributeComponent->updateStats(true);
+	attributeComponent->setAttributes(vit, str, dex, agi, intel, charis, luck);
+	updateStats(false);
 	attributeComponent->setHP(hp);
 	attributeComponent->setXP(exp);
 }
@@ -251,13 +255,6 @@ string Player::getStatsAsString() const{
 		to_string(hp) + " " +
 		to_string(xp) + " " +
 		to_string(gold) + " " +
-////		to_string(strength) + " " +
-////		to_string(vitality) + " " +
-////		to_string(dexterity) + " " +
-////		to_string(intelligence) + " " +
-//		to_string(stamina) + " " +
-//		to_string(statPoints) + " " +
-//		to_string(skillPoints) + " " +
 		to_string(corruption);
 
     return deets;
@@ -439,9 +436,9 @@ void Player::levelUp(){
 //    }
 }
 
-void Player::updateStats(){
+void Player::updateStats(bool reset){
 
-    attributeComponent->updateStats(true);
+    attributeComponent->updateStats(reset);
 }
 
 void Player::addStat(int stat, int value) {

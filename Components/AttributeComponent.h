@@ -27,6 +27,8 @@ public:
 
 	void loadAttribute(int level, float xp, int hp, int vit, int str, int dex, int agi, int intel, int charis, int luck);
 
+	void setAttributes(int vit, int str, int dex, int agi, int intel, int charis, int luck);
+
 	//Accessors
 	int getHP();
 	int getHPMax();

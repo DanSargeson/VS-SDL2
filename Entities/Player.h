@@ -49,8 +49,8 @@ private:
 public:
     Player();
     Player(string name, int dt);
-    Player(string n, int dt, int g, int lvl, int exp, int str, int vit, int dex, int intel, int hp,
-              int stam, int stPoint, int skPoint, int corr, bool reset);
+    Player(string n, int dt, int g, int lvl, int exp, int vit, int str, int dex, int agi,
+                     int intel, int charis, int luck, int hp,  int corr, bool reset = true);
     virtual ~Player();
 
     //Functions
@@ -64,7 +64,7 @@ public:
 	string getInvAsStringSave();
 	std::vector<std::string> getInvAsVec();
     void levelUp();
-    void updateStats();
+    void updateStats(bool reset = true);
 	void addStat(int stat, int value);
 	int takeDamage(int damage);
 	void equipItem(int index);
@@ -90,7 +90,8 @@ public:
 	void increaseAttribute(int i);
 	void decreaseAttribute(int i);
 
-	std::string getAttributeSheet();
+	std::string saveAttributes();
+	void setAttributes(int v, int s, int d, int a, int i, int c, int l);
 
 //Accessors
     inline const string& getName() const { return this->name;}
