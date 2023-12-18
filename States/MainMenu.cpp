@@ -44,7 +44,7 @@ MainMenu::MainMenu() : State(){
                     }
 
 
-                    State::loadCharacters();
+                   State::loadCharacters();
 }
 
 MainMenu::~MainMenu(){

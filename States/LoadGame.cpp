@@ -6,6 +6,8 @@ LoadGame::LoadGame() : State(){
 
     ///StateData::GetInstance()->clearCharacters();
     ///loadCharacters();
+
+    ///State::loadCharacters();
     std::vector<std::string> ops;
 
     loadMenu.reset();

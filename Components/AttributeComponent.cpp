@@ -210,6 +210,8 @@ mAttributes[ATTRIBUTE::VITALITY] = vit;
 	mAttributes[CHARISMA] = charis;
 	mAttributes[LUCK] = luck;
 
+
+    mHpMax = ((mAttributes[VITALITY] * 4) + mLevel  * 10);
 }
 
 int AttributeComponent::getHP(){
