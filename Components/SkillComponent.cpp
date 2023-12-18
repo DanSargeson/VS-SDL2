@@ -37,33 +37,33 @@ SkillComponent::~SkillComponent(){
 }
 
 
-int SkillComponent::calculateSkillsNEW(std::string attribute_name, int currAttribute){
-
-    /// Assume each attribute has a weight that determines its impact on the skill
-
-    int base_skill_value = 50;
-
-    std::unordered_map<std::string, double> attribute_weight = {
-            {"Vitality", 0.1},
-            {"Strength", 0.1},
-            {"Dexterity", 0.1},
-            {"Agility", 0.2},
-            {"Intelligence", 0.1},
-            {"Charisma", 0.3},
-            {"Luck", 0.1}
-        };
-
-        /// Calculate the modified skill value based on the attribute's influence
-        double modified_skill_value = base_skill_value + (currAttribute * attribute_weight[attribute_name]);
-
-        /// Ensure the modified skill value stays within a reasonable range (e.g., 1 to 100)
-        modified_skill_value = std::max(1.0, std::min(100.0, modified_skill_value));
-
-
-        std::cout << attribute_name << " : " << std::to_string(modified_skill_value);
-
-        return static_cast<int>(modified_skill_value);
-}
+///int SkillComponent::calculateSkillsNEW(std::string attribute_name, int currAttribute){
+///
+///    /// Assume each attribute has a weight that determines its impact on the skill
+///
+///    int base_skill_value = 50;
+////
+///    std::unordered_map<std::string, double> attribute_weight = {
+///            {"Vitality", 10},
+///            {"Strength", 20},
+///            {"Dexterity", 20},
+///            {"Agility", 20},
+///            {"Intelligence", 20},
+///            {"Charisma", 20},
+///            {"Luck", 10}
+///        };
+///
+///        /// Calculate the modified skill value based on the attribute's influence
+///        double modified_skill_value = base_skill_value + (currAttribute * attribute_weight[attribute_name]);
+///
+///        /// Ensure the modified skill value stays within a reasonable range (e.g., 1 to 100)
+///        modified_skill_value = std::max(1.0, std::min(100.0, modified_skill_value));
+///
+///
+///        std::cout << attribute_name << " : " << std::to_string(modified_skill_value);
+///
+///        return static_cast<int>(modified_skill_value);
+///}
 
 int SkillComponent::getSkill(const unsigned int skill) {
 
@@ -331,17 +331,40 @@ void SkillComponent::assignRandomSkills(int level){
 void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 
-     unsigned seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+     int base_skill_value = 10;
 
-     default_random_engine generator;
+    std::unordered_map<std::string, double> attribute_weight = {
+            {"Vitality", 10},
+            {"Strength", 15},
+            {"Dexterity", 15},
+            {"Agility", 20},
+            {"Intelligence", 15},
+            {"Charisma", 10},
+            {"Luck", 5}
+        };
 
-     generator.seed(seed);
 
-     std::uniform_int_distribution<int> skillDist1(1, 5);
-     int skill1 = skillDist1(generator);
 
-     std::uniform_int_distribution<int> skillDist2(2, 4);
-     int skill2 = skillDist2(generator);
+        /// Calculate the modified skill value based on the attribute's influence
+///        double modified_skill_value = base_skill_value + (currAttribute * attribute_weight[attribute_name]);
+
+        /// Ensure the modified skill value stays within a reasonable range (e.g., 1 to 100)
+///        modified_skill_value = std::max(1.0, std::min(100.0, modified_skill_value));
+
+
+   ///     std::cout << attribute_name << " : " << std::to_string(modified_skill_value);
+
+//     unsigned seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+//
+//     default_random_engine generator;
+//
+//     generator.seed(seed);
+//
+//     std::uniform_int_distribution<int> skillDist1(1, 5);
+//     int skill1 = skillDist1(generator);
+//
+//     std::uniform_int_distribution<int> skillDist2(2, 4);
+//     int skill2 = skillDist2(generator);
 
      int skillMod = 4;
 
@@ -359,13 +382,15 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	*/
 	int agilityLevel = ac->getAttribute(AGILITY);
 
-	int rangeLvl = ((agilityLevel * skillMod) + (level * 10) + luckLevel);
+	int rangeLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
 	mSkills[SKILLS::RANGED].setLevel(rangeLvl);
 
-	skill1 = skillDist1(generator);
-	skill2 = skillDist2(generator);
 
-	int accuLvl = ((agilityLevel * skillMod) + (level * 10) + luckLevel);
+
+    //DEX (Covers ACCURACY
+    int dexLevel = ac->getAttribute(DEXTERITY);
+
+	int accuLvl = base_skill_value + (dexLevel * attribute_weight["Dexterity"]);
 	mSkills[SKILLS::ACCURACY].setLevel(accuLvl);
 
 
@@ -373,11 +398,8 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 		CHARISMA
 	*/
 
-    skill1 = skillDist1(generator);
-	skill2 = skillDist2(generator);
-
 	int charismaLevel = ac->getAttribute(ATTRIBUTE::CHARISMA);
-	int persuLvl = ((charismaLevel * skillMod) + (level * 10) + luckLevel);
+	int persuLvl = base_skill_value + (charismaLevel * attribute_weight["Charisma"]);
 	mSkills[SKILLS::PERSUASION].setLevel(persuLvl);
 
 
@@ -385,52 +407,27 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 		VITALITY
 	*/
 
-	skill1 = skillDist1(generator);
-	skill2 = skillDist2(generator);
-
 	int vitLevel = ac->getAttribute(ATTRIBUTE::VITALITY);
-	int defenceLvl = ((vitLevel * skillMod) + (level * 10) + luckLevel);
+	int defenceLvl = base_skill_value + (vitLevel * attribute_weight["Vitality"]);
 	mSkills[SKILLS::DEFENCE].setLevel(defenceLvl);
-
-
-	/*
-		DEXTERITY
-	*/
-
-	skill1 = skillDist1(generator);
-	skill2 = skillDist2(generator);
-
-	int dexLevel = ac->getAttribute(ATTRIBUTE::DEXTERITY);
-
-	int LockLvl = ((dexLevel * skillMod) + (level * 10) + luckLevel);
-	int stealthLvl = ((dexLevel * skillMod) + (level * 10) + luckLevel);
-	mSkills[SKILLS::STEALTH].setLevel(stealthLvl);
-	mSkills[SKILLS::LOCKPICKING].setLevel(LockLvl);
 
 
 	/*
 		INTELLIGENCE
 	*/
-
-	skill1 = skillDist1(generator);
-	skill2 = skillDist2(generator);
 	int intLevel = ac->getAttribute(ATTRIBUTE::INTELLIGENCE);
 
-	int magLvl = ((intLevel * skillMod) + (level * 10) + luckLevel);
-	int percepLvl = ((intLevel * skillMod) + (level * 10) + luckLevel);
+	int magLvl = base_skill_value + (intLevel * attribute_weight["Intelligence"]);
 	mSkills[SKILLS::MAGIC].setLevel(magLvl);
-	mSkills[SKILLS::PERCEPTION].setLevel(percepLvl);
+//	mSkills[SKILLS::PERCEPTION].setLevel(percepLvl);
 
 	/*
 		STRENGTH
 	*/
 
-	skill1 = skillDist1(generator);
-	skill2 = skillDist2(generator);
-
 	int strLevel = ac->getAttribute(ATTRIBUTE::STRENGTH);
 
-	int meleeLvl = ((strLevel * skillMod) + (level * 10) + luckLevel);
+	int meleeLvl = base_skill_value + (strLevel * attribute_weight["Strength"]);
 	mSkills[SKILLS::MELEE].setLevel(meleeLvl);
 
 

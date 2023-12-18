@@ -36,7 +36,7 @@ public:
 
 	std::string displaySkills();
 
-	int calculateSkillsNEW(std::string attribute_name, int currAttribute);
+	///int calculateSkillsNEW(std::string attribute_name, int currAttribute);
 
 private:
 

@@ -85,7 +85,6 @@ public:
 	std::string getFactionName(int faction);
 
 	void calculateSkills();
-	void calculateSkillsNEW();
 
 	//std::vector<std::string> getDialogueOptions();
 

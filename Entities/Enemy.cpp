@@ -46,9 +46,8 @@ Enemy::Enemy(int lvl) : Entity(){
     this->createAttributeComponent(this->level, true, true);
     //attributeComponent->updateLevel();
     createSkillComponent();
-    createAttackComponent(skillComponent, attributeComponent);
-
     skillComponent->calculateSkills(attributeComponent);
+    createAttackComponent(skillComponent, attributeComponent);
 }
 
 Enemy::~Enemy(){

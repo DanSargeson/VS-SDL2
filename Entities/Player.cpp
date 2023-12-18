@@ -102,20 +102,19 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int vit, int str, int 
     corruption = corr;
 
    this->createAttributeComponent(level, true, false);
+	attributeComponent->setAttributes(vit, str, dex, agi, intel, charis, luck);
 
 	this->createSkillComponent();
 	this->createFactionComponent();
    //attributeComponent->loadAttribute(lvl, exp, hp, vit, str, dex, agi, intel, charis, luck);
-	createAttackComponent(skillComponent, attributeComponent);
 
 	//attributeComponent->updateLevel();
 	//attributeComponent->updateStats(true);
-	attributeComponent->setAttributes(vit, str, dex, agi, intel, charis, luck);
+	skillComponent->calculateSkills(attributeComponent);
 	updateStats(false);
+	createAttackComponent(skillComponent, attributeComponent);
 	attributeComponent->setHP(hp);
 	attributeComponent->setXP(exp);
-
-	skillComponent->calculateSkills(attributeComponent);
 }
 
 Player::Player(string name, int dt) : Entity(){

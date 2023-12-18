@@ -6,7 +6,7 @@ AttackComponent::AttackComponent(std::shared_ptr<SkillComponent> skillComp, std:
 	this->skillComponent = skillComp;
 	this->attributeComponent = attriComp;
 
-	this->baseDmg = (this->skillComponent->getSkill(SKILLS::MELEE) / 2) + (this->attributeComponent->getAttribute(ATTRIBUTE::STRENGTH) / 2);
+	this->baseDmg = (this->skillComponent->getSkill(SKILLS::MELEE));
 
 	this->magicTable["NORMAL"] = 5;
 	this->magicTable["FIRE"] = 5;
@@ -132,18 +132,18 @@ void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
 
 int AttackComponent::getBaseMinDamage(){
 
-	int minDamage = this->attributeComponent->getAttribute(ATTRIBUTE::STRENGTH * 2) + this->attributeComponent->getLevel();
+	int minDamage = this->skillComponent->getSkill(SKILLS::MELEE / 99);
 
-	minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
+	///minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
 
 	return minDamage;
 }
 
 int AttackComponent::getBaseMaxDamage(){
 
-	int maxDamage = this->attributeComponent->getAttribute(ATTRIBUTE::STRENGTH * 3) + this->attributeComponent->getLevel();
+	int maxDamage = 0;
 
-	maxDamage += this->skillComponent->getSkill(SKILLS::MELEE);
+	maxDamage += this->skillComponent->getSkill(SKILLS::MELEE / 90);
 
 	return maxDamage;
 }
@@ -153,5 +153,6 @@ int AttackComponent::getTotalDamage() {
 
 	this->totalAttack = this->magicMod + this->baseDmg + this->weaponMod;
 
+	totalAttack /= 15; ///TODO FIX THIS
 	return this->totalAttack;
 }

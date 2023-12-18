@@ -182,11 +182,6 @@ float Entity::getAttributeFloat(int attribute){
 
 }
 
-void Entity::calculateSkillsNEW(){
-
-    skillComponent->calculateSkillsNEW("Vitality", attributeComponent->getAttribute(0));
-}
-
 void Entity::calculateSkills(){
 
     if(attributeComponent){
@@ -286,10 +281,10 @@ int Entity::getDamage(){
 
 			this->attackComponent->calculateWeaponModifier(dynamic_cast<Weapon&>(*this->activeWeapon));
 		}
+        return this->attackComponent->getTotalDamage();
 	}
 
-	return this->attackComponent->getTotalDamage();
-//	return 0;
+	return 0;
 }
 
 void Entity::resetHP(){
