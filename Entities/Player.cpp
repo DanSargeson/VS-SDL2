@@ -114,6 +114,8 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int vit, int str, int 
 	updateStats(false);
 	attributeComponent->setHP(hp);
 	attributeComponent->setXP(exp);
+
+	skillComponent->calculateSkills(attributeComponent);
 }
 
 Player::Player(string name, int dt) : Entity(){

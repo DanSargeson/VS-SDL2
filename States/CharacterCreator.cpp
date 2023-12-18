@@ -354,6 +354,8 @@ void CharacterCreator::updateEvents(SDL_Event& e){
             int vit = temp->getAttribute(ATTRIBUTE::VITALITY);
 
             temp->updateStats();
+            temp->createSkillComponent();
+            temp->calculateSkills();
             StateData::GetInstance()->characters.push_back(temp);
 
 

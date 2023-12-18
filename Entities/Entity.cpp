@@ -182,6 +182,22 @@ float Entity::getAttributeFloat(int attribute){
 
 }
 
+void Entity::calculateSkillsNEW(){
+
+    skillComponent->calculateSkillsNEW("Vitality", attributeComponent->getAttribute(0));
+}
+
+void Entity::calculateSkills(){
+
+    if(attributeComponent){
+
+        if(skillComponent){
+
+            skillComponent->calculateSkills(attributeComponent);
+        }
+    }
+}
+
 std::string Entity::getFactionStr() {
 
 	return this->factionComponent->getFactionsStr();

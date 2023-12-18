@@ -36,6 +36,35 @@ SkillComponent::~SkillComponent(){
 
 }
 
+
+int SkillComponent::calculateSkillsNEW(std::string attribute_name, int currAttribute){
+
+    /// Assume each attribute has a weight that determines its impact on the skill
+
+    int base_skill_value = 50;
+
+    std::unordered_map<std::string, double> attribute_weight = {
+            {"Vitality", 0.1},
+            {"Strength", 0.1},
+            {"Dexterity", 0.1},
+            {"Agility", 0.2},
+            {"Intelligence", 0.1},
+            {"Charisma", 0.3},
+            {"Luck", 0.1}
+        };
+
+        /// Calculate the modified skill value based on the attribute's influence
+        double modified_skill_value = base_skill_value + (currAttribute * attribute_weight[attribute_name]);
+
+        /// Ensure the modified skill value stays within a reasonable range (e.g., 1 to 100)
+        modified_skill_value = std::max(1.0, std::min(100.0, modified_skill_value));
+
+
+        std::cout << attribute_name << " : " << std::to_string(modified_skill_value);
+
+        return static_cast<int>(modified_skill_value);
+}
+
 int SkillComponent::getSkill(const unsigned int skill) {
 
 	try {
@@ -314,6 +343,10 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
      std::uniform_int_distribution<int> skillDist2(2, 4);
      int skill2 = skillDist2(generator);
 
+     int skillMod = 4;
+
+     ///((mAttributes[VITALITY] * 4) + mLevel  * 10);
+
 	/*
 		LUCK HAS AN AFFECT ON ALL ABILITIES, SLIGHTLY
 	*/
@@ -326,14 +359,14 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	*/
 	int agilityLevel = ac->getAttribute(AGILITY);
 
-	int rangeLvl = ((agilityLevel * skill1 + agilityLevel / skill2) + (luckLevel));
-	mSkills[SKILLS::RANGED].setLevel(rangeLvl + level);
+	int rangeLvl = ((agilityLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::RANGED].setLevel(rangeLvl);
 
 	skill1 = skillDist1(generator);
 	skill2 = skillDist2(generator);
 
-	int accuLvl = (agilityLevel * skill1 + agilityLevel / skill2) + (luckLevel);
-	mSkills[SKILLS::ACCURACY].setLevel(accuLvl + level);
+	int accuLvl = ((agilityLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::ACCURACY].setLevel(accuLvl);
 
 
 	/*
@@ -344,8 +377,8 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	skill2 = skillDist2(generator);
 
 	int charismaLevel = ac->getAttribute(ATTRIBUTE::CHARISMA);
-	int persuLvl = (charismaLevel * skill1 + charismaLevel / skill2) + luckLevel;
-	mSkills[SKILLS::PERSUASION].setLevel(persuLvl + level);
+	int persuLvl = ((charismaLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::PERSUASION].setLevel(persuLvl);
 
 
 	/*
@@ -356,8 +389,8 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	skill2 = skillDist2(generator);
 
 	int vitLevel = ac->getAttribute(ATTRIBUTE::VITALITY);
-	int defenceLvl = (vitLevel * skill1 + vitLevel / skill2) + luckLevel;
-	mSkills[SKILLS::DEFENCE].setLevel(defenceLvl + level);
+	int defenceLvl = ((vitLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::DEFENCE].setLevel(defenceLvl);
 
 
 	/*
@@ -369,10 +402,10 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 	int dexLevel = ac->getAttribute(ATTRIBUTE::DEXTERITY);
 
-	int LockLvl = (dexLevel * skill1 + dexLevel / skill2) + luckLevel;
-	int stealthLvl = (dexLevel * skill1 + dexLevel / skill2) + luckLevel;
-	mSkills[SKILLS::STEALTH].setLevel(stealthLvl + level);
-	mSkills[SKILLS::LOCKPICKING].setLevel(LockLvl + level);
+	int LockLvl = ((dexLevel * skillMod) + (level * 10) + luckLevel);
+	int stealthLvl = ((dexLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::STEALTH].setLevel(stealthLvl);
+	mSkills[SKILLS::LOCKPICKING].setLevel(LockLvl);
 
 
 	/*
@@ -383,10 +416,10 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	skill2 = skillDist2(generator);
 	int intLevel = ac->getAttribute(ATTRIBUTE::INTELLIGENCE);
 
-	int magLvl = (intLevel * skill1 + intLevel / skill2) + luckLevel;
-	int percepLvl = (intLevel * skill1 + intLevel / skill2) + luckLevel;
-	mSkills[SKILLS::MAGIC].setLevel(magLvl + level);
-	mSkills[SKILLS::PERCEPTION].setLevel(percepLvl + level);
+	int magLvl = ((intLevel * skillMod) + (level * 10) + luckLevel);
+	int percepLvl = ((intLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::MAGIC].setLevel(magLvl);
+	mSkills[SKILLS::PERCEPTION].setLevel(percepLvl);
 
 	/*
 		STRENGTH
@@ -397,8 +430,8 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 	int strLevel = ac->getAttribute(ATTRIBUTE::STRENGTH);
 
-	int meleeLvl = (strLevel * skill1 + strLevel / skill2) + luckLevel;
-	mSkills[SKILLS::MELEE].setLevel(meleeLvl + level);
+	int meleeLvl = ((strLevel * skillMod) + (level * 10) + luckLevel);
+	mSkills[SKILLS::MELEE].setLevel(meleeLvl);
 
 
 	/*

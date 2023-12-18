@@ -92,7 +92,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 	for (size_t i = 0; i < noOfEnemies; i++){
 		std::cout << "LEVEL:: " << std::to_string(StateData::GetInstance()->getActiveCharacter()->getLevel()) << "\n\n\n";
 		int low = getData()->getActiveCharacter()->getLevel() - 1;
-		int high = getData()->getActiveCharacter()->getLevel() * 2;
+		int high = getData()->getActiveCharacter()->getLevel() + 1;
 
 		int rando = 0;
 		if(low <= 0){

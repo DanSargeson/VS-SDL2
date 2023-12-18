@@ -84,6 +84,9 @@ public:
 	std::string getFactionStrSave();
 	std::string getFactionName(int faction);
 
+	void calculateSkills();
+	void calculateSkillsNEW();
+
 	//std::vector<std::string> getDialogueOptions();
 
 	void setCharacterName(std::string name);

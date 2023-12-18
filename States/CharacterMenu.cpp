@@ -22,6 +22,8 @@ CharacterMenu::CharacterMenu(){
     mButtons["ATTRIBUTES"]->setSelected(true);
 
     std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+
+    getData()->getActiveCharacter()->calculateSkillsNEW();
     StateData::GetInstance()->mainText->setString(mmm, true, 420);
 }
 
