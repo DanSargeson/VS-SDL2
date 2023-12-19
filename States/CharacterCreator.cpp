@@ -294,11 +294,16 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 
     if(textInput){
 
-        if(e.key.keysym.sym == SDLK_BACKSPACE && name.length() > 0){
+       /// if(e.key.keysym.sym == SDLK_BACKSPACE && e.key.repeat != 0 && name.length() > 0){
+
+        if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_BACKSPACE) && name.length() > 0){
 
             name.pop_back();
-            SDL_Delay(20);
+            ///SDL_Delay(60);
+
+            return;
         }
+       /// }
         if(e.key.keysym.sym == SDLK_RETURN){
 
             if(name != ""){
