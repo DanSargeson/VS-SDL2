@@ -19,6 +19,7 @@ AttackComponent::AttackComponent(std::shared_ptr<SkillComponent> skillComp, std:
 	this->magicMod = 0;
 	this->totalAttack = 0;
 	this->weaponMod = 0;
+	defMod = 0;
 }
 
 AttackComponent::~AttackComponent(){
@@ -104,7 +105,40 @@ int AttackComponent::getMagicDamage(int type) {
 	}
 }
 
+int AttackComponent::getMinDefence(){
 
+    int minDefence = (this->skillComponent->getSkill(SKILLS::DEFENCE) * 0.10);
+
+	///minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
+
+	return minDefence;
+
+}
+
+void AttackComponent::calculateArmourModifier(Armour& armourMod) {
+
+	//USED TO  DETERMINE WETHER THE WEAPON HITS WITH MIN - MAX DAMAGE..
+	auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(static_cast<unsigned>(seed));
+
+
+	int minWeapon = armourMod.getDefence();
+	int maxWeapon = armourMod.getDefence() * skillComponent->getSkill(SKILLS::DEFENCE * 0.25);
+
+	std::uniform_int_distribution<int> dmgDist(minWeapon, maxWeapon);
+	this->weaponMod = dmgDist(generator);
+}
+
+int AttackComponent::getMaxDefence(){
+
+    int maxDef = 0;
+
+	maxDef += (this->skillComponent->getSkill(SKILLS::DEFENCE) * 0.25);
+
+	return maxDef;
+}
+
+///TODO POssibly bring back
 void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
 
 	//USED TO  DETERMINE WETHER THE WEAPON HITS WITH MIN - MAX DAMAGE..
@@ -115,19 +149,8 @@ void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
 	int minWeapon = weaponMod.getDamageMin();
 	int maxWeapon = weaponMod.getDamageMax();
 
-		//Randomly pick min or max value..
-
-		//add to attackTotal
 	std::uniform_int_distribution<int> dmgDist(minWeapon, maxWeapon);
-
-	//dmgDist.operator();
-
 	this->weaponMod = dmgDist(generator);
-	//this->totalAttack += dmgDist(generator);
-
-	//int attack = this->baseDmg + this->attributeComponent->getAttribute(ATTRIBUTE::STRENGTH) + this->skillComponent->getSkill(SKILLS::MELEE);
-
-	//this->totalAttack = this->baseDmg;
 }
 
 int AttackComponent::getBaseMinDamage(){
@@ -153,9 +176,28 @@ int AttackComponent::getTotalDamage() {
 
 	///this->totalAttack = this->magicMod + this->baseDmg + this->weaponMod;
 
-	totalAttack = rand() % + getBaseMinDamage() + getBaseMaxDamage();
+	///totalAttack = rand() % + getBaseMinDamage() + getBaseMaxDamage();
 
-	//totalAttack;
+	 int mini = getBaseMinDamage();
+    int maxi = getBaseMaxDamage();
 
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(static_cast<unsigned>(seed));
+	std::uniform_int_distribution<int> atkDist(mini, maxi);
+    totalAttack = atkDist(generator);
 	return this->totalAttack;
+}
+
+int AttackComponent::getTotalDefence(){
+
+
+    int mini = getMinDefence();
+    int maxi = getMaxDefence();
+
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(static_cast<unsigned>(seed));
+	std::uniform_int_distribution<int> defDist(mini, maxi);
+    int totalDefence = defDist(generator);
+
+    return totalDefence;  //TODO baseDef
 }

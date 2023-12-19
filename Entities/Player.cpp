@@ -350,7 +350,7 @@ std::string Player::getStatsAttributeScreen(){
 		deets += "Empty\n";
 	}
 
-	int defence = this->skillComponent->getSkill(SKILLS::DEFENCE);
+	int defence = this->attackComponent->getTotalDefence();
 //	int armour = this->getArmourRating();
 
 

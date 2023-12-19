@@ -329,11 +329,20 @@ const void Battle::playerAttacks(){
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
-					enemies[choice].loseHP(damage);
+					defendRoll = enemies[choice].getDefence();
+                    int tot = 0;
+                    if(damage >= defendRoll){
+
+                        tot = damage;
+                    }else{
+
+                        tot = damage - defendRoll;
+                     }
+					enemies[choice].loseHP(abs(tot));
 //					if(totalDmg < 0){
 //                        totalDmg = 1;
 //					}
-					std::string dmgMsg = "HIT for " + std::to_string(damage) + " damage!";
+					std::string dmgMsg = "HIT for " + std::to_string(abs(tot)) + " damage!";
 					playerAttkTxt->setString(dmgMsg);
 					alpha = 255;
 

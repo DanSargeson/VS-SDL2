@@ -4,6 +4,7 @@
 #include "SkillComponent.h"
 #include "AttributeComponent.h"
 #include "Weapon.h"
+#include "Armour.h"
 
 
 enum ELEMENT_TYPE {
@@ -32,6 +33,7 @@ private:
 	int baseDmg;
 	int magicMod;
 	int weaponMod;
+	int defMod;
 	int totalAttack;
 
 
@@ -44,10 +46,14 @@ public:
 	void calculateElementBonus(int type = 0);
 	int getMagicDamage(int type);
 	void calculateWeaponModifier(Weapon& weaponMod);
+	void calculateArmourModifier(Armour& defMod);
 
+	int getMinDefence();
+	int getMaxDefence();
 	int getBaseMinDamage();
 	int getBaseMaxDamage();
 	int getTotalDamage();
+	int getTotalDefence();
 };
 
 #endif

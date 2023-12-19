@@ -283,14 +283,14 @@ int Entity::getDamage(){
 	if (this->attackComponent) {
 
 
-		//Calculate base damage
-		this->attackComponent->calculateElementBonus();
-
-
-		if (this->activeWeapon != NULL) {
-
-			this->attackComponent->calculateWeaponModifier(dynamic_cast<Weapon&>(*this->activeWeapon));
-		}
+//		//Calculate base damage
+//		this->attackComponent->calculateElementBonus();
+//
+//
+//		if (this->activeWeapon != NULL) {
+//
+//			this->attackComponent->calculateWeaponModifier(dynamic_cast<Weapon&>(*this->activeWeapon));
+//		}
         return this->attackComponent->getTotalDamage();
 	}
 
@@ -302,9 +302,34 @@ void Entity::resetHP(){
     attributeComponent->updateStats(true);
 }
 
-int Entity::getDefence()
-{
-	return 0;
+int Entity::getDefence(){
+
+    int defence = 0;
+    defence += attackComponent->getTotalDefence();
+
+    if(activeHead != nullptr){
+
+        attackComponent->calculateArmourModifier(dynamic_cast<Armour &>(*activeHead));
+
+        defence += attackComponent->getTotalDefence();
+    }
+    if(activeChest != nullptr){
+
+        attackComponent->calculateArmourModifier(dynamic_cast<Armour &>(*activeChest));
+        defence += attackComponent->getTotalDefence();
+    }
+    if(activeArms != nullptr){
+
+        attackComponent->calculateArmourModifier(dynamic_cast<Armour &>(*activeArms));
+        defence += attackComponent->getTotalDefence();
+    }
+    if(activeLegs != nullptr){
+
+        attackComponent->calculateArmourModifier(dynamic_cast<Armour &>(*activeLegs));
+        defence += attackComponent->getTotalDefence();
+    }
+
+    return defence;
 }
 
 float Entity::getPositionXSave() {

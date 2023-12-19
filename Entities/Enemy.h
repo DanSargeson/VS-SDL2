@@ -37,7 +37,7 @@ public:
 	int getExp() const;
 	inline int getHp() const { return this->hp; }
 	inline int getHpMax() const { return this->hpMax; }
-	inline int getDefence() const { return this->defence; }
+	///inline int getDefence() const { return this->defence; }
 	inline int getAccuracy() const { return this->accuracy; }
 	inline std::string getName() { return this->name; }
 
