@@ -155,6 +155,20 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                 }
 
             }
+            if(menu->getChoice() == 3){
+
+                if(unlockedCharm){
+
+                    //barter
+                    getData()->enemyText->clearText();
+                    getData()->dynamicText->setString("The stranger has no items...");
+                }
+                else{
+
+                    return;
+                }
+
+            }
         }
     }
 

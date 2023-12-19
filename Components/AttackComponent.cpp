@@ -181,10 +181,15 @@ int AttackComponent::getTotalDamage() {
 	 int mini = getBaseMinDamage();
     int maxi = getBaseMaxDamage();
 
-    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine generator(static_cast<unsigned>(seed));
-	std::uniform_int_distribution<int> atkDist(mini, maxi);
-    totalAttack = atkDist(generator);
+    // Use std::random_device to obtain a seed for the random number generator
+            std::random_device rd;
+
+                // Use std::mt19937 as the random number generator
+                std::mt19937 gen(rd());
+
+                // Use std::uniform_int_distribution to generate random indices
+                std::uniform_int_distribution<> dis(mini, maxi);
+    totalAttack = dis(gen);
 	return this->totalAttack;
 }
 
@@ -194,10 +199,20 @@ int AttackComponent::getTotalDefence(){
     int mini = getMinDefence();
     int maxi = getMaxDefence();
 
-    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine generator(static_cast<unsigned>(seed));
-	std::uniform_int_distribution<int> defDist(mini, maxi);
-    int totalDefence = defDist(generator);
+    ///auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+//	std::default_random_engine generator(static_cast<unsigned>(seed));
+//	std::uniform_int_distribution<int> defDist(mini, maxi);
+
+	// Use std::random_device to obtain a seed for the random number generator
+            std::random_device rd;
+
+                // Use std::mt19937 as the random number generator
+                std::mt19937 gen(rd());
+
+                // Use std::uniform_int_distribution to generate random indices
+                std::uniform_int_distribution<> dis(mini, maxi);
+
+    int totalDefence = dis(gen);
 
     return totalDefence;  //TODO baseDef
 }
