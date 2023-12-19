@@ -169,6 +169,16 @@ void Entity::loseDurability(){
 //	}
 }
 
+int Entity::getExp(){
+
+    return attributeComponent->getEXP();
+}
+
+int Entity::getExpNext(){
+
+    return attributeComponent->getEXPNext();
+}
+
 float Entity::getAttributeFloat(int attribute){
 
 	if (this->attributeComponent) {

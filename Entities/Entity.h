@@ -69,6 +69,9 @@ public:
 	int checkDurability();
 	float getAttributeFloat(int attribute);
 
+	int getExp();
+	int getExpNext();
+
 
 	int getLevel();
 

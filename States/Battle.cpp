@@ -350,6 +350,15 @@ const void Battle::playerAttacks(){
 
                         endMsg += "Gold Gained: " + std::to_string(gainGold) + "\n";
                         endMsg += "EXP Gained: " + std::to_string(gainEXP);
+
+                        if(getData()->getActiveCharacter()->getExp() >= getData()->getActiveCharacter()->getExpNext()){
+
+                            getData()->getActiveCharacter()->levelUp();
+                            endMsg += "\nLevelled up!!\n";
+						}
+
+                        gainEXP = 0;
+                        gainGold = 0;
 						if(enemies.size() == 1){
 
                             endMsg += "\n\nTotal EXP Gained: " + std::to_string(totalEXP);

@@ -124,6 +124,13 @@ void Game::update(const float& dt){
         gameMenu->setActive(true);
     }
     gameMenu->update();
+
+    if(getData()->getActiveCharacter()->getExp() >= getData()->getActiveCharacter()->getExpNext()){
+
+        getData()->dynamicText->setPosition(20.f, 60.f);
+        getData()->dynamicText->setString("Level Up Available!!");
+    }
+
     saveCharacters();
 }
 
@@ -232,6 +239,7 @@ void Game::updateEvents(SDL_Event& e){
 
                 StateData::GetInstance()->getActiveCharacter()->levelUp();
                // StateData::GetInstance()->mainText->setString("Levelled up!!");
+                StateData::GetInstance()->dynamicText->setString("");
             }
 
             if(gameMenu->getChoice() == 3){

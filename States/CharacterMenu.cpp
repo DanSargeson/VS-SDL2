@@ -98,7 +98,14 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             //if(invMenu2->getChoice() == 0){
 
                 //if(wv->getItemType() == WEAPON){
-                StateData::GetInstance()->getActiveCharacter()->equipItem(choice);
+
+                if(cc == 0){        ///Equip item
+                    StateData::GetInstance()->getActiveCharacter()->equipItem(choice);
+                }
+                if(cc == 1){  ///Drop item
+
+                    getData()->getActiveCharacter()->removeItem(wv);
+                }
 
                 //invMenu2->setActive(false);
                 //invMenu->setActive(true);
@@ -124,7 +131,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         //BUTTONS START HERE
         if (mButtons["SKILLS"]->isPressed(e.button)) {
 
-            invMenu->setActive(true);
+            invMenu->setActive(false);
             invMenu2->setActive(false);
 
             mButtons["SKILLS"]->setSelected(true);
@@ -143,7 +150,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             //mButtons["INVENTORY"]->setSelected(false);
             mButtons["FACTIONS"]->setSelected(true);
 
-            invMenu->setActive(true);
+            invMenu->setActive(false);
             invMenu2->setActive(false);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
             StateData::GetInstance()->mainText->setString(fact, true, 420);
@@ -170,9 +177,18 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         //BUTTONS END HERE
     }
 
-
     if(invMenu2->getActive() == false){
         State::updateEvents(e);
+    }
+    else{
+
+        if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_ESCAPE)){
+
+            invMenu2->setActive(false);
+            invMenu->setActive(true);
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+            StateData::GetInstance()->mainText->setString(mmm, true, 420);
+        }
     }
 }
 

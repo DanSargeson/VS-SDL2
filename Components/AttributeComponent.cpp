@@ -3,11 +3,11 @@
 
 AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset, bool enemy) : Component(owner){
 
-    baseEXP = 500.f;
+    baseEXP = 50.f;
 	mLevel = level;
 	mExp = 0;
 	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
-	mExpNext = baseEXP * (mLevel);
+	mExpNext = (baseEXP * mLevel) * 5;
 	mAttributePoints = 2;
 	mHasLevelled = false;
 
@@ -18,7 +18,8 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 
 	if (enemy) {
 
-        baseEXP = 50.f;
+        baseEXP = 5.f;
+        mExpNext = (baseEXP * mLevel) * 5;
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
 //		std::uniform_int_distribution<int> levelDistribution(low, high);
@@ -242,7 +243,6 @@ unsigned AttributeComponent::getLevel(){
 void AttributeComponent::gainEXP(const float exp){
 
 	mExp += exp;
-	updateLevel();
 }
 
 void AttributeComponent::loseEXP(const float exp){
@@ -296,7 +296,7 @@ void AttributeComponent::updateLevel(){
 		mLevel = 1;
 	}
 
-    mExpNext = baseEXP * (mLevel);
+	mExpNext = (baseEXP * mLevel) * 5;
 
 	while (mExp >= mExpNext && mExpNext != 0) {
 
@@ -304,7 +304,7 @@ void AttributeComponent::updateLevel(){
 		mExp -= mExpNext;
 
 		//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
-		mExpNext = baseEXP * (mLevel);
+		mExpNext = (baseEXP * mLevel) * 5;
 		updateStats(true);
 
 		mHasLevelled = true;
