@@ -18,6 +18,8 @@ class RandomEncounter : public State{
 
         bool charm();
         bool rob();
+
+        void attemptSteal();
         void barter();
 
     private:
