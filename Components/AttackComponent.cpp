@@ -132,7 +132,7 @@ void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
 
 int AttackComponent::getBaseMinDamage(){
 
-	int minDamage = this->skillComponent->getSkill(SKILLS::MELEE / 99);
+	int minDamage = (this->skillComponent->getSkill(SKILLS::MELEE) * 0.10);
 
 	///minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
 
@@ -143,7 +143,7 @@ int AttackComponent::getBaseMaxDamage(){
 
 	int maxDamage = 0;
 
-	maxDamage += this->skillComponent->getSkill(SKILLS::MELEE / 90);
+	maxDamage += (this->skillComponent->getSkill(SKILLS::MELEE) * 0.25);
 
 	return maxDamage;
 }

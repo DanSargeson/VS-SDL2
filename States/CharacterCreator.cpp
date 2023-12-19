@@ -204,7 +204,7 @@ CharacterCreator::CharacterCreator() : State(){
     temp = std::make_shared<Player>();
     temp->createAttributeComponent(1, true, false);
 
-    pointsToSpend = 20;
+    pointsToSpend = 0;
 
     const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";
 
@@ -251,7 +251,7 @@ void CharacterCreator::updateInput(const float& dt){
         //DECREASE
         if(pointsToSpend > 20){
 
-            pointsToSpend = 20;
+            pointsToSpend = 0;
         }
         if(pointsToSpend <= 0){
 
@@ -350,13 +350,13 @@ void CharacterCreator::updateEvents(SDL_Event& e){
             bool append = false;
             ///temp->createAttributeComponent(1, true, false);
 
-            int strength = temp->getAttribute(ATTRIBUTE::STRENGTH);
-            int agi = temp->getAttribute(ATTRIBUTE::AGILITY);
-            int charis = temp->getAttribute(ATTRIBUTE::CHARISMA);
-            int dex = temp->getAttribute(ATTRIBUTE::DEXTERITY);
-            int intell = temp->getAttribute(ATTRIBUTE::INTELLIGENCE);
-            int luck = temp->getAttribute(ATTRIBUTE::LUCK);
-            int vit = temp->getAttribute(ATTRIBUTE::VITALITY);
+//            int strength = temp->getAttribute(ATTRIBUTE::STRENGTH);
+//            int agi = temp->getAttribute(ATTRIBUTE::AGILITY);
+//            int charis = temp->getAttribute(ATTRIBUTE::CHARISMA);
+//            int dex = temp->getAttribute(ATTRIBUTE::DEXTERITY);
+//            int intell = temp->getAttribute(ATTRIBUTE::INTELLIGENCE);
+//            int luck = temp->getAttribute(ATTRIBUTE::LUCK);
+//            int vit = temp->getAttribute(ATTRIBUTE::VITALITY);
 
             temp->updateStats();
             temp->createSkillComponent();
@@ -402,7 +402,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 //            StateData::GetInstance()->push_state(std::make_shared<GameState>(StateData::GetInstance()));
         }
 
-        if(menuPos == MENU_POS::ATTRIBUTES && pointsToSpend > 0){
+        if(menuPos == MENU_POS::ATTRIBUTES && pointsToSpend > 21){          ///TODO Took this out
 
             int x, y;
 

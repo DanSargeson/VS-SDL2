@@ -27,10 +27,11 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 //
 //		mLevel = levelDistribution(generator);
 
-		int point = 20;
-//		if(mLevel > 1){
-//            point = (5 + (mLevel * 2));
-//		}
+		int point = 0;
+		int counter = 0;
+		if(mLevel > 1){
+            point += mLevel;
+		}
 
 		for (int i = 0; i < point; i++) {
 

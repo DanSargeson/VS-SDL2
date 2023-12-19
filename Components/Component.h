@@ -17,7 +17,7 @@ public:
 
 	int getUpdateOrder() { return mUpdateOrder; }
 
-private:
+protected:
 
 	class Entity* mOwner;
 	int mUpdateOrder;
