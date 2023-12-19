@@ -6,7 +6,7 @@ AttackComponent::AttackComponent(std::shared_ptr<SkillComponent> skillComp, std:
 	this->skillComponent = skillComp;
 	this->attributeComponent = attriComp;
 
-	this->baseDmg = (this->skillComponent->getSkill(SKILLS::MELEE));
+	this->baseDmg = 5; ///(this->skillComponent->getSkill(SKILLS::MELEE));
 
 	this->magicTable["NORMAL"] = 5;
 	this->magicTable["FIRE"] = 5;
@@ -151,8 +151,11 @@ int AttackComponent::getBaseMaxDamage(){
 int AttackComponent::getTotalDamage() {
 
 
-	this->totalAttack = this->magicMod + this->baseDmg + this->weaponMod;
+	///this->totalAttack = this->magicMod + this->baseDmg + this->weaponMod;
 
-	totalAttack /= 15; ///TODO FIX THIS
+	totalAttack = rand() % + getBaseMinDamage() + getBaseMaxDamage();
+
+	//totalAttack;
+
 	return this->totalAttack;
 }

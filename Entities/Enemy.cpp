@@ -22,14 +22,14 @@ Enemy::Enemy(int lvl) : Entity(){
     initNames();
 	this->name = Enemy::enemyNames[rand() % Enemy::enemyNames.size()];
     //this->level = rand() % (level - 2);
-    level = 0;
+    level = lvl;
 
     unsigned seed;
     std::default_random_engine generator;
     seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
      generator.seed(seed);
-    std::uniform_int_distribution<int> numEnemiesDistribution(lvl-2, lvl);
-     this->level = numEnemiesDistribution(generator);
+//    std::uniform_int_distribution<int> numEnemiesDistribution(lvl-2, lvl);
+//     this->level = numEnemiesDistribution(generator);
      if(level <= 0){
 
         level = 1;
