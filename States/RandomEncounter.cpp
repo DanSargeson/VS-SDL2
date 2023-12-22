@@ -117,6 +117,8 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
                         getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
                         getData()->getActiveCharacter()->gainRep(npc->getFaction(), 5);
+
+                        menu->setActive(false);
                     }
                     else{
 
@@ -129,11 +131,13 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                         }
 
                         getData()->dynamicText->setString(msg, true);
+                        menu->setActive(false);
                     }
                 }
                 else{
 
                     attemptSteal();
+                    menu->setActive(false);
                 }
 
                 menu->setActive(false);
@@ -144,12 +148,14 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                 if(unlockedCharm){
 
                     attemptSteal();
+                    menu->setActive(false);
                 }
                 else{
 
                     //barter
                     getData()->enemyText->clearText();
                     getData()->dynamicText->setString("The stranger has no items...");
+                    menu->setActive(false);
                 }
 
             }

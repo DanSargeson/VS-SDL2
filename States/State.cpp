@@ -37,7 +37,7 @@ keyTime = 0.f;
     getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
 
     getData()->dynamicText = std::make_shared<GUI::Text>(false);
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(30));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
     getDynamicText()->clearText();
 
     getData()->enemyText = std::make_shared<GUI::Text>(true);

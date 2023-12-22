@@ -447,6 +447,23 @@ void GUI::Text::setFontfile(std::string fontFile) {
 	mFontFile = fontFile;
 }
 
+void GUI::Text::setBorder(int x, int y, int w, int h){
+
+    mOutline.x = GUI::p2pXi(x);
+    mOutline.y = GUI::p2pYi(y);
+    mOutline.w = GUI::p2pXi(w);
+    mOutline.h = GUI::p2pYi(h);
+
+
+    mFiller.x = mOutline.x - 2;
+    mFiller.y = mOutline.y - 2;
+    mFiller.w = mOutline.w + 4;
+    mFiller.h = mOutline.h + 4;
+
+    offsetX = 10;
+    offsetY = 10;
+}
+
 void GUI::Text::setTextParameters(std::string txt, SDL_Color colour, TTF_Font * font, int size){
 
 	mFont = font;

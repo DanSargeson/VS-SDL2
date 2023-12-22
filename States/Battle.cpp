@@ -5,9 +5,35 @@
 
 Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>())/*, seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed)*/, noOfEnemies(0) {
 
-     std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
-     noOfEnemies = numEnemiesDistribution(generator);
 
+
+
+//     std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
+//     noOfEnemies = numEnemiesDistribution(generator);
+
+    std::random_device rd;
+
+
+    std::mt19937 gen(rd());
+
+                // Use std::uniform_int_distribution to generate random indices
+
+                int maxi = 2 + getData()->getActiveCharacter()->getLevel();
+                if(maxi > 5){
+
+                    maxi = 5;
+                }
+    std::uniform_int_distribution<> dis(1, 2);
+
+    noOfEnemies = dis(gen);
+
+    if(getData()->getActiveCharacter()->getLevel() <= 4){
+
+        noOfEnemies = 1;
+    }
+
+
+     playerWins = false;
      totalEXP = 0;
      totalGold = 0;
 
@@ -27,21 +53,26 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
     enemyMenu->setActive(false);
 
     getMainText() = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
-    getMainText()->setString("Test");
-    getDynamicText()->setString("You are attacked: ");
+    //getMainText()->setString("Test");
+    //getDynamicText()->setString("You are attacked: ");
 
     getEnemyText()->setString("");
     getEnemyText()->setColour(255, 0, 0, 0);
 
     playerAttkTxt = std::make_unique<GUI::Text>(true);
     playerAttkTxt->setColour(0, 0, 255, 0);
-    playerAttkTxt->setPosition(GUI::p2pX(60), GUI::p2pY(20));
+    playerAttkTxt->setPosition(GUI::p2pX(15.f), GUI::p2pY(55.f));
     playerAttkTxt->clearText();
 
     enemyAttkTxt = std::make_unique<GUI::Text>(true);
     enemyAttkTxt->setColour(255, 0, 0, 0);
-    enemyAttkTxt->setPosition(GUI::p2pX(60), GUI::p2pY(50));
+    enemyAttkTxt->setPosition(GUI::p2pX(60.f), GUI::p2pY(50.f));
     enemyAttkTxt->clearText();
+
+    battleCloseMsg = std::make_unique<GUI::textBox>();
+    battleCloseMsg->setPosition(20, 10);
+    battleCloseMsg->setSize(500, 500);
+    battleCloseMsg->setActive(false);
 
     playerTurn = false;
     endTurn = false;
@@ -95,16 +126,25 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
             rando = 1;
 		}
 
-		rando = rand() % high + low;
+		//rando = rand() % high + low;
+		std::uniform_int_distribution<>randEnemies(low, high);
+		rando = randEnemies(gen);
 		enemies.push_back(Enemy(rando));
 		enemyText.push_back(GUI::Text());
+
+		for(int i = 0; i < enemies.size(); i++){
+
+            enemyText[i].setColour(255, 0, 0, 0);
+		}
         SDL_Delay(19);
 	}
 
 	for(size_t i = 0; i < enemies.size(); i++){
 
-        enemyText[i].setString(enemies[i].getName());
-		enemyText[i].setPosition(96, 140 + (i * 40));
+        std::string msg = enemies[i].getName() + " HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax());
+        enemyText[i].setString(msg);
+        enemyText[i].setColour(255, 0, 0, 0);
+		enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
 	}
 
 	//BATTLE VARIABLES
@@ -192,7 +232,6 @@ void Battle::updateMenu(){
 
 void Battle::update(const float& dt){
 
-
 if(endTurn){
 
     battleMenu->setActive(false);
@@ -219,15 +258,11 @@ if(playerDefeated){
 }
 
 
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
-            getMainText()->setString(msg);
+            std::string msg = "You are attacked.\n\n";
+            msg += "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
+            getMainText()->setString(msg, true);
             getMainText()->render();
             std::string enemyMsg = "";
-//            for(int i = 0; i < enemies.size(); i++){
-//
-//                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
-//            }
-//            getEnemyText()->setString(enemyMsg);
 
     if(!escape && !playerDefeated && !enemyDefeated) {
 
@@ -245,6 +280,7 @@ if(playerDefeated){
             else if (enemies.size() <= 0) {
                 enemyDefeated = true;
                 cout << "All enemies defeated!\n\n";
+
   //              ~Battle();
                 Engine::GetInstance()->PopState();
             }
@@ -253,7 +289,7 @@ if(playerDefeated){
         if(!playerTurn && !playerDefeated){
 
                 //std::cout << "DT:  " << battleGameTimer->getTicks() << std::endl;
-                if(battleGameTimer->getTicks() > 300){
+                if(battleGameTimer->getTicks() > 500){
                     enemyAttacks();
                     battleGameTimer->stop();
                 }
@@ -334,12 +370,15 @@ const void Battle::playerAttacks(){
 //                        totalDmg = 1;
 //					}
 					std::string dmgMsg = "HIT for " + std::to_string(abs(tot)) + " damage!";
+
+					std::string msg = enemies[choice].getName() + " HP: " + std::to_string(enemies[choice].getHP()) + "/" + std::to_string(enemies[choice].getHPMax());
+                    enemyText[choice].setString(msg);
 					playerAttkTxt->setString(dmgMsg);
 					alpha = 255;
 
 					//#####PLAYER WINS
 					if (!enemies[choice].isAlive()) {
-						endMsg = " YOU DEFEATED!\n\n";
+						battleCloseMsg->setHeader("YOU DEFEATED!");
 						gainGold = rand() & enemies[choice].getLevel() * 10 + 1;
 						totalGold += gainGold;
 						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
@@ -362,7 +401,9 @@ const void Battle::playerAttacks(){
 						if(enemies.size() == 1){
 
                             endMsg += "\n\nTotal EXP Gained: " + std::to_string(totalEXP);
-                            endMsg += "\n Total Gold Gained: " + std::to_string(totalGold);
+                            endMsg += "\nTotal Gold Gained: " + std::to_string(totalGold);
+
+                            playerWins = true;
 						}
 
 						//ITEM ROLL
@@ -422,15 +463,19 @@ const void Battle::playerAttacks(){
 									endMsg += tempAw->getName() + " " + tempAw->getTypeStr() + "\n";
 								}
 							}
-                        getDynamicText()->setString(endMsg, true, GUI::p2pY(80));
+                        ///getDynamicText()->setString(endMsg, true, GUI::p2pY(80));
+                        battleCloseMsg->setText(endMsg);
 						enemies.erase(enemies.begin() + choice);
 						enemyText.erase(enemyText.begin() + choice);
 //						int s = enemies.size();
 //						std::cout << std::endl << std::to_string(s);
 						for(size_t i = 0; i < enemies.size(); i++){
 
-                            enemyText[i].setString(enemies[i].getName());
-                            enemyText[i].setPosition(96, 140 + (i * 40));
+                            std::string msg = enemies[i].getName() + " HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax());
+                            enemyText[i].setString(msg);
+                            //enemyText[i].setString(enemies[i].getName());
+                            enemyText[i].setColour(255, 0, 0, 0);
+                            enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
                         }
 					} //####END PLAYER WINS
 				}
@@ -496,8 +541,9 @@ const void Battle::enemyAttacks(){
 				}
 			}
 
-            std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
-            getMainText()->setString(msg);
+            std::string msg = "You are attacked.\n\n";
+            msg += "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
+            getMainText()->setString(msg, true);
 			//END TURN
 			 endTurn = true;
 		}
@@ -509,6 +555,11 @@ void Battle::updateEvents(SDL_Event& e){
     enemyMenu->update();
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+
+        if(playerWins){
+
+
+        }
 
         if(endTurn){
 
@@ -558,7 +609,7 @@ void Battle::updateEvents(SDL_Event& e){
 //
 //            }
 
-        if(battleMenu->isSelected()){
+        if(battleMenu->isSelected() && playerTurn){
 
         int choice = battleMenu->getChoice();
 
@@ -583,15 +634,13 @@ void Battle::updateEvents(SDL_Event& e){
 
         if(enemyMenu->isSelected() && playerTurn){
 
+            playerTurn = false;
+            enemyMenu->setActive(false);
             choice = enemyMenu->getChoice();
-
             ///THIS GOES IN THE SELECTED ENEMY
             playerAttacks();
             //TODO: Should go below so defence, items etc work
-            playerTurn = false;
-            enemyMenu->setActive(false);
             battleMenu->setActive(true);
-
         }
             ///END IN ENEMY
     }
@@ -638,7 +687,28 @@ void Battle::render(){
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     getMainText()->render();
     getEnemyText()->render();
-    getDynamicText()->render();
+
+    if(playerWins){
+
+        if(!battleCloseMsg->getActive()){
+            SDL_Delay(600);
+            battleCloseMsg->setActive(true);
+        }
+        int w, h;
+        SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, &h);
+        SDL_Rect overlay = { 0, 0, w, h };
+        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 211, 211, 211, 100);
+        SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &overlay);
+        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
+
+        endTurn = true;
+        battleCloseMsg->render();
+
+        return;
+    }
+
+
 
     if(alpha2 > 10){
         enemyAttkTxt->render();

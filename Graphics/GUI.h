@@ -103,6 +103,7 @@ namespace GUI{
 		void updateWindow();
 		void refreshGUI();
 		void setTextParameters(std::string txt, SDL_Color colour, TTF_Font* font, int size);
+		void setBorder(int x, int y, int w, int h);
 		void setFontfile(std::string fontfile);
 
 	private:

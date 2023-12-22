@@ -59,7 +59,7 @@ void PlayerDeath::update(const float& dt){
 
         if(textTimer->getTicks() > 1500){
 
-            alpha2 += 1;
+            alpha2 += 2;
         }
 
 

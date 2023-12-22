@@ -30,10 +30,13 @@ class Battle : public State{
         std::vector<GUI::Text> enemyText;
         GUI::Text temp;
 
+        std::unique_ptr<GUI::textBox> battleCloseMsg;
+
         std::unique_ptr<Timer> battleTxtTimer;
         std::unique_ptr<GameTimer> battleGameTimer;
 
         bool playerTurn;
+        bool playerWins;
         int choice;
         int playerAccuracy;
         int playerDefence;
