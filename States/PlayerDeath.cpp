@@ -49,7 +49,7 @@ PlayerDeath::~PlayerDeath(){
 void PlayerDeath::update(const float& dt){
 
 //    Timer::GetInstance()->Tick();
-    if(textTimer->getTicks() <= 10000){
+    if(textTimer->getTicks() <= 15000){
         alpha += 1;
 
         if(alpha > 255){
@@ -59,7 +59,7 @@ void PlayerDeath::update(const float& dt){
 
         if(textTimer->getTicks() > 1500){
 
-            alpha2 += 2;
+            alpha2 += 1;
         }
 
 

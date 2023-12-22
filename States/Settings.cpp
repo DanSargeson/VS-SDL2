@@ -4,10 +4,9 @@
 Settings::Settings(){
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-    getDynamicText() = std::make_shared<GUI::Text>();
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+   // getDynamicText() = std::make_shared<GUI::Text>();
+   // getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
     getDynamicText()->setString("");
-
     settingsTxt = std::make_unique<GUI::Text>();
     volume = std::make_unique<GUI::Text>();
 
@@ -118,6 +117,7 @@ void Settings::updateEvents(SDL_Event& e){
 void Settings::render(){
 
 
+    getMainText()->render();
     settingsTxt->render();
     volume->render();
     musicTxt->render();

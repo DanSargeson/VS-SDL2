@@ -7,10 +7,8 @@ FactionEncounter::FactionEncounter(int faction){
 
 
     getEnemyText()->setString("");
-    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     getDynamicText()->setString("");
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     m_fileName = "Assets/factionQuests.txt";
 

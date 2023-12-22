@@ -22,10 +22,9 @@ Game::Game() : State(){
     //getMainText()->setPosition(GUI::p2pX(20), GUI::p2pY(20));
 
     getEnemyText()->setString("");
-    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+
 
     getDynamicText()->setString("");
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
 
 	std::vector<std::string> menuOptions;
 

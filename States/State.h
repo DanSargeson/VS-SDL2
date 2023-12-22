@@ -15,7 +15,7 @@
 #include "Enemy.h"
 #include "GUI.h"
 #include "Camera.h"
-
+#include "Timer.h"
 //#include "SaveData.h"
 
 class StateData{
@@ -148,6 +148,8 @@ protected:
     bool gameOver;
     bool resolutionChange;
     Mix_Music *music;
+
+    std::shared_ptr<GameTimer> textTimer;
 
     unsigned seed;
     std::default_random_engine generator;

@@ -28,14 +28,9 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
     getMainText() = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
     getMainText()->setString("Test");
-
-    getDynamicText() = std::make_shared<GUI::Text>(false);
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(10));
     getDynamicText()->setString("You are attacked: ");
 
-    getEnemyText() = std::make_shared<GUI::Text>(true);
-    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
-    getEnemyText()->setString("Selectaaaaa an option: ");
+    getEnemyText()->setString("");
     getEnemyText()->setColour(255, 0, 0, 0);
 
     playerAttkTxt = std::make_unique<GUI::Text>(true);
@@ -101,11 +96,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		}
 
 		rando = rand() % high + low;
-		//int lvl = StateData::GetInstance()->getActiveCharacter()->getLevel();
 		enemies.push_back(Enemy(rando));
-		//std::string msg = "test " + std::to_string(i);
-	//	y += (i * 2);
-        //temp.setString();
 		enemyText.push_back(GUI::Text());
         SDL_Delay(19);
 	}
@@ -167,11 +158,11 @@ if(!escape && !playerDefeated && !enemyDefeated) {
             std::string enemyMsg = "";
             if(battleMenu->getActive()){
 
-                for(int i = 0; i < enemies.size(); i++){
-
-                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
-                }
-                getEnemyText()->setString(enemyMsg);
+//                for(int i = 0; i < enemies.size(); i++){
+//
+//                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
+//                }
+//                getEnemyText()->setString(enemyMsg);
             }
 			}
         }
@@ -186,7 +177,7 @@ if(!escape && !playerDefeated && !enemyDefeated) {
 void Battle::updateMenu(){
 
 
-    getDynamicText()->setString("Which enemy to attack?: ");
+    //getDynamicText()->setString("Which enemy to attack?: ");
     std::vector<std::string> enemyMenuStr;
 
     for(int i = 0; i < enemies.size(); i++){
@@ -232,11 +223,11 @@ if(playerDefeated){
             getMainText()->setString(msg);
             getMainText()->render();
             std::string enemyMsg = "";
-            for(int i = 0; i < enemies.size(); i++){
-
-                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
-            }
-            getEnemyText()->setString(enemyMsg);
+//            for(int i = 0; i < enemies.size(); i++){
+//
+//                enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
+//            }
+//            getEnemyText()->setString(enemyMsg);
 
     if(!escape && !playerDefeated && !enemyDefeated) {
 
@@ -523,7 +514,7 @@ void Battle::updateEvents(SDL_Event& e){
 
             endTurn = false;
             playerTurn = true;
-            getDynamicText()->setString("Choose action: ");
+            //getDynamicText()->setString("Choose action: ");
             battleMenu->setActive(true);
         }
     }
