@@ -34,19 +34,25 @@ this->quit = false;
 keyTimeMax = 0.5f;
 keyTime = 0.f;
 
-    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>(false);
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(30));
-    StateData::GetInstance()->dynamicText->clearText();
+    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
 
-    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>(true);
-    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
-    StateData::GetInstance()->enemyText->clearText();
-    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+    getData()->dynamicText = std::make_shared<GUI::Text>(false);
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(30));
+    getDynamicText()->clearText();
+
+    getData()->enemyText = std::make_shared<GUI::Text>(true);
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getEnemyText()->clearText();
+    getEnemyText()->setColour(255, 0, 0, 0);
 
 }
 
 State::~State(){
 
+    getData()->dynamicText->clearText();
+    getData()->enemyText->clearText();
+    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    getData()->mainText->setString("Select an option: ");
 }
 
 void State::setData(StateData& stateData){

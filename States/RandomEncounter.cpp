@@ -5,11 +5,11 @@ RandomEncounter::RandomEncounter(int faction){
 
     filename = "Assets/newDialogue.txt";
 
-    StateData::GetInstance()->enemyText->setString("");
-    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getEnemyText()->setString("");
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
-    StateData::GetInstance()->dynamicText->setString("");
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getDynamicText()->setString("");
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
 
     npc = std::make_shared<NPC>(faction);
@@ -60,7 +60,7 @@ RandomEncounter::~RandomEncounter(){
 
     getData()->dynamicText->clearText();
     getData()->enemyText->clearText();
-    getData()->mainText->setString("Select an option: ");
+    State::~State();
 }
 
 

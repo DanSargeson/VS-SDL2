@@ -60,6 +60,8 @@ MainMenu::~MainMenu(){
 //	delete mBgTexture;
 
 Mix_FreeMusic(music);
+
+State::~State();
 }
 
 //void MainMenu::setStateData()

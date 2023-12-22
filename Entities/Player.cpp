@@ -427,13 +427,13 @@ void Player::levelUp(){
 //        //return true;
 //
 //        std::string msg =  "You are now level " + std::to_string(this->level) + "!";
-//        StateData::GetInstance()->mainText->setString(msg);
+//        getMainText()->setString(msg);
 //
 //        updateStats();
 //        this->hp = this->hpMax;
 //    }
 //    else{
-//        StateData::GetInstance()->mainText->setString("You do not have enough experience.");
+//        getMainText()->setString("You do not have enough experience.");
 //        //return false;
 //    }
 }

@@ -26,17 +26,17 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
     enemyMenu->setActive(false);
 
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
-    StateData::GetInstance()->mainText->setString("Test");
+    getMainText() = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
+    getMainText()->setString("Test");
 
-    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>(false);
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(10));
-    StateData::GetInstance()->dynamicText->setString("You are attacked: ");
+    getDynamicText() = std::make_shared<GUI::Text>(false);
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(10));
+    getDynamicText()->setString("You are attacked: ");
 
-    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>(true);
-    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
-    StateData::GetInstance()->enemyText->setString("Selectaaaaa an option: ");
-    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
+    getEnemyText() = std::make_shared<GUI::Text>(true);
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getEnemyText()->setString("Selectaaaaa an option: ");
+    getEnemyText()->setColour(255, 0, 0, 0);
 
     playerAttkTxt = std::make_unique<GUI::Text>(true);
     playerAttkTxt->setColour(0, 0, 255, 0);
@@ -136,16 +136,16 @@ Battle::~Battle(){
     enemyAttkTxt.reset();
     playerAttkTxt.reset();
 
-    StateData::GetInstance()->mainText->clearText();
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    getMainText()->clearText();
+    getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     if(!escape){
-        StateData::GetInstance()->mainText->setString("Select an option: ");
+        getMainText()->setString("Select an option: ");
     }
     else{
-        StateData::GetInstance()->mainText->setString("Ran away safely!!");
+        getMainText()->setString("Ran away safely!!");
     }
-    StateData::GetInstance()->enemyText->clearText();
-    StateData::GetInstance()->dynamicText->clearText();
+    getEnemyText()->clearText();
+    getDynamicText()->clearText();
     enemies.clear();
 }
 
@@ -171,7 +171,7 @@ if(!escape && !playerDefeated && !enemyDefeated) {
 
                     enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
                 }
-                StateData::GetInstance()->enemyText->setString(enemyMsg);
+                getEnemyText()->setString(enemyMsg);
             }
 			}
         }
@@ -186,7 +186,7 @@ if(!escape && !playerDefeated && !enemyDefeated) {
 void Battle::updateMenu(){
 
 
-    StateData::GetInstance()->dynamicText->setString("Which enemy to attack?: ");
+    getDynamicText()->setString("Which enemy to attack?: ");
     std::vector<std::string> enemyMenuStr;
 
     for(int i = 0; i < enemies.size(); i++){
@@ -214,8 +214,8 @@ battleTxtTimer->Tick();
 
 if(playerDefeated){
 
-    StateData::GetInstance()->mainText->setColour(255, 0, 0, 0);
-    StateData::GetInstance()->mainText->setString("You Died!");
+    getMainText()->setColour(255, 0, 0, 0);
+    getMainText()->setString("You Died!");
 
     playerTurn = false;
     endTurn = true;
@@ -229,14 +229,14 @@ if(playerDefeated){
 
 
             std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
-            StateData::GetInstance()->mainText->setString(msg);
-            StateData::GetInstance()->mainText->render();
+            getMainText()->setString(msg);
+            getMainText()->render();
             std::string enemyMsg = "";
             for(int i = 0; i < enemies.size(); i++){
 
                 enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
             }
-            StateData::GetInstance()->enemyText->setString(enemyMsg);
+            getEnemyText()->setString(enemyMsg);
 
     if(!escape && !playerDefeated && !enemyDefeated) {
 
@@ -431,7 +431,7 @@ const void Battle::playerAttacks(){
 									endMsg += tempAw->getName() + " " + tempAw->getTypeStr() + "\n";
 								}
 							}
-                        StateData::GetInstance()->dynamicText->setString(endMsg, true, GUI::p2pY(80));
+                        getDynamicText()->setString(endMsg, true, GUI::p2pY(80));
 						enemies.erase(enemies.begin() + choice);
 						enemyText.erase(enemyText.begin() + choice);
 //						int s = enemies.size();
@@ -506,7 +506,7 @@ const void Battle::enemyAttacks(){
 			}
 
             std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
-            StateData::GetInstance()->mainText->setString(msg);
+            getMainText()->setString(msg);
 			//END TURN
 			 endTurn = true;
 		}
@@ -523,7 +523,7 @@ void Battle::updateEvents(SDL_Event& e){
 
             endTurn = false;
             playerTurn = true;
-            StateData::GetInstance()->dynamicText->setString("Choose action: ");
+            getDynamicText()->setString("Choose action: ");
             battleMenu->setActive(true);
         }
     }
@@ -535,7 +535,7 @@ void Battle::updateEvents(SDL_Event& e){
 
                     int coinToss = rand() % 2 + 1;
                         if (coinToss == 2){
-                            StateData::GetInstance()->dynamicText->setString("Ran away!!");
+                            getDynamicText()->setString("Ran away!!");
                             escape = true;
                             //return;
                         }
@@ -645,9 +645,9 @@ void Battle::render(){
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-    StateData::GetInstance()->mainText->render();
-    StateData::GetInstance()->enemyText->render();
-    StateData::GetInstance()->dynamicText->render();
+    getMainText()->render();
+    getEnemyText()->render();
+    getDynamicText()->render();
 
     if(alpha2 > 10){
         enemyAttkTxt->render();

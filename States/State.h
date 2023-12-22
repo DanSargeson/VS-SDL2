@@ -121,6 +121,10 @@ public:
     void loadCharacters();
     StateData* getData() { return StateData::GetInstance(); }
 
+    std::shared_ptr<GUI::Text> getMainText() { return getData()->mainText; }
+    std::shared_ptr<GUI::Text> getDynamicText() { return getData()->dynamicText; }
+    std::shared_ptr<GUI::Text> getEnemyText() { return getData()->enemyText; }
+
     bool getQuit();
     const bool getKeyTime();
     inline void endState() { quit = true; }

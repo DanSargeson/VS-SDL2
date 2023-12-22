@@ -15,7 +15,7 @@ PlayerDeath::PlayerDeath() : State(){
     deathMsg = std::make_shared<GUI::Text>(false);
 
     deathMsg->setFontSize(100);
-   // int w = StateData::GetInstance()->mainText->getTextWidth();
+   // int w = getMainText()->getTextWidth();
     deathMsg->setColour(255, 0, 0, 0);
     //deathMsg->setBorder(false);
     deathMsg->setString("Gift of Death received");
@@ -24,17 +24,17 @@ PlayerDeath::PlayerDeath() : State(){
    // deathMsg->clearText();
     SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
 
-    StateData::GetInstance()->dynamicText->setString("Continue...");
-    int dynaX = (w / 2) - (StateData::GetInstance()->dynamicText->getTextWidth() / 2);
-    StateData::GetInstance()->dynamicText->setPosition(dynaX, GUI::p2pY(80));
-    StateData::GetInstance()->dynamicText->setColour(0, 255, 0, 0);
+    getDynamicText()->setString("Continue...");
+    int dynaX = (w / 2) - (getDynamicText()->getTextWidth() / 2);
+    getDynamicText()->setPosition(dynaX, GUI::p2pY(80));
+    getDynamicText()->setColour(0, 255, 0, 0);
 
     StateData::GetInstance()->getActiveCharacter()->increaseCorruption();
 
-    StateData::GetInstance()->enemyText->setString("Corruption has increased");
-    SDL_SetTextureAlphaMod(StateData::GetInstance()->enemyText->getTexture(), alpha);
-    int enemX = (w / 2) - (StateData::GetInstance()->enemyText->getTextWidth() / 2);
-    StateData::GetInstance()->enemyText->setPosition(enemX, GUI::p2pY(55));
+    getEnemyText()->setString("Corruption has increased");
+    SDL_SetTextureAlphaMod(getEnemyText()->getTexture(), alpha);
+    int enemX = (w / 2) - (getEnemyText()->getTextWidth() / 2);
+    getEnemyText()->setPosition(enemX, GUI::p2pY(55));
 
     //HERE SAVEGAME
     textTimer->start();
@@ -43,8 +43,7 @@ PlayerDeath::PlayerDeath() : State(){
 
 PlayerDeath::~PlayerDeath(){
 
-    StateData::GetInstance()->dynamicText->clearText();
-    StateData::GetInstance()->enemyText->clearText();
+    State::~State();
 }
 
 void PlayerDeath::update(const float& dt){
@@ -70,7 +69,7 @@ void PlayerDeath::update(const float& dt){
         }
 
         SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
-        SDL_SetTextureAlphaMod(StateData::GetInstance()->enemyText->getTexture(), alpha2);
+        SDL_SetTextureAlphaMod(getEnemyText()->getTexture(), alpha2);
     }
 }
 
@@ -98,13 +97,13 @@ void PlayerDeath::render(){
 
         if(textTimer->getTicks() > 1500){
 
-            StateData::GetInstance()->enemyText->render();
+            getEnemyText()->render();
         }
     }
 
     if(textTimer->getTicks() > 4000){
 
-            StateData::GetInstance()->dynamicText->render();
+            getDynamicText()->render();
         }
 //    std::cout << deathMsg->getColour() << std::endl;
 }

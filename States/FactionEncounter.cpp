@@ -6,11 +6,11 @@ int FactionEncounter::position = 1;
 FactionEncounter::FactionEncounter(int faction){
 
 
-    StateData::GetInstance()->enemyText->setString("");
-    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getEnemyText()->setString("");
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
-    StateData::GetInstance()->dynamicText->setString("");
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getDynamicText()->setString("");
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     m_fileName = "Assets/factionQuests.txt";
 
@@ -30,7 +30,7 @@ FactionEncounter::FactionEncounter(int faction){
     file->readJsonFile2(json_file);
    // std::pair msg1 = file->getDialogueAndResponses(npc->getFactionStr(), 1, 0);
    std::string check = npc->getFactionStr();
-    StateData::GetInstance()->mainText->setString(file->getDialogue(check, 1));
+    getMainText()->setString(file->getDialogue(check, 1));
     m_menu = std::make_shared<GUI::Menu>();
 
     m_menu->setMenuOptions(file->getFirstResponses(check, 1), true);
@@ -39,16 +39,17 @@ FactionEncounter::FactionEncounter(int faction){
 
 FactionEncounter::~FactionEncounter(){
 
-    StateData::GetInstance()->mainText->setString("Select an option: ");
+    //getMainText()->setString("Select an option: ");
     npc.reset();
+    State::~State();
 }
 
 void FactionEncounter::update(const float& dt){
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
-        StateData::GetInstance()->enemyText->clearText();
-        StateData::GetInstance()->dynamicText->clearText();
+        getEnemyText()->clearText();
+        getDynamicText()->clearText();
 
         if(!m_menu->getActive()){
 
@@ -76,7 +77,7 @@ void FactionEncounter::updateEvents(SDL_Event& e)
 
                 file->selectResponse(npc->getFactionStr(), 1, (m_menu->getChoice() + 1));
                 std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
-                StateData::GetInstance()->mainText->setString(msg2);
+                getMainText()->setString(msg2);
                 m_menu->setMenuOptions(file->getPlayerOps(), true);
  //           }
         }
@@ -87,14 +88,14 @@ void FactionEncounter::updateEvents(SDL_Event& e)
 
 void FactionEncounter::render()
 {
-    StateData::GetInstance()->mainText->render();
-    if(StateData::GetInstance()->enemyText->getString() != ""){
+    getMainText()->render();
+    if(getEnemyText()->getString() != ""){
 
-        StateData::GetInstance()->enemyText->render();
+        getEnemyText()->render();
     }
-    if(StateData::GetInstance()->dynamicText->getString() != ""){
+    if(getDynamicText()->getString() != ""){
 
-        StateData::GetInstance()->dynamicText->render();
+        getDynamicText()->render();
     }
     m_menu->render();
 }

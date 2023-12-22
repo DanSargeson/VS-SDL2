@@ -14,18 +14,18 @@ Game::Game() : State(){
 //  LoadGame lg;/
 //  lg.loadCharacters();
     tutorialCount = 0;
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-    StateData::GetInstance()->enemyText = std::make_shared<GUI::Text>();
-    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>();
+    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    getData()->enemyText = std::make_shared<GUI::Text>();
+    getData()->dynamicText = std::make_shared<GUI::Text>();
 
-    StateData::GetInstance()->mainText->setString("Select an option: ");
-    //StateData::GetInstance()->mainText->setPosition(GUI::p2pX(20), GUI::p2pY(20));
+    getMainText()->setString("Select an option: ");
+    //getMainText()->setPosition(GUI::p2pX(20), GUI::p2pY(20));
 
-    StateData::GetInstance()->enemyText->setString("");
-    StateData::GetInstance()->enemyText->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getEnemyText()->setString("");
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
-    StateData::GetInstance()->dynamicText->setString("");
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+    getDynamicText()->setString("");
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
 
 	std::vector<std::string> menuOptions;
 
@@ -70,6 +70,7 @@ Game::Game() : State(){
 Game::~Game(){
 
  //Mix_FreeMusic(music);
+ State::~State();
 }
 
 void Game::update(const float& dt){
@@ -163,7 +164,7 @@ void Game::updateEvents(SDL_Event& e){
                 std::uniform_int_distribution<int> eventDistribution(1, 6);
                 int eventToss = eventDistribution(generator);
 
-                StateData::GetInstance()->mainText->setString("You travel into parts unknown...");
+                getMainText()->setString("You travel into parts unknown...");
                 SDL_Delay(200);
                 StateData::GetInstance()->getActiveCharacter()->travel();
                // Event e;
@@ -238,8 +239,8 @@ void Game::updateEvents(SDL_Event& e){
             if(gameMenu->getChoice() == 2){
 
                 StateData::GetInstance()->getActiveCharacter()->levelUp();
-               // StateData::GetInstance()->mainText->setString("Levelled up!!");
-                StateData::GetInstance()->dynamicText->setString("");
+               // getMainText()->setString("Levelled up!!");
+                getDynamicText()->setString("");
             }
 
             if(gameMenu->getChoice() == 3){
@@ -249,14 +250,14 @@ void Game::updateEvents(SDL_Event& e){
                     StateData::GetInstance()->getActiveCharacter()->resetHP();
                     StateData::GetInstance()->getActiveCharacter()->gainGold(-10);
 
-                    StateData::GetInstance()->mainText->setString("You awake feeling well rested");
-                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
-                    StateData::GetInstance()->enemyText->setString("Lost 10 gold");
+                    getMainText()->setString("You awake feeling well rested");
+                    getEnemyText()->setColour(255, 0, 0, 0);
+                    getEnemyText()->setString("Lost 10 gold");
                 }
                 else{
 
-                    StateData::GetInstance()->enemyText->setColour(255, 0, 0, 0);
-                    StateData::GetInstance()->enemyText->setString("You don't have enough gold.");
+                    getEnemyText()->setColour(255, 0, 0, 0);
+                    getEnemyText()->setString("You don't have enough gold.");
                 }
             }
 
@@ -274,7 +275,7 @@ void Game::updateEvents(SDL_Event& e){
             if(gameMenu->getChoice() == 6){
 
                 saveCharacters();
-                StateData::GetInstance()->mainText->setString("Game Saved");
+                getMainText()->setString("Game Saved");
             }
 
             if(gameMenu->getChoice() == 7){
@@ -296,26 +297,26 @@ void Game::updateEvents(SDL_Event& e){
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
 
         std::string msg = "Corruption: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getCorruption());
-        StateData::GetInstance()->enemyText->setString(msg);
+        getEnemyText()->setString(msg);
     }
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
-        if(!StateData::GetInstance()->mainText->isEmpty()){
+        if(!getMainText()->isEmpty()){
 
-            StateData::GetInstance()->mainText->clearText();
-            StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-            StateData::GetInstance()->mainText->setString("Select an option: ");
+            //getMainText()->clearText();
+            getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+            getMainText()->setString("Select an option: ");
         }
 
-        if(!StateData::GetInstance()->dynamicText->isEmpty()){
+        if(!getDynamicText()->isEmpty()){
 
-            StateData::GetInstance()->dynamicText->clearText();
+            getDynamicText()->clearText();
         }
 
-        if(!StateData::GetInstance()->enemyText->isEmpty()){
+        if(!getEnemyText()->isEmpty()){
 
-            StateData::GetInstance()->enemyText->clearText();
+            getEnemyText()->clearText();
         }
 
         if(testNpc->getDialogueActive()){
@@ -352,9 +353,9 @@ void Game::render(){
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     gameMenu->render();
-    StateData::GetInstance()->mainText->render();
-    StateData::GetInstance()->dynamicText->render();
-    StateData::GetInstance()->enemyText->render();
+    getMainText()->render();
+    getDynamicText()->render();
+    getEnemyText()->render();
 
        if(textBox->getActive()){
 
@@ -374,7 +375,7 @@ void Game::render(){
         }
         if(tutorialCount == 2){
 
-            StateData::GetInstance()->mainText->render();
+            getMainText()->render();
             textBox->render();
 
         }

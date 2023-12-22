@@ -229,7 +229,7 @@ CharacterCreator::CharacterCreator() : State(){
 
 CharacterCreator::~CharacterCreator(){
 
-    //NOTHING??
+    State::~State();
 }
 
 void CharacterCreator::updateButtons(const float &dt){

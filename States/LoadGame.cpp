@@ -27,6 +27,7 @@ LoadGame::LoadGame() : State(){
 LoadGame::~LoadGame(){
 
     loadMenu.reset();
+    State::~State();
 }
 
 void LoadGame::update(const float& dt){

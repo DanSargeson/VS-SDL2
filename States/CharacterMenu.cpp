@@ -12,26 +12,22 @@ CharacterMenu::CharacterMenu(){
     invMenu->setActive(true);
     invMenu2->setActive(false);
     choice = -1;
-    //StateData::GetInstance()->mainText->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    //getMainText()->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
+    getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
 
-    StateData::GetInstance()->mainText->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
+    getMainText()->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
 
     initButtons();
 
     mButtons["ATTRIBUTES"]->setSelected(true);
 
     std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-    StateData::GetInstance()->mainText->setString(mmm, true, 420);
+    getMainText()->setString(mmm, true, 420);
 }
 
 CharacterMenu::~CharacterMenu(){
 
-    StateData::GetInstance()->mainText->clearText();
-    //StateData::GetInstance()->mainText->setString("Select an option: ");
-    StateData::GetInstance()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-    StateData::GetInstance()->mainText->setString("Select an option: ");
-
+    State::~State();
     invMenu.reset();
     invMenu2.reset();
 }
@@ -65,7 +61,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
 //            if(invMenu->getChoice() == 0){
 //
-//                Engine::GetInstance()->PopState();
+//                Engine::GetInstance()->PopPopState();
 //
 //                return;
 //            }
@@ -80,7 +76,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 invMenu2->setActive(true);
 
                 std::string msg = StateData::GetInstance()->getActiveCharacter()->getInvItemAsString(choice);
-                StateData::GetInstance()->mainText->setString(msg, true, 420);
+                getMainText()->setString(msg, true, 420);
                 //mStateData::getInstane
                     std::cout << invMenu->getChoice() << std::endl;
 
@@ -112,7 +108,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
                 invMenu->setMenuOptions(ops, true, true);
                  std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-                StateData::GetInstance()->mainText->setString(mmm, true, 420);
+                getMainText()->setString(mmm, true, 420);
                  mButtons["SKILLS"]->setSelected(false);
                 mButtons["ATTRIBUTES"]->setSelected(true);
             //mButtons["INVENTORY"]->setSelected(false);
@@ -140,7 +136,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             mButtons["FACTIONS"]->setSelected(false);
 
             std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
-            StateData::GetInstance()->mainText->setString(msg, true, GUI::p2pY(420));
+            getMainText()->setString(msg, true, GUI::p2pY(420));
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
@@ -153,7 +149,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             invMenu->setActive(false);
             invMenu2->setActive(false);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
-            StateData::GetInstance()->mainText->setString(fact, true, 420);
+            getMainText()->setString(fact, true, 420);
         }
 
         if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
@@ -169,9 +165,9 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             //std::cout << "Attrib pressed\n\n\n\n\n";
 
            /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
-           /// StateData::GetInstance()->mainText->setString("ATTRIBUTES");
+           /// getMainText()->setString("ATTRIBUTES");
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-            StateData::GetInstance()->mainText->setString(mmm, true, 420);
+            getMainText()->setString(mmm, true, 420);
         }
 
         //BUTTONS END HERE
@@ -187,14 +183,14 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             invMenu2->setActive(false);
             invMenu->setActive(true);
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-            StateData::GetInstance()->mainText->setString(mmm, true, 420);
+            getMainText()->setString(mmm, true, 420);
         }
     }
 }
 
 void CharacterMenu::render(){
 
-    StateData::GetInstance()->mainText->render();
+    getMainText()->render();
 
     if(invMenu->getActive()){
         invMenu->render();

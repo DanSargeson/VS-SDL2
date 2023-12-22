@@ -89,8 +89,8 @@ void Event::enemyEvent(){
 //            eventMenu->setMenuOptions(ops, true);
 //  //          std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHpMax());
 //
-//            StateData::GetInstance()->mainText->setString("THIS SHOULD SHOW HP");
-//            StateData::GetInstance()->enemyText->setString("Choose action: ");
+//            getMainText()->setString("THIS SHOULD SHOW HP");
+//            getEnemyText()->setString("Choose action: ");
 ////			system("clear");
 ////			cout << "= BATTLE MENU = \n\n";
 ////			cout << "HP: " << player.getHP() << "/" << player.getHpMax() << "\n\n";

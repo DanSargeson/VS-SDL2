@@ -4,9 +4,9 @@
 Settings::Settings(){
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-    StateData::GetInstance()->dynamicText = std::make_shared<GUI::Text>();
-    StateData::GetInstance()->dynamicText->setPosition(GUI::p2pX(20), GUI::p2pY(40));
-    StateData::GetInstance()->dynamicText->setString("");
+    getDynamicText() = std::make_shared<GUI::Text>();
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+    getDynamicText()->setString("");
 
     settingsTxt = std::make_unique<GUI::Text>();
     volume = std::make_unique<GUI::Text>();
@@ -40,7 +40,7 @@ Settings::Settings(){
 
 Settings::~Settings()
 {
-
+    State::~State();
 }
 
 void Settings::update(const float& dt){
@@ -52,7 +52,7 @@ void Settings::updateEvents(SDL_Event& e){
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_B)){
 
         Engine::GetInstance()->PopState();
-        StateData::GetInstance()->dynamicText->clearText();
+        getDynamicText()->clearText();
         return;
     }
 
@@ -72,7 +72,7 @@ void Settings::updateEvents(SDL_Event& e){
                 Mix_VolumeMusic(currentVol);
             }
             std::string txt = "Curr Volume: " + std::to_string(currentVol);
-            StateData::GetInstance()->dynamicText->setString(txt);
+            getDynamicText()->setString(txt);
         }
     }
 
@@ -94,7 +94,7 @@ void Settings::updateEvents(SDL_Event& e){
             }
             Mix_VolumeMusic(currentVol);
             std::string txt = "Curr Volume: " + std::to_string(currentVol);
-            StateData::GetInstance()->dynamicText->setString(txt);
+            getDynamicText()->setString(txt);
         }
     }
 
@@ -124,6 +124,6 @@ void Settings::render(){
     musicButton->renderButtons();
     volumeButton->renderButtons();
     volDown->renderButtons();
-    StateData::GetInstance()->dynamicText->render();
+    getDynamicText()->render();
 }
 
