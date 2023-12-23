@@ -163,8 +163,6 @@ void Game::updateEvents(SDL_Event& e){
                 std::uniform_int_distribution<int> eventDistribution(1, 6);
                 int eventToss = eventDistribution(generator);
 
-                ///DEBUG REMOVE:
-                    eventToss = 1;
                 getMainText()->setString("You travel into parts unknown...");
                 SDL_Delay(200);
                 StateData::GetInstance()->getActiveCharacter()->travel();

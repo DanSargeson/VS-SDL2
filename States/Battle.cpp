@@ -129,7 +129,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		//rando = rand() % high + low;
 		std::uniform_int_distribution<>randEnemies(low, high);
 		rando = randEnemies(gen);
-		enemies.push_back(Enemy(/*rando*/1)); ///TODO bring back
+		enemies.push_back(Enemy(rando));
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){
@@ -460,8 +460,6 @@ const void Battle::playerAttacks(){
 
                             rarity = 4;
                         }
-
-                        //TODO DEBUG REMOVE!!!!
 
                         seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
                         generator.seed(seed);
