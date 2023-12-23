@@ -129,7 +129,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		//rando = rand() % high + low;
 		std::uniform_int_distribution<>randEnemies(low, high);
 		rando = randEnemies(gen);
-		enemies.push_back(Enemy(rando));
+		enemies.push_back(Enemy(/*rando*/1)); ///TODO bring back
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){
@@ -183,6 +183,8 @@ Battle::~Battle(){
 
 void Battle::initBattle(){
 
+endGameTimer = std::make_unique<GameTimer>();
+endGameTimer->start();
 battleGameTimer->start();
 
 if(!escape && !playerDefeated && !enemyDefeated) {
@@ -233,6 +235,11 @@ void Battle::updateMenu(){
 void Battle::update(const float& dt){
 
 if(endTurn){
+
+    if(playerWins){
+
+        updateText();
+    }
 
     battleMenu->setActive(false);
     return;
@@ -289,18 +296,33 @@ if(playerDefeated){
         if(!playerTurn && !playerDefeated){
 
                 //std::cout << "DT:  " << battleGameTimer->getTicks() << std::endl;
-                if(battleGameTimer->getTicks() > 500){
+                if(battleGameTimer->getTicks() > 100){
                     enemyAttacks();
                     battleGameTimer->stop();
                 }
         }
 	}
 
-
-        updateText();
+    updateText();
 }
 
 void Battle::updateText(){
+
+
+    if(playerWins){
+
+        if(endGameTimer != nullptr && endGameTimer->getTicks() > 5){
+
+            alpha += 2;
+            if(alpha > 255){
+
+                alpha = 255;
+            }
+            SDL_SetTextureAlphaMod(this->battleCloseMsg->getTexture(), alpha);
+            SDL_SetTextureAlphaMod(this->battleCloseMsg->getHeaderTexture(), alpha);
+            endGameTimer->restart();
+        }
+    }
 
     if(playerAttkTxt && playerTurn){
 
@@ -404,6 +426,7 @@ const void Battle::playerAttacks(){
                             endMsg += "\nTotal Gold Gained: " + std::to_string(totalGold);
 
                             playerWins = true;
+                            alpha = 0;
 						}
 
 						//ITEM ROLL
@@ -690,20 +713,34 @@ void Battle::render(){
 
     if(playerWins){
 
+
+
         if(!battleCloseMsg->getActive()){
             SDL_Delay(600);
+            endGameTimer->restart();
             battleCloseMsg->setActive(true);
         }
+
         int w, h;
         SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, &h);
         SDL_Rect overlay = { 0, 0, w, h };
         SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 211, 211, 211, 100);
+        //endGameTimer->restart();
         SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &overlay);
+        battleCloseMsg->setAlpha(alpha);
+       // SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 255, 255, alpha);
         SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
-
-        endTurn = true;
         battleCloseMsg->render();
+
+        if(alpha != 255){
+
+            endTurn = false;
+        }
+        else{
+
+            endTurn = true;
+        }
 
         return;
     }

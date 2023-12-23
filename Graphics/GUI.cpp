@@ -1156,6 +1156,8 @@ GUI::textBox::textBox(){
     header = GUI::Text();
     text = GUI::Text();
 
+    alpha = 255;
+
     filler.x = outline.x - 2;
     filler.y = outline.y - 2;
     filler.w = outline.w + 4;
@@ -1174,14 +1176,28 @@ GUI::textBox::~textBox(){
     outline = { 0, 0, 0, 0};
 }
 
+void GUI::textBox::setAlpha(int al){
+
+    if(al >=0 && al <= 255){
+
+        alpha = al;
+    }
+    else{
+
+        alpha = 255;
+    }
+}
+
 void GUI::textBox::setHeader(std::string txt){
 
     header.setString(txt);
+    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 10);
 }
 
 void GUI::textBox::setText(std::string txt){
 
     text.setString(txt, true, outline.w - GUI::p2pXi(1));
+    text.setPosition(bg.x + GUI::p2pXi(5), header.getGlobalBounds().y + GUI::p2pYi(10));
 }
 
 void GUI::textBox::setSize(int h, int w){
@@ -1198,6 +1214,9 @@ void GUI::textBox::setSize(int h, int w){
     bg.y = outline.y + 1;
     bg.w = outline.w - 1;
     bg.h = outline.h - 1;
+
+    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 5);
+    text.setPosition(bg.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
 }
 
 void GUI::textBox::setPosition(int x, int y){
@@ -1221,12 +1240,19 @@ void GUI::textBox::setPosition(int x, int y){
 
 void GUI::textBox::render(){
 
-    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 192, 192, 192, 0);
+
+    if(alpha < 255){
+
+        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
+    }
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 192, 192, 192, alpha);
     SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &filler);
-    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 0);
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, alpha);
     SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &bg);
-    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 255, 0, 0);
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 255, 0, alpha);
     SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &outline);
+
+    SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
     header.render();
     text.render();
 }

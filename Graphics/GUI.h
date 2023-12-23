@@ -273,16 +273,21 @@ namespace GUI{
             void setHeader(std::string txt);
             void setText(std::string txt);
             void setSize(int h, int w);
+            void setAlpha(int alpha);
             void setPosition(int x, int y);
             void render();
 
             inline void setActive(bool a) { active = a; }
             inline bool getActive() { return active; }
+            inline GUI::Text getText() { return text; }
+            inline SDL_Texture* getTexture() { return text.getTexture(); }
+            inline SDL_Texture* getHeaderTexture() { return header.getTexture(); }
         private:
 
             GUI::Text header;
             GUI::Text text;
 
+            int alpha;
             int width;
             int height;
 

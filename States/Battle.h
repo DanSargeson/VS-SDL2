@@ -34,6 +34,7 @@ class Battle : public State{
 
         std::unique_ptr<Timer> battleTxtTimer;
         std::unique_ptr<GameTimer> battleGameTimer;
+        std::unique_ptr<GameTimer> endGameTimer;
 
         bool playerTurn;
         bool playerWins;

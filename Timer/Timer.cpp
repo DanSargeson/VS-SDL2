@@ -44,6 +44,12 @@ void GameTimer::stop(){
 	mPausedTicks = 0;
 }
 
+void GameTimer::restart(){
+
+    stop();
+    start();
+}
+
 void GameTimer::pause(){
 
 	if (mStarted && !mPaused) {
