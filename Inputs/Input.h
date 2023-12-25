@@ -1,7 +1,11 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#ifdef WIN32
+#include <SDL.h>
+#else
 #include <SDL2/SDL.h>
+#endif // WIN32
 
 class Input{
 

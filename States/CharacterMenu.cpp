@@ -27,7 +27,7 @@ CharacterMenu::CharacterMenu(){
 
 CharacterMenu::~CharacterMenu(){
 
-    State::~State();
+//    State::~State();
     invMenu.reset();
     invMenu2.reset();
 }

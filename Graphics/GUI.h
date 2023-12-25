@@ -1,11 +1,20 @@
 #ifndef GUI_H
 #define GUI_H
 
+#ifdef WIN32
+#include <SDL.h>
+#include <SDL_ttf.h>
+#else
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#endif // WIN32
+
+
 #include <string>
 #include <memory>
 #include <vector>
+
 
 class Texture;
 class StateData;

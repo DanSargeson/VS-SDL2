@@ -1,11 +1,18 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <string>
+#ifdef _WIN32
+#include "SDL.h"
+#include "SDL_ttf.h"
+#include "SDL_image.h"
+#else
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
 #include "SDL2/SDL_image.h"
+#endif // _WIN32
+
 #include "Engine.h"
+#include <string>
 #include <iostream>
 
 class Texture{
