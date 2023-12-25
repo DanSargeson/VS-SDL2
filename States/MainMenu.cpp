@@ -8,7 +8,12 @@
 //#include "Texture.h"
 #include "Engine.h"
 #include <filesystem>
+
+#ifdef WIN32
+#include <SDL_mixer.h>
+#else
 #include <SDL2/SDL_mixer.h>
+#endif // WIN32
 
 MainMenu::MainMenu() : State(){
 
