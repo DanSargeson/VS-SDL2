@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="VS-SDL2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/VS-SDL2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="Assets" />
+					<Add directory="Engine" />
+					<Add directory="Events" />
+					<Add directory="Entities" />
+					<Add directory="Graphics" />
+					<Add directory="Inputs" />
+					<Add directory="Items" />
+					<Add directory="States" />
+					<Add directory="Timer" />
+				</Compiler>
+				<Linker>
+					<Add option="-lSDL2" />
+					<Add option="-lSDL2_ttf" />
+					<Add option="-lSDL2_image" />
+					<Add option="-lSDL2_mixer" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/VS-SDL2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="States" />
+					<Add directory="Entities" />
+					<Add directory="Assets" />
+					<Add directory="Engine" />
+					<Add directory="Events" />
+					<Add directory="Graphics" />
+					<Add directory="Inputs" />
+					<Add directory="Items" />
+					<Add directory="Timer" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lSDL2" />
+					<Add option="-lSDL2_ttf" />
+					<Add option="-lSDL2_image" />
+					<Add option="-lSDL2_mixer" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="Assets" />
+			<Add directory="Engine" />
+			<Add directory="Events" />
+			<Add directory="Entities" />
+			<Add directory="Graphics" />
+			<Add directory="Inputs" />
+			<Add directory="Items" />
+			<Add directory="States" />
+			<Add directory="Timer" />
+			<Add directory="Components" />
+		</Compiler>
+		<Linker>
+			<Add option="-lSDL2" />
+			<Add option="-lSDL2_ttf" />
+			<Add option="-lSDL2_image" />
+			<Add option="-lSDL2_mixer" />
+		</Linker>
+		<Unit filename="Components/AttackComponent.cpp" />
+		<Unit filename="Components/AttackComponent.h" />
+		<Unit filename="Components/AttributeComponent.cpp" />
+		<Unit filename="Components/AttributeComponent.h" />
+		<Unit filename="Components/Component.cpp" />
+		<Unit filename="Components/Component.h" />
+		<Unit filename="Components/DialogueComponent.cpp" />
+		<Unit filename="Components/DialogueComponent.h" />
+		<Unit filename="Components/FactionComponent.cpp" />
+		<Unit filename="Components/FactionComponent.h" />
+		<Unit filename="Components/SkillComponent.cpp" />
+		<Unit filename="Components/SkillComponent.h" />
+		<Unit filename="Engine/Camera.cpp" />
+		<Unit filename="Engine/Camera.h" />
+		<Unit filename="Engine/Engine.cpp" />
+		<Unit filename="Engine/Engine.h" />
+		<Unit filename="Engine/LoadFiles.cpp" />
+		<Unit filename="Engine/LoadFiles.h" />
+		<Unit filename="Engine/Vector2D.h" />
+		<Unit filename="Engine/json.hpp" />
+		<Unit filename="Engine/stdafx.h" />
+		<Unit filename="Entities/Enemy.cpp" />
+		<Unit filename="Entities/Enemy.h" />
+		<Unit filename="Entities/Entity.cpp" />
+		<Unit filename="Entities/Entity.h" />
+		<Unit filename="Entities/NPC.cpp" />
+		<Unit filename="Entities/NPC.h" />
+		<Unit filename="Entities/Player.cpp" />
+		<Unit filename="Entities/Player.h" />
+		<Unit filename="Events/Event.cpp" />
+		<Unit filename="Events/Event.h" />
+		<Unit filename="Graphics/GUI.cpp" />
+		<Unit filename="Graphics/GUI.h" />
+		<Unit filename="Graphics/Texture.cpp" />
+		<Unit filename="Graphics/Texture.h" />
+		<Unit filename="Inputs/Input.cpp" />
+		<Unit filename="Inputs/Input.h" />
+		<Unit filename="Items/Armour.cpp" />
+		<Unit filename="Items/Armour.h" />
+		<Unit filename="Items/Inventory.cpp" />
+		<Unit filename="Items/Inventory.h" />
+		<Unit filename="Items/Item.cpp" />
+		<Unit filename="Items/Item.h" />
+		<Unit filename="Items/Weapon.cpp" />
+		<Unit filename="Items/Weapon.h" />
+		<Unit filename="States/Battle.cpp" />
+		<Unit filename="States/Battle.h" />
+		<Unit filename="States/CharacterCreator.cpp" />
+		<Unit filename="States/CharacterCreator.h" />
+		<Unit filename="States/CharacterMenu.cpp" />
+		<Unit filename="States/CharacterMenu.h" />
+		<Unit filename="States/FactionEncounter.cpp" />
+		<Unit filename="States/FactionEncounter.h" />
+		<Unit filename="States/Game.cpp" />
+		<Unit filename="States/Game.h" />
+		<Unit filename="States/LoadGame.cpp" />
+		<Unit filename="States/LoadGame.h" />
+		<Unit filename="States/MainMenu.cpp" />
+		<Unit filename="States/MainMenu.h" />
+		<Unit filename="States/PlayerDeath.cpp" />
+		<Unit filename="States/PlayerDeath.h" />
+		<Unit filename="States/RandomEncounter.cpp" />
+		<Unit filename="States/RandomEncounter.h" />
+		<Unit filename="States/Settings.cpp" />
+		<Unit filename="States/Settings.h" />
+		<Unit filename="States/State.cpp" />
+		<Unit filename="States/State.h" />
+		<Unit filename="Timer/Timer.cpp" />
+		<Unit filename="Timer/Timer.h" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,598 @@
+# depslib dependency file v1.0
+1696330057 source:/home/dan/Code/VS-SDL2/Engine/Camera.cpp
+	"Camera.h"
+
+1686156281 /home/dan/Code/VS-SDL2/Engine/Camera.h
+	"Vector2D.h"
+	"stdafx.h"
+
+1699367066 /home/dan/Code/VS-SDL2/Engine/Vector2D.h
+	<iostream>
+
+1686156281 /home/dan/Code/VS-SDL2/Engine/stdafx.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_image.h>
+	<SDL2/SDL_thread.h>
+	<iostream>
+	<fstream>
+	<unordered_map>
+	<map>
+	<string>
+	<stack>
+	<chrono>
+	<random>
+	<sstream>
+	<vector>
+	<cmath>
+	<thread>
+	<algorithm>
+	<filesystem>
+	<time.h>
+	"Input.h"
+
+1686156281 /home/dan/Code/VS-SDL2/Inputs/Input.h
+	<SDL2/SDL.h>
+
+1702586039 source:/home/dan/Code/VS-SDL2/Engine/Engine.cpp
+	"Engine.h"
+	"Input.h"
+	"MainMenu.h"
+	<iostream>
+	<SDL2/SDL.h>
+
+1702552677 /home/dan/Code/VS-SDL2/Engine/Engine.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_mixer.h>
+	<vector>
+	<memory>
+	"State.h"
+
+1703292192 /home/dan/Code/VS-SDL2/States/State.h
+	<memory>
+	<string>
+	<vector>
+	<unordered_map>
+	<fstream>
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_mixer.h>
+	"Player.h"
+	"Enemy.h"
+	"GUI.h"
+	"Camera.h"
+	"Timer.h"
+
+1702663381 /home/dan/Code/VS-SDL2/Entities/Player.h
+	"Inventory.h"
+	"Entity.h"
+
+1702590320 /home/dan/Code/VS-SDL2/Items/Inventory.h
+	"Item.h"
+	"Weapon.h"
+	"Armour.h"
+	<vector>
+	<algorithm>
+	<memory>
+
+1699367067 /home/dan/Code/VS-SDL2/Items/Item.h
+	<string>
+	<iostream>
+	<iomanip>
+	<math.h>
+	<vector>
+	<SDL2/SDL.h>
+
+1699367067 /home/dan/Code/VS-SDL2/Items/Weapon.h
+	"Item.h"
+
+1699367067 /home/dan/Code/VS-SDL2/Items/Armour.h
+	"Item.h"
+
+1703029406 /home/dan/Code/VS-SDL2/Entities/Enemy.h
+	<stdlib.h>
+	<vector>
+	<string>
+	"Entity.h"
+
+1703292192 /home/dan/Code/VS-SDL2/Graphics/GUI.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<string>
+	<memory>
+	<vector>
+
+1699367067 /home/dan/Code/VS-SDL2/States/MainMenu.h
+	"State.h"
+	"Texture.h"
+	"GUI.h"
+
+1686156281 /home/dan/Code/VS-SDL2/Graphics/Texture.h
+	<string>
+	"SDL2/SDL.h"
+	"SDL2/SDL_ttf.h"
+	"SDL2/SDL_image.h"
+	"Engine.h"
+	<iostream>
+
+1703029406 source:/home/dan/Code/VS-SDL2/Entities/Enemy.cpp
+	"Enemy.h"
+	"AttributeComponent.h"
+	"SkillComponent.h"
+	<random>
+
+1703292192 source:/home/dan/Code/VS-SDL2/Entities/Player.cpp
+	"Player.h"
+	"State.h"
+	"FactionComponent.h"
+	"AttributeComponent.h"
+	"SkillComponent.h"
+	"AttackComponent.h"
+	"Entity.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/Events/Event.cpp
+	"Event.h"
+	"Game.h"
+	"Engine.h"
+
+1699367066 /home/dan/Code/VS-SDL2/Events/Event.h
+	<stdlib.h>
+	<iostream>
+	"Enemy.h"
+	"GUI.h"
+
+1702403196 /home/dan/Code/VS-SDL2/States/Game.h
+	"State.h"
+	"GUI.h"
+	"LoadFiles.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/Graphics/GUI.cpp
+	"GUI.h"
+	"Texture.h"
+	"State.h"
+	"Engine.h"
+
+1703286035 source:/home/dan/Code/VS-SDL2/Graphics/Texture.cpp
+	"Texture.h"
+
+1686156281 source:/home/dan/Code/VS-SDL2/Inputs/Input.cpp
+	"Input.h"
+	"Engine.h"
+	<iostream>
+
+1699367067 source:/home/dan/Code/VS-SDL2/Items/Armour.cpp
+	"Armour.h"
+
+1697543162 source:/home/dan/Code/VS-SDL2/Items/Inventory.cpp
+	"Inventory.h"
+
+1688481004 source:/home/dan/Code/VS-SDL2/Items/Item.cpp
+	"Item.h"
+
+1699367067 source:/home/dan/Code/VS-SDL2/Items/Weapon.cpp
+	"Weapon.h"
+
+1702552675 source:/home/dan/Code/VS-SDL2/main.cpp
+	"Engine.h"
+	"Timer.h"
+
+1703292192 /home/dan/Code/VS-SDL2/Timer/Timer.h
+	<cstdint>
+
+1703292342 source:/home/dan/Code/VS-SDL2/States/Battle.cpp
+	"Battle.h"
+	"Engine.h"
+	"Input.h"
+	"PlayerDeath.h"
+
+1703292192 /home/dan/Code/VS-SDL2/States/Battle.h
+	"State.h"
+	"Timer.h"
+	"Player.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/CharacterCreator.cpp
+	"CharacterCreator.h"
+	"Game.h"
+	"AttributeComponent.h"
+
+1702658908 /home/dan/Code/VS-SDL2/States/CharacterCreator.h
+	"State.h"
+	"Texture.h"
+	"Player.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/CharacterMenu.cpp
+	"CharacterMenu.h"
+	"Engine.h"
+	"Input.h"
+
+1699367067 /home/dan/Code/VS-SDL2/States/CharacterMenu.h
+	"GUI.h"
+	"State.h"
+
+1703292350 source:/home/dan/Code/VS-SDL2/States/Game.cpp
+	"Game.h"
+	"Engine.h"
+	"Event.h"
+	"Settings.h"
+	"Battle.h"
+	"FactionEncounter.h"
+	"RandomEncounter.h"
+	"CharacterMenu.h"
+	"LoadGame.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/LoadGame.cpp
+	"LoadGame.h"
+	"Engine.h"
+	"Game.h"
+
+1702584039 /home/dan/Code/VS-SDL2/States/LoadGame.h
+	"GUI.h"
+	"State.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/MainMenu.cpp
+	"MainMenu.h"
+	"CharacterCreator.h"
+	"LoadGame.h"
+	"Settings.h"
+	"Engine.h"
+	<filesystem>
+	<SDL2/SDL_mixer.h>
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/State.cpp
+	"State.h"
+	"Engine.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/Timer/Timer.cpp
+	"Timer.h"
+	<SDL2/SDL.h>
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/PlayerDeath.cpp
+	"PlayerDeath.h"
+	"Timer.h"
+	"Engine.h"
+
+1703292192 /home/dan/Code/VS-SDL2/States/PlayerDeath.h
+	"Timer.h"
+	"State.h"
+
+1702992039 /home/dan/Code/VS-SDL2/Entities/Entity.h
+	<memory>
+	"Inventory.h"
+
+1703029406 source:/home/dan/Code/VS-SDL2/Entities/Entity.cpp
+	"stdafx.h"
+	"Entity.h"
+	"Component.h"
+	"FactionComponent.h"
+	"AttributeComponent.h"
+	"SkillComponent.h"
+	"AttackComponent.h"
+	"DialogueComponent.h"
+
+1703029406 source:/home/dan/Code/VS-SDL2/Components/AttributeComponent.cpp
+	"stdafx.h"
+	"AttributeComponent.h"
+
+1702663381 /home/dan/Code/VS-SDL2/Components/AttributeComponent.h
+	"Component.h"
+
+1703029406 /home/dan/Code/VS-SDL2/Components/Component.h
+	"Engine.h"
+
+1702575108 source:/home/dan/Code/VS-SDL2/Components/FactionComponent.cpp
+	"stdafx.h"
+	"FactionComponent.h"
+
+1702575108 /home/dan/Code/VS-SDL2/Components/FactionComponent.h
+	"Component.h"
+
+1703029406 source:/home/dan/Code/VS-SDL2/Components/SkillComponent.cpp
+	"stdafx.h"
+	"SkillComponent.h"
+	"AttributeComponent.h"
+
+1702992039 /home/dan/Code/VS-SDL2/Components/SkillComponent.h
+	"Component.h"
+
+1703029406 source:/home/dan/Code/VS-SDL2/Components/AttackComponent.cpp
+	"stdafx.h"
+	"AttackComponent.h"
+
+1703029406 /home/dan/Code/VS-SDL2/Components/AttackComponent.h
+	"SkillComponent.h"
+	"AttributeComponent.h"
+	"Weapon.h"
+	"Armour.h"
+
+1688385248 source:/home/dan/Code/VS-SDL2/Engine/DiagTree.cpp
+	"stdafx.h"
+	"DiagTree.h"
+
+1688385248 /home/dan/Code/VS-SDL2/Engine/DiagTree.h
+	"Graph.h"
+
+1690291981 /home/dan/Code/VS-SDL2/Engine/Graph.h
+	"Node.h"
+
+1690291981 /home/dan/Code/VS-SDL2/Engine/Node.h
+
+1690291981 source:/home/dan/Code/VS-SDL2/Engine/Graph.cpp
+	"stdafx.h"
+	"Graph.h"
+
+1690291981 source:/home/dan/Code/VS-SDL2/Engine/Node.cpp
+	"stdafx.h"
+	"Node.h"
+
+1701190513 source:/home/dan/Code/VS-SDL2/Components/Component.cpp
+	"stdafx.h"
+	"Component.h"
+	"Entity.h"
+
+1702403196 source:/home/dan/Code/VS-SDL2/Components/DialogueComponent.cpp
+	"DialogueComponent.h"
+
+1702403196 /home/dan/Code/VS-SDL2/Components/DialogueComponent.h
+	"Component.h"
+
+1690291981 source:/home/dan/Code/VS-SDL2/Components/DiagTree.cpp
+	"stdafx.h"
+	"DiagTree.h"
+
+1690291981 /home/dan/Code/VS-SDL2/Components/DiagTree.h
+	"Graph.h"
+
+1690291981 /home/dan/Code/VS-SDL2/Components/Graph.h
+	"Node.h"
+
+1690291981 /home/dan/Code/VS-SDL2/Components/Node.h
+
+1690291981 source:/home/dan/Code/VS-SDL2/Components/Graph.cpp
+	"stdafx.h"
+	"Graph.h"
+
+1690291981 source:/home/dan/Code/VS-SDL2/Components/Node.cpp
+	"stdafx.h"
+	"Node.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/Settings.cpp
+	"Settings.h"
+	"Engine.h"
+
+1699367067 /home/dan/Code/VS-SDL2/States/Settings.h
+	"State.h"
+
+1702506338 source:/home/dan/Code/VS-SDL2/Engine/LoadFiles.cpp
+	"LoadFiles.h"
+	<unordered_set>
+
+1702506338 /home/dan/Code/VS-SDL2/Engine/LoadFiles.h
+	"Engine.h"
+	"json.hpp"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/FactionEncounter.cpp
+	"FactionEncounter.h"
+	"LoadFiles.h"
+
+1702575108 /home/dan/Code/VS-SDL2/States/FactionEncounter.h
+	"State.h"
+	"NPC.h"
+	"LoadFiles.h"
+
+1702575108 source:/home/dan/Code/VS-SDL2/Entities/NPC.cpp
+	"NPC.h"
+	"FactionComponent.h"
+	"DialogueComponent.h"
+
+1702499446 /home/dan/Code/VS-SDL2/Entities/NPC.h
+	"Entity.h"
+	"Inventory.h"
+	"Weapon.h"
+	"Armour.h"
+	"Engine.h"
+
+1703292192 source:/home/dan/Code/VS-SDL2/States/RandomEncounter.cpp
+	"RandomEncounter.h"
+
+1703029406 /home/dan/Code/VS-SDL2/States/RandomEncounter.h
+	"State.h"
+	"NPC.h"
+	"GUI.h"
+	"LoadFiles.h"
+
+1702485512 /home/dan/Code/VS-SDL2/Engine/json.hpp
+	<algorithm>
+	<cstddef>
+	<functional>
+	<initializer_list>
+	<iosfwd>
+	<iterator>
+	<memory>
+	<string>
+	<utility>
+	<vector>
+	<utility>
+	<algorithm>
+	<array>
+	<forward_list>
+	<iterator>
+	<map>
+	<string>
+	<tuple>
+	<type_traits>
+	<unordered_map>
+	<utility>
+	<valarray>
+	<cstddef>
+	<exception>
+	<numeric>
+	<stdexcept>
+	<string>
+	<vector>
+	<array>
+	<cstddef>
+	<cstdint>
+	<string>
+	<utility>
+	<type_traits>
+	<stdint.h>
+	<stdint.h>
+	<version>
+	<cstdlib>
+	<cassert>
+	<compare>
+	<cstddef>
+	<array>
+	<cstddef>
+	<type_traits>
+	<utility>
+	<limits>
+	<type_traits>
+	<utility>
+	<tuple>
+	<string>
+	<iterator>
+	<cstdint>
+	<map>
+	<memory>
+	<string>
+	<vector>
+	<cstring>
+	<string>
+	<utility>
+	<experimental/filesystem>
+	<filesystem>
+	<algorithm>
+	<iterator>
+	<string>
+	<tuple>
+	<type_traits>
+	<utility>
+	<valarray>
+	<vector>
+	<cstddef>
+	<iterator>
+	<string>
+	<tuple>
+	<utility>
+	<ranges>
+	<cstdint>
+	<tuple>
+	<utility>
+	<cstdint>
+	<cstddef>
+	<functional>
+	<algorithm>
+	<array>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<cstring>
+	<iterator>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<array>
+	<cstddef>
+	<cstring>
+	<iterator>
+	<memory>
+	<numeric>
+	<string>
+	<type_traits>
+	<utility>
+	<cstdio>
+	<istream>
+	<cstddef>
+	<string>
+	<utility>
+	<vector>
+	<array>
+	<clocale>
+	<cstddef>
+	<cstdio>
+	<cstdlib>
+	<initializer_list>
+	<string>
+	<utility>
+	<vector>
+	<cstdint>
+	<utility>
+	<string>
+	<cmath>
+	<cstdint>
+	<functional>
+	<string>
+	<utility>
+	<vector>
+	<cstddef>
+	<limits>
+	<iterator>
+	<type_traits>
+	<cstddef>
+	<iterator>
+	<utility>
+	<type_traits>
+	<algorithm>
+	<cctype>
+	<cerrno>
+	<cstdlib>
+	<iosfwd>
+	<limits>
+	<numeric>
+	<string>
+	<utility>
+	<vector>
+	<initializer_list>
+	<utility>
+	<algorithm>
+	<array>
+	<map>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<algorithm>
+	<cstddef>
+	<iterator>
+	<memory>
+	<string>
+	<vector>
+	<ios>
+	<ostream>
+	<algorithm>
+	<array>
+	<clocale>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<limits>
+	<string>
+	<iomanip>
+	<type_traits>
+	<utility>
+	<array>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<type_traits>
+	<functional>
+	<initializer_list>
+	<iterator>
+	<memory>
+	<stdexcept>
+	<type_traits>
+	<utility>
+	<vector>
+	<any>
+	<string_view>
+
