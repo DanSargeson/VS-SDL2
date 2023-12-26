@@ -125,6 +125,7 @@ public:
     virtual void render() = 0;
 
     void loadCharacters();
+    virtual void refreshGUI();
     StateData* getData() { return StateData::GetInstance(); }
 
     std::shared_ptr<GUI::Text> getMainText() { return getData()->mainText; }

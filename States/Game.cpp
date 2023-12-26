@@ -18,6 +18,8 @@ Game::Game() : State(){
     getData()->enemyText = std::make_shared<GUI::Text>();
     getData()->dynamicText = std::make_shared<GUI::Text>();
 
+    refreshGUI();
+
     getMainText()->setString("Select an option: ");
     //getMainText()->setPosition(GUI::p2pX(20), GUI::p2pY(20));
 
