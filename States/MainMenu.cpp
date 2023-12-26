@@ -7,8 +7,8 @@
 #include "Settings.h"
 //#include "Texture.h"
 #include "Engine.h"
-#include <filesystem>
 
+#include <filesystem>
 #ifdef WIN32
 #include <SDL_mixer.h>
 #else
@@ -139,6 +139,8 @@ if( Mix_PlayingMusic() == 0 )
 
 
 	std::cout << "LOAD" << std::endl;
+
+
 
         if(std::filesystem::exists("characters.txt")){
             Engine::GetInstance()->AddState(std::make_shared<LoadGame>());

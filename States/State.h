@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <fstream>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
