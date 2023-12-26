@@ -1030,7 +1030,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1703545283 c:\users\dansa\onedrive\documents\github\vs-sdl2\inputs\input.h
+1703547956 c:\users\dansa\onedrive\documents\github\vs-sdl2\inputs\input.h
 	<SDL.h>
 	<SDL2/SDL.h>
 
@@ -1068,7 +1068,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1703545976 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.h
+1703547936 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.h
 	<memory>
 	<string>
 	<vector>
@@ -1098,7 +1098,7 @@
 	<algorithm>
 	<memory>
 
-1703545334 c:\users\dansa\onedrive\documents\github\vs-sdl2\items\item.h
+1703547944 c:\users\dansa\onedrive\documents\github\vs-sdl2\items\item.h
 	<SDL.h>
 	<SDL2/SDL.h>
 	<string>
@@ -1123,7 +1123,7 @@
 	<string>
 	"Entity.h"
 
-1703545951 c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.h
+1703547965 c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL2/SDL.h>
@@ -1505,4 +1505,83 @@
 1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.h
 	"GUI.h"
 	"State.h"
+
+1703552748 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.cpp
+	"FactionEncounter.h"
+	"LoadFiles.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.h
+	"State.h"
+	"NPC.h"
+	"LoadFiles.h"
+
+1703552755 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactercreator.cpp
+	"CharacterCreator.h"
+	"Game.h"
+	"AttributeComponent.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactercreator.h
+	"State.h"
+	"Texture.h"
+	"Player.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
+	"Game.h"
+	"Engine.h"
+	"Event.h"
+	"Settings.h"
+	"Battle.h"
+	"FactionEncounter.h"
+	"RandomEncounter.h"
+	"CharacterMenu.h"
+	"LoadGame.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.h
+	"State.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.h
+	"State.h"
+	"NPC.h"
+	"GUI.h"
+	"LoadFiles.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.h
+	"GUI.h"
+	"State.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
+	"LoadGame.h"
+	"Engine.h"
+	"Game.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.cpp
+	"PlayerDeath.h"
+	"Timer.h"
+	"Engine.h"
+
+1703552705 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.cpp
+	"MainMenu.h"
+	"CharacterCreator.h"
+	"LoadGame.h"
+	"Settings.h"
+	"Engine.h"
+	<filesystem>
+	<SDL_mixer.h>
+	<SDL2/SDL_mixer.h>
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.cpp
+	"RandomEncounter.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.cpp
+	"Settings.h"
+	"Engine.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
+	"State.h"
+	"Engine.h"
+
+1703552246 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\timer\timer.cpp
+	"Timer.h"
+	<SDL.h>
+	<SDL2/SDL.h>
 

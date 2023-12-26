@@ -69,6 +69,10 @@
 			<Add option="-Wall" />
 			<Add option="-std=gnu++17" />
 			<Add option="-std=c17" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2/include/SDL2" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2_image-2.8.1/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2_mixer-2.6.3/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2_ttf-2.20.2/x86_64-w64-mingw32/include/SDL2" />
 			<Add directory="Assets" />
 			<Add directory="Engine" />
 			<Add directory="Events" />
@@ -81,11 +85,14 @@
 			<Add directory="Components" />
 		</Compiler>
 		<Linker>
-			<Add option="-lSDL2main" />
 			<Add option="-lSDL2" />
 			<Add option="-lSDL2_ttf" />
 			<Add option="-lSDL2_image" />
 			<Add option="-lSDL2_mixer" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2/lib" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2_image-2.8.1/x86_64-w64-mingw32/lib" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2_mixer-2.6.3/x86_64-w64-mingw32/lib" />
+			<Add directory="C:/Users/dansa/OneDrive/Documents/Code/SDL2_ttf-2.20.2/x86_64-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="Components/AttackComponent.cpp" />
 		<Unit filename="Components/AttackComponent.h" />
