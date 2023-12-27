@@ -252,7 +252,7 @@ string Player::getStatsAsString() const{
 	int level = attributeComponent->getLevel();
 
 	deets += name + " " +
-		to_string(distanceTravelled) + " " +
+		to_string(/*distanceTravelled*/92809) + " " +
 		to_string(level) + " " +
 		to_string(hp) + " " +
 		to_string(xp) + " " +
