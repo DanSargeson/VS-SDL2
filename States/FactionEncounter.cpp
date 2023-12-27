@@ -42,18 +42,6 @@ FactionEncounter::~FactionEncounter(){
 
 void FactionEncounter::update(const float& dt){
 
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
-
-        getEnemyText()->clearText();
-        getDynamicText()->clearText();
-
-        if(!menu->getActive()){
-
-            Engine::GetInstance()->PopState();
-        }
-
-        return;
-    }
 }
 
 void FactionEncounter::updateEvents(SDL_Event& e)
@@ -79,6 +67,19 @@ void FactionEncounter::updateEvents(SDL_Event& e)
                 menu->setMenuOptions(file->getPlayerOps(), true);
  //           }
         }
+    }
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+
+        getEnemyText()->clearText();
+        getDynamicText()->clearText();
+
+        if(!menu->getActive()){
+
+            Engine::GetInstance()->PopState();
+        }
+
+        return;
     }
 
     State::updateEvents(e);

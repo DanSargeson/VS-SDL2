@@ -1393,7 +1393,7 @@
 	"AttackComponent.h"
 	"DialogueComponent.h"
 
-1703695727 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
+1703697237 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
 	"Engine.h"
 	"Input.h"
 	"MainMenu.h"
@@ -1482,7 +1482,7 @@
 	"Engine.h"
 	"Timer.h"
 
-1703695317 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.cpp
+1703698409 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.cpp
 	"Battle.h"
 	"Engine.h"
 	"Input.h"
@@ -1497,7 +1497,7 @@
 	"Timer.h"
 	"State.h"
 
-1703693442 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.cpp
+1703698212 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.cpp
 	"CharacterMenu.h"
 	"Engine.h"
 	"Input.h"
@@ -1506,7 +1506,7 @@
 	"GUI.h"
 	"State.h"
 
-1703696575 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.cpp
+1703697424 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.cpp
 	"FactionEncounter.h"
 	"LoadFiles.h"
 
@@ -1525,7 +1525,7 @@
 	"Texture.h"
 	"Player.h"
 
-1703695824 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
+1703697805 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
 	"Game.h"
 	"Engine.h"
 	"Event.h"
@@ -1549,12 +1549,12 @@
 	"GUI.h"
 	"State.h"
 
-1703696596 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
+1703697691 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
 	"LoadGame.h"
 	"Engine.h"
 	"Game.h"
 
-1703696604 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.cpp
+1703697942 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.cpp
 	"PlayerDeath.h"
 	"Timer.h"
 	"Engine.h"
@@ -1576,7 +1576,7 @@
 	"Settings.h"
 	"Engine.h"
 
-1703696325 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
+1703696883 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
 	"State.h"
 	"Engine.h"
 

@@ -18,6 +18,8 @@ PlayerDeath::PlayerDeath() : State(){
 PlayerDeath::~PlayerDeath(){
 
 //    State::~State();
+    getEnemyText()->setString("");
+    getDynamicText()->setString("");
 }
 
 void PlayerDeath::refreshGUI(){

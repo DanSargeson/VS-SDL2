@@ -39,7 +39,7 @@ Game::Game() : State(){
 
 	//menuOptions.push_back("0: Quit
 
-    refreshGUI();
+//    refreshGUI();
 
 //	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
 //
@@ -66,7 +66,7 @@ Game::~Game(){
 void Game::refreshGUI(){
 
     State::refreshGUI();
-    getData()->mainText->setString("Select an option.");
+//    getData()->mainText->setString("Select an option.");
 	ops.clear();
 	ops.push_back("Travel");    //1
 	ops.push_back("Shop");      //2
@@ -90,6 +90,8 @@ void Game::update(const float& dt){
                             printf("ERROR PLAYING MUSIC Game.cpp line 57.");
                         }
         }
+
+        getMainText()->setString("Select an option: ");
 
     if(StateData::GetInstance()->getTutorial() == true){
 

@@ -50,8 +50,8 @@ void RandomEncounter::refreshGUI(){
     msg += "\"" + file->loadRandomDialogue() +  "\"";
     getData()->mainText->setString(msg, true);
 
-//    menu.reset();
-//    menu = std::make_shared<GUI::Menu>();
+    menu.reset();
+    menu = std::make_shared<GUI::Menu>();
 
     unlockedCharm = false;
 

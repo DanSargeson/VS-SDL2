@@ -26,7 +26,7 @@ LoadGame::LoadGame() : State(){
 
 LoadGame::~LoadGame(){
 
-    menu.reset();
+ //   menu.reset();
 //    State::~State();
 }
 

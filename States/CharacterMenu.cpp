@@ -4,11 +4,11 @@
 
 CharacterMenu::CharacterMenu(){
 
-    menu = std::make_shared<GUI::Menu>();
+  //  menu = std::make_shared<GUI::Menu>();
 
+    invMenu2 = std::make_shared<GUI::Menu>();
     ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
     menu->setMenuOptions(ops, true, true);
-    ///invMenu2 = std::make_shared<GUI::Menu>();
     menu->setActive(true);
     invMenu2->setActive(false);
     choice = -1;
@@ -28,13 +28,15 @@ CharacterMenu::CharacterMenu(){
 CharacterMenu::~CharacterMenu(){
 
 //    State::~State();
-    menu.reset();
+//    menu.reset();
     invMenu2.reset();
 }
 
 void CharacterMenu::refreshGUI(){
 
-    CharacterMenu();
+    State::refreshGUI();
+    invMenu2->refreshGUI();
+    initButtons();
 }
 
 void CharacterMenu::update(const float& dt){

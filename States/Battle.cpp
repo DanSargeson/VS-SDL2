@@ -198,6 +198,10 @@ void Battle::refreshGUI(){
 
     playerAttkTxt->setPosition(GUI::p2pX(15.f), GUI::p2pY(55.f));
     enemyAttkTxt->setPosition(GUI::p2pX(60.f), GUI::p2pY(50.f));
+
+
+    battleCloseMsg->setPosition(20, 10);
+    battleCloseMsg->setSize(500, 500);
     //menu->setPosition();
 }
 
