@@ -23,6 +23,8 @@ class PlayerDeath : public State{
         int alpha;
         int alpha2;
         std::shared_ptr<GUI::Text> deathMsg;
+        std::shared_ptr<GUI::Text> deathMsg2;
+        std::shared_ptr<GUI::Text> deathMsg3;
 };
 
 #endif

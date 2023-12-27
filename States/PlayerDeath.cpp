@@ -24,13 +24,15 @@ PlayerDeath::~PlayerDeath(){
 
 void PlayerDeath::refreshGUI(){
 
-    State::refreshGUI();
+  //  State::refreshGUI();
     int w;
     SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, NULL);
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
 
     deathMsg = std::make_shared<GUI::Text>(false);
+    deathMsg2 = std::make_shared<GUI::Text>(false);
+    deathMsg3 = std::make_shared<GUI::Text>(false);
 
     deathMsg->setFontSize(100);
    // int w = getMainText()->getTextWidth();
@@ -42,17 +44,17 @@ void PlayerDeath::refreshGUI(){
    // deathMsg->clearText();
     SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
 
-    getDynamicText()->setString("Continue...");
-    int dynaX = (w / 2) - (getDynamicText()->getTextWidth() / 2);
-    getDynamicText()->setPosition(dynaX, GUI::p2pY(80));
-    getDynamicText()->setColour(0, 255, 0, 0);
+    deathMsg2->setString("Continue...");
+    int dynaX = (w / 2) - (deathMsg2->getTextWidth() / 2);
+    deathMsg2->setPosition(dynaX, GUI::p2pY(80));
+    deathMsg2->setColour(0, 255, 0, 0);
 
     StateData::GetInstance()->getActiveCharacter()->increaseCorruption();
 
-    getEnemyText()->setString("Corruption has increased");
-    SDL_SetTextureAlphaMod(getEnemyText()->getTexture(), alpha);
-    int enemX = (w / 2) - (getEnemyText()->getTextWidth() / 2);
-    getEnemyText()->setPosition(enemX, GUI::p2pY(55));
+    deathMsg3->setString("Corruption has increased");
+    SDL_SetTextureAlphaMod(deathMsg3->getTexture(), alpha);
+    int enemX = (w / 2) - (deathMsg3->getTextWidth() / 2);
+    deathMsg3->setPosition(enemX, GUI::p2pY(55));
 }
 
 void PlayerDeath::update(const float& dt){
@@ -106,13 +108,13 @@ void PlayerDeath::render(){
 
         if(textTimer->getTicks() > 1500){
 
-            getEnemyText()->render();
+            deathMsg3->render();
         }
     }
 
     if(textTimer->getTicks() > 4000){
 
-            getDynamicText()->render();
+            deathMsg2->render();
         }
 //    std::cout << deathMsg->getColour() << std::endl;
 }

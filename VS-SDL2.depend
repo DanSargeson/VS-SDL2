@@ -1493,7 +1493,7 @@
 	"Timer.h"
 	"Player.h"
 
-1703688743 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.h
+1703699077 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.h
 	"Timer.h"
 	"State.h"
 
@@ -1569,7 +1569,7 @@
 	<SDL_mixer.h>
 	<SDL2/SDL_mixer.h>
 
-1703696616 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.cpp
+1703698838 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.cpp
 	"RandomEncounter.h"
 
 1703696621 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.cpp

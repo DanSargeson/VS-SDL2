@@ -26,6 +26,10 @@ RandomEncounter::RandomEncounter(int faction){
     npc->createAttributeComponent(npcLevel, true, true);
     npc->createSkillComponent();
 
+    menu.reset();
+    menu = std::make_shared<GUI::Menu>();
+
+
     refreshGUI();
 
     std::cout << "NPC LEVEL: " << npcLevel << std::endl;
@@ -49,9 +53,6 @@ void RandomEncounter::refreshGUI(){
     std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
     msg += "\"" + file->loadRandomDialogue() +  "\"";
     getData()->mainText->setString(msg, true);
-
-    menu.reset();
-    menu = std::make_shared<GUI::Menu>();
 
     unlockedCharm = false;
 
