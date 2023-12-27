@@ -91,6 +91,25 @@ void LoadGame::updateEvents(SDL_Event& e){
 
 }
 
+void LoadGame::refreshGUI(){
+
+    State::refreshGUI();
+
+    loadMenu.reset();
+	loadMenu = make_unique<GUI::Menu>();
+
+    std::vector<std::string> ops;
+
+	for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
+
+		ops.push_back(StateData::GetInstance()->characters[i]->getName());
+	}
+
+	//this->activeMenu->setDynamicMenu(ops, 0);
+	loadMenu->setMenuOptions(ops, true);
+
+}
+
 void LoadGame::render(){
 
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);

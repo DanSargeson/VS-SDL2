@@ -69,6 +69,12 @@ Mix_FreeMusic(music);
 State::~State();
 }
 
+void MainMenu::refreshGUI(){
+
+    State::refreshGUI();
+    initButtons();
+}
+
 //void MainMenu::setStateData()
 //{
 //}

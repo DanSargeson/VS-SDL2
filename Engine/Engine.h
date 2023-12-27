@@ -44,7 +44,7 @@ public:
         inline SDL_Renderer* GetRenderer() { return m_Renderer; }
         inline SDL_Window* GetWindow() { return m_Window; }
         inline void AddState(std::shared_ptr<State> s) { mStates.push_back(s); currentState++; }
-        inline void PopState(){ if(!mStates.empty()){ mStates.pop_back(); currentState--;} }
+        inline void PopState(){ if(!mStates.empty()){ mStates.pop_back(); currentState--; mStates[currentState]->refreshGUI();} }
 
 private:
 

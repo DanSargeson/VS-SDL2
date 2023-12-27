@@ -68,6 +68,7 @@ bool State::getQuit(){
 void State::refreshGUI(){
 
     getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    getData()->mainText->setString("Select an option.");
 
     getData()->dynamicText = std::make_shared<GUI::Text>(false);
     getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));

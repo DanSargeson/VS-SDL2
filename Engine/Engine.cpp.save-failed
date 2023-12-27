@@ -99,11 +99,11 @@ void Engine::UpdateEvents(SDL_Event &event){
 
     }
 
-    if(event.window.event == SDL_WINDOWEVENT_RESIZED){
+    if(event.type == SDL_WINDOWEVENT_RESIZED){
 
         if(!mStates.empty()){
 
-        mStates[currentState]->refreshGUI();
+        mStates[currentState]->updateEvents(event);
         }
     }
 }

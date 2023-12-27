@@ -1046,7 +1046,7 @@
 1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\component.h
 	"Engine.h"
 
-1703545913 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.h
+1703638084 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -1393,13 +1393,13 @@
 	"AttackComponent.h"
 	"DialogueComponent.h"
 
-1703552831 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
+1703636918 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
 	"Engine.h"
 	"Input.h"
 	"MainMenu.h"
 	<iostream>
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.h
+1703635552 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.h
 	"State.h"
 	"Texture.h"
 	"GUI.h"
@@ -1525,7 +1525,7 @@
 	"Texture.h"
 	"Player.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
+1703589847 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
 	"Game.h"
 	"Engine.h"
 	"Event.h"
@@ -1545,11 +1545,11 @@
 	"GUI.h"
 	"LoadFiles.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.h
+1703637102 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.h
 	"GUI.h"
 	"State.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
+1703637519 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
 	"LoadGame.h"
 	"Engine.h"
 	"Game.h"
@@ -1559,7 +1559,7 @@
 	"Timer.h"
 	"Engine.h"
 
-1703552705 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.cpp
+1703636885 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.cpp
 	"MainMenu.h"
 	"CharacterCreator.h"
 	"LoadGame.h"
@@ -1576,7 +1576,7 @@
 	"Settings.h"
 	"Engine.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
+1703637243 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
 	"State.h"
 	"Engine.h"
 

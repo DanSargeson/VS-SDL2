@@ -12,6 +12,7 @@ class LoadGame : public State{
         ~LoadGame();
         void update(const float &dt);
         void updateEvents(SDL_Event &e);
+        void refreshGUI();
         void render();
 
 //        void loadCharacters();
