@@ -843,6 +843,8 @@ bool GUI::Menu::isSelected(){
 
 	/* TODO check myGame menu.cpp, skipped some code that may be obsolete, but maybe not?? */
 
+	if(this->active){
+
 	if(!this->options.empty()){
 
 		for(size_t i = 0; i < options.size(); i++){
@@ -854,11 +856,12 @@ bool GUI::Menu::isSelected(){
 
 				this->selection = i;
 				SDL_Color colour = { 255, 255, 255, 150 };
-				SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &textSelector);
+				//SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &textSelector);
 
 				return true;
 			}
 		}
+	}
 	}
 	return false;
 }
@@ -991,7 +994,7 @@ void GUI::Menu::render(){
 	SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &outline);
 	SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
 
-	if(this->textSelectorActive){
+	if(this->textSelectorActive && this->getActive()){
 
 		SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
 		if(clicked){
