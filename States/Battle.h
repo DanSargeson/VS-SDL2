@@ -21,6 +21,7 @@ class Battle : public State{
         const void enemyAttacks();
         const void playerAttacks();
         void render();
+        void refreshGUI();
 
     private:
         std::shared_ptr<GUI::Menu> battleMenu;

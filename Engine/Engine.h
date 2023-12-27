@@ -1,10 +1,19 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#ifdef _WIN32
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#endif // _WIN32
+
+
 #include <vector>
 #include <memory>
 
@@ -35,7 +44,7 @@ public:
         inline SDL_Renderer* GetRenderer() { return m_Renderer; }
         inline SDL_Window* GetWindow() { return m_Window; }
         inline void AddState(std::shared_ptr<State> s) { mStates.push_back(s); currentState++; }
-        inline void PopState(){ if(!mStates.empty()){ mStates.pop_back(); currentState--;} }
+        inline void PopState(){ if(!mStates.empty()){ mStates.pop_back(); currentState--;}}
 
 private:
 

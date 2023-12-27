@@ -19,7 +19,7 @@ class CharacterMenu : public State{
         //void loadCharacters();
 
     private:
-            std::shared_ptr<GUI::Menu> invMenu;
+            //std::shared_ptr<GUI::Menu> invMenu;
             std::shared_ptr<GUI::Menu> invMenu2;
             std::unordered_map<std::string, GUI::Button*> mButtons;
             int choice;

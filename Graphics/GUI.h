@@ -1,11 +1,19 @@
 #ifndef GUI_H
 #define GUI_H
 
+#ifdef _WIN32
+#include <SDL.h>
+#include <SDL_ttf.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#endif // WIN32
+
+
 #include <string>
 #include <memory>
 #include <vector>
+
 
 class Texture;
 class StateData;
@@ -228,6 +236,7 @@ namespace GUI{
 			void setDynamicMenu(std::vector<std::string> ops, int type);
 
 			void setMenuOptions(std::vector<std::string> options, bool dynamic = false, bool item = false); //ONLY ONE YOU NEED I BELIEVE!!!!
+			void setPosition();
 
 		private:
 
@@ -258,9 +267,6 @@ namespace GUI{
 
 			std::vector<std::string> ops; //Duplicate, why have this??
 			std::vector<Texture*> options;
-
-
-			void setPosition();
 	};
 
 	class textBox{

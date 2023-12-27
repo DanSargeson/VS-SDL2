@@ -4,12 +4,12 @@
 
 CharacterMenu::CharacterMenu(){
 
-    invMenu = std::make_shared<GUI::Menu>();
+  //  menu = std::make_shared<GUI::Menu>();
 
-    std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
-    invMenu->setMenuOptions(ops, true, true);
     invMenu2 = std::make_shared<GUI::Menu>();
-    invMenu->setActive(true);
+    ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+    menu->setMenuOptions(ops, true, true);
+    menu->setActive(true);
     invMenu2->setActive(false);
     choice = -1;
     //getMainText()->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
@@ -27,19 +27,21 @@ CharacterMenu::CharacterMenu(){
 
 CharacterMenu::~CharacterMenu(){
 
-    State::~State();
-    invMenu.reset();
+//    State::~State();
+//    menu.reset();
     invMenu2.reset();
 }
 
 void CharacterMenu::refreshGUI(){
 
-    CharacterMenu();
+    State::refreshGUI();
+    invMenu2->refreshGUI();
+    initButtons();
 }
 
 void CharacterMenu::update(const float& dt){
 
-    invMenu->update();
+    menu->update();
     invMenu2->update();
 }
 
@@ -47,17 +49,17 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
 
-        invMenu->scrollText(0);
+        menu->scrollText(0);
     }
 
       if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
 
-        invMenu->scrollText(1);
+        menu->scrollText(1);
     }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
-        if(invMenu->isSelected() && invMenu->getActive()){
+        if(menu->isSelected() && menu->getActive()){
 
 //            if(invMenu->getChoice() == 0){
 //
@@ -66,19 +68,19 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 //                return;
 //            }
 
-                choice = invMenu->getChoice();
+                choice = menu->getChoice();
                 std::vector<std::string> ops;
                 ops.push_back("Equip Item");
                 ops.push_back("Drop Item");
 
-                invMenu->setActive(false);
+                menu->setActive(false);
                 invMenu2->setMenuOptions(ops, true);
                 invMenu2->setActive(true);
 
                 std::string msg = StateData::GetInstance()->getActiveCharacter()->getInvItemAsString(choice);
                 getMainText()->setString(msg, true, 420);
                 //mStateData::getInstane
-                    std::cout << invMenu->getChoice() << std::endl;
+        ///            std::cout << invMenu->getChoice() << std::endl;
 
         }   //FIRST MENU ENDS HERE
 
@@ -106,7 +108,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 //invMenu2->setActive(false);
                 //invMenu->setActive(true);
                 std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
-                invMenu->setMenuOptions(ops, true, true);
+                menu->setMenuOptions(ops, true, true);
                  std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
                 getMainText()->setString(mmm, true, 420);
                  mButtons["SKILLS"]->setSelected(false);
@@ -117,8 +119,8 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             ///}
 
             ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
-            invMenu->setMenuOptions(ops, true, true);
-            invMenu->setActive(true);
+            menu->setMenuOptions(ops, true, true);
+            menu->setActive(true);
             invMenu2->setActive(false);
     }
 
@@ -127,7 +129,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         //BUTTONS START HERE
         if (mButtons["SKILLS"]->isPressed(e.button)) {
 
-            invMenu->setActive(false);
+            menu->setActive(false);
             invMenu2->setActive(false);
 
             mButtons["SKILLS"]->setSelected(true);
@@ -146,7 +148,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             //mButtons["INVENTORY"]->setSelected(false);
             mButtons["FACTIONS"]->setSelected(true);
 
-            invMenu->setActive(false);
+            menu->setActive(false);
             invMenu2->setActive(false);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
             getMainText()->setString(fact, true, 420);
@@ -159,7 +161,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             //mButtons["INVENTORY"]->setSelected(false);
             mButtons["FACTIONS"]->setSelected(false);
 
-            invMenu->setActive(true);
+            menu->setActive(true);
             invMenu2->setActive(false);
 
             //std::cout << "Attrib pressed\n\n\n\n\n";
@@ -181,7 +183,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_ESCAPE)){
 
             invMenu2->setActive(false);
-            invMenu->setActive(true);
+            menu->setActive(true);
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             getMainText()->setString(mmm, true, 420);
         }
@@ -192,8 +194,8 @@ void CharacterMenu::render(){
 
     getMainText()->render();
 
-    if(invMenu->getActive()){
-        invMenu->render();
+    if(menu->getActive()){
+        menu->render();
     }
     if(invMenu2->getActive()){
         invMenu2->render();

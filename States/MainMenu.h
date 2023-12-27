@@ -18,7 +18,7 @@ public:
 	void update(const float &dt);
 	void updateEvents(SDL_Event &e);
 //	void updateMouseEvents(SDL_MouseButtonEvent& e);
-//	void updateGUI();
+	void refreshGUI();
     void loadFiles();
 	void render();
 

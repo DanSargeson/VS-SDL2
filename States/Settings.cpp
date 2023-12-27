@@ -39,7 +39,7 @@ Settings::Settings(){
 
 Settings::~Settings()
 {
-    State::~State();
+//    State::~State();
 }
 
 void Settings::update(const float& dt){

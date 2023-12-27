@@ -18,8 +18,10 @@ public:
 	void updateEvents(SDL_Event &e);
 	void render();
 
+	void refreshGUI();
+
 private:
-    std::unique_ptr<GUI::Menu> gameMenu;
+   // std::unique_ptr<GUI::Menu> gameMenu;
     std::shared_ptr<GUI::Text> mainText;
 
     std::shared_ptr<GUI::textBox> textBox;

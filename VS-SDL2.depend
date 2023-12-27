@@ -596,3 +596,992 @@
 	<any>
 	<string_view>
 
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\attackcomponent.cpp
+	"stdafx.h"
+	"AttackComponent.h"
+
+1703545880 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\stdafx.h
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	<SDL_thread.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_image.h>
+	<SDL2/SDL_thread.h>
+	<iostream>
+	<fstream>
+	<unordered_map>
+	<map>
+	<string>
+	<stack>
+	<chrono>
+	<random>
+	<sstream>
+	<vector>
+	<cmath>
+	<thread>
+	<algorithm>
+	<filesystem>
+	<time.h>
+	"Input.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_guid.h"
+	"SDL_haptic.h"
+	"SDL_hidapi.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_metal.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"SDL_locale.h"
+	"SDL_misc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	<sal.h>
+	"begin_code.h"
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+	<winsdkver.h>
+	<sdkddkver.h>
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_platform.h
+	<AvailabilityMacros.h>
+	<TargetConditionals.h>
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\begin_code.h
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\close_code.h
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_assert.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<sys/cpuinline.h>
+	<mbarrier.h>
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<endian.h>
+	<endian.h>
+	<sys/endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	<process.h>
+	<process.h>
+	<stdlib.h>
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<arm_neon.h>
+	<altivec.h>
+	<arm_neon.h>
+	<armintr.h>
+	<arm_neon.h>
+	<arm64intr.h>
+	<arm64_neon.h>
+	<mm3dnow.h>
+	<lsxintrin.h>
+	<lasxintrin.h>
+	<immintrin.h>
+	<mmintrin.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_guid.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_guid.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_sensor.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_hidapi.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_metal.h
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543531 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_locale.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703543530 c:\users\dansa\onedrive\documents\code\sdl2\include\sdl2\sdl_misc.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703545611 c:\users\dansa\onedrive\documents\code\sdl2_ttf-2.20.2\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703545478 c:\users\dansa\onedrive\documents\code\sdl2_image-2.8.1\x86_64-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703547956 c:\users\dansa\onedrive\documents\github\vs-sdl2\inputs\input.h
+	<SDL.h>
+	<SDL2/SDL.h>
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\attackcomponent.h
+	"SkillComponent.h"
+	"AttributeComponent.h"
+	"Weapon.h"
+	"Armour.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\skillcomponent.h
+	"Component.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\component.h
+	"Engine.h"
+
+1703696041 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_mixer.h>
+	<vector>
+	<memory>
+	"State.h"
+
+1703545628 c:\users\dansa\onedrive\documents\code\sdl2_mixer-2.6.3\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1703684398 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.h
+	<memory>
+	<string>
+	<vector>
+	<unordered_map>
+	<fstream>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_mixer.h>
+	"Player.h"
+	"Enemy.h"
+	"GUI.h"
+	"Camera.h"
+	"Timer.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\player.h
+	"Inventory.h"
+	"Entity.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\items\inventory.h
+	"Item.h"
+	"Weapon.h"
+	"Armour.h"
+	<vector>
+	<algorithm>
+	<memory>
+
+1703547944 c:\users\dansa\onedrive\documents\github\vs-sdl2\items\item.h
+	<SDL.h>
+	<SDL2/SDL.h>
+	<string>
+	<iostream>
+	<iomanip>
+	<math.h>
+	<vector>
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\items\weapon.h
+	"Item.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\items\armour.h
+	"Item.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\entity.h
+	<memory>
+	"Inventory.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\enemy.h
+	<stdlib.h>
+	<vector>
+	<string>
+	"Entity.h"
+
+1703691081 c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.h
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<string>
+	<memory>
+	<vector>
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\camera.h
+	"Vector2D.h"
+	"stdafx.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\vector2d.h
+	<iostream>
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\timer\timer.h
+	<cstdint>
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\attributecomponent.h
+	"Component.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\attributecomponent.cpp
+	"stdafx.h"
+	"AttributeComponent.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\component.cpp
+	"stdafx.h"
+	"Component.h"
+	"Entity.h"
+
+1703696465 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\dialoguecomponent.cpp
+	"DialogueComponent.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\dialoguecomponent.h
+	"Component.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\factioncomponent.cpp
+	"stdafx.h"
+	"FactionComponent.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\factioncomponent.h
+	"Component.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\skillcomponent.cpp
+	"stdafx.h"
+	"SkillComponent.h"
+	"AttributeComponent.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\camera.cpp
+	"Camera.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\loadfiles.cpp
+	"LoadFiles.h"
+	<unordered_set>
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\loadfiles.h
+	"Engine.h"
+	"json.hpp"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\json.hpp
+	<algorithm>
+	<cstddef>
+	<functional>
+	<initializer_list>
+	<iosfwd>
+	<iterator>
+	<memory>
+	<string>
+	<utility>
+	<vector>
+	<utility>
+	<algorithm>
+	<array>
+	<forward_list>
+	<iterator>
+	<map>
+	<string>
+	<tuple>
+	<type_traits>
+	<unordered_map>
+	<utility>
+	<valarray>
+	<cstddef>
+	<exception>
+	<numeric>
+	<stdexcept>
+	<string>
+	<vector>
+	<array>
+	<cstddef>
+	<cstdint>
+	<string>
+	<utility>
+	<type_traits>
+	<stdint.h>
+	<stdint.h>
+	<version>
+	<cstdlib>
+	<cassert>
+	<compare>
+	<cstddef>
+	<array>
+	<cstddef>
+	<type_traits>
+	<utility>
+	<limits>
+	<type_traits>
+	<utility>
+	<tuple>
+	<string>
+	<iterator>
+	<cstdint>
+	<map>
+	<memory>
+	<string>
+	<vector>
+	<cstring>
+	<string>
+	<utility>
+	<experimental/filesystem>
+	<filesystem>
+	<algorithm>
+	<iterator>
+	<string>
+	<tuple>
+	<type_traits>
+	<utility>
+	<valarray>
+	<vector>
+	<cstddef>
+	<iterator>
+	<string>
+	<tuple>
+	<utility>
+	<ranges>
+	<cstdint>
+	<tuple>
+	<utility>
+	<cstdint>
+	<cstddef>
+	<functional>
+	<algorithm>
+	<array>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<cstring>
+	<iterator>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<array>
+	<cstddef>
+	<cstring>
+	<iterator>
+	<memory>
+	<numeric>
+	<string>
+	<type_traits>
+	<utility>
+	<cstdio>
+	<istream>
+	<cstddef>
+	<string>
+	<utility>
+	<vector>
+	<array>
+	<clocale>
+	<cstddef>
+	<cstdio>
+	<cstdlib>
+	<initializer_list>
+	<string>
+	<utility>
+	<vector>
+	<cstdint>
+	<utility>
+	<string>
+	<cmath>
+	<cstdint>
+	<functional>
+	<string>
+	<utility>
+	<vector>
+	<cstddef>
+	<limits>
+	<iterator>
+	<type_traits>
+	<cstddef>
+	<iterator>
+	<utility>
+	<type_traits>
+	<algorithm>
+	<cctype>
+	<cerrno>
+	<cstdlib>
+	<iosfwd>
+	<limits>
+	<numeric>
+	<string>
+	<utility>
+	<vector>
+	<initializer_list>
+	<utility>
+	<algorithm>
+	<array>
+	<map>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<algorithm>
+	<cstddef>
+	<iterator>
+	<memory>
+	<string>
+	<vector>
+	<ios>
+	<ostream>
+	<algorithm>
+	<array>
+	<clocale>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<limits>
+	<string>
+	<iomanip>
+	<type_traits>
+	<utility>
+	<array>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<type_traits>
+	<functional>
+	<initializer_list>
+	<iterator>
+	<memory>
+	<stdexcept>
+	<type_traits>
+	<utility>
+	<vector>
+	<any>
+	<string_view>
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\enemy.cpp
+	"Enemy.h"
+	"AttributeComponent.h"
+	"SkillComponent.h"
+	<random>
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\entity.cpp
+	"stdafx.h"
+	"Entity.h"
+	"Component.h"
+	"FactionComponent.h"
+	"AttributeComponent.h"
+	"SkillComponent.h"
+	"AttackComponent.h"
+	"DialogueComponent.h"
+
+1703697237 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
+	"Engine.h"
+	"Input.h"
+	"MainMenu.h"
+	<iostream>
+
+1703635552 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.h
+	"State.h"
+	"Texture.h"
+	"GUI.h"
+
+1703546038 c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\texture.h
+	"SDL.h"
+	"SDL_ttf.h"
+	"SDL_image.h"
+	"SDL2/SDL.h"
+	"SDL2/SDL_ttf.h"
+	"SDL2/SDL_image.h"
+	"Engine.h"
+	<string>
+	<iostream>
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\npc.cpp
+	"NPC.h"
+	"FactionComponent.h"
+	"DialogueComponent.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\npc.h
+	"Entity.h"
+	"Inventory.h"
+	"Weapon.h"
+	"Armour.h"
+	"Engine.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\entities\player.cpp
+	"Player.h"
+	"State.h"
+	"FactionComponent.h"
+	"AttributeComponent.h"
+	"SkillComponent.h"
+	"AttackComponent.h"
+	"Entity.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\events\event.cpp
+	"Event.h"
+	"Game.h"
+	"Engine.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\events\event.h
+	<stdlib.h>
+	<iostream>
+	"Enemy.h"
+	"GUI.h"
+
+1703689931 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.h
+	"State.h"
+	"GUI.h"
+	"LoadFiles.h"
+
+1703696482 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.cpp
+	"GUI.h"
+	"Texture.h"
+	"State.h"
+	"Engine.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\texture.cpp
+	"Texture.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\inputs\input.cpp
+	"Input.h"
+	"Engine.h"
+	<iostream>
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\items\armour.cpp
+	"Armour.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\items\inventory.cpp
+	"Inventory.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\items\item.cpp
+	"Item.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\items\weapon.cpp
+	"Weapon.h"
+
+1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\main.cpp
+	"Engine.h"
+	"Timer.h"
+
+1703698409 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.cpp
+	"Battle.h"
+	"Engine.h"
+	"Input.h"
+	"PlayerDeath.h"
+
+1703690937 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.h
+	"State.h"
+	"Timer.h"
+	"Player.h"
+
+1703699077 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.h
+	"Timer.h"
+	"State.h"
+
+1703698212 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.cpp
+	"CharacterMenu.h"
+	"Engine.h"
+	"Input.h"
+
+1703687950 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.h
+	"GUI.h"
+	"State.h"
+
+1703697424 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.cpp
+	"FactionEncounter.h"
+	"LoadFiles.h"
+
+1703689248 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.h
+	"State.h"
+	"NPC.h"
+	"LoadFiles.h"
+
+1703696588 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactercreator.cpp
+	"CharacterCreator.h"
+	"Game.h"
+	"AttributeComponent.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactercreator.h
+	"State.h"
+	"Texture.h"
+	"Player.h"
+
+1703697805 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
+	"Game.h"
+	"Engine.h"
+	"Event.h"
+	"Settings.h"
+	"Battle.h"
+	"FactionEncounter.h"
+	"RandomEncounter.h"
+	"CharacterMenu.h"
+	"LoadGame.h"
+
+1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.h
+	"State.h"
+
+1703693672 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.h
+	"State.h"
+	"NPC.h"
+	"GUI.h"
+	"LoadFiles.h"
+
+1703687667 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.h
+	"GUI.h"
+	"State.h"
+
+1703697691 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
+	"LoadGame.h"
+	"Engine.h"
+	"Game.h"
+
+1703699197 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.cpp
+	"PlayerDeath.h"
+	"Timer.h"
+	"Engine.h"
+
+1703696600 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.cpp
+	"MainMenu.h"
+	"CharacterCreator.h"
+	"LoadGame.h"
+	"Settings.h"
+	"Engine.h"
+	<filesystem>
+	<SDL_mixer.h>
+	<SDL2/SDL_mixer.h>
+
+1703698838 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.cpp
+	"RandomEncounter.h"
+
+1703696621 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.cpp
+	"Settings.h"
+	"Engine.h"
+
+1703696883 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
+	"State.h"
+	"Engine.h"
+
+1703552246 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\timer\timer.cpp
+	"Timer.h"
+	<SDL.h>
+	<SDL2/SDL.h>
+

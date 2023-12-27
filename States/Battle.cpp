@@ -39,20 +39,21 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
      player = StateData::GetInstance()->getActiveCharacter();
 
-    std::vector<std::string> ops;
+//    std::vector<std::string> ops;
+    ops.clear();
     ops.push_back("Attack");
     ops.push_back("Defend");
     ops.push_back("Use Item");
-    battleMenu.reset();
-    battleMenu = std::make_shared<GUI::Menu>();
-    battleMenu->setMenuOptions(ops, true);
+    //menu.reset();
+    //menu = std::make_shared<GUI::Menu>();
+    menu->setMenuOptions(ops, true);
 
     enemyMenu.reset();
     enemyMenu = std::make_shared<GUI::Menu>();
 
     enemyMenu->setActive(false);
 
-    getMainText() = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
+   // getMainText() = std::make_shared<GUI::Text>(5, 10, 12, 8, true);
     //getMainText()->setString("Test");
     //getDynamicText()->setString("You are attacked: ");
 
@@ -161,14 +162,14 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
 Battle::~Battle(){
 
-    battleMenu.reset();
+//    menu.reset();
     enemyMenu.reset();
 
     enemyAttkTxt.reset();
     playerAttkTxt.reset();
 
-    getMainText()->clearText();
-    getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+    //getMainText()->clearText();
+    //getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
     if(!escape){
         getMainText()->setString("Select an option: ");
     }
@@ -178,6 +179,30 @@ Battle::~Battle(){
     getEnemyText()->clearText();
     getDynamicText()->clearText();
     enemies.clear();
+}
+
+void Battle::refreshGUI(){
+
+    State::refreshGUI();
+
+    for(size_t i = 0; i < enemies.size(); i++){
+
+        std::string msg = enemies[i].getName() + " HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax());
+        enemyText[i].setString(msg);
+     //   enemyText[i].setColour(255, 0, 0, 0);
+		enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
+	}
+
+    enemyAttkTxt->refreshGUI();
+    playerAttkTxt->refreshGUI();
+
+    playerAttkTxt->setPosition(GUI::p2pX(15.f), GUI::p2pY(55.f));
+    enemyAttkTxt->setPosition(GUI::p2pX(60.f), GUI::p2pY(50.f));
+
+
+    battleCloseMsg->setPosition(20, 10);
+    battleCloseMsg->setSize(500, 500);
+    //menu->setPosition();
 }
 
 
@@ -195,10 +220,10 @@ if(!escape && !playerDefeated && !enemyDefeated) {
             ops.push_back("Attack");
             ops.push_back("Defend");
             ops.push_back("Use Item");
-            battleMenu->setMenuOptions(ops, true);
+            menu->setMenuOptions(ops, true);
             std::string msg = "HP: " + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHP()) + "/" + std::to_string(StateData::GetInstance()->getActiveCharacter()->getHPMax());
             std::string enemyMsg = "";
-            if(battleMenu->getActive()){
+            if(menu->getActive()){
 
 //                for(int i = 0; i < enemies.size(); i++){
 //
@@ -229,7 +254,7 @@ void Battle::updateMenu(){
 
     enemyMenu->setMenuOptions(enemyMenuStr, true);
     enemyMenu->setActive(true);
-    battleMenu->setActive(false);
+    menu->setActive(false);
 }
 
 void Battle::update(const float& dt){
@@ -241,11 +266,11 @@ if(endTurn){
         updateText();
     }
 
-    battleMenu->setActive(false);
+    menu->setActive(false);
     return;
 }
 
-battleMenu->update();
+menu->update();
 
 battleTxtTimer->Tick();
 
@@ -572,7 +597,7 @@ const void Battle::enemyAttacks(){
 
 void Battle::updateEvents(SDL_Event& e){
 
-    battleMenu->update();
+    menu->update();
     enemyMenu->update();
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
@@ -587,7 +612,7 @@ void Battle::updateEvents(SDL_Event& e){
             endTurn = false;
             playerTurn = true;
             //getDynamicText()->setString("Choose action: ");
-            battleMenu->setActive(true);
+            menu->setActive(true);
         }
     }
 
@@ -630,11 +655,11 @@ void Battle::updateEvents(SDL_Event& e){
 //
 //            }
 
-        if(battleMenu->isSelected() && playerTurn){
+        if(menu->isSelected() && playerTurn){
 
-        int choice = battleMenu->getChoice();
+        int choice = menu->getChoice();
 
-        if(battleMenu->getChoice() == 0){
+        if(menu->getChoice() == 0){
 
 
             ///THIS NEEDS TO BE THE ENEMY MENU
@@ -648,7 +673,7 @@ void Battle::updateEvents(SDL_Event& e){
 
             enemyMenu->setMenuOptions(ops, true);
             enemyMenu->setActive(true);
-            battleMenu->setActive(false);
+            menu->setActive(false);
 
             }
         }
@@ -661,7 +686,7 @@ void Battle::updateEvents(SDL_Event& e){
             ///THIS GOES IN THE SELECTED ENEMY
             playerAttacks();
             //TODO: Should go below so defence, items etc work
-            battleMenu->setActive(true);
+            menu->setActive(true);
         }
             ///END IN ENEMY
     }
@@ -752,8 +777,8 @@ void Battle::render(){
         playerAttkTxt->render();
     }
 
-    if(endTurn || battleMenu->getActive()){
-        battleMenu->render();
+    if(endTurn || menu->getActive()){
+        menu->render();
     }
     else if(enemyMenu->getActive()){
         enemyMenu->render();

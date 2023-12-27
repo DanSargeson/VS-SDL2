@@ -7,11 +7,15 @@
 #include "Settings.h"
 //#include "Texture.h"
 #include "Engine.h"
+
 #include <filesystem>
+#ifdef WIN32
+#include <SDL_mixer.h>
+#else
 #include <SDL2/SDL_mixer.h>
+#endif // WIN32
 
 MainMenu::MainMenu() : State(){
-
 
     mBgTexture = std::make_unique<Texture>();
 
@@ -61,7 +65,13 @@ MainMenu::~MainMenu(){
 
 Mix_FreeMusic(music);
 
-State::~State();
+//State::~State();
+}
+
+void MainMenu::refreshGUI(){
+
+    State::refreshGUI();
+    initButtons();
 }
 
 //void MainMenu::setStateData()
@@ -134,6 +144,8 @@ if( Mix_PlayingMusic() == 0 )
 
 
 	std::cout << "LOAD" << std::endl;
+
+
 
         if(std::filesystem::exists("characters.txt")){
             Engine::GetInstance()->AddState(std::make_shared<LoadGame>());

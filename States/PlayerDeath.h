@@ -15,12 +15,16 @@ class PlayerDeath : public State{
         void updateEvents(SDL_Event &e);
         void render();
 
+        void refreshGUI();
+
     private:
 
        // std::unique_ptr<GameTimer> textTimer;
         int alpha;
         int alpha2;
         std::shared_ptr<GUI::Text> deathMsg;
+        std::shared_ptr<GUI::Text> deathMsg2;
+        std::shared_ptr<GUI::Text> deathMsg3;
 };
 
 #endif

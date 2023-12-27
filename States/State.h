@@ -7,9 +7,15 @@
 #include <unordered_map>
 #include <fstream>
 
+#ifdef _WIN32
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#endif // WIN32
 
 #include "Player.h"
 #include "Enemy.h"
@@ -119,6 +125,7 @@ public:
     virtual void render() = 0;
 
     void loadCharacters();
+    virtual void refreshGUI();
     StateData* getData() { return StateData::GetInstance(); }
 
     std::shared_ptr<GUI::Text> getMainText() { return getData()->mainText; }
@@ -150,7 +157,8 @@ protected:
     Mix_Music *music;
 
     std::shared_ptr<GameTimer> textTimer;
-
+    std::shared_ptr<GUI::Menu> menu;
+    std::vector<std::string> ops;
     unsigned seed;
     std::default_random_engine generator;
 

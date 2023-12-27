@@ -1,12 +1,17 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#ifdef _WIN32
+#include <SDL.h>
+#else
+#include <SDL2/SDL.h>
+#endif // WIN32
+
 #include <string>
 #include <iostream>
 #include <iomanip>
 #include <math.h>
 #include <vector>
-#include <SDL2/SDL.h>
 //#include "dArray.h"
 
 using namespace std;

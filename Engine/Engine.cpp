@@ -3,7 +3,7 @@
 #include "MainMenu.h"
 #include <iostream>
 
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h>
 
 Engine* Engine::s_Instance = nullptr;
 
@@ -37,7 +37,7 @@ bool Engine::Init(){
         std::cerr << "Mix open audio failed: " << Mix_GetError() << std::endl;
     }
 
-    m_Window = SDL_CreateWindow("Dan's Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    m_Window = SDL_CreateWindow("Dan's Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
     if(m_Window == nullptr){
 
         SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -97,6 +97,17 @@ void Engine::UpdateEvents(SDL_Event &event){
 
         mStates[currentState]->updateEvents(event);
 
+    }
+
+    if(event.window.event == SDL_WINDOWEVENT_RESIZED){
+
+        if(!mStates.empty()){
+
+            for(int i = mStates.size() - 1; i >= 0; i--){
+
+                mStates[i]->refreshGUI();
+            }
+        }
     }
 }
 

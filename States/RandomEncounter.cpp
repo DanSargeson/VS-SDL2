@@ -3,13 +3,15 @@
 
 RandomEncounter::RandomEncounter(int faction){
 
+    firstEncounter = true;
+
     filename = "Assets/newDialogue.txt";
 
     getEnemyText()->setString("");
 
     getDynamicText()->setString("");
 
-
+    choice = -1;
     npc = std::make_shared<NPC>(faction);
 
     file = std::make_shared<LoadFiles>(filename, 0);
@@ -24,10 +26,33 @@ RandomEncounter::RandomEncounter(int faction){
     npc->createAttributeComponent(npcLevel, true, true);
     npc->createSkillComponent();
 
+    menu.reset();
+    menu = std::make_shared<GUI::Menu>();
+
+
+    refreshGUI();
+
+    std::cout << "NPC LEVEL: " << npcLevel << std::endl;
+    std::cout << "INT: " << npc->getAttribute(4) << std::endl;
+
+    //getData()->mainText->setString("TESTING");
+}
+
+RandomEncounter::~RandomEncounter(){
+
+    getData()->dynamicText->clearText();
+    getData()->enemyText->clearText();
+//    State::~State();
+}
+
+void RandomEncounter::refreshGUI(){
+
+    State::refreshGUI();
+
+    if(firstEncounter){
     std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
     msg += "\"" + file->loadRandomDialogue() +  "\"";
-    getData()->mainText->setString(msg, true, 880);
-    menu = std::make_shared<GUI::Menu>();
+    getData()->mainText->setString(msg, true);
 
     unlockedCharm = false;
 
@@ -48,17 +73,92 @@ RandomEncounter::RandomEncounter(int faction){
 
     menu->setMenuOptions(ops, true);
 
-    std::cout << "NPC LEVEL: " << npcLevel << std::endl;
-    std::cout << "INT: " << npc->getAttribute(4) << std::endl;
 
-    //getData()->mainText->setString("TESTING");
-}
+    }
+    else{
 
-RandomEncounter::~RandomEncounter(){
 
-    getData()->dynamicText->clearText();
-    getData()->enemyText->clearText();
-    State::~State();
+    //###########################
+
+    if(choice == 0){
+
+                    getData()->getActiveCharacter()->gainRep(npc->getFaction(), 1);
+                    std::string msg = "You have a pleasant chat with the stranger.\nFaction rep slightly increased.";
+                    if(getData()->getActiveCharacter()->getRep(npc->getFaction()) == 110){
+
+                        msg += "\n**New interaction unlocked!**";
+                    }
+                    getData()->dynamicText->setString(msg);
+
+                menu->setActive(false);
+            }
+
+            if(choice == 1){
+
+            //Charm
+                if(unlockedCharm){
+                    getData()->enemyText->clearText();
+                    if(charm()){
+
+                        getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
+                        getData()->getActiveCharacter()->gainRep(npc->getFaction(), 5);
+
+                        menu->setActive(false);
+                    }
+                    else{
+
+                        std::string msg = "The stranger isn't fooled by false flattery.";
+
+                        if(getData()->getActiveCharacter()->getRep(npc->getFaction()) >= 112){
+
+                            msg += "\nFaction rep decreased slightly.";
+                            getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
+                        }
+
+                        getData()->enemyText->setString(msg);
+                        menu->setActive(false);
+                    }
+                }
+                else{
+
+                    attemptSteal();
+                    menu->setActive(false);
+                }
+
+                menu->setActive(false);
+            }
+
+            if(choice == 2){
+
+                if(unlockedCharm){
+
+                    attemptSteal();
+                    menu->setActive(false);
+                }
+                else{
+
+                    //barter
+                    getData()->enemyText->clearText();
+                    getData()->dynamicText->setString("The stranger has no items...");
+                    menu->setActive(false);
+                }
+
+            }
+            if(choice == 3){
+
+                if(unlockedCharm){
+
+                    //barter
+                    getData()->enemyText->clearText();
+                    getData()->dynamicText->setString("The stranger has no items...");
+                }
+                else{
+
+                    return;
+                }
+
+            }
+        }
 }
 
 
@@ -94,8 +194,9 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 //
 //                return;
 //            }
-
+            choice = menu->getChoice();
             if(menu->getChoice() == 0){
+
 
                     getData()->getActiveCharacter()->gainRep(npc->getFaction(), 1);
                     std::string msg = "You have a pleasant chat with the stranger.\nFaction rep slightly increased.";
