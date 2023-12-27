@@ -8,6 +8,11 @@ PlayerDeath::PlayerDeath() : State(){
     alpha = 0;
     alpha2 = 0;
 
+
+    deathMsg = std::make_shared<GUI::Text>(false);
+    deathMsg2 = std::make_shared<GUI::Text>(false);
+    deathMsg3 = std::make_shared<GUI::Text>(false);
+
     refreshGUI();
 
     //HERE SAVEGAME
@@ -29,10 +34,6 @@ void PlayerDeath::refreshGUI(){
     SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, NULL);
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-
-    deathMsg = std::make_shared<GUI::Text>(false);
-    deathMsg2 = std::make_shared<GUI::Text>(false);
-    deathMsg3 = std::make_shared<GUI::Text>(false);
 
     deathMsg->setFontSize(100);
    // int w = getMainText()->getTextWidth();
@@ -80,7 +81,7 @@ void PlayerDeath::update(const float& dt){
         }
 
         SDL_SetTextureAlphaMod(deathMsg->getTexture(), alpha);
-        SDL_SetTextureAlphaMod(getEnemyText()->getTexture(), alpha2);
+        SDL_SetTextureAlphaMod(deathMsg3->getTexture(), alpha2);
     }
 }
 
