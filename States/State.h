@@ -157,7 +157,8 @@ protected:
     Mix_Music *music;
 
     std::shared_ptr<GameTimer> textTimer;
-
+    std::shared_ptr<GUI::Menu> menu;
+    std::vector<std::string> ops;
     unsigned seed;
     std::default_random_engine generator;
 

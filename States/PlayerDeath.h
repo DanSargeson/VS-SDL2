@@ -15,6 +15,8 @@ class PlayerDeath : public State{
         void updateEvents(SDL_Event &e);
         void render();
 
+        void refreshGUI();
+
     private:
 
        // std::unique_ptr<GameTimer> textTimer;

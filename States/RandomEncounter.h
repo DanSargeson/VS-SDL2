@@ -16,6 +16,7 @@ class RandomEncounter : public State{
         void updateEvents(SDL_Event& e);
         void render();
 
+        void refreshGUI();
         bool charm();
         bool rob();
 
@@ -28,6 +29,7 @@ class RandomEncounter : public State{
         std::shared_ptr<GUI::Menu> menu;
         std::shared_ptr<LoadFiles> file;
         std::string filename;
-
+        bool firstEncounter;
         bool unlockedCharm;
+        int choice;
 };

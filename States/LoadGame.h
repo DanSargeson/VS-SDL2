@@ -18,7 +18,7 @@ class LoadGame : public State{
 //        void loadCharacters();
 
     private:
-            std::shared_ptr<GUI::Menu> loadMenu;
+           // std::shared_ptr<GUI::Menu> loadMenu;
 };
 
 #endif // LOADGAME_H

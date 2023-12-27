@@ -103,7 +103,10 @@ void Engine::UpdateEvents(SDL_Event &event){
 
         if(!mStates.empty()){
 
-        mStates[currentState]->refreshGUI();
+            for(int i = 0; i < mStates.size(); i++){
+
+                mStates[i]->refreshGUI();
+            }
         }
     }
 }

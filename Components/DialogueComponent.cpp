@@ -14,7 +14,7 @@ DialogueComponent::DialogueComponent(Entity* owner) : Component(owner){
 
 DialogueComponent::~DialogueComponent(){
 
-    text.release();
+//    text.release();
 }
 
 void DialogueComponent::render(){

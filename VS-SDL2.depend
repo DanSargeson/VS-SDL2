@@ -1046,7 +1046,7 @@
 1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\component.h
 	"Engine.h"
 
-1703638084 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.h
+1703696041 c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -1068,7 +1068,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1703589664 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.h
+1703684398 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.h
 	<memory>
 	<string>
 	<vector>
@@ -1123,7 +1123,7 @@
 	<string>
 	"Entity.h"
 
-1703547965 c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.h
+1703691081 c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL2/SDL.h>
@@ -1154,7 +1154,7 @@
 	"Component.h"
 	"Entity.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\dialoguecomponent.cpp
+1703696465 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\components\dialoguecomponent.cpp
 	"DialogueComponent.h"
 
 1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\components\dialoguecomponent.h
@@ -1393,7 +1393,7 @@
 	"AttackComponent.h"
 	"DialogueComponent.h"
 
-1703636918 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
+1703695727 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\engine\engine.cpp
 	"Engine.h"
 	"Input.h"
 	"MainMenu.h"
@@ -1447,12 +1447,12 @@
 	"Enemy.h"
 	"GUI.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.h
+1703689931 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.h
 	"State.h"
 	"GUI.h"
 	"LoadFiles.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.cpp
+1703696482 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\graphics\gui.cpp
 	"GUI.h"
 	"Texture.h"
 	"State.h"
@@ -1482,40 +1482,40 @@
 	"Engine.h"
 	"Timer.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.cpp
+1703695317 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.cpp
 	"Battle.h"
 	"Engine.h"
 	"Input.h"
 	"PlayerDeath.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.h
+1703690937 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\battle.h
 	"State.h"
 	"Timer.h"
 	"Player.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.h
+1703688743 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.h
 	"Timer.h"
 	"State.h"
 
-1703546104 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.cpp
+1703693442 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.cpp
 	"CharacterMenu.h"
 	"Engine.h"
 	"Input.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.h
+1703687950 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactermenu.h
 	"GUI.h"
 	"State.h"
 
-1703552748 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.cpp
+1703696575 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.cpp
 	"FactionEncounter.h"
 	"LoadFiles.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.h
+1703689248 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\factionencounter.h
 	"State.h"
 	"NPC.h"
 	"LoadFiles.h"
 
-1703552755 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactercreator.cpp
+1703696588 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\charactercreator.cpp
 	"CharacterCreator.h"
 	"Game.h"
 	"AttributeComponent.h"
@@ -1525,7 +1525,7 @@
 	"Texture.h"
 	"Player.h"
 
-1703589847 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
+1703695824 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\game.cpp
 	"Game.h"
 	"Engine.h"
 	"Event.h"
@@ -1539,27 +1539,27 @@
 1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.h
 	"State.h"
 
-1703544002 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.h
+1703693672 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.h
 	"State.h"
 	"NPC.h"
 	"GUI.h"
 	"LoadFiles.h"
 
-1703637102 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.h
+1703687667 c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.h
 	"GUI.h"
 	"State.h"
 
-1703637519 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
+1703696596 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\loadgame.cpp
 	"LoadGame.h"
 	"Engine.h"
 	"Game.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.cpp
+1703696604 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\playerdeath.cpp
 	"PlayerDeath.h"
 	"Timer.h"
 	"Engine.h"
 
-1703636885 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.cpp
+1703696600 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\mainmenu.cpp
 	"MainMenu.h"
 	"CharacterCreator.h"
 	"LoadGame.h"
@@ -1569,14 +1569,14 @@
 	<SDL_mixer.h>
 	<SDL2/SDL_mixer.h>
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.cpp
+1703696616 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\randomencounter.cpp
 	"RandomEncounter.h"
 
-1703544002 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.cpp
+1703696621 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\settings.cpp
 	"Settings.h"
 	"Engine.h"
 
-1703637243 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
+1703696325 source:c:\users\dansa\onedrive\documents\github\vs-sdl2\states\state.cpp
 	"State.h"
 	"Engine.h"
 

@@ -236,6 +236,7 @@ namespace GUI{
 			void setDynamicMenu(std::vector<std::string> ops, int type);
 
 			void setMenuOptions(std::vector<std::string> options, bool dynamic = false, bool item = false); //ONLY ONE YOU NEED I BELIEVE!!!!
+			void setPosition();
 
 		private:
 
@@ -266,9 +267,6 @@ namespace GUI{
 
 			std::vector<std::string> ops; //Duplicate, why have this??
 			std::vector<Texture*> options;
-
-
-			void setPosition();
 	};
 
 	class textBox{

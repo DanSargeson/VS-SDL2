@@ -17,7 +17,6 @@
 
 MainMenu::MainMenu() : State(){
 
-
     mBgTexture = std::make_unique<Texture>();
 
 
@@ -66,7 +65,7 @@ MainMenu::~MainMenu(){
 
 Mix_FreeMusic(music);
 
-State::~State();
+//State::~State();
 }
 
 void MainMenu::refreshGUI(){

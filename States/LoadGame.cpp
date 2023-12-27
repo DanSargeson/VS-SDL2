@@ -10,8 +10,8 @@ LoadGame::LoadGame() : State(){
     ///State::loadCharacters();
     std::vector<std::string> ops;
 
-    loadMenu.reset();
-	loadMenu = make_unique<GUI::Menu>();
+    menu.reset();
+	menu = make_unique<GUI::Menu>();
 
 
 
@@ -21,18 +21,18 @@ LoadGame::LoadGame() : State(){
 	}
 
 	//this->activeMenu->setDynamicMenu(ops, 0);
-	loadMenu->setMenuOptions(ops, true);
+	menu->setMenuOptions(ops, true);
 }
 
 LoadGame::~LoadGame(){
 
-    loadMenu.reset();
-    State::~State();
+    menu.reset();
+//    State::~State();
 }
 
 void LoadGame::update(const float& dt){
 
-    loadMenu->update();
+    menu->update();
 }
 
 void LoadGame::updateEvents(SDL_Event& e){
@@ -41,21 +41,21 @@ void LoadGame::updateEvents(SDL_Event& e){
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
 
-        loadMenu->scrollText(0);
+        menu->scrollText(0);
     }
 
       if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
 
-        loadMenu->scrollText(1);
+        menu->scrollText(1);
     }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
         if(e.button.button == SDL_BUTTON_LEFT){
 
-            if (this->loadMenu->isSelected()) {
+            if (this->menu->isSelected()) {
 
-//			if (this->loadMenu->getChoice() == 0) {
+//			if (this->menu->getChoice() == 0) {
 //
 //              //  StateData::GetInstance()->characters.clear();
 //                Engine::GetInstance()->PopState();
@@ -65,13 +65,13 @@ void LoadGame::updateEvents(SDL_Event& e){
 
 				for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
 
-                        int c = loadMenu->getChoice();
+                        int c = menu->getChoice();
 //                        int d = StateData::GetInstance()->characters[i]->getID();
                         std::cout << "You picked:::   " << std::to_string(c) << std::endl;
 
                         //StateData::GetInstance()->characters[c];
 
-					//if (loadMenu->getChoice() == StateData::GetInstance()->characters[i]->getID()) {
+					//if (menu->getChoice() == StateData::GetInstance()->characters[i]->getID()) {
 
 						StateData::GetInstance()->activeCharacter = c;
                         ///StateData::GetInstance()->currentMap->LoadFromFile("Data/Map1.txt");
@@ -95,8 +95,8 @@ void LoadGame::refreshGUI(){
 
     State::refreshGUI();
 
-    loadMenu.reset();
-	loadMenu = make_unique<GUI::Menu>();
+    menu.reset();
+	menu = make_unique<GUI::Menu>();
 
     std::vector<std::string> ops;
 
@@ -106,7 +106,7 @@ void LoadGame::refreshGUI(){
 	}
 
 	//this->activeMenu->setDynamicMenu(ops, 0);
-	loadMenu->setMenuOptions(ops, true);
+	menu->setMenuOptions(ops, true);
 
 }
 
@@ -115,7 +115,7 @@ void LoadGame::render(){
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-    loadMenu->render();
+    menu->render();
 }
 
 /*

@@ -40,19 +40,19 @@ keyTime = 0.f;
     getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
     getDynamicText()->clearText();
 
-    getData()->enemyText = std::make_shared<GUI::Text>(true);
+    getData()->enemyText = std::make_shared<GUI::Text>(false);
     getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
     getEnemyText()->clearText();
     getEnemyText()->setColour(255, 0, 0, 0);
+
+    menu = std::make_shared<GUI::Menu>();
 
 }
 
 State::~State(){
 
-    getData()->dynamicText->clearText();
-    getData()->enemyText->clearText();
-    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-    getData()->mainText->setString("Select an option: ");
+    //getData()->dynamicText->clearText();
+    //getData()->enemyText->clearText();
 }
 
 void State::setData(StateData& stateData){
@@ -67,17 +67,17 @@ bool State::getQuit(){
 
 void State::refreshGUI(){
 
-    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-    getData()->mainText->setString("Select an option.");
 
-    getData()->dynamicText = std::make_shared<GUI::Text>(false);
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
-    getDynamicText()->clearText();
+        getData()->mainText->refreshGUI();
+        getDynamicText()->refreshGUI();
+        getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
-    getData()->enemyText = std::make_shared<GUI::Text>(true);
-    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
-    getEnemyText()->clearText();
-    getEnemyText()->setColour(255, 0, 0, 0);
+        //getData()->enemyText = std::make_shared<GUI::Text>();
+        getEnemyText()->refreshGUI();
+        getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+        //getEnemyText()->clearText();
+
+        menu->refreshGUI();
 
     //TODO Add buttons & menu to state to allow GUI refresh.... OR override
 }
@@ -357,7 +357,7 @@ void State::saveCharacters()
 
     std::string fileName = "characters.txt";
 
-        ofstream outFile(fileName);
+    std::ofstream outFile(fileName);
 
  //   void Game::saveCharacters(){
     if(outFile.is_open()){

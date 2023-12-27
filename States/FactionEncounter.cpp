@@ -5,6 +5,8 @@ int FactionEncounter::position = 1;
 
 FactionEncounter::FactionEncounter(int faction){
 
+    firstEncounter = true;
+
 
     getEnemyText()->setString("");
 
@@ -21,17 +23,13 @@ FactionEncounter::FactionEncounter(int faction){
 
     npc->createDialogueComponent();
     npc->createFactionComponent();
-    ///npc->setCharacterName(npc->getName());
-    ///npc->setDialogueText(file->loadDialogue());
-
-    ///file->loadFactionDialogue(npc->getFaction());
     file->readJsonFile2(json_file);
    // std::pair msg1 = file->getDialogueAndResponses(npc->getFactionStr(), 1, 0);
    std::string check = npc->getFactionStr();
     getMainText()->setString(file->getDialogue(check, 1));
-    m_menu = std::make_shared<GUI::Menu>();
+    menu = std::make_shared<GUI::Menu>();
 
-    m_menu->setMenuOptions(file->getFirstResponses(check, 1), true);
+    menu->setMenuOptions(file->getFirstResponses(check, 1), true);
 
 }
 
@@ -39,7 +37,7 @@ FactionEncounter::~FactionEncounter(){
 
     //getMainText()->setString("Select an option: ");
     npc.reset();
-    State::~State();
+    //State::~State();
 }
 
 void FactionEncounter::update(const float& dt){
@@ -49,7 +47,7 @@ void FactionEncounter::update(const float& dt){
         getEnemyText()->clearText();
         getDynamicText()->clearText();
 
-        if(!m_menu->getActive()){
+        if(!menu->getActive()){
 
             Engine::GetInstance()->PopState();
         }
@@ -61,27 +59,47 @@ void FactionEncounter::update(const float& dt){
 void FactionEncounter::updateEvents(SDL_Event& e)
 {
 
-    m_menu->update();
+    menu->update();
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
 
-        if(m_menu->isSelected()){
+        if(menu->isSelected()){
 
-//            if(m_menu->getChoice() == 0){
+//            if(menu->getChoice() == 0){
 //                Engine::GetInstance()->PopState();
 //            }
            // else{
 
-                file->selectResponse(npc->getFactionStr(), 1, (m_menu->getChoice() + 1));
+                firstEncounter = false;
+
+                file->selectResponse(npc->getFactionStr(), 1, (menu->getChoice() + 1));
                 std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
                 getMainText()->setString(msg2);
-                m_menu->setMenuOptions(file->getPlayerOps(), true);
+                menu->setMenuOptions(file->getPlayerOps(), true);
  //           }
         }
     }
 
     State::updateEvents(e);
+}
+
+void FactionEncounter::refreshGUI(){
+
+    State::refreshGUI();
+
+    if(firstEncounter){
+
+    std::string check = npc->getFactionStr();
+    getMainText()->setString(file->getDialogue(check, 1));
+    menu->setMenuOptions(file->getFirstResponses(check, 1), true);
+    }
+    else{
+
+        std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
+        getMainText()->setString(msg2);
+        menu->setMenuOptions(file->getPlayerOps(), true);
+    }
 }
 
 void FactionEncounter::render()
@@ -95,6 +113,6 @@ void FactionEncounter::render()
 
         getDynamicText()->render();
     }
-    m_menu->render();
+    menu->render();
 }
 

@@ -395,7 +395,7 @@ bool GUI::Text::isEmpty(){
 void GUI::Text::clearText(){
 
     this->setString("");
-    mBorder = false;
+    //mBorder = false;
 }
 
 std::string GUI::Text::getString() {
@@ -660,7 +660,7 @@ GUI::Tooltip::Tooltip(){
 
 GUI::Tooltip::~Tooltip(){
 
-	displayText.release();
+//	displayText.release();
 }
 
 void GUI::Tooltip::setDisplayText(std::string txt) {

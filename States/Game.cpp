@@ -14,9 +14,9 @@ Game::Game() : State(){
 //  LoadGame lg;/
 //  lg.loadCharacters();
     tutorialCount = 0;
-    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-    getData()->enemyText = std::make_shared<GUI::Text>();
-    getData()->dynamicText = std::make_shared<GUI::Text>();
+//    getData()->mainText = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+ //   getData()->enemyText = std::make_shared<GUI::Text>();
+  //  getData()->dynamicText = std::make_shared<GUI::Text>();
 
     refreshGUI();
 
@@ -28,10 +28,8 @@ Game::Game() : State(){
 
     getDynamicText()->setString("");
 
-	std::vector<std::string> menuOptions;
+	//std::vector<std::string> menuOptions;
 
-    gameMenu.reset();
-	gameMenu = make_unique<GUI::Menu>();
 
 	textBox = std::make_shared<GUI::textBox>();
 
@@ -39,17 +37,9 @@ Game::Game() : State(){
     file = std::make_shared<LoadFiles>("Assets/factionDiag.txt");
 ///    testNpc->setFaction(file->loadFaction());
 
-	//menuOptions.push_back("0: Quit");
-	menuOptions.push_back("Travel");    //1
-	menuOptions.push_back("Shop");      //2
-	menuOptions.push_back("Level Up");  //3
-	menuOptions.push_back("Rest - Cost 10 Gold");   //4
-	menuOptions.push_back("Character Menu");        //5
-	menuOptions.push_back("Settings");
-	menuOptions.push_back("Save Game");             //7
-	menuOptions.push_back("Help");                  //9
+	//menuOptions.push_back("0: Quit
 
-	gameMenu->setMenuOptions(menuOptions, true);
+    refreshGUI();
 
 //	music = Mix_LoadMUS("Assets/Audio/Intro.wav");
 //
@@ -71,7 +61,23 @@ Game::Game() : State(){
 Game::~Game(){
 
  //Mix_FreeMusic(music);
- State::~State();
+}
+
+void Game::refreshGUI(){
+
+    State::refreshGUI();
+    getData()->mainText->setString("Select an option.");
+	ops.clear();
+	ops.push_back("Travel");    //1
+	ops.push_back("Shop");      //2
+	ops.push_back("Level Up");  //3
+	ops.push_back("Rest - Cost 10 Gold");   //4
+	ops.push_back("Character Menu");        //5
+	ops.push_back("Settings");
+	ops.push_back("Save Game");             //7
+	ops.push_back("Help");                  //9
+
+	menu->setMenuOptions(ops, true);
 }
 
 void Game::update(const float& dt){
@@ -119,13 +125,13 @@ void Game::update(const float& dt){
 
     if(textBox->getActive() || testNpc->getDialogueActive()){
 
-        gameMenu->setActive(false);
+        menu->setActive(false);
     }
     else{
 
-        gameMenu->setActive(true);
+        menu->setActive(true);
     }
-    gameMenu->update();
+    menu->update();
 
     if(getData()->getActiveCharacter()->getExp() >= getData()->getActiveCharacter()->getExpNext()){
 
@@ -138,24 +144,24 @@ void Game::update(const float& dt){
 
 void Game::updateEvents(SDL_Event& e){
 
-    gameMenu->update();
+    menu->update();
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
 
-        gameMenu->scrollText(0);
+        menu->scrollText(0);
     }
 
       if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
 
-        gameMenu->scrollText(1);
+        menu->scrollText(1);
     }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
         //updateMouseEvents(e.button);
         //GAME LOOP HERE
-        if(gameMenu->isSelected()){
+        if(menu->isSelected()){
 
-            if(gameMenu->getChoice() == 0){
+            if(menu->getChoice() == 0){
 
 
                 seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
@@ -237,14 +243,14 @@ void Game::updateEvents(SDL_Event& e){
                 //StateData::GetInstance()->push_state(std::make_shared<Battle>());
             }
 
-            if(gameMenu->getChoice() == 2){
+            if(menu->getChoice() == 2){
 
                 StateData::GetInstance()->getActiveCharacter()->levelUp();
                // getMainText()->setString("Levelled up!!");
                 getDynamicText()->setString("");
             }
 
-            if(gameMenu->getChoice() == 3){
+            if(menu->getChoice() == 3){
 
                 if(StateData::GetInstance()->getActiveCharacter()->getGold() >= 10){
 
@@ -262,24 +268,24 @@ void Game::updateEvents(SDL_Event& e){
                 }
             }
 
-            if(gameMenu->getChoice() == 4){
+            if(menu->getChoice() == 4){
 
                 Engine::GetInstance()->AddState(std::make_shared<CharacterMenu>());
             }
 
-            if(gameMenu->getChoice() == 5){
+            if(menu->getChoice() == 5){
 
                 Engine::GetInstance()->AddState(std::make_shared<Settings>());
             }
 
 
-            if(gameMenu->getChoice() == 6){
+            if(menu->getChoice() == 6){
 
                 saveCharacters();
                 getMainText()->setString("Game Saved");
             }
 
-            if(gameMenu->getChoice() == 7){
+            if(menu->getChoice() == 7){
 
                 tutorialCount = 0;
                 StateData::GetInstance()->setTutorial(true);
@@ -353,7 +359,7 @@ void Game::render(){
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-    gameMenu->render();
+    menu->render();
     getMainText()->render();
     getDynamicText()->render();
     getEnemyText()->render();
@@ -371,7 +377,7 @@ void Game::render(){
 
         if(tutorialCount == 1){
 
-            gameMenu->render();
+            menu->render();
             textBox->render();
         }
         if(tutorialCount == 2){

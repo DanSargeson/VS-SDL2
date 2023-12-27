@@ -7,7 +7,23 @@ PlayerDeath::PlayerDeath() : State(){
     textTimer = std::make_unique<GameTimer>();
     alpha = 0;
     alpha2 = 0;
-     int w;
+
+    refreshGUI();
+
+    //HERE SAVEGAME
+    textTimer->start();
+   // std::cout << deathMsg->getColour() << std::endl;
+}
+
+PlayerDeath::~PlayerDeath(){
+
+//    State::~State();
+}
+
+void PlayerDeath::refreshGUI(){
+
+    State::refreshGUI();
+    int w;
     SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, NULL);
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
@@ -35,15 +51,6 @@ PlayerDeath::PlayerDeath() : State(){
     SDL_SetTextureAlphaMod(getEnemyText()->getTexture(), alpha);
     int enemX = (w / 2) - (getEnemyText()->getTextWidth() / 2);
     getEnemyText()->setPosition(enemX, GUI::p2pY(55));
-
-    //HERE SAVEGAME
-    textTimer->start();
-   // std::cout << deathMsg->getColour() << std::endl;
-}
-
-PlayerDeath::~PlayerDeath(){
-
-    State::~State();
 }
 
 void PlayerDeath::update(const float& dt){
