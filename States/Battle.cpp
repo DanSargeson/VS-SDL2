@@ -132,7 +132,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		//rando = rand() % high + low;
 		std::uniform_int_distribution<>randEnemies(low, high);
 		rando = randEnemies(gen);
-		enemies.push_back(Enemy(/*rando*/1)); ///TODO DEBUG REMOVE
+		enemies.push_back(Enemy(rando));
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){
@@ -814,7 +814,7 @@ void Battle::updateEvents(SDL_Event& e){
 void Battle::render(){
 
 
-     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     getMainText()->render();
