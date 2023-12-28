@@ -107,6 +107,7 @@ namespace GUI{
 		SDL_Rect getPositionRect();
 
 		void setColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		void setAlpha(Uint8 a);
 		void setFontSize(int size);
 		void updateWindow();
 		void refreshGUI();
@@ -288,6 +289,7 @@ namespace GUI{
             inline GUI::Text getText() { return text; }
             inline SDL_Texture* getTexture() { return text.getTexture(); }
             inline SDL_Texture* getHeaderTexture() { return header.getTexture(); }
+
         private:
 
             GUI::Text header;

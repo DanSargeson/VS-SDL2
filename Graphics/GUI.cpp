@@ -401,6 +401,12 @@ void GUI::Text::clearText(){
 std::string GUI::Text::getString() {
 
 	return mMainText;
+
+}
+
+void GUI::Text::setAlpha(Uint8 a){
+
+    mTextColour.a = a;
 }
 
 void GUI::Text::setColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
@@ -975,6 +981,23 @@ void GUI::Menu::update(){
 		this->updateTextSelector();
 		this->updateInput(); //CAN BE REMOVED..
 	}
+
+	///TODO: - Fix and bring back
+//	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)){
+//
+//        if(isSelected() && getActive()){
+//
+//            scrollText(1);
+//        }
+//	}
+//
+//	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)){
+//
+//        if(isSelected() && getActive()){
+//
+//            scrollText(0);
+//        }
+//	}
 }
 
 /* TODO SCROLL TEXT FUNCTION!!! */

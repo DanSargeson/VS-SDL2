@@ -219,7 +219,7 @@ void Game::updateEvents(SDL_Event& e){
                 std::uniform_int_distribution<> dis2(0, numbers.size() - 1);
                 randomIndex = dis2(gen);
                 randomValue = numbers[randomIndex];
-
+                eventToss = 2; ///TODO DEBUG REMOVE!!
                if(eventToss <= 2){
 
                     Engine::GetInstance()->AddState(std::make_shared<Battle>());

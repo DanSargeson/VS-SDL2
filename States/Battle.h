@@ -1,6 +1,9 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
+#include <thread>
+#include <atomic>
+
 #include "State.h"
 #include "Timer.h"
 #include "Player.h"
@@ -18,10 +21,14 @@ class Battle : public State{
         void initBattle();
         void updateMenu();
         void updateText();
+        void updateWinText();
         const void enemyAttacks();
         const void playerAttacks();
         void render();
         void refreshGUI();
+
+        void startTextThread();
+        void startWinThread();
 
     private:
         std::shared_ptr<GUI::Menu> battleMenu;
@@ -52,6 +59,7 @@ class Battle : public State{
         int combatRollEnemy;
         float alpha;
         float alpha2;
+        float winAlpha;
 
         bool escape;
         bool playerDefeated;
@@ -75,6 +83,13 @@ class Battle : public State{
         std::string endMsg;
         std::unique_ptr<GUI::Text> playerAttkTxt;
         std::unique_ptr<GUI::Text> enemyAttkTxt;
+
+        std::thread textThread;
+        std::thread winThread;
+        std::atomic<bool> textThreadRunning;
+        std::atomic<bool> winThreadRunning;
+
+
 
 
 //        unsigned seed;

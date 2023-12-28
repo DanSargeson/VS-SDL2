@@ -11,6 +11,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 //     std::uniform_int_distribution<int> numEnemiesDistribution(1, 3);
 //     noOfEnemies = numEnemiesDistribution(generator);
 
+    textThreadRunning = false;
+
     std::random_device rd;
 
 
@@ -27,7 +29,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
     noOfEnemies = dis(gen);
 
-    if(getData()->getActiveCharacter()->getLevel() <= 4){
+    if(getData()->getActiveCharacter()->getLevel() <= 50){
 
         noOfEnemies = 1;
     }
@@ -130,7 +132,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		//rando = rand() % high + low;
 		std::uniform_int_distribution<>randEnemies(low, high);
 		rando = randEnemies(gen);
-		enemies.push_back(Enemy(rando));
+		enemies.push_back(Enemy(/*rando*/1)); ///TODO DEBUG REMOVE
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){
@@ -179,6 +181,11 @@ Battle::~Battle(){
     getEnemyText()->clearText();
     getDynamicText()->clearText();
     enemies.clear();
+
+    if(textThread.joinable()){
+
+        textThread.join();
+    }
 }
 
 void Battle::refreshGUI(){
@@ -208,6 +215,7 @@ void Battle::refreshGUI(){
 
 void Battle::initBattle(){
 
+winAlpha = 0;
 endGameTimer = std::make_unique<GameTimer>();
 endGameTimer->start();
 battleGameTimer->start();
@@ -261,10 +269,10 @@ void Battle::update(const float& dt){
 
 if(endTurn){
 
-    if(playerWins){
-
-        updateText();
-    }
+//    if(playerWins){
+//
+//        updateText();
+//    }
 
     menu->setActive(false);
     return;
@@ -282,11 +290,29 @@ if(playerDefeated){
     playerTurn = false;
     endTurn = true;
 
+    textThreadRunning = false;
+    if(textThread.joinable()){
+
+        textThread.join();
+    }
+
 //    ~Battle();
     Engine::GetInstance()->PopState();
     Engine::GetInstance()->AddState(std::make_shared<PlayerDeath>());
 
     return;
+}
+
+if(playerWins){
+
+    if(winThread.joinable()){
+
+        if(winAlpha == 255){
+
+            winThread.join();
+        }
+        return;
+    }
 }
 
 
@@ -312,7 +338,6 @@ if(playerDefeated){
             else if (enemies.size() <= 0) {
                 enemyDefeated = true;
                 cout << "All enemies defeated!\n\n";
-
   //              ~Battle();
                 Engine::GetInstance()->PopState();
             }
@@ -328,26 +353,58 @@ if(playerDefeated){
         }
 	}
 
-    updateText();
+	if(alpha2 <=5 || alpha <=5){
+//        textThreadRunning = false;
+        if(textThread.joinable()){
+            textThread.join();
+        }
+	}
 }
 
-void Battle::updateText(){
+void Battle::startTextThread(){
 
+    textThreadRunning = true;
+    textThread = std::thread(&Battle::updateText, this);
+}
+
+void Battle::startWinThread(){
+
+    winThreadRunning = true;
+    winThread = std::thread(&Battle::updateWinText, this);
+}
+
+void Battle::updateWinText(){
+
+    while(winThreadRunning){
 
     if(playerWins){
 
         if(endGameTimer != nullptr && endGameTimer->getTicks() > 5){
 
-            alpha += 2;
-            if(alpha > 255){
+            //std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            winAlpha+= 7;
+            if(winAlpha > 255){
 
-                alpha = 255;
+                winAlpha = 255;
+                winThreadRunning = false;
             }
-            SDL_SetTextureAlphaMod(this->battleCloseMsg->getTexture(), alpha);
-            SDL_SetTextureAlphaMod(this->battleCloseMsg->getHeaderTexture(), alpha);
+
+            battleCloseMsg->setAlpha(winAlpha);
+            SDL_SetTextureAlphaMod(this->battleCloseMsg->getTexture(), winAlpha);
+            SDL_SetTextureAlphaMod(this->battleCloseMsg->getHeaderTexture(), winAlpha);
+
             endGameTimer->restart();
         }
     }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    }
+}
+
+void Battle::updateText(){
+
+
+    while(textThreadRunning){
 
     if(playerAttkTxt && playerTurn){
 
@@ -361,12 +418,14 @@ void Battle::updateText(){
 
             playerAttkTxt->clearText();
             alpha = 255;
+            textThreadRunning = false;
         }
     }
 
 
     if(enemyAttkTxt){
 
+        //std::this_thread::sleep_for(std::chrono::milliseconds(20));
         if(alpha2 >= 0){
 
             alpha2 -= 5;
@@ -376,13 +435,17 @@ void Battle::updateText(){
 
             enemyAttkTxt->clearText();
             alpha2 = 255;
+            textThreadRunning = false;
         }
+    }
+     std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
 }
 
 
 const void Battle::playerAttacks(){
 
+                alpha = 255;
 ///            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
             enemyTotal = enemies[choice].getSkill(2); /// / (double)combatTotal * 100;
 ///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
@@ -421,7 +484,7 @@ const void Battle::playerAttacks(){
 					std::string msg = enemies[choice].getName() + " HP: " + std::to_string(enemies[choice].getHP()) + "/" + std::to_string(enemies[choice].getHPMax());
                     enemyText[choice].setString(msg);
 					playerAttkTxt->setString(dmgMsg);
-					alpha = 255;
+					//alpha = 255;
 
 					//#####PLAYER WINS
 					if (!enemies[choice].isAlive()) {
@@ -451,7 +514,12 @@ const void Battle::playerAttacks(){
                             endMsg += "\nTotal Gold Gained: " + std::to_string(totalGold);
 
                             playerWins = true;
-                            alpha = 0;
+                            winAlpha = 0;
+                            if(textThread.joinable()){
+
+                                textThread.detach();
+                            }
+                            startWinThread();
 						}
 
 						//ITEM ROLL
@@ -543,6 +611,7 @@ const void Battle::enemyAttacks(){
     if(enemies.size() <= 0){
 
         endTurn = true;
+///        textThreadRunning = false;
         return;
     }
 
@@ -604,15 +673,26 @@ void Battle::updateEvents(SDL_Event& e){
 
         if(playerWins){
 
+                if(!winThreadRunning){
 
+                    Engine::GetInstance()->PopState();
+                    return;
+                }
         }
 
         if(endTurn){
 
-            endTurn = false;
-            playerTurn = true;
-            //getDynamicText()->setString("Choose action: ");
-            menu->setActive(true);
+                endTurn = false;
+                playerTurn = true;
+                menu->setActive(true);
+            if(!textThreadRunning){
+
+                    if(!winThreadRunning){
+
+                        startTextThread();
+                    }
+                //getDynamicText()->setString("Choose action: ");
+            }
         }
     }
 
@@ -640,6 +720,11 @@ void Battle::updateEvents(SDL_Event& e){
                         return;
                     }
                     else{
+
+                        if(textThread.joinable()){
+
+                            textThread.detach();
+                        }
                         Engine::GetInstance()->PopState();
                         return;
                     }
@@ -728,52 +813,54 @@ void Battle::updateEvents(SDL_Event& e){
 
 void Battle::render(){
 
-    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
+
+     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
     getMainText()->render();
     getEnemyText()->render();
 
+
     if(playerWins){
 
-
-
         if(!battleCloseMsg->getActive()){
-            SDL_Delay(600);
+            //SDL_Delay(600);
             endGameTimer->restart();
+            battleCloseMsg->setAlpha(winAlpha);
+            SDL_SetTextureAlphaMod(battleCloseMsg->getTexture(), winAlpha);
+            SDL_SetTextureAlphaMod(battleCloseMsg->getHeaderTexture(), winAlpha);
             battleCloseMsg->setActive(true);
         }
 
         int w, h;
         SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, &h);
-        SDL_Rect overlay = { 0, 0, w, h };
-        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
-        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 211, 211, 211, 100);
-        //endGameTimer->restart();
-        SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &overlay);
-        battleCloseMsg->setAlpha(alpha);
-       // SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 255, 255, alpha);
-        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
+//        SDL_Rect overlay = { 0, 0, w, h };
+//        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
+//        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 211, 211, 211, winAlpha);
+//        SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &overlay);
+//        SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
         battleCloseMsg->render();
 
-        if(alpha != 255){
+        if(winAlpha != 255){
 
             endTurn = false;
         }
         else{
 
             endTurn = true;
-        }
 
+        }
+        endGameTimer->restart();
         return;
     }
 
-
-
     if(alpha2 > 10){
+        SDL_SetTextureAlphaMod(enemyAttkTxt->getTexture(), alpha);
         enemyAttkTxt->render();
     }
     if(alpha > 10){
+
+        SDL_SetTextureAlphaMod(playerAttkTxt->getTexture(), alpha);
         playerAttkTxt->render();
     }
 
