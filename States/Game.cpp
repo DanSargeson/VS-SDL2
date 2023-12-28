@@ -68,8 +68,8 @@ void Game::refreshGUI(){
     State::refreshGUI();
 //    getData()->mainText->setString("Select an option.");
 	ops.clear();
-	ops.push_back("Travel");    //1
-	ops.push_back("Shop");      //2
+	ops.push_back("Visit Civilisation");    //1
+	ops.push_back("Explore Wilderness");      //2
 	ops.push_back("Level Up");  //3
 	ops.push_back("Rest - Cost 10 Gold");   //4
 	ops.push_back("Character Menu");        //5
@@ -178,22 +178,14 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->getActiveCharacter()->travel();
                // Event e;
 
+
+
+
+               /*** BEGIN RANDOM VALUE **/
                std::vector<int> numbers = {2, 3, 4};
+                int randomValue = getRandomValue(0, numbers.size() - 1);
+                /*** END RANDOM VALUE **/
 
-                // Use std::random_device to obtain a seed for the random number generator
-                std::random_device rd;
-
-                // Use std::mt19937 as the random number generator
-                std::mt19937 gen(rd());
-
-                // Use std::uniform_int_distribution to generate random indices
-                std::uniform_int_distribution<> dis(0, numbers.size() - 1);
-
-                // Generate a random index
-                int randomIndex = dis(gen);
-
-                // Access the corresponding element in the set
-                int randomValue = numbers[randomIndex];
 
                 if(getData()->getActiveCharacter()->getRep(randomValue) >= 110){
 
@@ -216,16 +208,16 @@ void Game::updateEvents(SDL_Event& e){
                     }
                 }
 
-                std::uniform_int_distribution<> dis2(0, numbers.size() - 1);
-                randomIndex = dis2(gen);
+                int randomIndex = getRandomValue(0, numbers.size() - 1);
                 randomValue = numbers[randomIndex];
-                eventToss = 2; ///TODO DEBUG REMOVE!!
-               if(eventToss <= 2){
 
-                    Engine::GetInstance()->AddState(std::make_shared<Battle>());
-               }
 
-               else if( eventToss > 2){
+//               if(eventToss <= 2){
+//
+//                    Engine::GetInstance()->AddState(std::make_shared<Battle>());
+//               }
+
+               if( eventToss < 2){
 
                    if(getData()->getActiveCharacter()->getRep(randomValue) >= 160){      ///TODO: Magic number
 
@@ -243,6 +235,11 @@ void Game::updateEvents(SDL_Event& e){
 
                // e.createEvent();
                 //StateData::GetInstance()->push_state(std::make_shared<Battle>());
+            }
+
+            if(menu->getChoice() == 1){
+
+                Engine::GetInstance()->AddState(std::make_shared<Battle>());
             }
 
             if(menu->getChoice() == 2){

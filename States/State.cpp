@@ -123,6 +123,26 @@ void StateData::clearCharacters(){
     ///characters.clear();
 }
 
+int State::getRandomValue(int low, int high){
+
+    // Use std::random_device to obtain a seed for the random number generator
+                std::random_device rd;
+
+                // Use std::mt19937 as the random number generator
+                std::mt19937 gen(rd());
+
+                // Use std::uniform_int_distribution to generate random indices
+                std::uniform_int_distribution<> dis(low, high);
+
+                // Generate a random index
+                int randomIndex = dis(gen);
+
+                // Access the corresponding element in the set
+//                int randomValue = numbers[randomIndex];
+
+                return randomIndex;
+}
+
 void State::loadCharacters(){
     std::string fileName = "characters.txt";
     ifstream inFile(fileName);

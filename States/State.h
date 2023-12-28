@@ -124,6 +124,8 @@ public:
     virtual void updateEvents(SDL_Event &e);
     virtual void render() = 0;
 
+    int getRandomValue(int low, int high);
+
     void loadCharacters();
     virtual void refreshGUI();
     StateData* getData() { return StateData::GetInstance(); }
