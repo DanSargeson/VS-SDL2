@@ -15,6 +15,8 @@ class CharacterMenu : public State{
         void render();
         void refreshGUI();
 
+        void checkItemStrength();
+
         void initButtons();
         //void loadCharacters();
 

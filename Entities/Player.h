@@ -80,8 +80,8 @@ public:
 	inline void getInv() { this->inventory.debugVector(); }
 	inline int getInvSize() { return this->inventory.smrtSize(); }
 	inline void setInv(Inventory inv) { this->inventory = inv; }
-	inline void setWeapon(shared_ptr<Item> w) { this->activeWeapon = w; }
-	inline void setArmourHead(shared_ptr<Item> a) { this->activeHead = a; }
+	inline void setWeapon(shared_ptr<Weapon> w) { this->activeWeapon = w; }
+	inline void setArmourHead(shared_ptr<Armour> a) { this->activeHead = a; }
 	inline void setArmourChest(shared_ptr<Item> a) { this->activeChest = a; }
 	inline void setArmourArms(shared_ptr<Item> a) { this->activeArms = a; }
 	inline void setArmourLegs(shared_ptr<Item> a) { this->activeLegs = a; }

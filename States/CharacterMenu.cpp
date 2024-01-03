@@ -8,6 +8,8 @@ CharacterMenu::CharacterMenu(){
 
     invMenu2 = std::make_shared<GUI::Menu>();
     ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+
+    checkItemStrength();
     menu->setMenuOptions(ops, true, true);
     menu->setActive(true);
     invMenu2->setActive(false);
@@ -23,6 +25,22 @@ CharacterMenu::CharacterMenu(){
 
     std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
     getMainText()->setString(mmm, true, 420);
+}
+
+void CharacterMenu::checkItemStrength(){
+
+    for(int i = 0; i < ops.size(); i++){
+
+        auto wv = getData()->getActiveCharacter()->findItem(i);
+
+        if(wv->getItemType() == WEAPON){
+
+            if(dynamic_cast<Weapon&>(*wv).getDamageMin() > getData()->getActiveCharacter()->getActiveWeapon()->getDamageMin()){
+
+                    ops[i] += " **";
+            }
+        }
+    }
 }
 
 CharacterMenu::~CharacterMenu(){
@@ -69,12 +87,12 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 //            }
 
                 choice = menu->getChoice();
-                std::vector<std::string> ops;
-                ops.push_back("Equip Item");
-                ops.push_back("Drop Item");
+                std::vector<std::string> ops2;
+                ops2.push_back("Equip Item");
+                ops2.push_back("Drop Item");
 
                 menu->setActive(false);
-                invMenu2->setMenuOptions(ops, true);
+                invMenu2->setMenuOptions(ops2, true);
                 invMenu2->setActive(true);
 
                 std::string msg = StateData::GetInstance()->getActiveCharacter()->getInvItemAsString(choice);
@@ -107,7 +125,8 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
                 //invMenu2->setActive(false);
                 //invMenu->setActive(true);
-                std::vector<std::string> ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+                ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+                checkItemStrength();
                 menu->setMenuOptions(ops, true, true);
                  std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
                 getMainText()->setString(mmm, true, 420);
@@ -119,6 +138,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             ///}
 
             ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
+            checkItemStrength();
             menu->setMenuOptions(ops, true, true);
             menu->setActive(true);
             invMenu2->setActive(false);

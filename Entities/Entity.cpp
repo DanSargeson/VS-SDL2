@@ -169,6 +169,18 @@ void Entity::loseDurability(){
 //	}
 }
 
+std::shared_ptr<Weapon> Entity::getActiveWeapon(){
+
+    if(this->activeWeapon != nullptr){
+
+        return activeWeapon;
+    }
+    else{
+
+        return nullptr;
+    }
+}
+
 int Entity::getExp(){
 
     return attributeComponent->getEXP();

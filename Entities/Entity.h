@@ -22,8 +22,8 @@ protected:
 
 
 	//EQUIPPED ITEMS
-	std::shared_ptr<class Item> activeWeapon;
-	std::shared_ptr<class Item> activeHead;
+	std::shared_ptr<class Weapon> activeWeapon;
+	std::shared_ptr<class Armour> activeHead;
 	std::shared_ptr<class Item> activeChest;
 	std::shared_ptr<Item> activeArms;
 	std::shared_ptr<Item> activeLegs;
@@ -169,6 +169,8 @@ public:
 	void renderDialogue();
 
 	//virtual int getDirection() = 0;
+
+	std::shared_ptr<Weapon> getActiveWeapon();
 
 	virtual void update();
 	virtual void render();
