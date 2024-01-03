@@ -52,7 +52,7 @@ void RandomEncounter::refreshGUI(){
     if(firstEncounter){
     std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
     msg += "\"" + file->loadRandomDialogue() +  "\"";
-    getData()->mainText->setString(msg, true);
+    getData()->mainText->setString(msg, true, 720);
 
     unlockedCharm = false;
 

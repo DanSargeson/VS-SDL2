@@ -66,7 +66,9 @@ GUI::Button::Button(){
 
 	mTextureText = std::make_unique<Texture>();
 
-	const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";
+
+	///TODO: - Has no effect...
+	const char* fontFile = "Assets/Fonts/Roboto.ttf";
 	this->font = TTF_OpenFont(fontFile , 30);
 
 	if (!font) {
@@ -94,7 +96,8 @@ GUI::Button::Button(float x, float y, float w, float h, unsigned int charSize){
 
 	mTextureText = std::make_shared<Texture>();
 
-	const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";
+    /** FONT FILE WHICH CHANGES BUTTONS....*/
+	const char* fontFile = "Assets/Fonts/Roboto.ttf";
 	this->font = TTF_OpenFont(fontFile, charSize);
 
 	if (!font) {
@@ -204,10 +207,11 @@ GUI::Text::Text(bool border){
 	mBorder = border;
 //	mRend = rend;
 //	mWind = wind;
-	mMainText = "Debug text 1";
+///	mMainText = "Debug text 1";
 
-	mFontFile = "Assets/Fonts/SF Atarian System.ttf";
-	mFontSize = 28;
+    ///TODO: - Does nothing again....
+	mFontFile = "Assets/Fonts/Roboto.ttf";
+	mFontSize = 20;
 
 	percentW = 0;
 	percentH = 0;
@@ -249,8 +253,9 @@ GUI::Text::Text(int x, int y, int w, int h, bool border){
 //	mRend = rend;
 //	mWind = wind;
 
-	mFontSize = 28;
-	mFontFile = "Assets/Fonts/SF Atarian System.ttf";
+	mFontSize = 20;
+	/** Main, Dynamic and Enemy Text font file....*/
+	mFontFile = "Assets/Fonts/Roboto.ttf";
 	mBorder = border;
 
 	percentW = w;
@@ -290,7 +295,7 @@ GUI::Text::Text(int x, int y, int w, int h, bool border){
 		//offsetY = 10;
 	}
 
-	mMainText = "Debug text 2";
+///	mMainText = "Debug text 2";
 
 	initFont();
 	initTextures();
@@ -414,9 +419,9 @@ void GUI::Text::setColour(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
 	mTextColour = { r, g, b, a };
 }
 
-void GUI::Text::setFontSize(int size) {
+void GUI::Text::setFontSize(int s) {
 
-	mFontSize = size;
+	mFontSize = s;
 	initFont();
 }
 
@@ -715,7 +720,9 @@ GUI::Menu::Menu(){
 	this->selection = -1;
 	this->exit = false;
 	this->charSize = GUI::calcCharSize(100);
-	this->font = TTF_OpenFont("Fonts/SF Atarian System Italic.ttf", charSize);
+
+	///TODO:- SEEMS TO DO NOTHING...
+	this->font = TTF_OpenFont("Fonts/Roboto.ttf", charSize);
 	this->active = true;
 	this->scrollable = false;
 
@@ -805,7 +812,8 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, b
 	unsigned charSize = GUI::calcCharSize(80);
 	SDL_Color colour = { 0, 255, 0 };
 
-	font = TTF_OpenFont("Assets/Fonts/SF Atarian System.ttf", 28);
+    /*** HANDLES MENU FONT, this needs looking at as it currently breaks...  */
+	font = TTF_OpenFont("Assets/Fonts/Roboto.ttf", 18);
 	if(dynamic){
 
 ///		this->options.push_back(new Texture());

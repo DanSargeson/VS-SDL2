@@ -9,7 +9,8 @@ void StateData::initFonts(){
 
     try{
 
-        font = TTF_OpenFont("Fonts/SF Atarian System.ttf", 24);
+        ///TODO:- Does nothing
+        font = TTF_OpenFont("Fonts/Roboto.ttf", 24);
 
     }
     catch(std::exception &e){
@@ -45,6 +46,10 @@ keyTime = 0.f;
     getEnemyText()->clearText();
     getEnemyText()->setColour(255, 0, 0, 0);
 
+    getMainText()->setFontSize(20);
+    getDynamicText()->setFontSize(20);
+    getEnemyText()->setFontSize(20);
+
     menu = std::make_shared<GUI::Menu>();
 
 }
@@ -75,6 +80,10 @@ void State::refreshGUI(){
         //getData()->enemyText = std::make_shared<GUI::Text>();
         getEnemyText()->refreshGUI();
         getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+
+        getMainText()->setFontSize(20);
+        getDynamicText()->setFontSize(20);
+        getEnemyText()->setFontSize(20);
         //getEnemyText()->clearText();
 
         menu->refreshGUI();

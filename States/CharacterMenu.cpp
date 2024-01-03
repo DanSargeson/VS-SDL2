@@ -9,6 +9,8 @@ CharacterMenu::CharacterMenu(){
     invMenu2 = std::make_shared<GUI::Menu>();
     ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
 
+    getMainText()->setFontSize(20);
+
     checkItemStrength();
     menu->setMenuOptions(ops, true, true);
     menu->setActive(true);
@@ -47,6 +49,8 @@ CharacterMenu::~CharacterMenu(){
 
 //    State::~State();
 //    menu.reset();
+
+    //getMainText()->setFontSize(24);
     invMenu2.reset();
 }
 
@@ -190,6 +194,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
            /// getMainText()->setString("ATTRIBUTES");
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             getMainText()->setString(mmm, true, 420);
+//            getMainText()->setFontSize(10);
         }
 
         //BUTTONS END HERE
@@ -206,6 +211,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
             menu->setActive(true);
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             getMainText()->setString(mmm, true, 420);
+//            getMainText()->setFontSize(10);
         }
     }
 }
@@ -229,7 +235,7 @@ void CharacterMenu::render(){
 
 void CharacterMenu::initButtons(){
 
-    unsigned int charSize = GUI::calcCharSize(85);
+    unsigned int charSize = GUI::calcCharSize(125);
 
 
     mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
