@@ -1234,10 +1234,10 @@ void GUI::textBox::setText(std::string txt){
     text.setPosition(bg.x + GUI::p2pXi(5), header.getGlobalBounds().y + GUI::p2pYi(10));
 }
 
-void GUI::textBox::setSize(int h, int w){
+void GUI::textBox::setSize(int w, int h){
 
-    outline.h = h;
-    outline.w = w;
+    outline.h = GUI::p2pXi(h);
+    outline.w = GUI::p2pYi(w);
 
     filler.x = outline.x - 5;
     filler.y = outline.y - 5;
@@ -1253,10 +1253,13 @@ void GUI::textBox::setSize(int h, int w){
     text.setPosition(bg.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
 }
 
-void GUI::textBox::setPosition(int x, int y){
+void GUI::textBox::centreTextBox(){
 
-    outline.x = GUI::p2pXi(x);
-    outline.y = GUI::p2pYi(y);
+    outline.x = GUI::p2pXi(50);
+    outline.y = GUI::p2pYi(50);
+
+    outline.x -= outline.w / 2;
+    outline.y -= outline.h / 2;
 
     filler.x = outline.x - 5;
     filler.y = outline.y - 5;
@@ -1268,8 +1271,28 @@ void GUI::textBox::setPosition(int x, int y){
     bg.w = outline.w - 2;
     bg.h = outline.h - 2;
 
-    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 5);
-    text.setPosition(bg.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
+    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 25);
+    text.setPosition(bg.x + GUI::p2pXi(2), header.getGlobalBounds().y + GUI::p2pYi(5));
+
+}
+
+void GUI::textBox::setPosition(int x, int y){
+
+    outline.x = x;
+    outline.y = y;
+
+    filler.x = outline.x - 5;
+    filler.y = outline.y - 5;
+    filler.w = outline.w + 10;
+    filler.h = outline.h + 10;
+
+    bg.x = outline.x + 1;
+    bg.y = outline.y + 1;
+    bg.w = outline.w - 2;
+    bg.h = outline.h - 2;
+
+    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 25);
+    text.setPosition(bg.x + GUI::p2pXi(2), header.getGlobalBounds().y + GUI::p2pYi(5));
 }
 
 void GUI::textBox::render(){

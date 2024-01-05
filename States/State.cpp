@@ -72,7 +72,6 @@ bool State::getQuit(){
 
 void State::refreshGUI(){
 
-
         getData()->mainText->refreshGUI();
         getDynamicText()->refreshGUI();
         getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));

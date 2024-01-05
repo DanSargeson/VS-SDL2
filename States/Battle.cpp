@@ -12,6 +12,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 //     noOfEnemies = numEnemiesDistribution(generator);
 
     textThreadRunning = false;
+    winThreadRunning = false;
 
     std::random_device rd;
 
@@ -73,8 +74,8 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
     enemyAttkTxt->clearText();
 
     battleCloseMsg = std::make_unique<GUI::textBox>();
-    battleCloseMsg->setPosition(20, 10);
-    battleCloseMsg->setSize(500, 500);
+    battleCloseMsg->setSize(60, 40);
+    battleCloseMsg->centreTextBox();
     battleCloseMsg->setActive(false);
 
     playerTurn = false;
@@ -132,7 +133,7 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		//rando = rand() % high + low;
 		std::uniform_int_distribution<>randEnemies(low, high);
 		rando = randEnemies(gen);
-		enemies.push_back(Enemy(rando));
+		enemies.push_back(100); ///TODO CHANGE THIS BACK TO RANDO
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){
@@ -207,8 +208,8 @@ void Battle::refreshGUI(){
     enemyAttkTxt->setPosition(GUI::p2pX(60.f), GUI::p2pY(50.f));
 
 
-    battleCloseMsg->setPosition(20, 10);
-    battleCloseMsg->setSize(500, 500);
+    battleCloseMsg->setSize(60, 40);
+    battleCloseMsg->centreTextBox();
     //menu->setPosition();
 }
 
@@ -671,15 +672,6 @@ void Battle::updateEvents(SDL_Event& e){
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
-        if(playerWins){
-
-                if(!winThreadRunning){
-
-                    Engine::GetInstance()->PopState();
-                    return;
-                }
-        }
-
         if(endTurn){
 
                 endTurn = false;
@@ -687,9 +679,15 @@ void Battle::updateEvents(SDL_Event& e){
                 menu->setActive(true);
             if(!textThreadRunning){
 
-                    if(!winThreadRunning){
+                    if(!winThreadRunning && !playerWins){
 
                         startTextThread();
+                        return;
+                    }
+                    else if(!winThreadRunning && playerWins){
+
+                        Engine::GetInstance()->PopState();
+                        return;
                     }
                 //getDynamicText()->setString("Choose action: ");
             }

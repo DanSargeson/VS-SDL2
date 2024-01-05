@@ -282,6 +282,7 @@ namespace GUI{
             void setSize(int h, int w);
             void setAlpha(int alpha);
             void setPosition(int x, int y);
+            void centreTextBox();
             void render();
 
             inline void setActive(bool a) { active = a; }

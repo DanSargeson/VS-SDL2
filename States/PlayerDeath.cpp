@@ -29,14 +29,14 @@ PlayerDeath::~PlayerDeath(){
 
 void PlayerDeath::refreshGUI(){
 
-  //  State::refreshGUI();
+    State::refreshGUI();
     int w;
     SDL_GetWindowSize(Engine::GetInstance()->GetWindow(), &w, NULL);
 
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
 
-    deathMsg->setFontSize(100);
    // int w = getMainText()->getTextWidth();
+    deathMsg->setFontSize(GUI::calcCharSize(40));
     deathMsg->setColour(255, 0, 0, 0);
     //deathMsg->setBorder(false);
     deathMsg->setString("Gift of Death received");

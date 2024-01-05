@@ -98,17 +98,17 @@ void Game::update(const float& dt){
         switch(tutorialCount){
 
         case 0:
-            textBox->setSize(400, 400);
+            textBox->setSize(60, 30);
             textBox->setActive(true);
             textBox->setHeader("Welcome to the tutorial!");
             textBox->setText("Here I will explain some of the screens.\n\nPress ENTER to continue...");
-            textBox->setPosition(20, 20);
+            textBox->setPosition(GUI::p2pX(20), GUI::p2pY(20));
             break;
 
         case 1:
-            textBox->setSize(400, 400);
+            //textBox->setSize(50, 50);
             textBox->setActive(true);
-            textBox->setPosition(40, 10);
+            textBox->setPosition(GUI::p2pX(40), GUI::p2pY(10));
             textBox->setHeader("Main Menu");
             textBox->setText("Here is your main menu, scroll using the UP and DOWN arrow buttons\n\nPress ENTER to continue...");
             break;

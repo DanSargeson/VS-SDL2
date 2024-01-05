@@ -39,7 +39,7 @@ void CharacterMenu::checkItemStrength(){
 
             if(dynamic_cast<Weapon&>(*wv).getDamageMin() > getData()->getActiveCharacter()->getActiveWeapon()->getDamageMin()){
 
-                    ops[i] += " **";
+                    ops[i] += " *";
             }
         }
     }
