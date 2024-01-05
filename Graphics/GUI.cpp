@@ -960,13 +960,14 @@ void GUI::Menu::updateTextSelector(){
 		textSelector.x = outline.x + 1;
 		textSelector.y = outline.y + gridPosY * (textSelector.h);
 
+        ///SDL_ShowCursor(SDL_DISABLE); ///THIS IS WHERE YOU LOSE CURSOR
 		textSelectorActive = true;
 	}
 	else{
 
+		textSelectorActive = false;
 		textSelector.x = -9000;
 		textSelector.y = -9000;
-		textSelectorActive = false;
 	}
 }
 
@@ -1030,7 +1031,7 @@ void GUI::Menu::render(){
 		SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
 		if(clicked){
 
-		       	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 0, 0, 255);
+            SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 0, 0, 255);
 			clicked = false;
 		}
 		else{
@@ -1251,6 +1252,26 @@ void GUI::textBox::setSize(int w, int h){
 
     header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 5);
     text.setPosition(bg.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
+}
+
+void GUI::textBox::refreshGUI(){
+
+    outline.h = GUI::p2pXi(outline.h);
+    outline.w = GUI::p2pYi(outline.w);
+
+    filler.x = outline.x - 5;
+    filler.y = outline.y - 5;
+    filler.w = outline.w + 10;
+    filler.h = outline.h + 10;
+
+    bg.x = outline.x + 1;
+    bg.y = outline.y + 1;
+    bg.w = outline.w - 1;
+    bg.h = outline.h - 1;
+
+    header.setPosition(bg.x + ((bg.w / 2) - header.getTextWidth() / 2), bg.y + 5);
+    text.setPosition(bg.x + GUI::p2pXi(1), header.getGlobalBounds().y + GUI::p2pYi(5));
+
 }
 
 void GUI::textBox::centreTextBox(){

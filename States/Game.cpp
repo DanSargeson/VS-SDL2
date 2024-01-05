@@ -18,6 +18,7 @@ Game::Game() : State(){
  //   getData()->enemyText = std::make_shared<GUI::Text>();
   //  getData()->dynamicText = std::make_shared<GUI::Text>();
 
+	textBox = std::make_shared<GUI::textBox>();
     refreshGUI();
 
     getMainText()->setString("Select an option: ");
@@ -31,7 +32,6 @@ Game::Game() : State(){
 	//std::vector<std::string> menuOptions;
 
 
-	textBox = std::make_shared<GUI::textBox>();
 
 	testNpc = std::make_shared<Entity>();
     file = std::make_shared<LoadFiles>("Assets/factionDiag.txt");
@@ -78,6 +78,7 @@ void Game::refreshGUI(){
 	ops.push_back("Help");                  //9
 
 	menu->setMenuOptions(ops, true);
+	textBox->refreshGUI();
 }
 
 void Game::update(const float& dt){
@@ -98,7 +99,7 @@ void Game::update(const float& dt){
         switch(tutorialCount){
 
         case 0:
-            textBox->setSize(60, 30);
+            textBox->setSize(70, 30);
             textBox->setActive(true);
             textBox->setHeader("Welcome to the tutorial!");
             textBox->setText("Here I will explain some of the screens.\n\nPress ENTER to continue...");
@@ -108,16 +109,16 @@ void Game::update(const float& dt){
         case 1:
             //textBox->setSize(50, 50);
             textBox->setActive(true);
-            textBox->setPosition(GUI::p2pX(40), GUI::p2pY(10));
             textBox->setHeader("Main Menu");
             textBox->setText("Here is your main menu, scroll using the UP and DOWN arrow buttons\n\nPress ENTER to continue...");
+            textBox->setPosition(GUI::p2pX(40), GUI::p2pY(10));
             break;
 
         case 2:
             textBox->setActive(true);
-            textBox->setPosition(40, 30);
             textBox->setHeader("Information Screen");
             textBox->setText("Here you will find information about the area you are currently in\n\nPress ENTER to close");
+            textBox->setPosition(GUI::p2pX(40), GUI::p2pY(30));
             break;
 
         default:
