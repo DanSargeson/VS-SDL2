@@ -350,7 +350,8 @@ std::string Player::getStatsAttributeScreen(){
 		deets += "Empty\n";
 	}
 
-	int defence = this->attackComponent->getTotalDefence();
+	int minDefence = this->attackComponent->getMinDefence();
+	int maxDefence = this->attackComponent->getMaxDefence();
 //	int armour = this->getArmourRating();
 
 
@@ -358,7 +359,7 @@ std::string Player::getStatsAttributeScreen(){
 	int maxAttack = this->attackComponent->getBaseMaxDamage();
 
 
-	deets += "\nArmour Rating: " + std::to_string(defence);
+	deets += "\nArmour Rating: " + std::to_string(minDefence) + " - " + std::to_string(maxDefence);
 
 //	if (armour > 0) {
 //

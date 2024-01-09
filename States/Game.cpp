@@ -21,7 +21,7 @@ Game::Game() : State(){
 	textBox = std::make_shared<GUI::textBox>();
     refreshGUI();
 
-    getMainText()->setString("Select an option: ");
+    getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
     //getMainText()->setPosition(GUI::p2pX(20), GUI::p2pY(20));
 
     getEnemyText()->setString("");
@@ -92,7 +92,7 @@ void Game::update(const float& dt){
                         }
         }
 
-        getMainText()->setString("Select an option: ");
+    getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
 
     if(StateData::GetInstance()->getTutorial() == true){
 
@@ -313,7 +313,7 @@ void Game::updateEvents(SDL_Event& e){
 
             //getMainText()->clearText();
             getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-            getMainText()->setString("Select an option: ");
+            getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
         }
 
         if(!getDynamicText()->isEmpty()){

@@ -125,15 +125,15 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 		int high = getData()->getActiveCharacter()->getLevel() + 1;
 
 		int rando = 0;
-		if(low <= 0){
+		std::uniform_int_distribution<>randEnemies(low, high);
+		rando = randEnemies(gen);
+		if(low <= 1){
 
             rando = 1;
 		}
 
 		//rando = rand() % high + low;
-		std::uniform_int_distribution<>randEnemies(low, high);
-		rando = randEnemies(gen);
-		enemies.push_back(100); ///TODO CHANGE THIS BACK TO RANDO
+		enemies.push_back(rando);
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){

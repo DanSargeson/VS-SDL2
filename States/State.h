@@ -134,6 +134,8 @@ public:
     std::shared_ptr<GUI::Text> getDynamicText() { return getData()->dynamicText; }
     std::shared_ptr<GUI::Text> getEnemyText() { return getData()->enemyText; }
 
+    std::shared_ptr<Player> getActiveCharacter() { return getData()->getActiveCharacter(); }
+
     bool getQuit();
     const bool getKeyTime();
     inline void endState() { quit = true; }
