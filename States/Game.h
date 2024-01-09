@@ -18,6 +18,8 @@ public:
 	void updateEvents(SDL_Event &e);
 	void render();
 
+	void initButtons();
+
 	void refreshGUI();
 
 private:
@@ -25,6 +27,8 @@ private:
     std::shared_ptr<GUI::Text> mainText;
 
     std::shared_ptr<GUI::textBox> textBox;
+
+     std::unordered_map<std::string, GUI::Button*> mButtons;
 
     std::shared_ptr<Entity> testNpc;
 

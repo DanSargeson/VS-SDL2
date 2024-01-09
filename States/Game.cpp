@@ -32,7 +32,7 @@ Game::Game() : State(){
 	//std::vector<std::string> menuOptions;
 
 
-
+    initButtons();
 	testNpc = std::make_shared<Entity>();
     file = std::make_shared<LoadFiles>("Assets/factionDiag.txt");
 ///    testNpc->setFaction(file->loadFaction());
@@ -79,6 +79,7 @@ void Game::refreshGUI(){
 
 	menu->setMenuOptions(ops, true);
 	textBox->refreshGUI();
+	initButtons();
 }
 
 void Game::update(const float& dt){
@@ -92,7 +93,7 @@ void Game::update(const float& dt){
                         }
         }
 
-    getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
+    ///
 
     if(StateData::GetInstance()->getTutorial() == true){
 
@@ -143,6 +144,25 @@ void Game::update(const float& dt){
     }
 
     saveCharacters();
+}
+
+void Game::initButtons(){
+
+    unsigned int charSize = GUI::calcCharSize(125);
+
+
+    mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["SKILLS"]->setRenderText("Skills");
+
+    mButtons["FACTIONS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["FACTIONS"]->setRenderText("Factions");
+
+    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ATTRIBUTES"]->setRenderText("Attributes");
+
+//    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
+//    mButtons["INVENTORY"]->setRenderText("Inventory");
+
 }
 
 void Game::updateEvents(SDL_Event& e){
@@ -291,7 +311,55 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->setTutorial(true);
             }
         }
-    }
+
+         //BUTTONS START HERE
+        if (mButtons["SKILLS"]->isPressed(e.button)) {
+
+         //   menu->setActive(false);
+          //  invMenu2->setActive(false);
+
+            //mButtons["SKILLS"]->setSelected(true);
+            //mButtons["ATTRIBUTES"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
+            //mButtons["FACTIONS"]->setSelected(false);
+
+            std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
+            getMainText()->setString(msg, true, GUI::p2pY(420));
+        }
+
+        if (mButtons["FACTIONS"]->isPressed(e.button)) {
+
+            //mButtons["SKILLS"]->setSelected(false);
+            //mButtons["ATTRIBUTES"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
+            //mButtons["FACTIONS"]->setSelected(true);
+
+          //  menu->setActive(false);
+           // invMenu2->setActive(false);
+            std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
+            getMainText()->setString(fact, true, 420);
+        }
+
+        if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
+
+            //mButtons["SKILLS"]->setSelected(false);
+            //mButtons["ATTRIBUTES"]->setSelected(true);
+            //mButtons["INVENTORY"]->setSelected(false);
+            //mButtons["FACTIONS"]->setSelected(false);
+
+            //menu->setActive(true);
+            //invMenu2->setActive(false);
+
+            //std::cout << "Attrib pressed\n\n\n\n\n";
+
+           /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
+           /// getMainText()->setString("ATTRIBUTES");
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+            getMainText()->setString(mmm, true, 420);
+//            getMainText()->setFontSize(10);
+        }
+
+    }   ///END MOUSEBUTTONDOWN
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_L)){
 
@@ -394,4 +462,9 @@ void Game::render(){
 
         testNpc->renderDialogue();
     }
+
+     for (auto i : mButtons) {
+
+		i.second->renderButtons();
+	}
 }
