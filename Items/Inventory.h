@@ -44,9 +44,32 @@ public:
 
         string str = "";
         //choice--;
+        smrtInvIt = smrtInv.begin();
         std::advance(smrtInvIt, choice);
 
         str = smrtInv[choice]->toString();
+		return str + "\n";
+	}
+
+	inline std::string getArmAsString(int choice){
+
+        string str = "";
+        //choice--;
+        smrtInvIt = armourInv.begin();
+        std::advance(smrtInvIt, choice);
+
+        str = armourInv[choice]->toString();
+		return str + "\n";
+	}
+
+	inline std::string getWepAsString(int choice){
+
+        string str = "";
+        //choice--;
+        smrtInvIt = weaponInv.begin();
+        std::advance(smrtInvIt, choice);
+
+        str = weaponInv[choice]->toString();
 		return str + "\n";
 	}
 
@@ -67,6 +90,51 @@ public:
             str += (*smrtInvIt)->getName() + " " + (*smrtInvIt)->getTypeStr();
             result.push_back(str);
             str = "";
+        }
+
+        if(result.empty()){
+
+            result.push_back("You have no items");
+        }
+
+        return result;
+	}
+
+	inline std::vector<std::string> getWepAsVecOps(){
+
+        std::vector<std::string> result;
+        std::string str;
+        for(smrtInvIt = weaponInv.begin(); smrtInvIt != weaponInv.end(); smrtInvIt++){
+
+            str += to_string(smrtInvIt - weaponInv.begin()+1) + ": ";
+            str += (*smrtInvIt)->getName() + " " + (*smrtInvIt)->getTypeStr();
+            result.push_back(str);
+            str = "";
+        }
+
+         if(result.empty()){
+
+            result.push_back("You have no weapons");
+        }
+
+        return result;
+	}
+
+	inline std::vector<std::string> getArmAsVecOps(){
+
+        std::vector<std::string> result;
+        std::string str;
+        for(smrtInvIt = armourInv.begin(); smrtInvIt != armourInv.end(); smrtInvIt++){
+
+            str += to_string(smrtInvIt - armourInv.begin()+1) + ": ";
+            str += (*smrtInvIt)->getName() + " " + (*smrtInvIt)->getTypeStr();
+            result.push_back(str);
+            str = "";
+        }
+
+         if(result.empty()){
+
+            result.push_back("You have no armour");
         }
 
         return result;
@@ -96,6 +164,8 @@ public:
 
     void addItemVectorSmart(shared_ptr<Item>);
 	shared_ptr<Item> findItemSmart(int index);
+	shared_ptr<Item> findArmourSmart(int index);
+	shared_ptr<Item> findWeaponSmart(int index);
     void removeItemVectorSmart(shared_ptr<Item>);
 
 private:
@@ -103,6 +173,9 @@ private:
     int noOfItems;
 
     vector<shared_ptr<Item>> smrtInv;
+    vector<shared_ptr<Item>> weaponInv;
+    vector<shared_ptr<Item>> armourInv;
+
     vector<shared_ptr<Item>>::iterator smrtInvIt;
     vector<shared_ptr<Item>>::iterator smrtDEl;
 

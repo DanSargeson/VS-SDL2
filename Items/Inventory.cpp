@@ -100,8 +100,32 @@ void Inventory::AddItemVector(Item* i){
 }
 
 void Inventory::addItemVectorSmart(shared_ptr<Item> i){
-    //smrtInv.push_back(i);
     smrtInv.push_back(i);
+
+    if(i->getItemType() == WEAPON){
+
+        weaponInv.push_back(i);
+    }
+    if(i->getItemType() == ARMOUR){
+
+        armourInv.push_back(i);
+    }
+
+    //smrtInv.push_back(i);
+}
+
+shared_ptr<Item> Inventory::findWeaponSmart(int index) {
+	smrtInvIt = weaponInv.begin();
+	std::advance(smrtInvIt, index);
+
+	return *smrtInvIt;
+}
+
+shared_ptr<Item> Inventory::findArmourSmart(int index) {
+	smrtInvIt = armourInv.begin();
+	std::advance(smrtInvIt, index);
+
+	return *smrtInvIt;
 }
 
 shared_ptr<Item> Inventory::findItemSmart(int index) {
@@ -114,6 +138,17 @@ shared_ptr<Item> Inventory::findItemSmart(int index) {
 void Inventory::removeItemVectorSmart(shared_ptr<Item> i){
     smrtDEl = find(smrtInv.begin(), smrtInv.end(), i);
     smrtInv.erase(smrtDEl);
+
+    if(i->getItemType() == WEAPON){
+
+        smrtDEl = find(weaponInv.begin(), weaponInv.end(), i);
+        weaponInv.erase(smrtDEl);
+    }
+    if(i->getItemType() == ARMOUR){
+
+        smrtDEl = find(armourInv.begin(), armourInv.end(), i);
+        armourInv.erase(smrtDEl);
+    }
 }
 
 void Inventory::removeItemVector(Item* i){

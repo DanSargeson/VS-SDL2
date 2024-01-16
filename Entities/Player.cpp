@@ -380,6 +380,18 @@ std::string Player::getInvItemAsString(int choice){
     return this->inventory.getInvItemAsString(choice);
 }
 
+std::string Player::getArmAsString(int choice){
+
+    return this->inventory.getArmAsString(choice);
+}
+
+
+std::string Player::getWepAsString(int choice){
+
+    return this->inventory.getWepAsString(choice);
+}
+
+
 SDL_Color Player::getItemColour(int choice){
 
     return this->inventory.getInvItemColour(choice);
@@ -397,6 +409,16 @@ void Player::loadFactions(int black, int white, int red, int blue, int green, in
 string Player::getInvAsString() {
 
 	return this->inventory.getInvAsString();
+}
+
+std::vector<std::string> Player::getWepAsVec(){
+
+    return inventory.getWepAsVecOps();
+}
+
+std::vector<std::string> Player::getArmAsVec(){
+
+    return inventory.getArmAsVecOps();
 }
 
 std::vector<std::string> Player::getInvAsVec(){
@@ -512,6 +534,82 @@ int Player::takeDamage(int damage) {
 //	return damage;
 
 	return 0;
+}
+
+void Player::equipWeapon(int index){
+
+    shared_ptr<Item> item = this->inventory.findWeaponSmart(index);
+		//auto wv = std::dynamic_pointer_cast<Weapon>(item);
+		Weapon* w = nullptr;
+		//w = dynamic_cast<Weapon*>(&this->inventory[index]);
+		//IS WEAPON
+		if (item->getItemType() == WEAPON) {
+            auto wv = std::dynamic_pointer_cast<Weapon>(item);
+			if (wv != nullptr) {
+				if (this->activeWeapon != NULL) {
+					this->addItem(this->activeWeapon);
+				}
+				//this->addItem(wv);
+				this->activeWeapon = wv;
+				this->inventory.removeItemVectorSmart(wv);
+			}
+		}
+}
+
+void Player::equipArmour(int index){
+
+   //a = dynamic_cast<Armour*>(&this->inventory[index]);
+   shared_ptr<Item> item = this->inventory.findArmourSmart(index);
+            auto wv = std::dynamic_pointer_cast<Armour>(item);
+			if (wv != nullptr) {
+				wv->getItemType();
+				int type = dynamic_cast<Armour&>(*wv).getType();
+				switch (type) {
+				case armourType::HEAD:
+					//this->addItem(wv);
+					if (this->activeHead != NULL) {
+						this->addItem(this->activeHead);
+					}
+					this->activeHead = wv;
+					this->inventory.removeItemVectorSmart(wv);
+					break;
+
+				case armourType::CHEST:
+					//this->addItem(wv);
+					if (this->activeChest != NULL) {
+						this->addItem(this->activeChest);
+					}
+					this->activeChest = wv;
+					this->inventory.removeItemVectorSmart(wv);
+					break;
+
+				case armourType::ARMS:
+					//this->addItem(wv);
+					if (this->activeArms != NULL) {
+						this->addItem(this->activeArms);
+					}
+					this->activeArms = wv;
+					this->inventory.removeItemVectorSmart(wv);
+					break;
+
+				case armourType::LEGS:
+					//this->addItem(wv);
+					if (this->activeLegs != NULL) {
+						this->addItem(this->activeLegs);
+					}
+					this->activeLegs = wv;
+					this->inventory.removeItemVectorSmart(wv);
+
+					/*	this->inventory.addItem(this->armourLegs);
+						this->armourLegs = *a;
+						this->inventory.removeItem(index);*/
+					break;
+
+				default:
+					cout << "ERROR IN ARMOUR TYPE!\n\n";
+					break;
+				}
+}
 }
 
 void Player::equipItem(int index){

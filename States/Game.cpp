@@ -72,7 +72,7 @@ void Game::refreshGUI(){
 	ops.push_back("Explore Wilderness");      //2
 	ops.push_back("Level Up");  //3
 	ops.push_back("Rest - Cost 10 Gold");   //4
-	ops.push_back("Character Menu");        //5
+	ops.push_back("Inventory");        //5
 	ops.push_back("Settings");
 	ops.push_back("Save Game");             //7
 	ops.push_back("Help");                  //9

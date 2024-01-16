@@ -10,23 +10,35 @@ CharacterMenu::CharacterMenu(){
     ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
 
     getMainText()->setFontSize(20);
+    if(!ops.empty()){
 
-    checkItemStrength();
-    menu->setMenuOptions(ops, true, true);
-    menu->setActive(true);
-    invMenu2->setActive(false);
-    choice = -1;
-    //getMainText()->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
-    getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+        if(ops[0] == "You have no items"){
 
-    getMainText()->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
+            menu->setMenuOptions(ops, false, false);
+            menu->setActive(true);
+        }
+        else{
 
-    initButtons();
-
-    mButtons["ATTRIBUTES"]->setSelected(true);
+        checkItemStrength();
+        menu->setMenuOptions(ops, true, true);
+        menu->setActive(true);
+        }
+    }
 
     std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
     getMainText()->setString(mmm, true, 420);
+    invMenu2->setActive(false);
+    choice = -1;
+    //getMainText()->setPosition(GUI::p2pXi(5), GUI::p2pYi(5), GUI::p2pXi(80), GUI::p2pYi(80));
+    ///getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
+
+    ///getMainText()->setString(StateData::GetInstance()->getActiveCharacter()->printPlayerDetails(), true, GUI::p2pY(120));
+
+    initButtons();
+
+    ///mButtons["ATTRIBUTES"]->setSelected(true);
+
+
 }
 
 void CharacterMenu::checkItemStrength(){
@@ -50,6 +62,8 @@ CharacterMenu::~CharacterMenu(){
 //    State::~State();
 //    menu.reset();
 
+    ops.clear();
+
     //getMainText()->setFontSize(24);
     invMenu2.reset();
 }
@@ -65,6 +79,7 @@ void CharacterMenu::update(const float& dt){
 
     menu->update();
     invMenu2->update();
+    ///checkItemStrength();
 }
 
 void CharacterMenu::updateEvents(SDL_Event& e){
@@ -81,7 +96,7 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
-        if(menu->isSelected() && menu->getActive()){
+        if(menu->isSelected() && menu->getActive() && ops[0] != "You have no items"){
 
 //            if(invMenu->getChoice() == 0){
 //
@@ -89,6 +104,11 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 //
 //                return;
 //            }
+
+            if(ops[0] == "You have no armour" || ops[0] == "You have no weapons"){
+
+                return;
+            }
 
                 choice = menu->getChoice();
                 std::vector<std::string> ops2;
@@ -99,7 +119,23 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 invMenu2->setMenuOptions(ops2, true);
                 invMenu2->setActive(true);
 
-                std::string msg = StateData::GetInstance()->getActiveCharacter()->getInvItemAsString(choice);
+
+                std::string msg;
+                if(mButtons["ARMOURS"]->getSelected()){
+
+                        msg = getActiveCharacter()->getArmAsString(choice);
+                        initButtons();
+                }
+                else if(mButtons["WEAPONS"]->getSelected()){
+
+                    msg = getActiveCharacter()->getWepAsString(choice);
+                    initButtons();
+                }
+                else{
+
+                    msg = StateData::GetInstance()->getActiveCharacter()->getInvItemAsString(choice);
+                }
+
                 getMainText()->setString(msg, true, 420);
                 //mStateData::getInstane
         ///            std::cout << invMenu->getChoice() << std::endl;
@@ -120,7 +156,19 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 //if(wv->getItemType() == WEAPON){
 
                 if(cc == 0){        ///Equip item
-                    StateData::GetInstance()->getActiveCharacter()->equipItem(choice);
+
+                    if(mButtons["WEAPONS"]->getSelected()){
+
+                        getActiveCharacter()->equipWeapon(choice);
+                    }
+                    else if(mButtons["ARMOURS"]->getSelected()){
+
+                        getActiveCharacter()->equipArmour(choice);
+                    }
+                    else{
+
+                        StateData::GetInstance()->getActiveCharacter()->equipItem(choice);
+                    }
                 }
                 if(cc == 1){  ///Drop item
 
@@ -134,10 +182,10 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 menu->setMenuOptions(ops, true, true);
                  std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
                 getMainText()->setString(mmm, true, 420);
-                 mButtons["SKILLS"]->setSelected(false);
-                mButtons["ATTRIBUTES"]->setSelected(true);
+                 //mButtons["SKILLS"]->setSelected(false);
+                //mButtons["ATTRIBUTES"]->setSelected(true);
             //mButtons["INVENTORY"]->setSelected(false);
-                mButtons["FACTIONS"]->setSelected(false);
+                //mButtons["FACTIONS"]->setSelected(false);
                 //}
             ///}
 
@@ -151,49 +199,73 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
 
         //BUTTONS START HERE
-        if (mButtons["SKILLS"]->isPressed(e.button)) {
-
-            menu->setActive(false);
-            invMenu2->setActive(false);
-
-            mButtons["SKILLS"]->setSelected(true);
-            mButtons["ATTRIBUTES"]->setSelected(false);
-            //mButtons["INVENTORY"]->setSelected(false);
-            mButtons["FACTIONS"]->setSelected(false);
-
-            std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
-            getMainText()->setString(msg, true, GUI::p2pY(420));
-        }
-
-        if (mButtons["FACTIONS"]->isPressed(e.button)) {
-
-            mButtons["SKILLS"]->setSelected(false);
-            mButtons["ATTRIBUTES"]->setSelected(false);
-            //mButtons["INVENTORY"]->setSelected(false);
-            mButtons["FACTIONS"]->setSelected(true);
-
-            menu->setActive(false);
-            invMenu2->setActive(false);
-            std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
-            getMainText()->setString(fact, true, 420);
-        }
-
-        if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
-
-            mButtons["SKILLS"]->setSelected(false);
-            mButtons["ATTRIBUTES"]->setSelected(true);
-            //mButtons["INVENTORY"]->setSelected(false);
-            mButtons["FACTIONS"]->setSelected(false);
+        if (mButtons["WEAPONS"]->isPressed(e.button)) {
 
             menu->setActive(true);
             invMenu2->setActive(false);
+
+            mButtons["WEAPONS"]->setSelected(true);
+            mButtons["ARMOURS"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
+            mButtons["ALL"]->setSelected(false);
+
+            ops = getActiveCharacter()->getWepAsVec();
+            if(ops[0] != "You have no weapons"){
+
+                checkItemStrength();
+                menu->setMenuOptions(ops, true, true);
+            }
+            else{
+
+                menu->setMenuOptions(ops, false, false);
+            }
+        }
+
+        if (mButtons["ALL"]->isPressed(e.button)) {
+
+            mButtons["WEAPONS"]->setSelected(false);
+            mButtons["ARMOURS"]->setSelected(false);
+            //mButtons["INVENTORY"]->setSelected(false);
+            mButtons["ALL"]->setSelected(true);
+
+            menu->setActive(true);
+            invMenu2->setActive(false);
+            ops = getActiveCharacter()->getInvAsVec();
+            if(ops[0] != "You have no items"){
+
+                checkItemStrength();
+                menu->setMenuOptions(ops, true, true);
+            }
+            else{
+                menu->setMenuOptions(ops, false, false);
+            }
+        }
+
+        if (mButtons["ARMOURS"]->isPressed(e.button)) {
+
+            mButtons["WEAPONS"]->setSelected(false);
+            mButtons["ARMOURS"]->setSelected(true);
+            //mButtons["INVENTORY"]->setSelected(false);
+            mButtons["ALL"]->setSelected(false);
+
+            menu->setActive(true);
+            invMenu2->setActive(false);
+            ops = getActiveCharacter()->getArmAsVec();
+            if(ops[0] != "You have no armour"){
+
+                checkItemStrength();
+                menu->setMenuOptions(ops, true, true);
+            }
+            else{
+
+                menu->setMenuOptions(ops, false, false);
+            }
 
             //std::cout << "Attrib pressed\n\n\n\n\n";
 
            /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
            /// getMainText()->setString("ATTRIBUTES");
-            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
-            getMainText()->setString(mmm, true, 420);
+
 //            getMainText()->setFontSize(10);
         }
 
@@ -220,6 +292,11 @@ void CharacterMenu::render(){
 
     getMainText()->render();
 
+    if(getDynamicText()->getString() != ""){
+
+        getDynamicText()->render();
+    }
+
     if(menu->getActive()){
         menu->render();
     }
@@ -238,16 +315,17 @@ void CharacterMenu::initButtons(){
     unsigned int charSize = GUI::calcCharSize(125);
 
 
-    mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["SKILLS"]->setRenderText("Skills");
+    mButtons["WEAPONS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["WEAPONS"]->setRenderText("Weapons");
 
-    mButtons["FACTIONS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["FACTIONS"]->setRenderText("Factions");
+    mButtons["ARMOURS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ARMOURS"]->setRenderText("Armour");
 
-    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["ATTRIBUTES"]->setRenderText("Attributes");
+    mButtons["ALL"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ALL"]->setRenderText("All");
 
-//    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
-//    mButtons["INVENTORY"]->setRenderText("Inventory");
+    mButtons["WEAPONS"]->setSelected(false);
+    mButtons["ARMOURS"]->setSelected(false);
+    mButtons["ALL"]->setSelected(true);
 
 }
