@@ -60,19 +60,49 @@ void CharacterMenu::checkItemStrength(){
         }
         else if(wv->getItemType() == ARMOUR){
 
-            //HEAD
-            if(getData()->getActiveCharacter()->getActiveHead() != nullptr){
+            int itemType = dynamic_cast<Armour&>(*wv).getType();
 
-                if(dynamic_cast<Armour&>(*wv).getType() == armourType::HEAD){
+            switch(itemType){
 
-                    if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveHead()->getDefence()){
+            case armourType::HEAD:
+
+                if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveHead()->getDefence()){
 
                         ops[i] += " *";
                     }
-                }
+                    break;
+
+
+            case armourType::CHEST:
+
+                if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveChest()->getDefence()){
+
+                        ops[i] += " *";
+                    }
+                    break;
+
+
+            case armourType::ARMS:
+
+                if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveArms()->getDefence()){
+
+                        ops[i] += " *";
+                    }
+                    break;
+
+            case armourType::LEGS:
+
+                if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveLegs()->getDefence()){
+
+                        ops[i] += " *";
+                    }
+                    break;
+
+            default:
+                ops[i] += " *";
+                break;
             }
-            else ops[0] += " *";
-        }
+        }   //EMD ARMOUR CHECK
     }
 }
 
