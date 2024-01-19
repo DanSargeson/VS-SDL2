@@ -9,6 +9,8 @@ CharacterMenu::CharacterMenu(){
     invMenu2 = std::make_shared<GUI::Menu>();
     ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
 
+    std::cout << getData()->getActiveCharacter()->getInvAsString() << endl;
+
     getMainText()->setFontSize(20);
     if(!ops.empty()){
 
@@ -66,36 +68,66 @@ void CharacterMenu::checkItemStrength(){
 
             case armourType::HEAD:
 
+                if(getData()->getActiveCharacter()->getActiveHead() != nullptr){
+
                 if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveHead()->getDefence()){
 
                         ops[i] += " *";
                     }
+                }
+                else{
+
+                    ops[i] += " *";
+                }
                     break;
 
 
             case armourType::CHEST:
 
+                if(getData()->getActiveCharacter()->getActiveChest() != nullptr){
+
+
                 if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveChest()->getDefence()){
 
                         ops[i] += " *";
                     }
+                }
+                else{
+
+                    ops[i] += " *";
+                }
                     break;
 
 
             case armourType::ARMS:
 
+                  if(getData()->getActiveCharacter()->getActiveArms() != nullptr){
+
+
                 if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveArms()->getDefence()){
 
                         ops[i] += " *";
                     }
+                  }
+                  else{
+
+                    ops[i] += " *";
+                }
                     break;
 
             case armourType::LEGS:
+
+                if(getData()->getActiveCharacter()->getActiveArms() != nullptr){
 
                 if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveLegs()->getDefence()){
 
                         ops[i] += " *";
                     }
+                }
+                else{
+
+                    ops[i] += " *";
+                }
                     break;
 
             default:
