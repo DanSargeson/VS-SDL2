@@ -289,6 +289,9 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         //BUTTONS START HERE
         if (mButtons["WEAPONS"]->isPressed(e.button)) {
 
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+            getMainText()->setString(mmm, true, 420);
+
             menu->setActive(true);
             invMenu2->setActive(false);
 
@@ -311,6 +314,9 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
         if (mButtons["ALL"]->isPressed(e.button)) {
 
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+            getMainText()->setString(mmm, true, 420);
+
             mButtons["WEAPONS"]->setSelected(false);
             mButtons["ARMOURS"]->setSelected(false);
             //mButtons["INVENTORY"]->setSelected(false);
@@ -330,6 +336,9 @@ void CharacterMenu::updateEvents(SDL_Event& e){
         }
 
         if (mButtons["ARMOURS"]->isPressed(e.button)) {
+
+            std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
+            getMainText()->setString(mmm, true, 420);
 
             mButtons["WEAPONS"]->setSelected(false);
             mButtons["ARMOURS"]->setSelected(true);
