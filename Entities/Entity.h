@@ -24,10 +24,10 @@ protected:
 	//EQUIPPED ITEMS
 	std::shared_ptr<class Weapon> activeWeapon;
 	std::shared_ptr<class Armour> activeHead;
-	std::shared_ptr<class Item> activeChest;
-	std::shared_ptr<Item> activeArms;
-	std::shared_ptr<Item> activeLegs;
-	std::shared_ptr<Item> activeTool;
+	std::shared_ptr<class Armour> activeChest;
+	std::shared_ptr<Armour> activeArms;
+	std::shared_ptr<Armour> activeLegs;
+	std::shared_ptr<Armour> activeTool;
 
 	std::shared_ptr<AttributeComponent> attributeComponent;
 	std::shared_ptr<SkillComponent> skillComponent;
@@ -171,6 +171,11 @@ public:
 	//virtual int getDirection() = 0;
 
 	std::shared_ptr<Weapon> getActiveWeapon();
+
+	std::shared_ptr<Armour> getActiveHead();
+	std::shared_ptr<Armour> getActiveChest();
+	std::shared_ptr<Armour> getActiveArms();
+	std::shared_ptr<Armour> getActiveLegs();
 
 	virtual void update();
 	virtual void render();

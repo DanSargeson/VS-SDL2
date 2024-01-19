@@ -181,6 +181,54 @@ std::shared_ptr<Weapon> Entity::getActiveWeapon(){
     }
 }
 
+std::shared_ptr<Armour> Entity::getActiveHead(){
+
+    if(this->activeHead != nullptr){
+
+        return activeHead;
+    }
+    else{
+
+        return nullptr;
+    }
+}
+
+std::shared_ptr<Armour> Entity::getActiveChest(){
+
+    if(this->activeChest != nullptr){
+
+        return activeChest;
+    }
+    else{
+
+        return nullptr;
+    }
+}
+
+std::shared_ptr<Armour> Entity::getActiveArms(){
+
+    if(this->activeArms != nullptr){
+
+        return activeArms;
+    }
+    else{
+
+        return nullptr;
+    }
+}
+
+std::shared_ptr<Armour> Entity::getActiveLegs(){
+
+    if(this->activeLegs != nullptr){
+
+        return activeLegs;
+    }
+    else{
+
+        return nullptr;
+    }
+}
+
 int Entity::getExp(){
 
     return attributeComponent->getEXP();

@@ -88,9 +88,9 @@ public:
 	inline void setInv(Inventory inv) { this->inventory = inv; }
 	inline void setWeapon(shared_ptr<Weapon> w) { this->activeWeapon = w; }
 	inline void setArmourHead(shared_ptr<Armour> a) { this->activeHead = a; }
-	inline void setArmourChest(shared_ptr<Item> a) { this->activeChest = a; }
-	inline void setArmourArms(shared_ptr<Item> a) { this->activeArms = a; }
-	inline void setArmourLegs(shared_ptr<Item> a) { this->activeLegs = a; }
+	inline void setArmourChest(shared_ptr<Armour> a) { this->activeChest = a; }
+	inline void setArmourArms(shared_ptr<Armour> a) { this->activeArms = a; }
+	inline void setArmourLegs(shared_ptr<Armour> a) { this->activeLegs = a; }
 	inline void increaseCorruption() { corruption++; }
 
 	void increaseAttribute(int i);

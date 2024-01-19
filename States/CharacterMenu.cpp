@@ -18,7 +18,7 @@ CharacterMenu::CharacterMenu(){
             menu->setActive(true);
         }
         else{
-
+        std::cout << ops[0] <<std::endl;
         checkItemStrength();
         menu->setMenuOptions(ops, true, true);
         menu->setActive(true);
@@ -43,16 +43,35 @@ CharacterMenu::CharacterMenu(){
 
 void CharacterMenu::checkItemStrength(){
 
+
     for(int i = 0; i < ops.size(); i++){
-
         auto wv = getData()->getActiveCharacter()->findItem(i);
-
         if(wv->getItemType() == WEAPON){
+            if(getActiveCharacter()->getActiveWeapon() != nullptr){
 
-            if(dynamic_cast<Weapon&>(*wv).getDamageMin() > getData()->getActiveCharacter()->getActiveWeapon()->getDamageMin()){
+                if(dynamic_cast<Weapon&>(*wv).getDamageMin() > getData()->getActiveCharacter()->getActiveWeapon()->getDamageMin()){
 
                     ops[i] += " *";
+                }
             }
+            else {
+                    ops[i] += " *";
+            }
+        }
+        else if(wv->getItemType() == ARMOUR){
+
+            //HEAD
+            if(getData()->getActiveCharacter()->getActiveHead() != nullptr){
+
+                if(dynamic_cast<Armour&>(*wv).getType() == armourType::HEAD){
+
+                    if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveHead()->getDefence()){
+
+                        ops[i] += " *";
+                    }
+                }
+            }
+            else ops[0] += " *";
         }
     }
 }
@@ -191,7 +210,14 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
             ops = StateData::GetInstance()->getActiveCharacter()->getInvAsVec();
             checkItemStrength();
-            menu->setMenuOptions(ops, true, true);
+            if(ops[0] == "You have no items"){
+
+                menu->setMenuOptions(ops, false, false);
+            }
+            else{
+
+                menu->setMenuOptions(ops, true, true);
+            }
             menu->setActive(true);
             invMenu2->setActive(false);
     }
