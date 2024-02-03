@@ -432,6 +432,12 @@ void Game::render(){
     getDynamicText()->render();
     getEnemyText()->render();
 
+
+    for (auto i : mButtons) {
+
+		i.second->renderButtons();
+	}
+
        if(textBox->getActive()){
 
        if(StateData::GetInstance()->getTutorial() == true){
@@ -462,9 +468,4 @@ void Game::render(){
 
         testNpc->renderDialogue();
     }
-
-     for (auto i : mButtons) {
-
-		i.second->renderButtons();
-	}
 }
