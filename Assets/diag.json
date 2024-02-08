@@ -88,12 +88,12 @@
         "id" : 1,
         "faction": "Blue",
         "dialogueId" : 1,
-        "text": "blue leader",
+        "text": "Hello, I am leader of the BLUE clan",
         "nextDialogue" : 2,
         "responses": [
             {
                 "id" : 1,
-                "text": "okay",
+                "text": "Hello",
                 "nextDialogue": 0 
             }
         ]
@@ -103,12 +103,12 @@
         "id" : 1,
         "faction": "Green",
         "dialogueId" : 1,
-        "text": "green leader",
+        "text": "Hi, I'm the GREEN leader",
         "nextDialogue" : 2,
         "responses": [
             {
                 "id" : 1,
-                "text": "okay",
+                "text": "Hey there",
                 "nextDialogue": 0 
             }
         ]
@@ -118,12 +118,12 @@
         "id" : 1,
         "faction": "Aqua",
         "dialogueId" : 1,
-        "text": "aqua leader",
+        "text": "Huh? I'm the leader of the AQUA faction, get out of my way",
         "nextDialogue" : 2,
         "responses": [
             {
                 "id" : 1,
-                "text": "okay",
+                "text": "Right...",
                 "nextDialogue": 0 
             }
         ]
@@ -134,12 +134,12 @@
         "id" : 1,
         "faction": "Brown",
         "dialogueId" : 1,
-        "text": "brown leader",
+        "text": "BROWN tribe stronk",
         "nextDialogue" : 2,
         "responses": [
             {
                 "id" : 1,
-                "text": "okay",
+                "text": "...Okay",
                 "nextDialogue": 0 
             }
         ]
@@ -149,7 +149,7 @@
         "id" : 1,
         "faction": "Purple",
         "dialogueId" : 1,
-        "text": "I am the purple leader",
+        "text": "I am the PURPLE leader",
         "nextDialogue" : 2,
         "responses": [
             {
