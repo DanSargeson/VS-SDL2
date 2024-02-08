@@ -16,6 +16,9 @@ class FactionEncounter : public State{
         void updateEvents(SDL_Event &e);
         void render();
 
+        void startTextThread();
+        void updateText();
+
         void refreshGUI();
 
     private:
@@ -27,7 +30,14 @@ class FactionEncounter : public State{
         // std::shared_ptr<GUI::Menu> m_menu;
          static int position;
 
+
+         std::thread textThread;
+         bool textThreadRunning;
          bool firstEncounter;
+
+         std::string copyText;
+         std::string builderText;
+         int textBuildCounter;
 
          std::map<std::string, std::map<int, Dialogue>> dialogueMap;
 
