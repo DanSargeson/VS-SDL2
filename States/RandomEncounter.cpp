@@ -216,8 +216,9 @@ void RandomEncounter::updateEvents(SDL_Event& e){
                     getData()->enemyText->clearText();
                     if(charm()){
 
-                        getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
+                        getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.\nPersuasion increased.", true, 680);
                         getData()->getActiveCharacter()->gainRep(npc->getFaction(), 5);
+                        getData()->getActiveCharacter()->increaseSkill(7); //7 == SKILLS::PERSUASION
 
                         menu->setActive(false);
                     }

@@ -42,6 +42,11 @@ void Player::decreaseAttribute(int i ){
     attributeComponent->decreaseAttribute(i);
 }
 
+void Player::increaseSkill(int i){
+
+    skillComponent->increaseSkill(i);
+}
+
 Player::Player() : Entity(){
     distanceTravelled = 0;
 

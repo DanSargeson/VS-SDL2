@@ -96,6 +96,8 @@ public:
 	void increaseAttribute(int i);
 	void decreaseAttribute(int i);
 
+	void increaseSkill(int i);
+
 	std::string saveAttributes();
 	void setAttributes(int v, int s, int d, int a, int i, int c, int l);
 
