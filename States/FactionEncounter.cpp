@@ -153,7 +153,7 @@ void FactionEncounter::refreshGUI(){
     std::string check = npc->getFactionStr();
     getMainText()->setString(file->getDialogue(check, 1));
     copyText = getMainText()->getString();
-    textThreadRunning = true;
+    //textThreadRunning = true;
     menu->setMenuOptions(file->getFirstResponses(check, 1), true);
     }
     else{
@@ -161,7 +161,7 @@ void FactionEncounter::refreshGUI(){
         std::string msg2 = file->getDialogue(npc->getFactionStr(), file->getCurrDiagID());
         getMainText()->setString(msg2);
         copyText = msg2;
-        textThreadRunning = true;
+      //  textThreadRunning = true;
         menu->setMenuOptions(file->getPlayerOps(), true);
     }
 }
