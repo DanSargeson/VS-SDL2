@@ -492,7 +492,7 @@ const void Battle::playerAttacks(){
 						battleCloseMsg->setHeader("YOU DEFEATED!");
 						gainGold = rand() & enemies[choice].getLevel() * 10 + 1;
 						totalGold += gainGold;
-						StateData::GetInstance()->getActiveCharacter()->setGold(gainGold);
+						StateData::GetInstance()->getActiveCharacter()->gainGold(gainGold);
 						gainEXP = enemies[choice].getExp();
 						totalEXP += gainEXP;
 						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
