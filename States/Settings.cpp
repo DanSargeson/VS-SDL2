@@ -40,6 +40,7 @@ Settings::Settings(){
 Settings::~Settings()
 {
 //    State::~State();
+    State::refreshGUI();
 }
 
 void Settings::update(const float& dt){

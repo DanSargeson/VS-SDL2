@@ -144,7 +144,7 @@ CharacterMenu::~CharacterMenu(){
 //    menu.reset();
 
     ops.clear();
-
+    State::refreshGUI();
     //getMainText()->setFontSize(24);
     invMenu2.reset();
 }
