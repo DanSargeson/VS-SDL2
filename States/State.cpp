@@ -58,7 +58,10 @@ State::~State(){
 
     //getData()->dynamicText->clearText();
     //getData()->enemyText->clearText();
-    getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
+    if(getActiveCharacter() != nullptr){
+
+        getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
+    }
 }
 
 void State::setData(StateData& stateData){

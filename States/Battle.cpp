@@ -350,10 +350,10 @@ if(playerWins){
         if(!playerTurn && !playerDefeated){
 
                 //std::cout << "DT:  " << battleGameTimer->getTicks() << std::endl;
-                if(battleGameTimer->getTicks() > 100){
+                SDL_Delay(10);
                     enemyAttacks();
-                    battleGameTimer->stop();
-                }
+                   /// battleGameTimer->stop();
+                //}
         }
 	}
 
