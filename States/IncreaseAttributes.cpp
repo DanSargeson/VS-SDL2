@@ -301,7 +301,7 @@ void IncreaseAttributes::updateEvents(SDL_Event& e){
 
         if(buttons["DONE"]->isPressed(e.button)){
 
-
+            getActiveCharacter()->setAttributePoints(0);
             saveCharacters();
             Engine::GetInstance()->PopState();
 

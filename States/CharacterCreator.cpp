@@ -366,6 +366,8 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 //            temp->setAttributePoints(0);
             StateData::GetInstance()->characters.push_back(temp);
 
+            std::cout << temp->getStatsAsString() << std::endl;
+
 
             int ac = StateData::GetInstance()->characters.size() - 1;
             StateData::GetInstance()->activeCharacter = ac;

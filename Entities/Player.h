@@ -94,6 +94,8 @@ public:
 	inline void setArmourLegs(shared_ptr<Armour> a) { this->activeLegs = a; }
 	inline void increaseCorruption() { corruption++; }
 
+
+	void setAttributePoints(int p);
 	void increaseAttribute(int i);
 	void decreaseAttribute(int i);
 

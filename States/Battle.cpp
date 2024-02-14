@@ -187,6 +187,9 @@ Battle::~Battle(){
 
         textThread.join();
     }
+
+    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
 }
 
 void Battle::refreshGUI(){
@@ -308,7 +311,7 @@ if(playerWins){
 
     if(winThread.joinable()){
 
-        if(winAlpha == 255){
+        if(winAlpha >= 255){
 
             winThread.join();
         }
@@ -398,7 +401,7 @@ void Battle::updateWinText(){
         }
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 }
 
@@ -463,7 +466,7 @@ const void Battle::playerAttacks(){
              combatRollEnemy = enemyTotalDistribution(generator);
 
 
-				if (combatRollPlayer > combatRollEnemy || missCounter >= 5) { //###########PLAYER HITS
+				if (combatRollPlayer >= combatRollEnemy || missCounter >= 3) { //###########PLAYER HITS
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
@@ -495,7 +498,7 @@ const void Battle::playerAttacks(){
 						StateData::GetInstance()->getActiveCharacter()->gainGold(gainGold);
 						gainEXP = enemies[choice].getExp();
 						totalEXP += gainEXP;
-						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
+						StateData::GetInstance()->getActiveCharacter()->gainXP(250); //TODO DEBUG REMOVE
 
 
                         endMsg += "Gold Gained: " + std::to_string(gainGold) + "\n";
@@ -637,6 +640,19 @@ const void Battle::enemyAttacks(){
 
 				if (combatRollPlayer < combatRollEnemy) {
 					//HIT
+					int chancetoSave = getRandomValue(0, getActiveCharacter()->getAttribute(6)); //PLAYERS LUCK == 6
+
+					if(chancetoSave > 0){
+
+                        //MISS
+					enemyMsg += "\n" + enemies[i].getName() + " Missed! ";
+					alpha2 = 255;
+					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
+					cout << "ENEMY MISSED!\n\n";
+
+					}
+					else{
+
 					damage = enemies[i].getDamage();
 					StateData::GetInstance()->getActiveCharacter()->loseHP(damage);
 					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(damage) + " damage! ";
@@ -646,6 +662,7 @@ const void Battle::enemyAttacks(){
 						cout << "YOU DIED!\n\n";
 						playerDefeated = true;
 						break;
+					}
 					}
 				}
 				else {

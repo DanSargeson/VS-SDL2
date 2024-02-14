@@ -88,7 +88,7 @@ void Game::refreshGUI(){
 	textBox->refreshGUI();
 	initButtons();
 
-	getEnemyText()->setPosition(GUI::p2pX(40), GUI::p2pY(60));
+	getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
     getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
 }
 
@@ -103,8 +103,13 @@ void Game::update(const float& dt){
                         }
         }
 
-    ///
 
+    if(getActiveCharacter()->getAttributePoints() > 0){
+
+        getDynamicText()->setString("Attribute upgrade available!");
+    }
+
+    ///
     if(StateData::GetInstance()->getTutorial() == true){
 
         switch(tutorialCount){
@@ -283,16 +288,12 @@ void Game::updateEvents(SDL_Event& e){
                     //TODO: INCREASE ATTRIBUTE POINTS
 
                     Engine::GetInstance()->AddState(std::make_shared<IncreaseAttributes>());
-                    //std::string msg1 = "Points available: " + std::to_string(getActiveCharacter()->getAttributePoints());
-                    //getDynamicText()->setString(msg1);
+
                 }
                 else{
 
-                    getEnemyText()->setString("No Points to Spend, level up to increase attributes...");
+                    getEnemyText()->setString("No Points to Spend.");
                 }
-                //StateData::GetInstance()->getActiveCharacter()->levelUp();
-               // getMainText()->setString("Levelled up!!");
-                //getDynamicText()->setString("");
             }
 
             if(menu->getChoice() == 3){

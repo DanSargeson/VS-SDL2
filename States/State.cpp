@@ -75,16 +75,19 @@ void State::refreshGUI(){
 
         getData()->mainText->refreshGUI();
         getDynamicText()->refreshGUI();
-        getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
         //getData()->enemyText = std::make_shared<GUI::Text>();
         getEnemyText()->refreshGUI();
         getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+        getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
         getMainText()->setFontSize(20);
         getDynamicText()->setFontSize(20);
         getEnemyText()->setFontSize(20);
         //getEnemyText()->clearText();
+
+        getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
 
         menu->refreshGUI();
 

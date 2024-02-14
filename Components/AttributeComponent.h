@@ -54,6 +54,8 @@ public:
 	void updateLevel();
 	void update();
 
+	void setAttributePoints(int p);
+
 	void assignRandomAttributes(int level);
 
 	inline bool levelUp() { return mHasLevelled; }
