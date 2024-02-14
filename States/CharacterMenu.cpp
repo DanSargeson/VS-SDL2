@@ -117,7 +117,7 @@ void CharacterMenu::checkItemStrength(){
 
             case armourType::LEGS:
 
-                if(getData()->getActiveCharacter()->getActiveArms() != nullptr){
+                if(getData()->getActiveCharacter()->getActiveLegs() != nullptr){
 
                 if(dynamic_cast<Armour&>(*wv).getDefence() > getData()->getActiveCharacter()->getActiveLegs()->getDefence()){
 
