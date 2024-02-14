@@ -8,7 +8,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 	mExp = 0;
 	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
 	mExpNext = (baseEXP * mLevel) * 5;
-	mAttributePoints = 2;
+	mAttributePoints = 0;
 	mHasLevelled = false;
 
 	for (int i = 0; i < TOTAL_ATTRIBUTES; i++) {

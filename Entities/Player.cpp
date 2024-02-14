@@ -438,6 +438,11 @@ string Player::getInvAsStringSave() {
 
 }
 
+int Player::getAttributePoints(){
+
+    return attributeComponent->getAttributePoints();
+}
+
 void Player::levelUp(){
 
     bool levelled;

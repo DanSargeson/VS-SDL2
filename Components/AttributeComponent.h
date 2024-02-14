@@ -63,6 +63,8 @@ public:
 
 	int getAttribute(const int attr);
 
+	int getAttributePoints() { return mAttributePoints; }
+
 	inline void setAttribute(int attr, int value) { mAttributes[attr] = value; }
 
 private:
