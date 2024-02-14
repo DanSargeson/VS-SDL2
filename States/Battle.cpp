@@ -22,15 +22,15 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
                 // Use std::uniform_int_distribution to generate random indices
 
                 int maxi = 2 + getData()->getActiveCharacter()->getLevel();
-                if(maxi > 5){
+                if(maxi > 3){
 
-                    maxi = 5;
+                    maxi = 3;
                 }
-    std::uniform_int_distribution<> dis(1, 2);
+    std::uniform_int_distribution<> dis(1, maxi);
 
     noOfEnemies = dis(gen);
 
-    if(getData()->getActiveCharacter()->getLevel() <= 50){
+    if(getData()->getActiveCharacter()->getLevel() <= 3){
 
         noOfEnemies = 1;
     }
@@ -166,10 +166,10 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 Battle::~Battle(){
 
 //    menu.reset();
-    enemyMenu.reset();
+//    enemyMenu.reset();
 
-    enemyAttkTxt.reset();
-    playerAttkTxt.reset();
+//    enemyAttkTxt.reset();
+//    playerAttkTxt.reset();
 
     //getMainText()->clearText();
     //getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
@@ -179,8 +179,8 @@ Battle::~Battle(){
     else{
         getMainText()->setString("Ran away safely!!");
     }
-    getEnemyText()->clearText();
-    getDynamicText()->clearText();
+    //getEnemyText()->clearText();
+    //getDynamicText()->clearText();
     enemies.clear();
 
     if(textThread.joinable()){
@@ -420,7 +420,6 @@ void Battle::updateText(){
         }
         else{
 
-            playerAttkTxt->clearText();
             alpha = 255;
             textThreadRunning = false;
         }
@@ -437,7 +436,7 @@ void Battle::updateText(){
         }
         else{
 
-            enemyAttkTxt->clearText();
+///            enemyAttkTxt->clearText();
             alpha2 = 255;
             textThreadRunning = false;
         }
@@ -498,11 +497,11 @@ const void Battle::playerAttacks(){
 						StateData::GetInstance()->getActiveCharacter()->gainGold(gainGold);
 						gainEXP = enemies[choice].getExp();
 						totalEXP += gainEXP;
-						StateData::GetInstance()->getActiveCharacter()->gainXP(250); //TODO DEBUG REMOVE
+						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
 
 
                         endMsg += "Gold Gained: " + std::to_string(gainGold) + "\n";
-                        endMsg += "EXP Gained: " + std::to_string(gainEXP);
+                        endMsg += "EXP Gained: " + std::to_string(gainEXP) + "\n";
 
                         if(getData()->getActiveCharacter()->getExp() >= getData()->getActiveCharacter()->getExpNext()){
 
@@ -718,7 +717,7 @@ void Battle::updateEvents(SDL_Event& e){
 
                     int coinToss = rand() % 2 + 1;
                         if (coinToss == 2){
-                            getDynamicText()->setString("Ran away!!");
+                            //getDynamicText()->setString("Ran away!!");
                             escape = true;
                             //return;
                         }
