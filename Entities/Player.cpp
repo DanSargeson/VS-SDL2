@@ -107,7 +107,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int vit, int str, int 
     corruption = corr;
 
    this->createAttributeComponent(level, true, false);
-   ///attributeComponent->setAttributes(vit, str, dex, agi, intel, charis, luck);
+   attributeComponent->setAttributes(vit, str, dex, agi, intel, charis, luck);
 
 
 	this->createSkillComponent();
@@ -436,6 +436,16 @@ string Player::getInvAsStringSave() {
 
 	return this->inventory.getInvAsStringSave();
 
+}
+
+void Player::setAttributePoints(int p){
+
+    attributeComponent->setAttributePoints(p);
+}
+
+int Player::getAttributePoints(){
+
+    return attributeComponent->getAttributePoints();
 }
 
 void Player::levelUp(){

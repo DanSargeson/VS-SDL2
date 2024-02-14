@@ -54,6 +54,8 @@ public:
 	void updateLevel();
 	void update();
 
+	void setAttributePoints(int p);
+
 	void assignRandomAttributes(int level);
 
 	inline bool levelUp() { return mHasLevelled; }
@@ -62,6 +64,8 @@ public:
 	std::string debugPrint();
 
 	int getAttribute(const int attr);
+
+	int getAttributePoints() { return mAttributePoints; }
 
 	inline void setAttribute(int attr, int value) { mAttributes[attr] = value; }
 

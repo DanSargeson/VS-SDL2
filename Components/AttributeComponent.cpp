@@ -8,7 +8,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 	mExp = 0;
 	//mExpNext = static_cast<float>((50 / 3) * (pow(mLevel + 1, 3) - 6 * pow(mLevel + 1, 2) + ((mLevel + 1) * 17) - 12));
 	mExpNext = (baseEXP * mLevel) * 5;
-	mAttributePoints = 2;
+	mAttributePoints = 0;
 	mHasLevelled = false;
 
 	for (int i = 0; i < TOTAL_ATTRIBUTES; i++) {
@@ -311,15 +311,20 @@ void AttributeComponent::updateLevel(){
 		mHasLevelled = true;
 	}
 
-	if (mLevel % 10 == 0) { //TODO - Every 10 levels player gains an attribute point. Might change this.
+	if (mLevel % 5 == 0) { //TODO - Every 10 levels player gains an attribute point. Might change this.
 
 		mAttributePoints++;
 	}
 
-	for(int i = 0; i < ATTRIBUTE::TOTAL_ATTRIBUTES; i++){
+//	for(int i = 0; i < ATTRIBUTE::TOTAL_ATTRIBUTES; i++){
+//
+//        mAttributes[i]++;
+//	}
+}
 
-        mAttributes[i]++;
-	}
+void AttributeComponent::setAttributePoints(int p){
+
+    mAttributePoints = p;
 }
 
 void AttributeComponent::update(){

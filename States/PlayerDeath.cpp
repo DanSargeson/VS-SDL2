@@ -25,6 +25,9 @@ PlayerDeath::~PlayerDeath(){
 //    State::~State();
     getEnemyText()->setString("");
     getDynamicText()->setString("");
+
+    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
 }
 
 void PlayerDeath::refreshGUI(){

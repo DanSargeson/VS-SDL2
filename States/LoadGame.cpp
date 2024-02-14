@@ -13,6 +13,8 @@ LoadGame::LoadGame() : State(){
     menu.reset();
 	menu = make_unique<GUI::Menu>();
 
+	getData()->activeCharacter = 0;
+
 
 
 	for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {

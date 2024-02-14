@@ -291,8 +291,8 @@ GUI::Text::Text(int x, int y, int w, int h, bool border){
 		mFiller.w = 0;
 		mFiller.h = 0;
 
-		//offsetX = 20;
-		//offsetY = 10;
+		offsetX = 0;
+		offsetY = 0;
 	}
 
 ///	mMainText = "Debug text 2";

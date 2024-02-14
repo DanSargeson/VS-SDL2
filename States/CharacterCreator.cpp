@@ -204,7 +204,9 @@ CharacterCreator::CharacterCreator() : State(){
     temp = std::make_shared<Player>();
     temp->createAttributeComponent(1, true, false);
 
-    pointsToSpend = 0;
+
+    maxPoints = 17;
+    pointsToSpend = maxPoints;
 
     const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";
 
@@ -249,9 +251,9 @@ void CharacterCreator::updateInput(const float& dt){
         }
 
         //DECREASE
-        if(pointsToSpend > 20){
+        if(pointsToSpend > maxPoints){
 
-            pointsToSpend = 0;
+            pointsToSpend = maxPoints;
         }
         if(pointsToSpend <= 0){
 
@@ -361,7 +363,10 @@ void CharacterCreator::updateEvents(SDL_Event& e){
             temp->updateStats();
             temp->createSkillComponent();
             temp->calculateSkills();
+//            temp->setAttributePoints(0);
             StateData::GetInstance()->characters.push_back(temp);
+
+            std::cout << temp->getStatsAsString() << std::endl;
 
 
             int ac = StateData::GetInstance()->characters.size() - 1;
@@ -402,7 +407,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
 //            StateData::GetInstance()->push_state(std::make_shared<GameState>(StateData::GetInstance()));
         }
 
-        if(menuPos == MENU_POS::ATTRIBUTES && pointsToSpend > 21){          ///TODO Took this out
+        if(menuPos == MENU_POS::ATTRIBUTES && pointsToSpend > 0){          ///TODO Took this out
 
             int x, y;
 

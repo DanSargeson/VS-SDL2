@@ -15,7 +15,7 @@ enum MENU_POS{
 };
 
 
-class CharacterCreator : public State{
+class IncreaseAttributes : public State{
 
 
 public:
@@ -25,9 +25,9 @@ public:
     void initGUI();
     void initText();
 
-    CharacterCreator();
+    IncreaseAttributes();
 
-    virtual ~CharacterCreator();
+    virtual ~IncreaseAttributes();
 
     //void setStateData();
     void updateButtons(const float& dt);
@@ -52,22 +52,14 @@ public:
 
 private:
 
-    SDL_Rect textBox; //Used for the player to input their own name.
-    std::string name; //stores value in textBox
 //    char[] nameChar;
-
-    Texture nameTex;
-
-    bool textInput;
-    bool textEditDone;  //Can surely get rid of and just use textInput???
-    bool nameSet;
 
     std::shared_ptr<Texture> mTexture;
     int pointsToSpend;
     int maxPoints;
 
     std::unique_ptr<GUI::Text> pointsMessage;
-    std::unique_ptr<GUI::Text> nameMessage;
+    //std::unique_ptr<GUI::Text> nameMessage;
 
     int menuPos;
     int lastMenuPos;
@@ -81,7 +73,7 @@ private:
     std::string vit;
 
 
-    std::shared_ptr<Player> temp;
+    //std::shared_ptr<Player> temp;
 
    TTF_Font* font;
     std::map<std::string, GUI::Button*> mButtons;   //TODO: Use smrt pointers
@@ -110,8 +102,6 @@ private:
     //TODO: Possibly need more textures for each stat..
 
     std::unique_ptr<GUI::Text> charCreatorText;
-
-
 };
 
 #endif // CHARACTER_CREATOR

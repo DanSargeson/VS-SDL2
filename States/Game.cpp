@@ -5,6 +5,7 @@
 #include "Battle.h"
 #include "FactionEncounter.h"
 #include "RandomEncounter.h"
+#include "IncreaseAttributes.h"
 #include "CharacterMenu.h"
 #include "LoadGame.h"
 
@@ -68,9 +69,15 @@ void Game::refreshGUI(){
     State::refreshGUI();
 //    getData()->mainText->setString("Select an option.");
 	ops.clear();
+	std::string msg3 = "Increase Attributes";
+	if(getActiveCharacter()->getAttributePoints() > 0){
+
+        msg3 += " **";
+	}
+
 	ops.push_back("Visit Civilisation");    //1
 	ops.push_back("Explore Wilderness");      //2
-	ops.push_back("Level Up");  //3
+	ops.push_back(msg3);  //3
 	ops.push_back("Rest - Cost 10 Gold");   //4
 	ops.push_back("Inventory");        //5
 	ops.push_back("Settings");
@@ -80,6 +87,9 @@ void Game::refreshGUI(){
 	menu->setMenuOptions(ops, true);
 	textBox->refreshGUI();
 	initButtons();
+
+	getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
 }
 
 void Game::update(const float& dt){
@@ -93,8 +103,13 @@ void Game::update(const float& dt){
                         }
         }
 
-    ///
 
+    if(getActiveCharacter()->getAttributePoints() > 0){
+
+        getDynamicText()->setString("Attribute upgrade available!");
+    }
+
+    ///
     if(StateData::GetInstance()->getTutorial() == true){
 
         switch(tutorialCount){
@@ -184,6 +199,9 @@ void Game::updateEvents(SDL_Event& e){
         //GAME LOOP HERE
         if(menu->isSelected()){
 
+            getDynamicText()->setString("");
+            getEnemyText()->setString("");
+
             if(menu->getChoice() == 0){
 
 
@@ -265,9 +283,17 @@ void Game::updateEvents(SDL_Event& e){
 
             if(menu->getChoice() == 2){
 
-                StateData::GetInstance()->getActiveCharacter()->levelUp();
-               // getMainText()->setString("Levelled up!!");
-                getDynamicText()->setString("");
+                if(getActiveCharacter()->getAttributePoints() > 0){
+
+                    //TODO: INCREASE ATTRIBUTE POINTS
+
+                    Engine::GetInstance()->AddState(std::make_shared<IncreaseAttributes>());
+
+                }
+                else{
+
+                    getEnemyText()->setString("No Points to Spend.");
+                }
             }
 
             if(menu->getChoice() == 3){
@@ -277,7 +303,7 @@ void Game::updateEvents(SDL_Event& e){
                     StateData::GetInstance()->getActiveCharacter()->resetHP();
                     StateData::GetInstance()->getActiveCharacter()->gainGold(-10);
 
-                    getMainText()->setString("You awake feeling well rested");
+                    getDynamicText()->setString("You awake feeling well rested");
                     getEnemyText()->setColour(255, 0, 0, 0);
                     getEnemyText()->setString("Lost 10 gold");
                 }

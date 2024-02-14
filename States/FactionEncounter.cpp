@@ -133,7 +133,7 @@ void FactionEncounter::updateEvents(SDL_Event& e)
         getEnemyText()->clearText();
         getDynamicText()->clearText();
 
-        if(!menu->getActive()){
+        if(!menu->getActive() && !textThreadRunning){
 
             Engine::GetInstance()->PopState();
         }
