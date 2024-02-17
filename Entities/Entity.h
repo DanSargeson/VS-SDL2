@@ -110,7 +110,7 @@ public:
 	void createSkillComponent();
 	void createFactionComponent();
 	void createDialogueComponent();
-	void createAttackComponent(std::shared_ptr<SkillComponent> skillComponent, std::shared_ptr<AttributeComponent> attributeComponent);
+	void createAttackComponent();
 
     std::shared_ptr<AttributeComponent> getAttributeComponent() { return this->attributeComponent; }
 	std::shared_ptr<SkillComponent> getSkillComponent() { return skillComponent; };

@@ -88,7 +88,7 @@ Player::Player() : Entity(){
 
 	this->skillComponent->calculateSkills(attributeComponent);
 	//this->createAttackComponent(skillComponent, attributeComponent);
-	createAttackComponent(skillComponent, attributeComponent);
+	createAttackComponent();
 
 
     //statPoints = 0;
@@ -118,7 +118,7 @@ Player::Player(string n, int dt, int g, int lvl, int exp, int vit, int str, int 
 	//attributeComponent->updateStats(true);
 	skillComponent->calculateSkills(attributeComponent);
 	updateStats(false);
-	createAttackComponent(skillComponent, attributeComponent);
+	createAttackComponent();
 	attributeComponent->setHP(hp);
 	attributeComponent->setXP(exp);
 }
@@ -130,7 +130,7 @@ Player::Player(string name, int dt) : Entity(){
     this->createAttributeComponent(0, true);
 	this->createSkillComponent();
 	this->createFactionComponent();
-	createAttackComponent(skillComponent, attributeComponent);
+	createAttackComponent();
 }
 
 Player::~Player(){

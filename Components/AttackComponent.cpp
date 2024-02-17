@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "AttackComponent.h"
 
-AttackComponent::AttackComponent(std::shared_ptr<SkillComponent> skillComp, std::shared_ptr<AttributeComponent> attriComp){
+AttackComponent::AttackComponent(Entity* owner) : Component(owner){
 
-	this->skillComponent = skillComp;
-	this->attributeComponent = attriComp;
+	//this->skillComponent = skillComp;
+	//this->attributeComponent = attriComp;
 
 	this->baseDmg = 5; ///(this->skillComponent->getSkill(SKILLS::MELEE));
 
@@ -107,7 +107,7 @@ int AttackComponent::getMagicDamage(int type) {
 
 int AttackComponent::getMinDefence(){
 
-    int minDefence = (this->skillComponent->getSkill(SKILLS::DEFENCE) * 0.10);
+    int minDefence = (mOwner->getSkill(SKILLS::DEFENCE) * 0.10);
 
 	///minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
 
@@ -123,7 +123,7 @@ void AttackComponent::calculateArmourModifier(Armour& armourMod) {
 
 
 	int minWeapon = armourMod.getDefence();
-	int maxWeapon = armourMod.getDefence() * skillComponent->getSkill(SKILLS::DEFENCE * 0.10);
+	int maxWeapon = armourMod.getDefence() * mOwner->getSkill(SKILLS::DEFENCE * 0.10);
 
 	std::uniform_int_distribution<int> dmgDist(minWeapon, maxWeapon);
 	this->weaponMod = dmgDist(generator);
@@ -133,7 +133,7 @@ int AttackComponent::getMaxDefence(){
 
     int maxDef = 0;
 
-	maxDef += (this->skillComponent->getSkill(SKILLS::DEFENCE) * 0.5);
+	maxDef += (mOwner->getSkill(SKILLS::DEFENCE) * 0.5);
 
 	return maxDef;
 }
@@ -156,11 +156,11 @@ void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
 int AttackComponent::getBaseMinDamage(){
 
 
-    int t1 = skillComponent->getSkill(SKILLS::MELEE);
+    int t1 = mOwner->getSkill(SKILLS::MELEE);
     int t2 = t1 * 0.10;
     int t3 = t1 * 0.5;
 
-	int minDamage = (this->skillComponent->getSkill(SKILLS::MELEE) * 0.10);
+	int minDamage = (mOwner->getSkill(SKILLS::MELEE) * 0.10);
 
 	///minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
 
@@ -171,7 +171,7 @@ int AttackComponent::getBaseMaxDamage(){
 
 	int maxDamage = 0;
 
-	maxDamage += (this->skillComponent->getSkill(SKILLS::MELEE) * 0.5);
+	maxDamage += (mOwner->getSkill(SKILLS::MELEE) * 0.5);
 
 	return maxDamage;
 }

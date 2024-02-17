@@ -23,11 +23,11 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
 //		std::uniform_int_distribution<int> levelDistribution(low, high);
-		std::uniform_int_distribution<int> pointDistribution(0, 6);
+		std::uniform_int_distribution<int> pointDistribution(0, 4);
 //
 //		mLevel = levelDistribution(generator);
 
-		int point = 0;
+		int point = 3;
 		int counter = 0;
 		if(mLevel > 1){
             point += mLevel;
@@ -40,31 +40,23 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 			switch (roll) {
 
 			case 0:
-				mAttributes[ATTRIBUTE::VITALITY] += 1;
+				mAttributes[ATTRIBUTE::VITALITY] += 1;      ///USED FOR DEFENCE
 				break;
 
 			case 1:
-				mAttributes[ATTRIBUTE::STRENGTH] += 1;
+				mAttributes[ATTRIBUTE::STRENGTH] += 1;      ///USED FOR MELEE
 				break;
 
 			case 2:
-				mAttributes[ATTRIBUTE::DEXTERITY] += 1;
+				mAttributes[ATTRIBUTE::DEXTERITY] += 1;     ///USED FOR ACCURACY
 				break;
 
 			case 3:
-				mAttributes[ATTRIBUTE::AGILITY] += 1;
+				mAttributes[ATTRIBUTE::INTELLIGENCE] += 1;       ///WILL EVENTUALLY BE USED FOR MAGIC
 				break;
 
 			case 4:
-				mAttributes[ATTRIBUTE::INTELLIGENCE] += 1;
-				break;
-
-			case 5:
-				mAttributes[ATTRIBUTE::CHARISMA] += 1;
-				break;
-
-			case 6:
-				mAttributes[ATTRIBUTE::LUCK] += 1;
+				mAttributes[ATTRIBUTE::LUCK] += 1;          ///USED TO BOOST EVERYTHING SLIGHTLY
 				break;
 
 			default:

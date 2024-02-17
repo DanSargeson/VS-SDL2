@@ -207,7 +207,8 @@ IncreaseAttributes::IncreaseAttributes() : State(){
 
 IncreaseAttributes::~IncreaseAttributes(){
 
-//    State::~State();
+   /// State::~State();
+   mainScreen = true;
 }
 
 void IncreaseAttributes::updateButtons(const float &dt){

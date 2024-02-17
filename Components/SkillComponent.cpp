@@ -332,7 +332,6 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 
      int base_skill_value = 5;
-
     std::unordered_map<std::string, double> attribute_weight = {
             {"Vitality", 2},
             {"Strength", 3},
@@ -374,13 +373,13 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 		LUCK HAS AN AFFECT ON ALL ABILITIES, SLIGHTLY
 	*/
 
-	int luckLevel = ac->getAttribute(LUCK);
-	int level = ac->getLevel();
+	int luckLevel = mOwner->getAttribute(LUCK);
+	int level = mOwner->getLevel();
 
 	/*
 		AGILITY
 	*/
-	int agilityLevel = ac->getAttribute(AGILITY);
+	int agilityLevel = mOwner->getAttribute(AGILITY);
 
 	int rangeLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
 	mSkills[SKILLS::RANGED].setLevel(rangeLvl);
@@ -388,23 +387,23 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 
     //DEX (Covers ACCURACY
-    int dexLevel = ac->getAttribute(DEXTERITY);
+    int dexLevel = mOwner->getAttribute(DEXTERITY);
 
 	int accuLvl = base_skill_value + (dexLevel * attribute_weight["Dexterity"]);
 	mSkills[SKILLS::ACCURACY].setLevel(accuLvl);
 
 	mSkills[SKILLS::LOCKPICKING].setLevel(accuLvl);
 
-	///TODP STEALTH UNDER JUST AGILITY??
-	int stealthLvl = base_skill_value * ((dexLevel + agilityLevel) * attribute_weight["Dexterity"]);
-	mSkills[SKILLS::STEALTH].setLevel(stealthLvl);
+	///TODO STEALTH UNDER JUST AGILITY?? AND GET RID OF RANGED ATTACKS
+	//int stealthLvl = base_skill_value * ((dexLevel + agilityLevel) * attribute_weight["Dexterity"]);
+	mSkills[SKILLS::STEALTH].setLevel(rangeLvl);
 
 
 	/*
 		CHARISMA
 	*/
 
-	int charismaLevel = ac->getAttribute(ATTRIBUTE::CHARISMA);
+	int charismaLevel = mOwner->getAttribute(ATTRIBUTE::CHARISMA);
 	int persuLvl = base_skill_value + (charismaLevel * attribute_weight["Charisma"]);
 	mSkills[SKILLS::PERSUASION].setLevel(persuLvl);
 
@@ -413,7 +412,7 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 		VITALITY
 	*/
 
-	int vitLevel = ac->getAttribute(ATTRIBUTE::VITALITY);
+	int vitLevel = mOwner->getAttribute(ATTRIBUTE::VITALITY);
 	int defenceLvl = base_skill_value + (vitLevel * attribute_weight["Vitality"]);
 	mSkills[SKILLS::DEFENCE].setLevel(defenceLvl);
 
@@ -421,7 +420,7 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	/*
 		INTELLIGENCE
 	*/
-	int intLevel = ac->getAttribute(ATTRIBUTE::INTELLIGENCE);
+	int intLevel = mOwner->getAttribute(ATTRIBUTE::INTELLIGENCE);
 
 	int magLvl = base_skill_value + (intLevel * attribute_weight["Intelligence"]);
 	mSkills[SKILLS::MAGIC].setLevel(magLvl);
@@ -431,7 +430,7 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 		STRENGTH
 	*/
 
-	int strLevel = ac->getAttribute(ATTRIBUTE::STRENGTH);
+	int strLevel = mOwner->getAttribute(ATTRIBUTE::STRENGTH);
 
 	int meleeLvl = base_skill_value + (strLevel * attribute_weight["Strength"]);
 	mSkills[SKILLS::MELEE].setLevel(meleeLvl);

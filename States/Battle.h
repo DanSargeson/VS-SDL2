@@ -33,7 +33,7 @@ class Battle : public State{
     private:
         std::shared_ptr<GUI::Menu> battleMenu;
         std::shared_ptr<GUI::Menu> enemyMenu;
-        std::vector<Enemy> enemies;
+        std::vector<std::shared_ptr<Enemy>> enemies;
         std::vector<GUI::textBox> enemyTextBoxes;
         std::vector<GUI::Text> enemyText;
         GUI::Text temp;

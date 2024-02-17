@@ -205,7 +205,7 @@ CharacterCreator::CharacterCreator() : State(){
     temp->createAttributeComponent(1, true, false);
 
 
-    maxPoints = 17;
+    maxPoints = 3;
     pointsToSpend = maxPoints;
 
     const char* fontFile = "Assets/Fonts/SF Atarian System.ttf";

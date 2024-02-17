@@ -19,14 +19,14 @@ enum ELEMENT_TYPE {
 };
 
 
-class AttackComponent{
+class AttackComponent : public Component{
 
 private:
 
 	//SkillComponent* skillComponent;
-	std::shared_ptr<class SkillComponent> skillComponent;
+	//std::shared_ptr<class SkillComponent> skillComponent;
 	//AttributeComponent* attributeComponent;
-	std::shared_ptr<AttributeComponent> attributeComponent;
+	//std::shared_ptr<AttributeComponent> attributeComponent;
 
 	std::map<std::string, int> magicTable;
 
@@ -39,7 +39,7 @@ private:
 
 public:
 
-	AttackComponent(std::shared_ptr<SkillComponent> skillComp, std::shared_ptr<AttributeComponent> attriComp);
+	AttackComponent(Entity* owner);
 	virtual ~AttackComponent();
 
 	int getTotalAttack();

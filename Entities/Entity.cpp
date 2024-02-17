@@ -35,7 +35,6 @@ Entity::Entity(){
     initNames();
 	this->InitVariables();
 	this->m_name = Entity::entityNames[rand() % Entity::entityNames.size()];
-
 }
 
 Entity::~Entity(){
@@ -341,9 +340,9 @@ void Entity::createDialogueComponent(){
 	this->dialogueComponent = std::make_shared<DialogueComponent>(this);
 }
 
-void Entity::createAttackComponent(std::shared_ptr<SkillComponent> skillComp, std::shared_ptr<AttributeComponent> attriComp){
+void Entity::createAttackComponent(){
 
-	this->attackComponent =  std::make_shared<AttackComponent>(skillComp, attriComp);
+	this->attackComponent =  std::make_shared<AttackComponent>(this);
 }
 
 int Entity::getDamage(){

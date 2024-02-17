@@ -34,20 +34,13 @@ Enemy::Enemy(int lvl) : Entity(){
 
         level = 1;
      }
-//     attributeComponent
-//    this->hpMax = level * 3;
-//    this->hp = this->hpMax;
-//    this->damageMin = this->level * 1;
-//    this->damageMax = this->level * 2;
-//    this->dropChance = rand() % 100 + 1;
-//    this->defence = rand() % this->level*2 + 1;
-//    this->accuracy = rand() % this->level*2 + 1;
 
     this->createAttributeComponent(this->level, true, true);
     //attributeComponent->updateLevel();
     createSkillComponent();
-    skillComponent->calculateSkills(attributeComponent);
-    createAttackComponent(skillComponent, attributeComponent);
+    updateStats(true);
+    ///skillComponent->calculateSkills(attributeComponent);
+    createAttackComponent();
 }
 
 Enemy::~Enemy(){

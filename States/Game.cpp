@@ -12,6 +12,8 @@
 Game::Game() : State(){
 
   ///  Mix_HaltMusic();
+
+  mainScreen = true;
 //  LoadGame lg;/
 //  lg.loadCharacters();
     tutorialCount = 0;
@@ -95,6 +97,11 @@ void Game::refreshGUI(){
 void Game::update(const float& dt){
 
     //Play the music
+
+    if(mainScreen){
+
+        getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true);
+    }
         if(Mix_PlayingMusic() == 0){
 
                         if( Mix_PlayMusic( music, -1) == -1 )
@@ -351,6 +358,7 @@ void Game::updateEvents(SDL_Event& e){
 
             std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
             getMainText()->setString(msg, true, GUI::p2pY(420));
+            mainScreen = false;
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
@@ -364,6 +372,7 @@ void Game::updateEvents(SDL_Event& e){
            // invMenu2->setActive(false);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
             getMainText()->setString(fact, true, 420);
+            mainScreen = false;
         }
 
         if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
@@ -375,7 +384,7 @@ void Game::updateEvents(SDL_Event& e){
 
             //menu->setActive(true);
             //invMenu2->setActive(false);
-
+            mainScreen = true;
             //std::cout << "Attrib pressed\n\n\n\n\n";
 
            /// StateData::GetInstance()->getActiveCharacter()->getAttributes();

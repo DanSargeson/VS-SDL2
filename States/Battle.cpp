@@ -137,7 +137,8 @@ Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alp
 		}
 
 		//rando = rand() % high + low;
-		enemies.push_back(rando);
+		std::shared_ptr<Enemy> temp = std::make_shared<Enemy>(rando);
+		enemies.push_back(temp);
 		enemyText.push_back(GUI::Text());
 
 		for(int i = 0; i < enemies.size(); i++){
@@ -149,7 +150,8 @@ Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alp
 
 	for(size_t i = 0; i < enemies.size(); i++){
 
-        std::string msg = enemies[i].getName() + " HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax());
+        enemies[i]->calculateSkills();
+        std::string msg = enemies[i]->getName() + " HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax());
         enemyText[i].setString(msg);
         enemyText[i].setColour(255, 0, 0, 0);
 		enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
@@ -203,7 +205,7 @@ void Battle::refreshGUI(){
 
     for(size_t i = 0; i < enemies.size(); i++){
 
-        std::string msg = enemies[i].getName() + " HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax());
+        std::string msg = enemies[i]->getName() + " HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax());
         enemyText[i].setString(msg);
      //   enemyText[i].setColour(255, 0, 0, 0);
 		enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
@@ -244,7 +246,7 @@ if(!escape && !playerDefeated && !enemyDefeated) {
 
 //                for(int i = 0; i < enemies.size(); i++){
 //
-//                    enemyMsg += enemies[i].getName() + ": " + "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax()) + " ";
+//                    enemyMsg += enemies[i]->getName() + ": " + "HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax()) + " ";
 //                }
 //                getEnemyText()->setString(enemyMsg);
             }
@@ -266,7 +268,7 @@ void Battle::updateMenu(){
 
     for(int i = 0; i < enemies.size(); i++){
 
-        enemyMenuStr.push_back(enemies[i].getName());
+        enemyMenuStr.push_back(enemies[i]->getName());
     }
 
     enemyMenu->setMenuOptions(enemyMenuStr, true);
@@ -455,11 +457,11 @@ const void Battle::playerAttacks(){
 
                 alpha = 255;
 ///            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
-            enemyTotal = enemies[choice].getSkill(2); /// / (double)combatTotal * 100;
+            enemyTotal = enemies[choice]->getSkill(2); /// / (double)combatTotal * 100;
 ///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
 
             playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(0); //0 == MELEE
-            combatTotal = enemies[choice].getSkill(2); // 2 == DEFENCE
+            combatTotal = enemies[choice]->getSkill(2); // 2 == DEFENCE
 
             seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -474,7 +476,7 @@ const void Battle::playerAttacks(){
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
-					defendRoll = enemies[choice].getDefence();
+					defendRoll = enemies[choice]->getDefence();
                     int tot = 0;
                     if(damage >= defendRoll){
 
@@ -488,24 +490,24 @@ const void Battle::playerAttacks(){
 
                         tot = 1;
                      }
-					enemies[choice].loseHP(abs(tot));
+					enemies[choice]->loseHP(abs(tot));
 					if(tot <= 0){
                         tot = 1;
 					}
 					std::string dmgMsg = "HIT for " + std::to_string(abs(tot)) + " damage!";
 
-					std::string msg = enemies[choice].getName() + " HP: " + std::to_string(enemies[choice].getHP()) + "/" + std::to_string(enemies[choice].getHPMax());
+					std::string msg = enemies[choice]->getName() + " HP: " + std::to_string(enemies[choice]->getHP()) + "/" + std::to_string(enemies[choice]->getHPMax());
                     enemyText[choice].setString(msg);
 					playerAttkTxt->setString(dmgMsg);
 					//alpha = 255;
 
 					//#####PLAYER WINS
-					if (!enemies[choice].isAlive()) {
+					if (!enemies[choice]->isAlive()) {
 						battleCloseMsg->setHeader("YOU DEFEATED!");
-						gainGold = rand() & enemies[choice].getLevel() * 10 + 1;
+						gainGold = rand() & enemies[choice]->getLevel() * 10 + 1;
 						totalGold += gainGold;
 						StateData::GetInstance()->getActiveCharacter()->gainGold(gainGold);
-						gainEXP = enemies[choice].getExp();
+						gainEXP = enemies[choice]->getExp();
 						totalEXP += gainEXP;
 						StateData::GetInstance()->getActiveCharacter()->gainXP(250); //DEBUG REMOVE
 
@@ -598,9 +600,9 @@ const void Battle::playerAttacks(){
 //						std::cout << std::endl << std::to_string(s);
 						for(size_t i = 0; i < enemies.size(); i++){
 
-                            std::string msg = enemies[i].getName() + " HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax());
+                            std::string msg = enemies[i]->getName() + " HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax());
                             enemyText[i].setString(msg);
-                            //enemyText[i].setString(enemies[i].getName());
+                            //enemyText[i].setString(enemies[i]->getName());
                             enemyText[i].setColour(255, 0, 0, 0);
                             enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
                         }
@@ -631,11 +633,11 @@ const void Battle::enemyAttacks(){
     if(!playerTurn && !escape && !enemyDefeated){
 			//ENEMY TURN
 			for (size_t i = 0; i < enemies.size(); i++){    //TIMER NEEDS TO GO AROUND HERE....
-				//combatTotal = enemies[i].getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
-				//enemyTotal = enemies[i].getAccuracy() / (double)combatTotal * 100;
+				//combatTotal = enemies[i]->getAccuracy() + StateData::GetInstance()->getActiveCharacter()->getDefence();
+				//enemyTotal = enemies[i]->getAccuracy() / (double)combatTotal * 100;
 				//playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
 
-				enemyTotal = enemies[i].getSkill(0); //0 == MELEE
+				enemyTotal = enemies[i]->getSkill(0); //0 == MELEE
                 combatTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); // 2 == DEFENCE
 
 				seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
@@ -648,13 +650,12 @@ const void Battle::enemyAttacks(){
 
 				if (combatRollPlayer < combatRollEnemy || enemyMissCounter >= 3) {
 					//HIT
-					enemyMissCounter = 0;
 					int chancetoSave = getRandomValue(0, getActiveCharacter()->getAttribute(6)); //PLAYERS LUCK == 6
 
 					if(chancetoSave > 0){
 
                         //MISS
-					enemyMsg += "\n" + enemies[i].getName() + " Missed! ";
+					enemyMsg += "\n" + enemies[i]->getName() + " Missed! ";
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					cout << "ENEMY MISSED!\n\n";
@@ -662,8 +663,8 @@ const void Battle::enemyAttacks(){
 
 					}
 					else{
-
-					damage = enemies[i].getDamage();
+                    enemyMissCounter = 0;
+					damage = enemies[i]->getDamage();
 					int defendRoll = getActiveCharacter()->getDefence();
                     int tot = 0;
                     if(damage >= defendRoll){
@@ -679,7 +680,7 @@ const void Battle::enemyAttacks(){
                         tot = 1;
                      }
 					StateData::GetInstance()->getActiveCharacter()->loseHP(tot);
-					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(tot) + " damage! ";
+					enemyMsg += "\n" + enemies[i]->getName() + " HIT for " + std::to_string(tot) + " damage! ";
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					if (!StateData::GetInstance()->getActiveCharacter()->isAlive()) {
@@ -691,7 +692,7 @@ const void Battle::enemyAttacks(){
 				}
 				else {
 					//MISS
-					enemyMsg += "\n" + enemies[i].getName() + " Missed! ";
+					enemyMsg += "\n" + enemies[i]->getName() + " Missed! ";
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					cout << "ENEMY MISSED!\n\n";
@@ -805,7 +806,7 @@ void Battle::updateEvents(SDL_Event& e){
 
             for(int i = 0; i < enemies.size(); i++){
 
-                ops.push_back(enemies[i].getName());
+                ops.push_back(enemies[i]->getName());
             }
 
             enemyMenu->setMenuOptions(ops, true);
@@ -845,10 +846,10 @@ void Battle::updateEvents(SDL_Event& e){
            y > r.y &&
            y < r.y + r.h){
 
-                std::string msg = "HP: " + std::to_string(enemies[i].getHP()) + "/" + std::to_string(enemies[i].getHPMax())
+                std::string msg = "HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax())
                     + "\nAttack: ????\nDefence: ????";
-                msg += "\nSkills: \nDefence Sk: " + std::to_string(enemies[i].getSkill(2));
-                msg += "\nMelee Sk: " + std::to_string(enemies[i].getSkill(0));
+                msg += "\nSkills: \nDefence Sk: " + std::to_string(enemies[i]->getSkill(2));
+                msg += "\nMelee Sk: " + std::to_string(enemies[i]->getSkill(0));
                 battleEyes->setDisplayText(msg);
                 battleEyes->update(x, y);
                 battleEyes->setHidden(false);

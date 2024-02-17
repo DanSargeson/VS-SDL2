@@ -158,6 +158,7 @@ private:
 
 protected:
 
+    bool mainScreen;
    // StateData* mStateData;
     std::unordered_map<std::string, int> keyBinds;
     bool quit;

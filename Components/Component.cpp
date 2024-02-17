@@ -14,6 +14,7 @@ Component::~Component(){
 //
 //		mOwner->removeComponent(this);
 //	}
+//}
 }
 
 void Component::update()
