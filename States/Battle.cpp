@@ -309,7 +309,7 @@ if(playerDefeated){
 
     if(winThread.joinable()){
 
-        winThread.join()();
+        winThread.join();
     }
 
 //    ~Battle();
