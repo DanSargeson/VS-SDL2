@@ -739,14 +739,19 @@ void Battle::updateEvents(SDL_Event& e){
                     }
                     else{
 
-                        if(textThread.joinable()){
+////                        if(textThread.joinable()){
+////
+////                            textThread.join();
+////                        }
+////                        if(winThread.joinable()){
+////
+////                            winThread.join();
+////                        }
 
-                            textThread.join();
-                        }
-                        if(winThread.joinable()){
-
-                            winThread.join();
-                        }
+                        alpha = 255;
+                        getDynamicText()->setString("Got away safely");
+                        ///getDynamicText()->render();
+                        //SDL_Delay(100);
                         Engine::GetInstance()->PopState();
                         return;
                     }
