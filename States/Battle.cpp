@@ -307,6 +307,11 @@ if(playerDefeated){
         textThread.join();
     }
 
+    if(winThread.joinable()){
+
+        winThread.join()();
+    }
+
 //    ~Battle();
     Engine::GetInstance()->PopState();
     Engine::GetInstance()->AddState(std::make_shared<PlayerDeath>());
