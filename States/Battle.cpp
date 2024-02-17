@@ -365,7 +365,7 @@ if(playerWins){
 	}
 
 	if(alpha2 <=5 || alpha <=5){
-//        textThreadRunning = false;
+        textThreadRunning = false;      ///HREE YOU COMMENTED
         if(textThread.joinable()){
             textThread.join();
         }
@@ -460,7 +460,7 @@ const void Battle::playerAttacks(){
             enemyTotal = enemies[choice]->getSkill(2); /// / (double)combatTotal * 100;
 ///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
 
-            playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(0); //0 == MELEE
+            playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(3); //3 == ACCURACY
             combatTotal = enemies[choice]->getSkill(2); // 2 == DEFENCE
 
             seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();

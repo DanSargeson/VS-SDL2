@@ -384,19 +384,15 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	int rangeLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
 	mSkills[SKILLS::RANGED].setLevel(rangeLvl);
 
-
-
-    //DEX (Covers ACCURACY
-    int dexLevel = mOwner->getAttribute(DEXTERITY);
-
-	int accuLvl = base_skill_value + (dexLevel * attribute_weight["Dexterity"]);
+	int accuLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
 	mSkills[SKILLS::ACCURACY].setLevel(accuLvl);
 
-	mSkills[SKILLS::LOCKPICKING].setLevel(accuLvl);
 
-	///TODO STEALTH UNDER JUST AGILITY?? AND GET RID OF RANGED ATTACKS
-	//int stealthLvl = base_skill_value * ((dexLevel + agilityLevel) * attribute_weight["Dexterity"]);
-	mSkills[SKILLS::STEALTH].setLevel(rangeLvl);
+    //DEX
+    int dexLevel = mOwner->getAttribute(DEXTERITY);
+    int stealLvl = base_skill_value + (dexLevel * attribute_weight["Dexterity"]);
+	mSkills[SKILLS::LOCKPICKING].setLevel(stealLvl);     ///CHANGE TO PICKPOCKET AND EFFECTS CHANCE TO STEAL
+	mSkills[SKILLS::STEALTH].setLevel(stealLvl);
 
 
 	/*
