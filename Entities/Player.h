@@ -77,8 +77,8 @@ public:
 	void equipArmour(int index);
 	int getDefenceTotal();
 //	int getDamage();
-	int getMinDamageWithWeapon();
-	int getMaxDamageWithWeapon();
+	//int getMinDamageWithWeapon();
+	//int getMaxDamageWithWeapon();
 	string getEquippedWeapon();
 	string getEquippedArmour();
 	inline shared_ptr<Item> findItem(int index) { return this->inventory.findItemSmart(index); }

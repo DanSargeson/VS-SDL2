@@ -3,7 +3,7 @@
 #include "Input.h"
 #include "PlayerDeath.h"
 
-Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>())/*, seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed)*/, noOfEnemies(0) {
+Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>())/*, seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed)*/, noOfEnemies(0) {
 
 
 
@@ -417,7 +417,7 @@ void Battle::updateText(){
 
     if(playerAttkTxt && playerTurn){
 
-        if(alpha >= 0 && battleTxtTimer->GetDeltaTime() <= 3){
+        if(alpha >= 0){
 
             alpha -= 5;
             SDL_SetTextureAlphaMod(playerAttkTxt->getTexture(), alpha);
@@ -425,7 +425,7 @@ void Battle::updateText(){
         }
         else{
 
-            alpha = 255;
+            //alpha = 255;
             textThreadRunning = false;
         }
     }
@@ -442,7 +442,7 @@ void Battle::updateText(){
         else{
 
 ///            enemyAttkTxt->clearText();
-            alpha2 = 255;
+        //    alpha2 = 255;
             textThreadRunning = false;
         }
     }
@@ -478,10 +478,10 @@ const void Battle::playerAttacks(){
                     int tot = 0;
                     if(damage >= defendRoll){
 
-                        tot = damage;
+                        tot = damage - defendRoll;
                     }else{
 
-                        tot = damage - defendRoll;
+                        tot = damage * 0.10;
                      }
 
                      if(tot <= 0){
@@ -507,7 +507,7 @@ const void Battle::playerAttacks(){
 						StateData::GetInstance()->getActiveCharacter()->gainGold(gainGold);
 						gainEXP = enemies[choice].getExp();
 						totalEXP += gainEXP;
-						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP);
+						StateData::GetInstance()->getActiveCharacter()->gainXP(250); //DEBUG REMOVE
 
 
                         endMsg += "Gold Gained: " + std::to_string(gainGold) + "\n";
@@ -636,7 +636,6 @@ const void Battle::enemyAttacks(){
 				//playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
 
 				enemyTotal = enemies[i].getSkill(0); //0 == MELEE
-				playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); //2 == DEFENCE
                 combatTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); // 2 == DEFENCE
 
 				seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
@@ -647,8 +646,9 @@ const void Battle::enemyAttacks(){
              std::uniform_int_distribution<int> enemyTotalDistribution(1, enemyTotal);
              combatRollEnemy = enemyTotalDistribution(generator);
 
-				if (combatRollPlayer < combatRollEnemy) {
+				if (combatRollPlayer < combatRollEnemy || enemyMissCounter >= 3) {
 					//HIT
+					enemyMissCounter = 0;
 					int chancetoSave = getRandomValue(0, getActiveCharacter()->getAttribute(6)); //PLAYERS LUCK == 6
 
 					if(chancetoSave > 0){
@@ -658,17 +658,28 @@ const void Battle::enemyAttacks(){
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					cout << "ENEMY MISSED!\n\n";
+					enemyMissCounter++;
 
 					}
 					else{
 
 					damage = enemies[i].getDamage();
-					if(damage <= 0){
+					int defendRoll = getActiveCharacter()->getDefence();
+                    int tot = 0;
+                    if(damage >= defendRoll){
 
-                        damage = 1;
-					}
-					StateData::GetInstance()->getActiveCharacter()->loseHP(damage);
-					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(damage) + " damage! ";
+                        tot = damage - defendRoll;
+                    }else{
+
+                        tot = damage * 0.10;
+                     }
+
+                     if(tot <= 0){
+
+                        tot = 1;
+                     }
+					StateData::GetInstance()->getActiveCharacter()->loseHP(tot);
+					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(tot) + " damage! ";
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					if (!StateData::GetInstance()->getActiveCharacter()->isAlive()) {
@@ -684,6 +695,7 @@ const void Battle::enemyAttacks(){
 					alpha2 = 255;
 					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
 					cout << "ENEMY MISSED!\n\n";
+					enemyMissCounter++;
 				}
 			}
 

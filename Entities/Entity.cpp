@@ -263,6 +263,14 @@ void Entity::calculateSkills(){
     }
 }
 
+void Entity::updateStats(bool s){
+
+    if(attributeComponent){
+
+        attributeComponent->updateStats(s);
+    }
+}
+
 std::string Entity::getFactionStr() {
 
 	return this->factionComponent->getFactionsStr();
@@ -360,6 +368,28 @@ int Entity::getDamage(){
 void Entity::resetHP(){
 
     attributeComponent->updateStats(true);
+}
+
+int Entity::getMaxDamageWithWeapon() {
+	int max = 0;
+	if (this->activeWeapon != NULL) {
+		max = dynamic_cast<Weapon&>(*activeWeapon).getDamageMax();
+	}
+
+	//max += this->damageMax;
+
+	return max;
+}
+
+int Entity::getMinDamageWithWeapon(){
+	int min = 0;
+	if (this->activeWeapon != NULL) {
+		min = dynamic_cast<Weapon&>(*activeWeapon).getDamageMin();
+	}
+
+	//min += this->damageMin;
+
+	return min;
 }
 
 int Entity::getDefence(){

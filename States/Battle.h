@@ -78,6 +78,7 @@ class Battle : public State{
         int gainGold;
 
         int missCounter;
+        int enemyMissCounter;
         bool endTurn;
 
         std::string endMsg;

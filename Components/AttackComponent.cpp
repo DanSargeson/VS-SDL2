@@ -123,7 +123,7 @@ void AttackComponent::calculateArmourModifier(Armour& armourMod) {
 
 
 	int minWeapon = armourMod.getDefence();
-	int maxWeapon = armourMod.getDefence() * skillComponent->getSkill(SKILLS::DEFENCE * 0.25);
+	int maxWeapon = armourMod.getDefence() * skillComponent->getSkill(SKILLS::DEFENCE * 0.10);
 
 	std::uniform_int_distribution<int> dmgDist(minWeapon, maxWeapon);
 	this->weaponMod = dmgDist(generator);
@@ -133,7 +133,7 @@ int AttackComponent::getMaxDefence(){
 
     int maxDef = 0;
 
-	maxDef += (this->skillComponent->getSkill(SKILLS::DEFENCE) * 0.25);
+	maxDef += (this->skillComponent->getSkill(SKILLS::DEFENCE) * 0.5);
 
 	return maxDef;
 }
@@ -155,6 +155,11 @@ void AttackComponent::calculateWeaponModifier(Weapon& weaponMod) {
 
 int AttackComponent::getBaseMinDamage(){
 
+
+    int t1 = skillComponent->getSkill(SKILLS::MELEE);
+    int t2 = t1 * 0.10;
+    int t3 = t1 * 0.5;
+
 	int minDamage = (this->skillComponent->getSkill(SKILLS::MELEE) * 0.10);
 
 	///minDamage += this->skillComponent->getSkill(SKILLS::MELEE);
@@ -166,7 +171,7 @@ int AttackComponent::getBaseMaxDamage(){
 
 	int maxDamage = 0;
 
-	maxDamage += (this->skillComponent->getSkill(SKILLS::MELEE) * 0.25);
+	maxDamage += (this->skillComponent->getSkill(SKILLS::MELEE) * 0.5);
 
 	return maxDamage;
 }

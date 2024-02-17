@@ -89,6 +89,8 @@ public:
 
 	void calculateSkills();
 
+	void updateStats(bool s);
+
 	//std::vector<std::string> getDialogueOptions();
 
 	void setCharacterName(std::string name);
@@ -125,6 +127,9 @@ public:
 
 	int getDamage();
 	int getDefence();
+
+	int getMaxDamageWithWeapon();
+	int getMinDamageWithWeapon();
 
 	//const virtual sf::Vector2f& getPosition() const;
 	float getPositionXSave();
