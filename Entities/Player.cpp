@@ -370,6 +370,11 @@ std::string Player::getStatsAttributeScreen(){
 //
 //	 deets += "  (+" + std::to_string(armour) + ")";
 //	}
+
+    if(minAttack <= 0){
+
+        minAttack = 1;      ///BATTLE ENSURES THAT A SUCCESSFUL ATTACK WILL ALWAYS DO AT LEAST 1 DMG
+    }
 	deets += "\nAttack Rating: " +  std::to_string(minAttack) + " - " + std::to_string(maxAttack);
 
 	if (this->getMinDamageWithWeapon() > 0) {

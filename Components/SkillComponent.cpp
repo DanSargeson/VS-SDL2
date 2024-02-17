@@ -331,15 +331,15 @@ void SkillComponent::assignRandomSkills(int level){
 void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 
-     int base_skill_value = 10;
+     int base_skill_value = 5;
 
     std::unordered_map<std::string, double> attribute_weight = {
-            {"Vitality", 3},
-            {"Strength", 7},
-            {"Dexterity", 7},
-            {"Agility", 7},
-            {"Intelligence", 7},
-            {"Charisma", 7},
+            {"Vitality", 2},
+            {"Strength", 3},
+            {"Dexterity", 3},
+            {"Agility", 3},
+            {"Intelligence", 3},
+            {"Charisma", 3},
             {"Luck", 1}
         };
 

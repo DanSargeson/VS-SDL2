@@ -21,18 +21,22 @@ Battle::Battle() : State(), missCounter(0), alpha(255), alpha2(255), battleTxtTi
 
                 // Use std::uniform_int_distribution to generate random indices
 
-                int maxi = 2 + getData()->getActiveCharacter()->getLevel();
-                if(maxi > 3){
+                int maxi = 1 + getData()->getActiveCharacter()->getLevel();
+                if(maxi > 4){
 
-                    maxi = 3;
+                    maxi = 4;
                 }
     std::uniform_int_distribution<> dis(1, maxi);
 
     noOfEnemies = dis(gen);
+    int playerLvl = getData()->getActiveCharacter()->getLevel();
+    if(playerLvl <= 5){
 
-    if(getData()->getActiveCharacter()->getLevel() <= 3){
+        noOfEnemies = 2;
+        if(playerLvl <= 3){
 
-        noOfEnemies = 1;
+            noOfEnemies = 1;
+        }
     }
 
 
@@ -479,10 +483,15 @@ const void Battle::playerAttacks(){
 
                         tot = damage - defendRoll;
                      }
+
+                     if(tot <= 0){
+
+                        tot = 1;
+                     }
 					enemies[choice].loseHP(abs(tot));
-//					if(totalDmg < 0){
-//                        totalDmg = 1;
-//					}
+					if(tot <= 0){
+                        tot = 1;
+					}
 					std::string dmgMsg = "HIT for " + std::to_string(abs(tot)) + " damage!";
 
 					std::string msg = enemies[choice].getName() + " HP: " + std::to_string(enemies[choice].getHP()) + "/" + std::to_string(enemies[choice].getHPMax());
@@ -654,6 +663,10 @@ const void Battle::enemyAttacks(){
 					else{
 
 					damage = enemies[i].getDamage();
+					if(damage <= 0){
+
+                        damage = 1;
+					}
 					StateData::GetInstance()->getActiveCharacter()->loseHP(damage);
 					enemyMsg += "\n" + enemies[i].getName() + " HIT for " + std::to_string(damage) + " damage! ";
 					alpha2 = 255;

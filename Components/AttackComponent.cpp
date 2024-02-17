@@ -181,6 +181,8 @@ int AttackComponent::getTotalDamage() {
 	 int mini = getBaseMinDamage();
     int maxi = getBaseMaxDamage();
 
+    //calculateWeaponModifier()
+
     // Use std::random_device to obtain a seed for the random number generator
             std::random_device rd;
 
@@ -190,6 +192,8 @@ int AttackComponent::getTotalDamage() {
                 // Use std::uniform_int_distribution to generate random indices
                 std::uniform_int_distribution<> dis(mini, maxi);
     totalAttack = dis(gen);
+
+    totalAttack += weaponMod;
 	return this->totalAttack;
 }
 

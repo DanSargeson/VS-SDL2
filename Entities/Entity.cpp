@@ -343,14 +343,14 @@ int Entity::getDamage(){
 	if (this->attackComponent) {
 
 
-//		//Calculate base damage
-//		this->attackComponent->calculateElementBonus();
-//
-//
-//		if (this->activeWeapon != NULL) {
-//
-//			this->attackComponent->calculateWeaponModifier(dynamic_cast<Weapon&>(*this->activeWeapon));
-//		}
+		//Calculate base damage
+		this->attackComponent->calculateElementBonus();
+
+
+		if (this->activeWeapon != NULL) {
+
+			this->attackComponent->calculateWeaponModifier(dynamic_cast<Weapon&>(*this->activeWeapon));
+		}
         return this->attackComponent->getTotalDamage();
 	}
 
