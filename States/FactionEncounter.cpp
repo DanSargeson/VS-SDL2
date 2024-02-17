@@ -46,7 +46,7 @@ void FactionEncounter::startTextThread(){
 FactionEncounter::~FactionEncounter(){
 
     //getMainText()->setString("Select an option: ");
-    npc.reset();
+//    npc.reset();
 
     if(textThread.joinable()){
 

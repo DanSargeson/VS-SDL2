@@ -26,7 +26,7 @@ RandomEncounter::RandomEncounter(int faction){
     npc->createAttributeComponent(npcLevel, true, true);
     npc->createSkillComponent();
 
-    menu.reset();
+//    menu.reset();
     menu = std::make_shared<GUI::Menu>();
 
 

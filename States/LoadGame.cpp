@@ -10,7 +10,7 @@ LoadGame::LoadGame() : State(){
     ///State::loadCharacters();
     std::vector<std::string> ops;
 
-    menu.reset();
+//    menu.reset();
 	menu = make_unique<GUI::Menu>();
 
 	getData()->activeCharacter = 0;
@@ -97,7 +97,7 @@ void LoadGame::refreshGUI(){
 
     State::refreshGUI();
 
-    menu.reset();
+//    menu.reset();
 	menu = make_unique<GUI::Menu>();
 
     std::vector<std::string> ops;

@@ -173,12 +173,6 @@ Battle::~Battle(){
 
     //getMainText()->clearText();
     //getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
-    if(!escape){
-        getMainText()->setString("Select an option: ");
-    }
-    else{
-        getMainText()->setString("Ran away safely!!");
-    }
     //getEnemyText()->clearText();
     //getDynamicText()->clearText();
     enemies.clear();
@@ -186,6 +180,13 @@ Battle::~Battle(){
     if(textThread.joinable()){
 
         textThread.join();
+        textThread.~thread();
+    }
+
+    if(winThread.joinable()){
+
+        winThread.join();
+        winThread.~thread();
     }
 
     getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
@@ -416,7 +417,7 @@ void Battle::updateText(){
 
             alpha -= 5;
             SDL_SetTextureAlphaMod(playerAttkTxt->getTexture(), alpha);
-            battleTxtTimer->Restart();
+     ///       battleTxtTimer->Restart();
         }
         else{
 
@@ -520,7 +521,7 @@ const void Battle::playerAttacks(){
                             winAlpha = 0;
                             if(textThread.joinable()){
 
-                                textThread.detach();
+                                textThread.join();
                             }
                             startWinThread();
 						}
@@ -695,15 +696,18 @@ void Battle::updateEvents(SDL_Event& e){
                 menu->setActive(true);
             if(!textThreadRunning){
 
-                    if(!winThreadRunning && !playerWins){
+                    if(!winThreadRunning && !playerWins && !escape){
 
                         startTextThread();
                         return;
                     }
-                    else if(!winThreadRunning && playerWins){
+                    else if(!winThreadRunning){
 
-                        Engine::GetInstance()->PopState();
-                        return;
+                            if(playerWins || escape){
+
+                                Engine::GetInstance()->PopState();
+                                return;
+                            }
                     }
                 //getDynamicText()->setString("Choose action: ");
             }
@@ -737,7 +741,11 @@ void Battle::updateEvents(SDL_Event& e){
 
                         if(textThread.joinable()){
 
-                            textThread.detach();
+                            textThread.join();
+                        }
+                        if(winThread.joinable()){
+
+                            winThread.join();
                         }
                         Engine::GetInstance()->PopState();
                         return;

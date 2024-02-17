@@ -461,6 +461,7 @@ void Game::render(){
 
     for (auto i : mButtons) {
 
+///        initButtons();
 		i.second->renderButtons();
 	}
 

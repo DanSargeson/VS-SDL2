@@ -129,13 +129,13 @@ void AttributeComponent::increaseAttribute(int attr){
 		break;
 	}
 
-	for (int i = 0; i < TOTAL_ATTRIBUTES; i++) {
-
-		if (mAttributes[i] >= 10) {
-
-			mAttributes[i] = 10;
-		}
-	}
+//	for (int i = 0; i < TOTAL_ATTRIBUTES; i++) {
+//
+//		if (mAttributes[i] >= 10) {
+//
+//			mAttributes[i] = 10;
+//		}
+//	}
 }
 
 void AttributeComponent::decreaseAttribute(int attr){
@@ -311,10 +311,10 @@ void AttributeComponent::updateLevel(){
 		mHasLevelled = true;
 	}
 
-	if (mLevel % 5 == 0) { //TODO - Every 10 levels player gains an attribute point. Might change this.
+	///if (mLevel % 5 == 0) { //TODO - Every 10 levels player gains an attribute point. Might change this.
 
 		mAttributePoints++;
-	}
+	///}
 
 //	for(int i = 0; i < ATTRIBUTE::TOTAL_ATTRIBUTES; i++){
 //
