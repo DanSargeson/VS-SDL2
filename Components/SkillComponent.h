@@ -6,14 +6,16 @@
 enum SKILLS {
 
 	MELEE = 0,
-	RANGED,
+	CRIT,
 	DEFENCE,
 	ACCURACY,
 	MAGIC,
 	STEALTH,
-	LOCKPICKING,
+	PICKPOCKET,
 	PERSUASION,
-	PERCEPTION
+	PERCEPTION,
+	BARTER,
+	DODGE
 };
 
 class SkillComponent : public Component{
@@ -78,8 +80,8 @@ private:
                     return "Defence";
                     break;
 
-                case SKILLS::LOCKPICKING:
-                    return "Lockpicking";
+                case SKILLS::PICKPOCKET:
+                    return "Pickpocket";
                     break;
 
                 case SKILLS::MAGIC:
@@ -98,12 +100,20 @@ private:
                     return "Persuasion";
                     break;
 
-                case SKILLS::RANGED:
-                    return "Ranged";
+                case SKILLS::BARTER:
+                    return "Barter";
                     break;
 
                 case SKILLS::STEALTH:
                     return "Stealth";
+                    break;
+
+                case SKILLS::DODGE:
+                    return "Dodge";
+                    break;
+
+                case SKILLS::CRIT:
+                    return "Crtit Rate";
                     break;
 
                 default:

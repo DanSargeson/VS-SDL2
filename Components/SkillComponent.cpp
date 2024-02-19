@@ -21,14 +21,16 @@ SkillComponent::SkillComponent(Entity* owner) : Component(owner) {
 
 	*/
 	mSkills.push_back(Skill(SKILLS::MELEE));			//UNARMED AND MELEE WEAPONS
-	mSkills.push_back(Skill(SKILLS::RANGED));			//BOWS AND THROWING WEAPONS
+	mSkills.push_back(Skill(SKILLS::CRIT));			//CRIT CHANCE
 	mSkills.push_back(Skill(SKILLS::DEFENCE));			//BLOCK CHANCE
 	mSkills.push_back(Skill(SKILLS::ACCURACY));		//HIT CHANCE
 	mSkills.push_back(Skill(SKILLS::MAGIC));			//MAGIC CHANCE - MAYBE CHANGE TO ELEMENTAL????
 	mSkills.push_back(Skill(SKILLS::STEALTH));			//CHANCE TO BE DETECTED AND CAHNCE CAUGHT STEALING
-	mSkills.push_back(Skill(SKILLS::LOCKPICKING));		//PICKING LOCKS
+	mSkills.push_back(Skill(SKILLS::PICKPOCKET));		//rOB CHANCE
 	mSkills.push_back(Skill(SKILLS::PERSUASION));		//DIALOGUE OPTIONS - CHANCE TO PERSUADE/INFLUENCE
 	mSkills.push_back(Skill(SKILLS::PERCEPTION));		//CHANCE TO DETECT TRAPS AND SEE THROUGH LIARS??
+	mSkills.push_back(Skill(SKILLS::DODGE));             //CHANCE TO AVOID ATTACK
+	mSkills.push_back(Skill(SKILLS::BARTER));            //Buy/Sell price.
 }
 
 SkillComponent::~SkillComponent(){
@@ -146,20 +148,23 @@ void SkillComponent::loadSkills(int skill, int value){
 		mSkills[SKILLS::ACCURACY].setLevel(value);
 		break;
 
+    case SKILLS::CRIT:
+        mSkills[SKILLS::CRIT].setLevel(value);
+        break;
+
 	case SKILLS::DEFENCE:
 
 		mSkills[SKILLS::DEFENCE].setLevel(value);
 		break;
 
-	case SKILLS::LOCKPICKING:
+	case SKILLS::PICKPOCKET:
 
-		mSkills[SKILLS::LOCKPICKING].setLevel(value);
+		mSkills[SKILLS::PICKPOCKET].setLevel(value);
 		break;
 
-	/*case SKILLS::LUCK:
+    case SKILLS::DODGE:
 
-		skills[SKILLS::LUCK].setLevel(value);
-		break;*/
+        mSkills[SKILLS::DODGE].setLevel(value);
 
 	case SKILLS::MAGIC:
 
@@ -181,9 +186,9 @@ void SkillComponent::loadSkills(int skill, int value){
 		mSkills[SKILLS::PERSUASION].setLevel(value);
 		break;
 
-	case SKILLS::RANGED:
+	case SKILLS::BARTER:
 
-		mSkills[SKILLS::RANGED].setLevel(value);
+		mSkills[SKILLS::BARTER].setLevel(value);
 		break;
 
 	case SKILLS::STEALTH:
@@ -209,9 +214,13 @@ std::string SkillComponent::getSkillName(int skill){
 		msg += "Defence\n";
 		break;
 
-	/*case SKILLS::LUCK :
-		msg += "Luck\n";
-		break;*/
+	case SKILLS::CRIT:
+        msg += "Critical Hit Chance\n";
+        break;
+
+    case SKILLS::DODGE:
+        msg += "Dodge Chance\n";
+        break;
 
 	case SKILLS::STEALTH:
 		msg += "Stealth\n";
@@ -221,16 +230,16 @@ std::string SkillComponent::getSkillName(int skill){
 		msg += "Melee Damage\n";
 		break;
 
-	case SKILLS::RANGED:
-		msg += "Ranged Damage\n";
+	case SKILLS::BARTER:
+        msg += "Buy/Sell Value\n";
 		break;
 
 	case SKILLS::MAGIC:
 		msg += "Magic\n";
 		break;
 
-	case SKILLS::LOCKPICKING:
-		msg += "Lockpicking\n";
+	case SKILLS::PICKPOCKET:
+		msg += "Pickpocket\n";
 		break;
 
 	case SKILLS::PERCEPTION:
@@ -267,8 +276,7 @@ void SkillComponent::assignRandomSkills(int level){
 
 	unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 	std::default_random_engine generator(seed);
-	std::uniform_int_distribution<int> skillDistribution(0, 9);
-
+	std::uniform_int_distribution<int> skillDistribution(0, 10);
 
 	for (int i = 0; i < skillPoint; i++) {
 
@@ -285,8 +293,8 @@ void SkillComponent::assignRandomSkills(int level){
 			this->increaseSkill(SKILLS::DEFENCE);
 			break;
 
-		case SKILLS::LOCKPICKING:
-			this->increaseSkill(SKILLS::LOCKPICKING);
+		case SKILLS::PICKPOCKET:
+			this->increaseSkill(SKILLS::PICKPOCKET);
 			break;
 
 	/*	case SKILLS::LUCK:
@@ -309,9 +317,17 @@ void SkillComponent::assignRandomSkills(int level){
 			this->increaseSkill(SKILLS::PERSUASION);
 			break;
 
-		case SKILLS::RANGED:
-			this->increaseSkill(SKILLS::RANGED);
+		case SKILLS::BARTER:
+			this->increaseSkill(SKILLS::BARTER);
 			break;
+
+        case SKILLS::DODGE:
+			this->increaseSkill(SKILLS::DODGE);
+			break;
+
+        case SKILLS::CRIT:
+            this->increaseSkill(SKILLS::CRIT);
+            break;
 
 		case SKILLS::STEALTH:
 			this->increaseSkill(SKILLS::STEALTH);
@@ -381,18 +397,16 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	*/
 	int agilityLevel = mOwner->getAttribute(AGILITY);
 
-	int rangeLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
-	mSkills[SKILLS::RANGED].setLevel(rangeLvl);
-
-	int accuLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
-	mSkills[SKILLS::ACCURACY].setLevel(accuLvl);
+	int dodgeLvl = base_skill_value + (agilityLevel * attribute_weight["Agility"]);
+	mSkills[SKILLS::DODGE].setLevel(dodgeLvl);
+	mSkills[SKILLS::STEALTH].setLevel(dodgeLvl);
 
 
     //DEX
     int dexLevel = mOwner->getAttribute(DEXTERITY);
     int stealLvl = base_skill_value + (dexLevel * attribute_weight["Dexterity"]);
-	mSkills[SKILLS::LOCKPICKING].setLevel(stealLvl);     ///CHANGE TO PICKPOCKET AND EFFECTS CHANCE TO STEAL
-	mSkills[SKILLS::STEALTH].setLevel(stealLvl);
+	mSkills[SKILLS::PICKPOCKET].setLevel(stealLvl);
+	mSkills[SKILLS::ACCURACY].setLevel(stealLvl);
 
 
 	/*
@@ -402,6 +416,7 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 	int charismaLevel = mOwner->getAttribute(ATTRIBUTE::CHARISMA);
 	int persuLvl = base_skill_value + (charismaLevel * attribute_weight["Charisma"]);
 	mSkills[SKILLS::PERSUASION].setLevel(persuLvl);
+	mSkills[SKILLS::BARTER].setLevel(persuLvl);
 
 
 	/*
@@ -430,6 +445,7 @@ void SkillComponent::calculateSkills(std::shared_ptr<AttributeComponent> ac) {
 
 	int meleeLvl = base_skill_value + (strLevel * attribute_weight["Strength"]);
 	mSkills[SKILLS::MELEE].setLevel(meleeLvl);
+	mSkills[SKILLS::CRIT].setLevel(meleeLvl);
 
 
 	/*

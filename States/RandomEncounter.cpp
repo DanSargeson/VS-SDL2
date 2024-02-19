@@ -344,7 +344,7 @@ bool RandomEncounter::rob()
 //    int npcTotal = npc->getAttribute(3);
 //    npcTotal += npc->getSkill(8);
 
-    int stealth = getActiveCharacter()->getSkill(SKILLS::STEALTH);
+    int stealth = getActiveCharacter()->getSkill(SKILLS::PICKPOCKET);
     int npcPerception = npc->getSkill(SKILLS::PERCEPTION);
 
    bool success = getActiveCharacter()->skillCheck(npc, stealth, npcPerception);
