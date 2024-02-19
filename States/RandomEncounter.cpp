@@ -1,4 +1,5 @@
 #include "RandomEncounter.h"
+#include "SkillComponent.h"
 
 
 RandomEncounter::RandomEncounter(int faction){
@@ -40,7 +41,7 @@ RandomEncounter::RandomEncounter(int faction){
     refreshGUI();
 
     std::cout << "NPC LEVEL: " << npcLevel << std::endl;
-    std::cout << "INT: " << npc->getAttribute(4) << std::endl;
+    ///std::cout << "INT: " << npc->getAttribute(4) << std::endl;
 
     //getData()->mainText->setString("TESTING");
 }
@@ -321,8 +322,8 @@ bool RandomEncounter::charm(){
 //    int luck = rand() % getData()->getActiveCharacter()->getAttribute(6) + 1;
 //    playerTotal += luck;
 
-    int playerPersuasion = getActiveCharacter()->getSkill(7);    ///7 == PERSUASION
-    int npcPerception = npc->getSkill(8);   /// 8 == PERCEPTION
+    int playerPersuasion = getActiveCharacter()->getSkill(SKILLS::PERSUASION);    ///7 == PERSUASION
+    int npcPerception = npc->getSkill(SKILLS::PERCEPTION);   /// 8 == PERCEPTION
 
     bool success = getActiveCharacter()->skillCheck(npc, playerPersuasion, npcPerception);
 
@@ -336,20 +337,25 @@ bool RandomEncounter::charm(){
 
 bool RandomEncounter::rob()
 {
-    bool success = false;
+   // bool success = false;
 
-    int playerTotal = getData()->getActiveCharacter()->getSkill(5);
-    playerTotal += getData()->getActiveCharacter()->getAttribute(2);
-    int npcTotal = npc->getAttribute(3);
-    npcTotal += npc->getSkill(8);
+//    int playerTotal = getData()->getActiveCharacter()->getSkill(5);
+//    playerTotal += getData()->getActiveCharacter()->getAttribute(2);
+//    int npcTotal = npc->getAttribute(3);
+//    npcTotal += npc->getSkill(8);
 
-    int luck = rand() % getData()->getActiveCharacter()->getAttribute(6) + 1;
-    playerTotal += luck;
+    int stealth = getActiveCharacter()->getSkill(SKILLS::STEALTH);
+    int npcPerception = npc->getSkill(SKILLS::PERCEPTION);
 
-    if(playerTotal > npcTotal){
+   bool success = getActiveCharacter()->skillCheck(npc, stealth, npcPerception);
 
-        success = true;
-    }
+//    int luck = rand() % getData()->getActiveCharacter()->getAttribute(6) + 1;
+//    playerTotal += luck;
+//
+//    if(playerTotal > npcTotal){
+//
+//        success = true;
+//    }
 
     return success;
 }
@@ -358,7 +364,7 @@ void RandomEncounter::attemptSteal(){
 
  //Steal HERE
                 getData()->dynamicText->clearText();
-                int gold = rand() % 100 + 1;
+                int gold = getRandomValue(1, (1+(npc->getLevel()*2)));
                 if(rob()){
 
                     std::string msg = "You succeed in robbing the stranger, gold increased by " + std::to_string(gold);
