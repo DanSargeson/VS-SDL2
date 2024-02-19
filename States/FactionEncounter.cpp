@@ -21,7 +21,7 @@ FactionEncounter::FactionEncounter(int faction){
 
     json_file = "Assets/diag.json";
 
-    npc = std::make_shared<NPC>(faction); // RED
+    npc = std::make_shared<NPC>(faction, 1); // TODO:: NEED TO FIX THIS
     file = std::make_shared<LoadFiles>(m_fileName, 1);
 
     npc->createDialogueComponent();
