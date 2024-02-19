@@ -251,6 +251,30 @@ float Entity::getAttributeFloat(int attribute){
 
 }
 
+
+bool Entity::skillCheck(std::shared_ptr<Entity> checkAgainst, int skill1, int skill2){
+
+    bool success = false;
+
+    int tot1 = skill1;
+    int tot2 = skill2;
+
+    if(skillComponent && checkAgainst->getSkillComponent()){
+
+            ///tot1 = skillComponent->getSkill(mySkill);
+            tot1 += attributeComponent->getAttribute(ATTRIBUTE::LUCK);
+            ///tot2 = checkAgainst->getSkill(testAgainst);
+           /// tot2 += checkAgainst->getAttribute(ATTRIBUTE::LUCK);
+
+            if(tot1 >= tot2){
+
+                success = true;
+            }
+    }
+
+    return success;
+}
+
 void Entity::calculateSkills(){
 
     if(attributeComponent){

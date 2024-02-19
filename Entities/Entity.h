@@ -89,6 +89,9 @@ public:
 
 	void calculateSkills();
 
+
+	bool skillCheck(std::shared_ptr<Entity> checkAgainst, int skill1, int skill2);
+
 	void updateStats(bool s);
 
 	//std::vector<std::string> getDialogueOptions();
