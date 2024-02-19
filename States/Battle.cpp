@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Input.h"
 #include "PlayerDeath.h"
+#include "SkillComponent.h"
 
 Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alpha2(255), battleTxtTimer(std::make_unique<Timer>()), battleGameTimer(std::make_unique<GameTimer>())/*, seed(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count())), generator(seed)*/, noOfEnemies(0) {
 
@@ -460,24 +461,22 @@ void Battle::updateText(){
 
 const void Battle::playerAttacks(){
 
-                alpha = 255;
-///            combatTotal = enemies[choice].getDefence() + StateData::GetInstance()->getActiveCharacter()->getAccuracy();
-            enemyTotal = enemies[choice]->getSkill(2); /// / (double)combatTotal * 100;
-///            playerTotal = StateData::GetInstance()->getActiveCharacter()->getAccuracy() / (double)combatTotal * 100;
+            alpha = 255;
+///            enemyTotal = enemies[choice]->getSkill(2); /// / (double)combatTotal * 100;;
 
-            playerTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(3); //3 == ACCURACY
-            combatTotal = enemies[choice]->getSkill(2); // 2 == DEFENCE
+            playerAccuracy = StateData::GetInstance()->getActiveCharacter()->getSkill(SKILLS::ACCURACY); //3 == ACCURACY
+            enemyTotal = enemies[choice]->getSkill(SKILLS::DODGE); // 2 == DEFENCE
 
-            seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
-             generator.seed(seed);
-             std::uniform_int_distribution<int> playerTotalDistribution(1, playerTotal);
-             combatRollPlayer = playerTotalDistribution(generator);
-
-             std::uniform_int_distribution<int> enemyTotalDistribution(1, enemyTotal);
-             combatRollEnemy = enemyTotalDistribution(generator);
+//            seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+//             generator.seed(seed);
+//             std::uniform_int_distribution<int> playerTotalDistribution(1, playerTotal);
+//             combatRollPlayer = playerTotalDistribution(generator);
+//
+//             std::uniform_int_distribution<int> enemyTotalDistribution(1, enemyTotal);
+//             combatRollEnemy = enemyTotalDistribution(generator);
 
 
-				if (combatRollPlayer >= combatRollEnemy || missCounter >= 3) { //###########PLAYER HITS
+				if (getActiveCharacter()->skillCheck(enemies[choice], playerAccuracy, enemyTotal) || missCounter >= 3) { //###########PLAYER HITS
 					//HIT
 					missCounter = 0;
 					damage = StateData::GetInstance()->getActiveCharacter()->getDamage();
@@ -643,7 +642,7 @@ const void Battle::enemyAttacks(){
 				//playerTotal = StateData::GetInstance()->getActiveCharacter()->getDefence() / (double)combatTotal * 100;
 
 				enemyTotal = enemies[i]->getSkill(0); //0 == MELEE
-                combatTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(2); // 2 == DEFENCE
+                combatTotal = StateData::GetInstance()->getActiveCharacter()->getSkill(SKILLS::DODGE); // 2 == DEFENCE
 
 				seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
              generator.seed(seed);
@@ -653,21 +652,21 @@ const void Battle::enemyAttacks(){
              std::uniform_int_distribution<int> enemyTotalDistribution(1, enemyTotal);
              combatRollEnemy = enemyTotalDistribution(generator);
 
-				if (combatRollPlayer < combatRollEnemy || enemyMissCounter >= 3) {
+				if (enemies[i]->skillCheck(getActiveCharacter(), enemyTotal, combatTotal) || enemyMissCounter >= 3) {
 					//HIT
-					int chancetoSave = getRandomValue(0, getActiveCharacter()->getAttribute(6)); //PLAYERS LUCK == 6
+					///int chancetoSave = getRandomValue(0, getActiveCharacter()->getAttribute(6)); //PLAYERS LUCK == 6
 
-					if(chancetoSave > 0){
+					///if(chancetoSave > 0){
 
                         //MISS
-					enemyMsg += "\n" + enemies[i]->getName() + " Missed! ";
-					alpha2 = 255;
-					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
-					cout << "ENEMY MISSED!\n\n";
-					enemyMissCounter++;
+///					enemyMsg += "\n" + enemies[i]->getName() + " Missed! ";
+///					alpha2 = 255;
+///					enemyAttkTxt->setString(enemyMsg, true, GUI::p2pX(80));
+///					cout << "ENEMY MISSED!\n\n";
+///					enemyMissCounter++;
 
-					}
-					else{
+					///}
+					///else{
                     enemyMissCounter = 0;
 					damage = enemies[i]->getDamage();
 					int defendRoll = getActiveCharacter()->getDefence();
@@ -693,7 +692,7 @@ const void Battle::enemyAttacks(){
 						playerDefeated = true;
 						break;
 					}
-					}
+					///}
 				}
 				else {
 					//MISS
