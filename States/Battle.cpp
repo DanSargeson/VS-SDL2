@@ -23,9 +23,9 @@ Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alp
                 // Use std::uniform_int_distribution to generate random indices
 
                 int maxi = 1 + getData()->getActiveCharacter()->getLevel();
-                if(maxi > 4){
+                if(maxi > 3){
 
-                    maxi = 4;
+                    maxi = 3;
                 }
     std::uniform_int_distribution<> dis(1, maxi);
 
@@ -513,7 +513,7 @@ const void Battle::playerAttacks(){
 						StateData::GetInstance()->getActiveCharacter()->gainGold(gainGold);
 						gainEXP = enemies[choice]->getExp();
 						totalEXP += gainEXP;
-						StateData::GetInstance()->getActiveCharacter()->gainXP(250); //DEBUG REMOVE
+						StateData::GetInstance()->getActiveCharacter()->gainXP(gainEXP); //DEBUG REMOVE
 
 
                         endMsg += "Gold Gained: " + std::to_string(gainGold) + "\n";
