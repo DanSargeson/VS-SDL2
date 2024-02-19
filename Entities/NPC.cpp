@@ -2,6 +2,7 @@
 #include "NPC.h"
 #include "FactionComponent.h"
 #include "DialogueComponent.h"
+#include "AttributeComponent.h"
 
 int NPC::characterID = 0;
 
@@ -17,7 +18,7 @@ std::string NPC::getFactionStr(){
     return fact;
 }
 
-NPC::NPC(int faction){
+NPC::NPC(int faction, int level){
 
 	this->createFactionComponent();
 	this->type = NPC_TYPE::PEASANT;
@@ -34,6 +35,81 @@ NPC::NPC(int faction){
 
 	this->gold = randomGold;
 
+	createFactionComponent();
+	createAttributeComponent(level, true, false);
+
+	unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
+		std::default_random_engine generator(seed);
+//		std::uniform_int_distribution<int> levelDistribution(low, high);
+		std::uniform_int_distribution<int> pointDistribution(0, 6);
+//
+//		mLevel = levelDistribution(generator);
+
+		int point = 3;
+		int counter = 0;
+		if(level > 1){
+            point += level;
+		}
+
+		for (int i = 0; i < point; i++) {
+
+			int roll = pointDistribution(generator);
+            int currAttri = 0;
+
+			switch (roll) {
+
+			case 0:
+                currAttri = getAttribute(0);
+                currAttri++;
+				getAttributeComponent()->setAttribute(0, currAttri);      ///USED FOR DEFENCE
+				break;
+
+			case 1:
+				currAttri = getAttribute(1);
+                currAttri++;
+				getAttributeComponent()->setAttribute(1, currAttri);        ///USED FOR MELEE
+				break;
+
+			case 2:
+				currAttri = getAttribute(2);
+                currAttri++;
+				getAttributeComponent()->setAttribute(2, currAttri);      ///USED FOR ACCURACY
+				break;
+
+            case 3:
+                currAttri = getAttribute(3);
+                currAttri++;
+				getAttributeComponent()->setAttribute(3, currAttri);
+				break;
+
+
+			case 4:
+				currAttri = getAttribute(4);
+                currAttri++;
+				getAttributeComponent()->setAttribute(4, currAttri);       ///WILL EVENTUALLY BE USED FOR MAGIC
+				break;
+
+            case 5:
+                currAttri = getAttribute(5);
+                currAttri++;
+				getAttributeComponent()->setAttribute(5, currAttri);
+				break;
+
+			case 6:
+				currAttri = getAttribute(6);
+                currAttri++;
+				getAttributeComponent()->setAttribute(6, currAttri);            ///USED TO BOOST EVERYTHING SLIGHTLY
+				break;
+
+			default:
+				break;
+			}
+		}
+
+
+	createSkillComponent();
+	calculateSkills();
+	createAttackComponent();
 	this->createDialogueComponent();
 
 
