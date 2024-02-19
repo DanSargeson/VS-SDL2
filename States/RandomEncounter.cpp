@@ -12,19 +12,26 @@ RandomEncounter::RandomEncounter(int faction){
     getDynamicText()->setString("");
 
     choice = -1;
-    npc = std::make_shared<NPC>(faction);
+
+    int playerLvlMin = getActiveCharacter()->getLevel();
+
+    playerLvlMin--;
+
+    if(playerLvlMin <= 0){
+
+        playerLvlMin = 1;
+    }
+
+    int npcLevel = getRandomValue(playerLvlMin, (getActiveCharacter()->getLevel() + 3));
+
+    npc = std::make_shared<NPC>(faction, npcLevel);
 
     file = std::make_shared<LoadFiles>(filename, 0);
 
-    int high = getData()->getActiveCharacter()->getLevel() + 8;
-    int low = getData()->getActiveCharacter()->getLevel() - 1;
-
-    int npcLevel = rand() % high + low;
-
-    npc->createDialogueComponent();
-    npc->createFactionComponent();
-    npc->createAttributeComponent(npcLevel, true, true);
-    npc->createSkillComponent();
+//    npc->createDialogueComponent();
+//    npc->createFactionComponent();
+//    npc->createAttributeComponent(npcLevel, true, true);
+//    npc->createSkillComponent();
 
 //    menu.reset();
     menu = std::make_shared<GUI::Menu>();
@@ -306,18 +313,23 @@ void RandomEncounter::render(){
 
 bool RandomEncounter::charm(){
 
-    bool success = false;
+///bool success = false;
 
-    int playerTotal = getData()->getActiveCharacter()->getAttribute(5);
-    int npcTotal = npc->getAttribute(4);
+//    int playerTotal = getData()->getActiveCharacter()->getAttribute(5);
+//    int npcTotal = npc->getAttribute(4);
+//
+//    int luck = rand() % getData()->getActiveCharacter()->getAttribute(6) + 1;
+//    playerTotal += luck;
 
-    int luck = rand() % getData()->getActiveCharacter()->getAttribute(6) + 1;
-    playerTotal += luck;
+    int playerPersuasion = getActiveCharacter()->getSkill(7);    ///7 == PERSUASION
+    int npcPerception = npc->getSkill(8);   /// 8 == PERCEPTION
 
-    if(playerTotal > npcTotal){
+    bool success = getActiveCharacter()->skillCheck(npc, playerPersuasion, npcPerception);
 
-        success = true;
-    }
+//    if(playerTotal > npcTotal){
+//
+//        success = true;
+//    }
 
     return success;
 }
