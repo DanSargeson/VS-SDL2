@@ -683,6 +683,22 @@ void GUI::Tooltip::setDisplayText(std::string txt) {
 	displayText->setPosition(outline.x + 5, outline.y + 5);
 }
 
+bool GUI::Tooltip::checkBounds(std::shared_ptr<GUI::Text> text){
+
+    SDL_Rect r = text->getPositionRect();
+    bool success = false;
+
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+
+    if(x > r.x && x < r.x + r.w && y > r.y && y < r.y + r.h){
+
+        success = true;
+    }
+
+    return success;
+}
+
 void GUI::Tooltip::setHidden(bool h) {
 
 	hidden = h;
@@ -694,7 +710,10 @@ bool GUI::Tooltip::getHidden() {
 }
 
 
-void GUI::Tooltip::update(int x, int y){
+void GUI::Tooltip::update(){
+
+    int x, y;
+    SDL_GetMouseState(&x, &y);
 
 	outline.x = x;
 	outline.y = y;

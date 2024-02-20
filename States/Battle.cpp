@@ -140,11 +140,11 @@ Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alp
 		//rando = rand() % high + low;
 		std::shared_ptr<Enemy> temp = std::make_shared<Enemy>(rando);
 		enemies.push_back(temp);
-		enemyText.push_back(GUI::Text());
+		enemyText.push_back(std::make_shared<GUI::Text>());
 
 		for(int i = 0; i < enemies.size(); i++){
 
-            enemyText[i].setColour(255, 0, 0, 0);
+            enemyText[i]->setColour(255, 0, 0, 0);
 		}
         SDL_Delay(19);
 	}
@@ -153,9 +153,9 @@ Battle::Battle() : State(), missCounter(0), enemyMissCounter(0), alpha(255), alp
 
         enemies[i]->calculateSkills();
         std::string msg = enemies[i]->getName() + " HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax());
-        enemyText[i].setString(msg);
-        enemyText[i].setColour(255, 0, 0, 0);
-		enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
+        enemyText[i]->setString(msg);
+        enemyText[i]->setColour(255, 0, 0, 0);
+		enemyText[i]->setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
 	}
 
 	//BATTLE VARIABLES
@@ -207,9 +207,9 @@ void Battle::refreshGUI(){
     for(size_t i = 0; i < enemies.size(); i++){
 
         std::string msg = enemies[i]->getName() + " HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax());
-        enemyText[i].setString(msg);
-     //   enemyText[i].setColour(255, 0, 0, 0);
-		enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
+        enemyText[i]->setString(msg);
+     //   enemyText[i]->setColour(255, 0, 0, 0);
+		enemyText[i]->setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
 	}
 
     enemyAttkTxt->refreshGUI();
@@ -501,7 +501,7 @@ const void Battle::playerAttacks(){
 					std::string dmgMsg = "HIT for " + std::to_string(abs(tot)) + " damage!";
 
 					std::string msg = enemies[choice]->getName() + " HP: " + std::to_string(enemies[choice]->getHP()) + "/" + std::to_string(enemies[choice]->getHPMax());
-                    enemyText[choice].setString(msg);
+                    enemyText[choice]->setString(msg);
 					playerAttkTxt->setString(dmgMsg);
 					//alpha = 255;
 
@@ -605,10 +605,10 @@ const void Battle::playerAttacks(){
 						for(size_t i = 0; i < enemies.size(); i++){
 
                             std::string msg = enemies[i]->getName() + " HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax());
-                            enemyText[i].setString(msg);
-                            //enemyText[i].setString(enemies[i]->getName());
-                            enemyText[i].setColour(255, 0, 0, 0);
-                            enemyText[i].setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
+                            enemyText[i]->setString(msg);
+                            //enemyText[i]->setString(enemies[i]->getName());
+                            enemyText[i]->setColour(255, 0, 0, 0);
+                            enemyText[i]->setPosition(GUI::p2pX(60), GUI::p2pY(15 + (i*5)));
                         }
 					} //####END PLAYER WINS
 				}
@@ -836,26 +836,23 @@ void Battle::updateEvents(SDL_Event& e){
     //std::cout << "THE CHOICE IS CURRENTLY: " << std::to_string(choice) << "\n";
     if(e.type == SDL_MOUSEMOTION){
 
-        int x, y;
-        SDL_GetMouseState(&x, &y);
-        SDL_Rect r;
+//        int x, y;
+//        SDL_GetMouseState(&x, &y);
+//        SDL_Rect r;
 
         for(int i = 0; i < enemies.size(); i++){
 
 
-        r = enemyText[i].getPositionRect();
+       /// r = enemyText[i]->getPositionRect();
 
-        if(x > r.x &&
-           x < r.x + r.w &&
-           y > r.y &&
-           y < r.y + r.h){
+        if(battleEyes->checkBounds(enemyText[i])){
 
                 std::string msg = "HP: " + std::to_string(enemies[i]->getHP()) + "/" + std::to_string(enemies[i]->getHPMax())
                     + "\nAttack: ????\nDefence: ????";
                 msg += "\nSkills: \nDefence Sk: " + std::to_string(enemies[i]->getSkill(2));
                 msg += "\nMelee Sk: " + std::to_string(enemies[i]->getSkill(0));
                 battleEyes->setDisplayText(msg);
-                battleEyes->update(x, y);
+                battleEyes->update();
                 battleEyes->setHidden(false);
 
                 return;
@@ -930,7 +927,7 @@ void Battle::render(){
 
     for(int i = 0; i < enemyText.size(); i++){
 
-        enemyText[i].render();
+        enemyText[i]->render();
     }
 
     battleEyes->render();

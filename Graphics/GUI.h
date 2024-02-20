@@ -183,12 +183,12 @@ namespace GUI{
 		~Tooltip();
 
 		void setDisplayText(std::string txt);
-
+        bool checkBounds(std::shared_ptr<GUI::Text> text);
 		void setHidden(bool hidden);
 
 		bool getHidden();
 
-		void update(int x, int y);
+		void update();
 		void render();
 
 	private:
