@@ -935,9 +935,11 @@ void GUI::Menu::updateTextSelector(){
 
 	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 255, 255, 255);
 
-	int mouseX, mouseY;
 
-	SDL_GetMouseState(&mouseX, &mouseY);
+	if(SDL_ShowCursor(SDL_QUERY)){
+
+	int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
 
 	SDL_Rect result;
 	bool inside = true;
@@ -988,6 +990,7 @@ void GUI::Menu::updateTextSelector(){
 		textSelector.x = -9000;
 		textSelector.y = -9000;
 	}
+	}
 }
 
 void GUI::Menu::updateInput(){
@@ -1011,21 +1014,21 @@ void GUI::Menu::update(){
 	}
 
 	///TODO: - Fix and bring back
-//	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)){
-//
-//        if(isSelected() && getActive()){
-//
-//            scrollText(1);
-//        }
-//	}
-//
-//	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)){
-//
-//        if(isSelected() && getActive()){
-//
-//            scrollText(0);
-//        }
-//	}
+	if(Input::GetInstance()->GetKeyUp(SDL_SCANCODE_UP)){
+
+        if(isSelected() && getActive()){
+
+            scrollText(0);
+        }
+	}
+
+	if(Input::GetInstance()->GetKeyUp(SDL_SCANCODE_DOWN)){
+
+        if(isSelected() && getActive()){
+
+            scrollText(1);
+        }
+	}
 }
 
 /* TODO SCROLL TEXT FUNCTION!!! */

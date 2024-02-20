@@ -190,15 +190,15 @@ void Game::initButtons(){
 void Game::updateEvents(SDL_Event& e){
 
     menu->update();
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
-
-        menu->scrollText(0);
-    }
-
-      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
-
-        menu->scrollText(1);
-    }
+//    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
+//
+//        menu->scrollText(0);
+//    }
+//
+//      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
+//
+//        menu->scrollText(1);
+//    }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
