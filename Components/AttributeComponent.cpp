@@ -23,7 +23,7 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 		unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
 //		std::uniform_int_distribution<int> levelDistribution(low, high);
-		std::uniform_int_distribution<int> pointDistribution(0, 4);
+		std::uniform_int_distribution<int> pointDistribution(0, 5);
 //
 //		mLevel = levelDistribution(generator);
 
@@ -58,6 +58,9 @@ AttributeComponent::AttributeComponent(Entity* owner, unsigned level, bool reset
 			case 4:
 				mAttributes[ATTRIBUTE::LUCK] += 1;          ///USED TO BOOST EVERYTHING SLIGHTLY
 				break;
+
+            case 5:
+                mAttributes[ATTRIBUTE::AGILITY] +=1;
 
 			default:
 				break;
@@ -326,7 +329,73 @@ void AttributeComponent::update(){
 
 void AttributeComponent::assignRandomAttributes(int level){
 
-	//TODO
+    unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
+		std::default_random_engine generator(seed);
+//		std::uniform_int_distribution<int> levelDistribution(low, high);
+		std::uniform_int_distribution<int> pointDistribution(0, TOTAL_ATTRIBUTES-1);
+
+    int point = 3;
+		///int counter = 0;
+		if(level > 1){
+            point += level;
+		}
+
+
+		for (int i = 0; i < point; i++) {
+
+			int roll = pointDistribution(generator);
+            int currAttri = 0;
+
+			switch (roll) {
+
+			case ATTRIBUTE::AGILITY:
+                currAttri = getAttribute(ATTRIBUTE::AGILITY);
+                currAttri++;
+				setAttribute(ATTRIBUTE::AGILITY, currAttri);
+				break;
+
+			case ATTRIBUTE::CHARISMA:
+				currAttri = getAttribute(ATTRIBUTE::CHARISMA);
+                currAttri++;
+				setAttribute(ATTRIBUTE::CHARISMA, currAttri);        ///USED FOR MELEE
+				break;
+
+			case ATTRIBUTE::DEXTERITY:
+				currAttri = getAttribute(ATTRIBUTE::DEXTERITY);
+                currAttri++;
+				setAttribute(ATTRIBUTE::DEXTERITY, currAttri);      ///USED FOR ACCURACY
+				break;
+
+            case ATTRIBUTE::INTELLIGENCE:
+                currAttri = getAttribute(ATTRIBUTE::INTELLIGENCE);
+                currAttri++;
+				setAttribute(ATTRIBUTE::INTELLIGENCE, currAttri);
+				break;
+
+
+			case ATTRIBUTE::LUCK:
+				currAttri = getAttribute(ATTRIBUTE::LUCK);
+                currAttri++;
+				setAttribute(ATTRIBUTE::LUCK, currAttri);       ///WILL EVENTUALLY BE USED FOR MAGIC
+				break;
+
+            case ATTRIBUTE::STRENGTH:
+                currAttri = getAttribute(ATTRIBUTE::STRENGTH);
+                currAttri++;
+				setAttribute(ATTRIBUTE::STRENGTH, currAttri);
+				break;
+
+			case ATTRIBUTE::VITALITY:
+				currAttri = getAttribute(ATTRIBUTE::VITALITY);
+                currAttri++;
+				setAttribute(ATTRIBUTE::VITALITY, currAttri);            ///USED TO BOOST EVERYTHING SLIGHTLY
+				break;
+
+			default:
+				break;
+			}
+		}
+
 }
 
 std::string AttributeComponent::debugPrint(){
