@@ -630,7 +630,7 @@ const void Battle::enemyAttacks(){
     if(enemies.size() <= 0){
 
         endTurn = true;
-///        textThreadRunning = false;
+        textThreadRunning = false;
         return;
     }
 
