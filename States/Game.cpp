@@ -157,7 +157,6 @@ void Game::update(const float& dt){
 
         menu->setActive(true);
     }
-    menu->update();
 
     if(getData()->getActiveCharacter()->getExp() >= getData()->getActiveCharacter()->getExpNext()){
 
@@ -189,15 +188,25 @@ void Game::initButtons(){
 
 void Game::updateEvents(SDL_Event& e){
 
-    menu->update();
-//    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
+
+
+    menu->update(e);
+    ///menu->update(e);
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
+
+        ///SDL_ShowCursor(SDL_DISABLE);
+        ///menu->scrollText(0);
+    }
+
+      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
+
+       /// SDL_ShowCursor(SDL_DISABLE);
+        //menu->scrollText(1);
+    }
+
+//    if(e.type == SDL_MOUSEMOTION){
 //
-//        menu->scrollText(0);
-//    }
-//
-//      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
-//
-//        menu->scrollText(1);
+//        SDL_ShowCursor(SDL_ENABLE);
 //    }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){

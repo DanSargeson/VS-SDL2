@@ -96,14 +96,13 @@ void FactionEncounter::updateText(){
         textBuildCounter = 0;
         textThreadRunning = false;
         menu->setActive(true);
-        menu->update();
     }
 }
 
 void FactionEncounter::updateEvents(SDL_Event& e)
 {
 
-    menu->update();
+    menu->update(e);
 
 
     if(e.type == SDL_MOUSEBUTTONDOWN){

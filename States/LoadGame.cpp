@@ -34,22 +34,23 @@ LoadGame::~LoadGame(){
 
 void LoadGame::update(const float& dt){
 
-    menu->update();
+
 }
 
 void LoadGame::updateEvents(SDL_Event& e){
 
     State::updateEvents(e);
 
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
-
-        menu->scrollText(0);
-    }
-
-      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
-
-        menu->scrollText(1);
-    }
+    menu->update(e);
+//    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
+//
+//        menu->scrollText(0);
+//    }
+//
+//      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
+//
+//        menu->scrollText(1);
+//    }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 

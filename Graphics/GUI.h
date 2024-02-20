@@ -221,7 +221,7 @@ namespace GUI{
 			void updateTextSelector();
 			void updateInput();
 
-			void update();
+			void update(SDL_Event& e);
 
 			void scrollText(int direction = 0);
 

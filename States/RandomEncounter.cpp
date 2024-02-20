@@ -181,7 +181,7 @@ void RandomEncounter::update(const float& dt)
 
 void RandomEncounter::updateEvents(SDL_Event& e){
 
-    menu->update();
+    menu->update(e);
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 

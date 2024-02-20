@@ -290,8 +290,6 @@ if(endTurn){
     return;
 }
 
-menu->update();
-
 battleTxtTimer->Tick();
 
 if(playerDefeated){
@@ -714,8 +712,8 @@ const void Battle::enemyAttacks(){
 
 void Battle::updateEvents(SDL_Event& e){
 
-    menu->update();
-    enemyMenu->update();
+    menu->update(e);
+    enemyMenu->update(e);
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
