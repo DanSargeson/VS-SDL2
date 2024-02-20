@@ -38,7 +38,7 @@ NPC::NPC(int faction, int level){
 
 	createFactionComponent();
 	createAttributeComponent(level, true, false);
-    attributeComponent->assignRandomAttributes(level);
+    attributeComponent->assignRandomAttributes(level, true);
 	createSkillComponent();
 	calculateSkills();
 	createAttackComponent();

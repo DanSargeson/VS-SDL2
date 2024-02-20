@@ -327,75 +327,113 @@ void AttributeComponent::update(){
 	updateLevel();
 }
 
-void AttributeComponent::assignRandomAttributes(int level){
+void AttributeComponent::assignRandomAttributes(int level, bool npc){
 
     unsigned seed = static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
 		std::default_random_engine generator(seed);
 //		std::uniform_int_distribution<int> levelDistribution(low, high);
-		std::uniform_int_distribution<int> pointDistribution(0, TOTAL_ATTRIBUTES-1);
 
-    int point = 3;
+        int point = 3;
 		///int counter = 0;
 		if(level > 1){
             point += level;
 		}
 
-
-		for (int i = 0; i < point; i++) {
-
-			int roll = pointDistribution(generator);
-            int currAttri = 0;
-
-			switch (roll) {
-
-			case ATTRIBUTE::AGILITY:
-                currAttri = getAttribute(ATTRIBUTE::AGILITY);
-                currAttri++;
-				setAttribute(ATTRIBUTE::AGILITY, currAttri);
-				break;
-
-			case ATTRIBUTE::CHARISMA:
-				currAttri = getAttribute(ATTRIBUTE::CHARISMA);
-                currAttri++;
-				setAttribute(ATTRIBUTE::CHARISMA, currAttri);        ///USED FOR MELEE
-				break;
-
-			case ATTRIBUTE::DEXTERITY:
-				currAttri = getAttribute(ATTRIBUTE::DEXTERITY);
-                currAttri++;
-				setAttribute(ATTRIBUTE::DEXTERITY, currAttri);      ///USED FOR ACCURACY
-				break;
-
-            case ATTRIBUTE::INTELLIGENCE:
-                currAttri = getAttribute(ATTRIBUTE::INTELLIGENCE);
-                currAttri++;
-				setAttribute(ATTRIBUTE::INTELLIGENCE, currAttri);
-				break;
+		if(!npc){
+            std::uniform_int_distribution<int> pointDistribution(0, TOTAL_ATTRIBUTES-1);
 
 
-			case ATTRIBUTE::LUCK:
-				currAttri = getAttribute(ATTRIBUTE::LUCK);
-                currAttri++;
-				setAttribute(ATTRIBUTE::LUCK, currAttri);       ///WILL EVENTUALLY BE USED FOR MAGIC
-				break;
+            for (int i = 0; i < point; i++) {
 
-            case ATTRIBUTE::STRENGTH:
-                currAttri = getAttribute(ATTRIBUTE::STRENGTH);
-                currAttri++;
-				setAttribute(ATTRIBUTE::STRENGTH, currAttri);
-				break;
+                int roll = pointDistribution(generator);
+                int currAttri = 0;
 
-			case ATTRIBUTE::VITALITY:
-				currAttri = getAttribute(ATTRIBUTE::VITALITY);
-                currAttri++;
-				setAttribute(ATTRIBUTE::VITALITY, currAttri);            ///USED TO BOOST EVERYTHING SLIGHTLY
-				break;
+                switch (roll) {
 
-			default:
-				break;
-			}
+                case ATTRIBUTE::AGILITY:
+                    currAttri = getAttribute(ATTRIBUTE::AGILITY);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::AGILITY, currAttri);
+                    break;
+
+                case ATTRIBUTE::CHARISMA:
+                    currAttri = getAttribute(ATTRIBUTE::CHARISMA);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::CHARISMA, currAttri);
+                    break;
+
+                case ATTRIBUTE::DEXTERITY:
+                    currAttri = getAttribute(ATTRIBUTE::DEXTERITY);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::DEXTERITY, currAttri);
+                    break;
+
+                case ATTRIBUTE::INTELLIGENCE:
+                    currAttri = getAttribute(ATTRIBUTE::INTELLIGENCE);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::INTELLIGENCE, currAttri);
+                    break;
+
+
+                case ATTRIBUTE::LUCK:
+                    currAttri = getAttribute(ATTRIBUTE::LUCK);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::LUCK, currAttri);
+                    break;
+
+                case ATTRIBUTE::STRENGTH:
+                    currAttri = getAttribute(ATTRIBUTE::STRENGTH);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::STRENGTH, currAttri);
+                    break;
+
+                case ATTRIBUTE::VITALITY:
+                    currAttri = getAttribute(ATTRIBUTE::VITALITY);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::VITALITY, currAttri);
+                    break;
+
+                default:
+                    break;
+                }
+            }
 		}
+		else{
 
+            std::uniform_int_distribution<int> pointDistribution(0, 2);
+
+            ///NPC HERE..
+
+            for (int i = 0; i < point; i++) {
+
+                int roll = pointDistribution(generator);
+                int currAttri = 0;
+
+                switch (roll){
+
+                 case 0:
+                    currAttri = getAttribute(ATTRIBUTE::CHARISMA);
+                    currAttri++;
+                    setAttribute(ATTRIBUTE::CHARISMA, currAttri);
+                    break;
+
+                 case 1:
+                    currAttri = getAttribute(ATTRIBUTE::INTELLIGENCE);
+                        currAttri++;
+                        setAttribute(ATTRIBUTE::INTELLIGENCE, currAttri);
+                        break;
+
+                 case 2:
+                    currAttri = getAttribute(ATTRIBUTE::LUCK);
+                        currAttri++;
+                        setAttribute(ATTRIBUTE::LUCK, currAttri);
+                        break;
+
+                 default:
+                    break;
+                }
+            }
+		}
 }
 
 std::string AttributeComponent::debugPrint(){

@@ -56,7 +56,7 @@ public:
 
 	void setAttributePoints(int p);
 
-	void assignRandomAttributes(int level);
+	void assignRandomAttributes(int level, bool npc=false);
 
 	inline bool levelUp() { return mHasLevelled; }
 	inline void turnLevelOff() { mHasLevelled = false; }
