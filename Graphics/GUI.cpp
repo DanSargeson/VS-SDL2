@@ -754,6 +754,10 @@ GUI::Menu::Menu(){
 //	this->mStateData = &stateData;
 
 	//TODO:: Add sprite for scrolling up/down when more than four options.
+
+	activeOption = 0;
+
+	detachCursor = false;
 }
 
 
@@ -921,8 +925,6 @@ void GUI::Menu::updateTextSelector(){
 	float x = GUI::p2pX(89.7f);
 	float newY = GUI::p2pY(8.f);
 
-	int activeOption = 0;
-
 	float y = 0;
 	y = this->options.size() * newY;
 
@@ -936,7 +938,10 @@ void GUI::Menu::updateTextSelector(){
 	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 255, 255, 255, 255);
 
 	int mouseX, mouseY;
+
+
     SDL_GetMouseState(&mouseX, &mouseY);
+
 
 	SDL_Rect result;
 	bool inside = true;
@@ -983,9 +988,8 @@ void GUI::Menu::updateTextSelector(){
 	}
 	else{
 
-		textSelectorActive = false;
-		textSelector.x = -9000;
-		textSelector.y = -9000;
+        ///textSelector.x = outline.x + 1;
+        ///textSelector.y = outline.y;
 	}
 }
 
@@ -996,14 +1000,14 @@ void GUI::Menu::updateInput(){
 
 void GUI::Menu::update(SDL_Event& e){
 
-	updateTextSelector();
+	///updateTextSelector();
 
 	if(this->options.empty()){
 
 		this->active = false;
 	}
 
-	if(this->active){
+	if(this->active && !detachCursor){
 
 		this->updateTextSelector();
 		this->updateInput(); //CAN BE REMOVED..
@@ -1012,18 +1016,44 @@ void GUI::Menu::update(SDL_Event& e){
 	///TODO: - Fix and bring back
 	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
 
-        if(isSelected() && getActive()){
+        if(active){
 
-            scrollText(1);
+            detachCursor = true;
+            textSelector.y -= textSelector.h;
+            if(textSelector.y < outline.y){
+
+                textSelector.y = outline.y;
+                if(options.size() > 1){
+
+                    scrollText(1);
+                }
+            }
         }
 	}
 
 	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
 
-        if(isSelected() && getActive()){
+        if(active){
 
-            scrollText(0);
+            detachCursor = true;
+            textSelector.y += textSelector.h;
+            if((textSelector.y + textSelector.h) > (outline.y + outline.h)){
+
+                textSelector.y = (outline.y + outline.h) - textSelector.h;
+
+                //if(hiddenCount > 0){
+                if(options.size() > 1){
+
+                    scrollText(0);
+                }
+                //}
+            }
         }
+	}
+
+	if(e.type == SDL_MOUSEMOTION){
+
+        detachCursor = false;
 	}
 }
 
@@ -1084,9 +1114,6 @@ void GUI::Menu::render(){
 
             options[i]->render(Engine::GetInstance()->GetRenderer(), options[i]->getTextureRect().x, options[i]->getTextureRect().y);
 		}
-
-
-
 	}
 
 	if(options.size() >= 4){
@@ -1192,6 +1219,8 @@ void GUI::Menu::refreshGUI(){
 	float xOffset = GUI::p2pX(20.f);
 	float yOffset = GUI::p2pY(12.f);
 
+    textSelector.x = outline.x + 1;
+    textSelector.y = outline.y;
 	textSelector.w = outline.w - static_cast<int>(xOffset);
 	textSelector.h = GUI::p2pYi(7);
 

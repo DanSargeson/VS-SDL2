@@ -235,9 +235,12 @@ namespace GUI{
 			void clearOptions();
 			void setDialogueMenu(std::string percent = " ");
 			void setDynamicMenu(std::vector<std::string> ops, int type);
-
+            int getActiveOption() { return activeOption; }
 			void setMenuOptions(std::vector<std::string> options, bool dynamic = false, bool item = false); //ONLY ONE YOU NEED I BELIEVE!!!!
 			void setPosition();
+
+			bool cursorDetached() { return detachCursor; }
+			void setCursorDetached(bool d) { detachCursor = d; }
 
 		private:
 
@@ -245,11 +248,13 @@ namespace GUI{
 			SDL_Rect outline;
 			SDL_Rect textSelector;
 
+			bool detachCursor;
+
 			std::unique_ptr<Texture> scrollArrowDown;
 			std::unique_ptr<Texture> scrollArrowUp;
 
 			unsigned charSize;
-
+            int activeOption;
 			int hiddenCount;
 			int selection;
 			bool clicked;

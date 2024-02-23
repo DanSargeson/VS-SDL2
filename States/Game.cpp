@@ -167,52 +167,9 @@ void Game::update(const float& dt){
     saveCharacters();
 }
 
-void Game::initButtons(){
+void Game::runMenuSelection(){
 
-    unsigned int charSize = GUI::calcCharSize(125);
-
-
-    mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["SKILLS"]->setRenderText("Skills");
-
-    mButtons["FACTIONS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["FACTIONS"]->setRenderText("Factions");
-
-    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
-    mButtons["ATTRIBUTES"]->setRenderText("Attributes");
-
-//    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
-//    mButtons["INVENTORY"]->setRenderText("Inventory");
-
-}
-
-void Game::updateEvents(SDL_Event& e){
-
-
-
-    menu->update(e);
-    ///menu->update(e);
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
-
-        ///SDL_ShowCursor(SDL_DISABLE);
-        ///menu->scrollText(0);
-    }
-
-      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
-
-       /// SDL_ShowCursor(SDL_DISABLE);
-        //menu->scrollText(1);
-    }
-
-//    if(e.type == SDL_MOUSEMOTION){
-//
-//        SDL_ShowCursor(SDL_ENABLE);
-//    }
-
-    if(e.type == SDL_MOUSEBUTTONDOWN){
-
-        //updateMouseEvents(e.button);
-        //GAME LOOP HERE
+            //GAME LOOP HERE
         if(menu->isSelected()){
 
             getDynamicText()->setString("");
@@ -307,7 +264,7 @@ void Game::updateEvents(SDL_Event& e){
 
                 }
                 else{
-
+                    ///menu->setActive(false);
                     getEnemyText()->setString("No Points to Spend.");
                 }
             }
@@ -353,6 +310,59 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->setTutorial(true);
             }
         }
+}
+
+void Game::initButtons(){
+
+    unsigned int charSize = GUI::calcCharSize(125);
+
+
+    mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["SKILLS"]->setRenderText("Skills");
+
+    mButtons["FACTIONS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["FACTIONS"]->setRenderText("Factions");
+
+    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ATTRIBUTES"]->setRenderText("Attributes");
+
+//    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
+//    mButtons["INVENTORY"]->setRenderText("Inventory");
+
+}
+
+void Game::updateEvents(SDL_Event& e){
+
+
+    menu->update(e);
+    ///menu->update(e);
+//    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
+//
+//        ///SDL_ShowCursor(SDL_DISABLE);
+//        ///menu->scrollText(0);
+//    }
+//
+//      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
+//
+//       /// SDL_ShowCursor(SDL_DISABLE);
+//        //menu->scrollText(1);
+//    }
+
+//    if(e.type == SDL_MOUSEMOTION){
+//
+//        SDL_ShowCursor(SDL_ENABLE);
+//    }
+
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+
+
+        if(!menu->cursorDetached()){
+
+            runMenuSelection();
+        }
+        //updateMouseEvents(e.button);
+
+
 
          //BUTTONS START HERE
         if (mButtons["SKILLS"]->isPressed(e.button)) {
@@ -419,7 +429,25 @@ void Game::updateEvents(SDL_Event& e){
         getEnemyText()->setString(msg);
     }
 
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && e.key.repeat == 0){
+
+        if(menu->cursorDetached()){
+
+            runMenuSelection();
+
+            menu->setCursorDetached(false);
+
+            //TODO NEED A FLAG FOR IS MENU HAS BEEN CLICKED.....
+            ///SDL_ShowCursor(SDL_ENABLE);
+
+            return;
+
+        }
+        else{
+
+            menu->setCursorDetached(true);
+        }
 
         if(!getMainText()->isEmpty()){
 
@@ -458,6 +486,13 @@ void Game::updateEvents(SDL_Event& e){
                 StateData::GetInstance()->setTutorial(false);
             }
         }
+
+
+        if(!menu->getActive()){
+
+            menu->setActive(true);
+        }
+        ///TODO Need to run the same code to check the menu as above.... DEfinitely split that into it's own function
     }
 
 
