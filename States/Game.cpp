@@ -432,6 +432,16 @@ void Game::updateEvents(SDL_Event& e){
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && e.key.repeat == 0){
 
+        if(!getDynamicText()->isEmpty()){
+
+            getDynamicText()->clearText();
+        }
+
+        if(!getEnemyText()->isEmpty()){
+
+            getEnemyText()->clearText();
+        }
+
         if(menu->cursorDetached()){
 
             runMenuSelection();
@@ -454,16 +464,6 @@ void Game::updateEvents(SDL_Event& e){
             //getMainText()->clearText();
             getMainText() = std::make_shared<GUI::Text>(5, 5, 89, 60, true);
             getMainText()->setString(getActiveCharacter()->getStatsAttributeScreen(), true, GUI::p2pY(120));
-        }
-
-        if(!getDynamicText()->isEmpty()){
-
-            getDynamicText()->clearText();
-        }
-
-        if(!getEnemyText()->isEmpty()){
-
-            getEnemyText()->clearText();
         }
 
         if(testNpc->getDialogueActive()){
