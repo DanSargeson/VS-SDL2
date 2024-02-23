@@ -757,7 +757,7 @@ GUI::Menu::Menu(){
 
 	activeOption = 0;
 
-	detachCursor = false;
+	detachCursor = true;
 }
 
 
@@ -793,6 +793,21 @@ int GUI::Menu::getType(){
 int GUI::Menu::getDynamicType(){
 
 	return this->dynamicType;
+}
+
+bool GUI::Menu::cursorDetached(){
+
+//    int x, y;
+//    SDL_GetMouseState(&x, &y);
+//
+//    if(detachCursor){
+//
+//        if(x > outline.x && x < (outline.x + outline.w) && y > outline.y && y < (outline.y + outline.h)){
+//
+//            detachCursor = false;
+//        }
+//    }
+    return detachCursor;
 }
 
 
@@ -973,7 +988,7 @@ void GUI::Menu::updateTextSelector(){
 		inside = false;
 	}
 
-	if(inside && this->active){
+	if(inside && this->active && !detachCursor){
 
 		int gridPosX, gridPosY;
 
@@ -1014,16 +1029,24 @@ void GUI::Menu::update(SDL_Event& e){
 	}
 
 	///TODO: - Fix and bring back
-	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
+	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP)){
 
+        SDL_Delay(50);
         if(active){
+
+            if(!isSelected()){
+
+                detachCursor = true;
+                textSelector.x = outline.x + 1;
+                textSelector.y = outline.y;
+            }
 
             detachCursor = true;
             textSelector.y -= textSelector.h;
             if(textSelector.y < outline.y){
 
                 textSelector.y = outline.y;
-                if(options.size() > 1){
+                if(options.size() > 0){
 
                     scrollText(1);
                 }
@@ -1031,9 +1054,17 @@ void GUI::Menu::update(SDL_Event& e){
         }
 	}
 
-	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
+	if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN)){
 
+        SDL_Delay(50);
         if(active){
+
+            if(!isSelected()){
+
+                detachCursor = true;
+                textSelector.x = outline.x + 1;
+                textSelector.y = outline.y;
+            }
 
             detachCursor = true;
             textSelector.y += textSelector.h;
@@ -1042,7 +1073,7 @@ void GUI::Menu::update(SDL_Event& e){
                 textSelector.y = (outline.y + outline.h) - textSelector.h;
 
                 //if(hiddenCount > 0){
-                if(options.size() > 1){
+                if(options.size() > 0){
 
                     scrollText(0);
                 }
@@ -1221,7 +1252,7 @@ void GUI::Menu::refreshGUI(){
 
     textSelector.x = outline.x + 1;
     textSelector.y = outline.y;
-	textSelector.w = outline.w - static_cast<int>(xOffset);
+	textSelector.w =  GUI::p2pX(89.7f);
 	textSelector.h = GUI::p2pYi(7);
 
 	if(hiddenCount > 0){

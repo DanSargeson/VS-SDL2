@@ -161,30 +161,10 @@ void CharacterMenu::update(const float& dt){
     ///checkItemStrength();
 }
 
-void CharacterMenu::updateEvents(SDL_Event& e){
+void CharacterMenu::runMenuSelection(){
 
-    invMenu2->update(e);
-    menu->update(e);
-//    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
-//
-//        menu->scrollText(0);
-//    }
-//
-//      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
-//
-//        menu->scrollText(1);
-//    }
-
-    if(e.type == SDL_MOUSEBUTTONDOWN){
-
+     ///RUN MENU SELECTION
         if(menu->isSelected() && menu->getActive() && ops[0] != "You have no items"){
-
-//            if(invMenu->getChoice() == 0){
-//
-//                Engine::GetInstance()->PopPopState();
-//
-//                return;
-//            }
 
             if(ops[0] == "You have no armour" || ops[0] == "You have no weapons"){
 
@@ -221,7 +201,11 @@ void CharacterMenu::updateEvents(SDL_Event& e){
                 //mStateData::getInstane
         ///            std::cout << invMenu->getChoice() << std::endl;
 
+            return;
+
         }   //FIRST MENU ENDS HERE
+
+
 
     ///THIS IS THE ONE111 else{
 
@@ -285,7 +269,23 @@ void CharacterMenu::updateEvents(SDL_Event& e){
     }
 
 
+    ///END RUN MENU SELECTION
 
+}
+
+void CharacterMenu::updateEvents(SDL_Event& e){
+
+    invMenu2->update(e);
+    menu->update(e);
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && e.key.repeat == 0){
+
+        runMenuSelection();
+    }
+
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+
+        runMenuSelection();
         //BUTTONS START HERE
         if (mButtons["WEAPONS"]->isPressed(e.button)) {
 

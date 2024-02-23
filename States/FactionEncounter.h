@@ -15,6 +15,7 @@ class FactionEncounter : public State{
         void update(const float &dt);
         void updateEvents(SDL_Event &e);
         void render();
+        void runMenuSelection();
 
         void startTextThread();
         void updateText();

@@ -14,6 +14,7 @@ class RandomEncounter : public State{
 
         void update(const float& dt);
         void updateEvents(SDL_Event& e);
+        void runMenuSelection();
         void render();
 
         void refreshGUI();

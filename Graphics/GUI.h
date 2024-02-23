@@ -239,7 +239,7 @@ namespace GUI{
 			void setMenuOptions(std::vector<std::string> options, bool dynamic = false, bool item = false); //ONLY ONE YOU NEED I BELIEVE!!!!
 			void setPosition();
 
-			bool cursorDetached() { return detachCursor; }
+			bool cursorDetached();
 			void setCursorDetached(bool d) { detachCursor = d; }
 
 		private:

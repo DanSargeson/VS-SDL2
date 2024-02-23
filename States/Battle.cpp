@@ -196,8 +196,8 @@ Battle::~Battle(){
         winThread.~thread();
     }
 
-    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
+  getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(55), GUI::p2pY(30));
 }
 
 void Battle::refreshGUI(){

@@ -90,8 +90,8 @@ void Game::refreshGUI(){
 	textBox->refreshGUI();
 	initButtons();
 
-	getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
+	getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(55), GUI::p2pY(30));
 }
 
 void Game::update(const float& dt){
@@ -317,13 +317,13 @@ void Game::initButtons(){
     unsigned int charSize = GUI::calcCharSize(125);
 
 
-    mButtons["SKILLS"] = new GUI::Button(27.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["SKILLS"] = new GUI::Button(27.f, 60.5f, 11.8f, 4.1f, charSize);
     mButtons["SKILLS"]->setRenderText("Skills");
 
-    mButtons["FACTIONS"] = new GUI::Button(42.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["FACTIONS"] = new GUI::Button(42.f, 60.5f, 11.8f, 4.1f, charSize);
     mButtons["FACTIONS"]->setRenderText("Factions");
 
-    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 65.5f, 11.8f, 4.1f, charSize);
+    mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 60.5f, 11.8f, 4.1f, charSize);
     mButtons["ATTRIBUTES"]->setRenderText("Attributes");
 
 //    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
@@ -335,84 +335,47 @@ void Game::updateEvents(SDL_Event& e){
 
 
     menu->update(e);
-    ///menu->update(e);
-//    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_DOWN) && e.key.repeat == 0){
-//
-//        ///SDL_ShowCursor(SDL_DISABLE);
-//        ///menu->scrollText(0);
-//    }
-//
-//      if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_UP) && e.key.repeat == 0){
-//
-//       /// SDL_ShowCursor(SDL_DISABLE);
-//        //menu->scrollText(1);
-//    }
-
-//    if(e.type == SDL_MOUSEMOTION){
-//
-//        SDL_ShowCursor(SDL_ENABLE);
-//    }
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
-
-
-        if(!menu->cursorDetached()){
-
-            runMenuSelection();
-        }
-        //updateMouseEvents(e.button);
-
-
 
          //BUTTONS START HERE
         if (mButtons["SKILLS"]->isPressed(e.button)) {
 
-         //   menu->setActive(false);
-          //  invMenu2->setActive(false);
-
-            //mButtons["SKILLS"]->setSelected(true);
-            //mButtons["ATTRIBUTES"]->setSelected(false);
-            //mButtons["INVENTORY"]->setSelected(false);
-            //mButtons["FACTIONS"]->setSelected(false);
-
+            refreshGUI();
+            //menu->setMenuOptions(ops);
             std::string msg = StateData::GetInstance()->getActiveCharacter()->displaySkills();
             getMainText()->setString(msg, true, GUI::p2pY(420));
             mainScreen = false;
+
+            return;
         }
 
         if (mButtons["FACTIONS"]->isPressed(e.button)) {
 
-            //mButtons["SKILLS"]->setSelected(false);
-            //mButtons["ATTRIBUTES"]->setSelected(false);
-            //mButtons["INVENTORY"]->setSelected(false);
-            //mButtons["FACTIONS"]->setSelected(true);
-
-          //  menu->setActive(false);
-           // invMenu2->setActive(false);
+            refreshGUI();
+            //menu->setMenuOptions(ops);
             std::string fact = StateData::GetInstance()->getActiveCharacter()->getFactionStr();
             getMainText()->setString(fact, true, 420);
             mainScreen = false;
+
+            return;
         }
 
         if (mButtons["ATTRIBUTES"]->isPressed(e.button)) {
-
-            //mButtons["SKILLS"]->setSelected(false);
-            //mButtons["ATTRIBUTES"]->setSelected(true);
-            //mButtons["INVENTORY"]->setSelected(false);
-            //mButtons["FACTIONS"]->setSelected(false);
-
-            //menu->setActive(true);
-            //invMenu2->setActive(false);
+            refreshGUI();
+            //menu->setMenuOptions(ops);
             mainScreen = true;
-            //std::cout << "Attrib pressed\n\n\n\n\n";
-
-           /// StateData::GetInstance()->getActiveCharacter()->getAttributes();
-           /// getMainText()->setString("ATTRIBUTES");
             std::string mmm = StateData::GetInstance()->getActiveCharacter()->getStatsAttributeScreen();
             getMainText()->setString(mmm, true, 420);
-//            getMainText()->setFontSize(10);
+
+            return;
         }
 
+        if(!menu->cursorDetached()){
+
+            runMenuSelection();
+            return;
+        }
     }   ///END MOUSEBUTTONDOWN
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_L)){
@@ -431,6 +394,23 @@ void Game::updateEvents(SDL_Event& e){
 
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && e.key.repeat == 0){
+
+
+            if(textBox->getActive()){
+
+            textBox->setActive(false);
+
+            if(StateData::GetInstance()->getTutorial() == true){
+
+                if(tutorialCount < 2){
+
+                    tutorialCount++;
+
+                    return;
+                }
+                StateData::GetInstance()->setTutorial(false);
+            }
+        }
 
         if(!getDynamicText()->isEmpty()){
 
@@ -469,22 +449,6 @@ void Game::updateEvents(SDL_Event& e){
         if(testNpc->getDialogueActive()){
 
             testNpc->setDialogueActive(false);
-        }
-
-        if(textBox->getActive()){
-
-            textBox->setActive(false);
-
-            if(StateData::GetInstance()->getTutorial() == true){
-
-                if(tutorialCount < 2){
-
-                    tutorialCount++;
-
-                    return;
-                }
-                StateData::GetInstance()->setTutorial(false);
-            }
         }
 
 

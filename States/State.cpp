@@ -50,6 +50,9 @@ keyTime = 0.f;
     getDynamicText()->setFontSize(20);
     getEnemyText()->setFontSize(20);
 
+    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(55), GUI::p2pY(30));
+
     menu = std::make_shared<GUI::Menu>();
 
 }
@@ -89,8 +92,8 @@ void State::refreshGUI(){
         getEnemyText()->setFontSize(20);
         //getEnemyText()->clearText();
 
-        getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
+        getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(55), GUI::p2pY(30));
 
         menu->refreshGUI();
 

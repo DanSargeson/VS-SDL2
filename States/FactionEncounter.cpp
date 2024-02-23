@@ -99,16 +99,9 @@ void FactionEncounter::updateText(){
     }
 }
 
-void FactionEncounter::updateEvents(SDL_Event& e)
-{
+void FactionEncounter::runMenuSelection(){
 
-    menu->update(e);
-
-
-    if(e.type == SDL_MOUSEBUTTONDOWN){
-
-
-        if(menu->isSelected()){
+ if(menu->isSelected()){
 
 //            if(menu->getChoice() == 0){
 //                Engine::GetInstance()->PopState();
@@ -125,10 +118,29 @@ void FactionEncounter::updateEvents(SDL_Event& e)
                 menu->setMenuOptions(file->getPlayerOps(), true);
  //           }
         }
+}
+
+void FactionEncounter::updateEvents(SDL_Event& e)
+{
+
+    menu->update(e);
+
+
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+
+        ///START run menu selection
+        runMenuSelection();
+
     }
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
+        if(menu->cursorDetached()){
+
+            runMenuSelection();
+
+            return;
+        }
         getEnemyText()->clearText();
         getDynamicText()->clearText();
 

@@ -58,8 +58,8 @@ void RandomEncounter::refreshGUI(){
 
     State::refreshGUI();
 
-    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(55), GUI::p2pY(30));
 
     if(firstEncounter){
     std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
@@ -179,33 +179,11 @@ void RandomEncounter::update(const float& dt)
 
 }
 
-void RandomEncounter::updateEvents(SDL_Event& e){
+void RandomEncounter::runMenuSelection(){
 
-    menu->update(e);
-
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
-
-        if(!menu->getActive()){
-
-            Engine::GetInstance()->PopState();
-        }
-    }
-
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
-
-        std::string ss = getData()->getActiveCharacter()->printPlayerDetails();
-        std::cout << ss << std::endl;
-    }
-
-    if(e.type == SDL_MOUSEBUTTONDOWN){
+   ///START runMenuSelection
         if(menu->isSelected()){
 
-//            if(menu->getChoice() == 0){
-//
-//                Engine::GetInstance()->PopState();
-//
-//                return;
-//            }
             choice = menu->getChoice();
             if(menu->getChoice() == 0){
 
@@ -292,6 +270,35 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
             }
         }
+        ///
+
+}
+
+void RandomEncounter::updateEvents(SDL_Event& e){
+
+    menu->update(e);
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+
+        if(!menu->getActive()){
+
+            Engine::GetInstance()->PopState();
+        }
+        else{
+
+            runMenuSelection();
+        }
+    }
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
+
+        std::string ss = getData()->getActiveCharacter()->printPlayerDetails();
+        std::cout << ss << std::endl;
+    }
+
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+
+         runMenuSelection();
     }
 
     State::updateEvents(e);

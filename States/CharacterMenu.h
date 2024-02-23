@@ -14,7 +14,7 @@ class CharacterMenu : public State{
         void updateEvents(SDL_Event &e);
         void render();
         void refreshGUI();
-
+        void runMenuSelection();
         void checkItemStrength();
 
         void initButtons();
