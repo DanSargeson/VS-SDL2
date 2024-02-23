@@ -208,6 +208,9 @@ IncreaseAttributes::IncreaseAttributes() : State(){
 IncreaseAttributes::~IncreaseAttributes(){
 
    /// State::~State();
+
+    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(60));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(60));
    mainScreen = true;
 }
 

@@ -30,6 +30,8 @@ class Battle : public State{
         void startTextThread();
         void startWinThread();
 
+        void runMenuSelection();
+
     private:
         std::shared_ptr<GUI::Menu> battleMenu;
         std::shared_ptr<GUI::Menu> enemyMenu;

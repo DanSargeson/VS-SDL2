@@ -716,7 +716,7 @@ void Battle::updateEvents(SDL_Event& e){
     enemyMenu->update(e);
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
-
+        runMenuSelection();
         if(endTurn){
 
                 endTurn = false;
@@ -790,46 +790,11 @@ void Battle::updateEvents(SDL_Event& e){
                 /*  END OF RUNNING FROM BATTLE  */
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
-//                choice = 12;
-//
-//
-//            }
 
-        if(menu->isSelected() && playerTurn){
-
-        int choice = menu->getChoice();
-
-        if(menu->getChoice() == 0){
-
-
-            ///THIS NEEDS TO BE THE ENEMY MENU
-
-            std::vector<std::string> ops;
-
-            for(int i = 0; i < enemies.size(); i++){
-
-                ops.push_back(enemies[i]->getName());
-            }
-
-            enemyMenu->setMenuOptions(ops, true);
-            enemyMenu->setActive(true);
-            menu->setActive(false);
-
-            }
-        }
-
-        if(enemyMenu->isSelected() && playerTurn){
-
-            playerTurn = false;
-            enemyMenu->setActive(false);
-            choice = enemyMenu->getChoice();
-            ///THIS GOES IN THE SELECTED ENEMY
-            playerAttacks();
-            //TODO: Should go below so defence, items etc work
-            menu->setActive(true);
-        }
-            ///END IN ENEMY
+        runMenuSelection();
     }
+
+
 
     //std::cout << "THE CHOICE IS CURRENTLY: " << std::to_string(choice) << "\n";
     if(e.type == SDL_MOUSEMOTION){
@@ -861,6 +826,45 @@ void Battle::updateEvents(SDL_Event& e){
            }
         }
     }
+}
+
+void Battle::runMenuSelection(){
+
+            if(menu->isSelected() && playerTurn){
+
+
+        ///RUN MENU OPTIONS START
+        int choice = menu->getChoice();
+
+        if(menu->getChoice() == 0){
+
+            std::vector<std::string> ops;
+
+            for(int i = 0; i < enemies.size(); i++){
+
+                ops.push_back(enemies[i]->getName());
+            }
+
+            enemyMenu->setMenuOptions(ops, true);
+            enemyMenu->setActive(true);
+            menu->setActive(false);
+
+            }
+
+            ///
+        }
+
+        if(enemyMenu->isSelected() && playerTurn){
+
+            playerTurn = false;
+            enemyMenu->setActive(false);
+            choice = enemyMenu->getChoice();
+            ///THIS GOES IN THE SELECTED ENEMY
+            playerAttacks();
+            //TODO: Should go below so defence, items etc work
+            menu->setActive(true);
+        }
+            ///END RUN MENU s
 }
 
 void Battle::render(){

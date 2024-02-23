@@ -58,38 +58,35 @@ void LoadGame::updateEvents(SDL_Event& e){
 
             if (this->menu->isSelected()) {
 
-//			if (this->menu->getChoice() == 0) {
-//
-//              //  StateData::GetInstance()->characters.clear();
-//                Engine::GetInstance()->PopState();
-//				//StateData::GetInstance()->pop_state();
-//			}
-//			else {
+				for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
+
+                        int c = menu->getChoice();
+						StateData::GetInstance()->activeCharacter = c;
+                        Engine::GetInstance()->PopState();
+						Engine::GetInstance()->AddState(std::make_shared<Game>());
+
+						return;
+
+				}
+            }
+        }
+    }
+
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && e.key.repeat == 0){
+
+            if (this->menu->isSelected()) {
 
 				for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
 
                         int c = menu->getChoice();
-//                        int d = StateData::GetInstance()->characters[i]->getID();
-                        std::cout << "You picked:::   " << std::to_string(c) << std::endl;
-
-                        //StateData::GetInstance()->characters[c];
-
-					//if (menu->getChoice() == StateData::GetInstance()->characters[i]->getID()) {
-
 						StateData::GetInstance()->activeCharacter = c;
-                        ///StateData::GetInstance()->currentMap->LoadFromFile("Data/Map1.txt");
                         Engine::GetInstance()->PopState();
 						Engine::GetInstance()->AddState(std::make_shared<Game>());
-						//StateData::GetInstance()->pop_state();
-						//StateData::GetInstance()->push_state(std::make_shared<GameState>(*StateData::GetInstance(), StateData::GetInstance()->currentMap));
 
 						return;
-					//}
-				}
 
-//			}
-		}
-        }
+				}
+            }
     }
 
 }
