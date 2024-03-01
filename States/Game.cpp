@@ -412,32 +412,23 @@ void Game::updateEvents(SDL_Event& e){
             }
         }
 
-        if(!getDynamicText()->isEmpty()){
+        if(!getDynamicText()->isEmpty() || !getEnemyText()->isEmpty()){
 
             getDynamicText()->clearText();
-        }
-
-        if(!getEnemyText()->isEmpty()){
-
             getEnemyText()->clearText();
-        }
-
-        if(menu->cursorDetached()){
-
-            runMenuSelection();
-
-            menu->setCursorDetached(false);
-
-            //TODO NEED A FLAG FOR IS MENU HAS BEEN CLICKED.....
-            ///SDL_ShowCursor(SDL_ENABLE);
 
             return;
-
         }
-        else{
 
-            menu->setCursorDetached(true);
+        if(menu->isSelected()){
+
+            runMenuSelection();
+            return;
         }
+//        else{
+//
+//            menu->setCursorDetached(true);
+//        }
 
         if(!getMainText()->isEmpty()){
 

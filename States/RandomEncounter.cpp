@@ -58,8 +58,8 @@ void RandomEncounter::refreshGUI(){
 
     State::refreshGUI();
 
-    getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
-    getDynamicText()->setPosition(GUI::p2pX(55), GUI::p2pY(30));
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     if(firstEncounter){
     std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";

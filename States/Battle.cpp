@@ -724,7 +724,7 @@ void Battle::updateEvents(SDL_Event& e){
                 menu->setActive(true);
             if(!textThreadRunning){
 
-                    if(!winThreadRunning && !playerWins && !escape){
+                    if(!winThreadRunning && !playerWins && !escape && !textThreadRunning){
 
                         startTextThread();
                         return;
