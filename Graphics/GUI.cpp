@@ -797,16 +797,19 @@ int GUI::Menu::getDynamicType(){
 
 bool GUI::Menu::cursorDetached(){
 
-//    int x, y;
-//    SDL_GetMouseState(&x, &y);
-//
-//    if(detachCursor){
-//
-//        if(x > outline.x && x < (outline.x + outline.w) && y > outline.y && y < (outline.y + outline.h)){
-//
-//            detachCursor = false;
-//        }
-//    }
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+
+
+    if(x > outline.x && x < (outline.x + outline.w) && y > outline.y && y < (outline.y + outline.h)){
+
+            detachCursor = false;
+    }
+    else{
+
+        detachCursor = true;
+    }
+
     return detachCursor;
 }
 
@@ -1084,7 +1087,7 @@ void GUI::Menu::update(SDL_Event& e){
 
 	if(e.type == SDL_MOUSEMOTION){
 
-        detachCursor = false;
+        cursorDetached();
 	}
 }
 
