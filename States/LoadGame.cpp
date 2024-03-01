@@ -56,7 +56,7 @@ void LoadGame::updateEvents(SDL_Event& e){
 
         if(e.button.button == SDL_BUTTON_LEFT){
 
-            if (this->menu->isSelected()) {
+            if (this->menu->isSelected() && !menu->cursorDetached()) {
 
 				for (unsigned int i = 0; i < StateData::GetInstance()->characters.size(); i++) {
 

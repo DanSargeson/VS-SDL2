@@ -791,7 +791,10 @@ void Battle::updateEvents(SDL_Event& e){
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
-        runMenuSelection();
+        if(!menu->cursorDetached()){
+
+            runMenuSelection();
+        }
     }
 
 

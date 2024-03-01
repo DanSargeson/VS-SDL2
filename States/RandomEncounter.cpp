@@ -298,7 +298,10 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
-         runMenuSelection();
+        if(!menu->cursorDetached()){
+
+            runMenuSelection();
+        }
     }
 
     State::updateEvents(e);

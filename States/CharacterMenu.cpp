@@ -285,7 +285,10 @@ void CharacterMenu::updateEvents(SDL_Event& e){
 
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
-        runMenuSelection();
+        if(!menu->cursorDetached()){
+
+            runMenuSelection();
+        }
         //BUTTONS START HERE
         if (mButtons["WEAPONS"]->isPressed(e.button)) {
 

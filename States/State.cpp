@@ -134,6 +134,14 @@ void State::updateEvents(SDL_Event& e){
 
         return;
     }
+
+    if(e.type == SDL_MOUSEMOTION){
+
+        if(!SDL_ShowCursor(SDL_QUERY)){
+
+            SDL_ShowCursor(SDL_ENABLE);
+        }
+    }
 }
 
 void StateData::clearCharacters(){

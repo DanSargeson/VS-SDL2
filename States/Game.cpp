@@ -414,10 +414,13 @@ void Game::updateEvents(SDL_Event& e){
 
         if(!getDynamicText()->isEmpty() || !getEnemyText()->isEmpty()){
 
-            getDynamicText()->clearText();
-            getEnemyText()->clearText();
 
-            return;
+            getEnemyText()->clearText();
+            if(getDynamicText()->getString() != "Attribute upgrade available!"){
+
+                getDynamicText()->clearText();
+                return;
+            }
         }
 
         if(menu->isSelected()){

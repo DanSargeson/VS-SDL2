@@ -34,7 +34,6 @@ FactionEncounter::FactionEncounter(int faction){
     menu = std::make_shared<GUI::Menu>();
 
     menu->setMenuOptions(file->getFirstResponses(check, 1), true);
-
 }
 
 void FactionEncounter::startTextThread(){
@@ -129,7 +128,10 @@ void FactionEncounter::updateEvents(SDL_Event& e)
     if(e.type == SDL_MOUSEBUTTONDOWN){
 
         ///START run menu selection
-        runMenuSelection();
+        if(!menu->cursorDetached()){
+
+            runMenuSelection();
+        }
 
     }
 
