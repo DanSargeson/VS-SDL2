@@ -141,12 +141,12 @@ void FactionEncounter::updateEvents(SDL_Event& e)
 
             runMenuSelection();
 
-            return;
+           /// return;
         }
         getEnemyText()->clearText();
         getDynamicText()->clearText();
 
-        if(!menu->getActive() && !textThreadRunning){
+        if(!textThreadRunning){
 
             Engine::GetInstance()->PopState();
         }
@@ -188,7 +188,7 @@ void FactionEncounter::render()
         getMainText()->setString(builderText);
         getMainText()->render();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+        std::this_thread::sleep_for(std::chrono::milliseconds(15));
         //return;
     }else{
 
