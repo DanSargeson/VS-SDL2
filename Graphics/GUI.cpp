@@ -757,6 +757,7 @@ GUI::Menu::Menu(){
 
 	activeOption = 0;
 
+    textSelectorActive = true;
 	detachCursor = true;
 }
 
@@ -840,6 +841,11 @@ void GUI::Menu::setPosition(){
 		float y = (offsetY * i) + this->outline.y;
 		options[i]->setPosition(outline.x + static_cast<int>(diff), static_cast<int>(y) + static_cast<int>(diff));
 	}
+
+    textSelector.x = outline.x + 1;
+    textSelector.y = outline.y;
+	textSelector.w =  GUI::p2pX(89.7f);
+	textSelector.h = GUI::p2pYi(7);
 }
 
 void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, bool item){
@@ -888,8 +894,8 @@ void GUI::Menu::setMenuOptions(std::vector<std::string> strings, bool dynamic, b
 		}
 	}
 
-	this->refreshGUI();
 	this->setPosition();
+	this->refreshGUI();
 }
 
 bool GUI::Menu::isSelected(){

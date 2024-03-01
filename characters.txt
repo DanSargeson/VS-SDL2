@@ -1,5 +1,5 @@
-Dan 92809 10 18 1258 1833 6 1 4 5 3 1 2 2 
-100 100 106 126 135 100 100 100 
+Dan 92809 10 104 1258 1833 7 1 4 5 3 1 2 2 
+100 100 134 144 155 109 100 100 
 0 Iron 7 1 7 14 2 
 1 Iron 3 1 27 0 1 Iron 11 1 18 1 1 Rusty 5 0 20 2 1 Iron 12 1 33 3 
 0 Rusty 12 0 6 13 1 0 Rusty 9 0 3 6 2 0 Rusty 11 0 3 6 2 0 Rusty 6 0 3 6 1 0 Rusty 11 0 4 9 2 0 Rusty 7 0 3 7 2 0 Rusty 6 0 5 10 0 0 Rusty 12 0 5 10 0 0 Rusty 5 0 3 7 2 0 Rusty 12 0 6 12 2 0 Rusty 6 0 5 10 0 0 Rusty 11 0 3 6 2 0 Rusty 10 0 4 9 1 0 Rusty 2 0 6 13 2 0 Rusty 11 0 4 9 2 0 Rusty 2 0 3 6 2 0 Rusty 5 0 3 7 2 0 Rusty 6 0 3 6 1 0 Iron 12 1 10 20 0 
