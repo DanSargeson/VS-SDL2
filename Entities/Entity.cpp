@@ -388,6 +388,82 @@ int Entity::getDamage(){
 	return 0;
 }
 
+void Entity::equipWeapon(int index){
+
+    shared_ptr<Item> item = this->inv.findWeaponSmart(index);
+		//auto wv = std::dynamic_pointer_cast<Weapon>(item);
+		Weapon* w = nullptr;
+		//w = dynamic_cast<Weapon*>(&this->inventory[index]);
+		//IS WEAPON
+		if (item->getItemType() == WEAPON) {
+            auto wv = std::dynamic_pointer_cast<Weapon>(item);
+			if (wv != nullptr) {
+				if (this->activeWeapon != NULL) {
+					this->addItem(this->activeWeapon);
+				}
+				//this->addItem(wv);
+				this->activeWeapon = wv;
+				this->inv.removeItemVectorSmart(wv);
+			}
+		}
+}
+
+void Entity::equipArmour(int index){
+
+     //a = dynamic_cast<Armour*>(&this->inventory[index]);
+   shared_ptr<Item> item = this->inv.findArmourSmart(index);
+            auto wv = std::dynamic_pointer_cast<Armour>(item);
+			if (wv != nullptr) {
+				wv->getItemType();
+				int type = dynamic_cast<Armour&>(*wv).getType();
+				switch (type) {
+				case armourType::HEAD:
+					//this->addItem(wv);
+					if (this->activeHead != NULL) {
+						this->addItem(this->activeHead);
+					}
+					this->activeHead = wv;
+					this->inv.removeItemVectorSmart(wv);
+					break;
+
+				case armourType::CHEST:
+					//this->addItem(wv);
+					if (this->activeChest != NULL) {
+						this->addItem(this->activeChest);
+					}
+					this->activeChest = wv;
+					this->inv.removeItemVectorSmart(wv);
+					break;
+
+				case armourType::ARMS:
+					//this->addItem(wv);
+					if (this->activeArms != NULL) {
+						this->addItem(this->activeArms);
+					}
+					this->activeArms = wv;
+					this->inv.removeItemVectorSmart(wv);
+					break;
+
+				case armourType::LEGS:
+					//this->addItem(wv);
+					if (this->activeLegs != NULL) {
+						this->addItem(this->activeLegs);
+					}
+					this->activeLegs = wv;
+					this->inv.removeItemVectorSmart(wv);
+
+					/*	this->inventory.addItem(this->armourLegs);
+						this->armourLegs = *a;
+						this->inventory.removeItem(index);*/
+					break;
+
+				default:
+					cout << "ERROR IN ARMOUR TYPE!\n\n";
+					break;
+				}
+}
+}
+
 void Entity::resetHP(){
 
     attributeComponent->updateStats(true);

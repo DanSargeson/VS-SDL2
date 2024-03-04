@@ -184,16 +184,15 @@ Battle::~Battle(){
     //getDynamicText()->clearText();
     enemies.clear();
 
+
     if(textThread.joinable()){
 
         textThread.join();
-        textThread.~thread();
     }
 
     if(winThread.joinable()){
 
         winThread.join();
-        winThread.~thread();
     }
 
   getEnemyText()->setPosition(GUI::p2pX(55), GUI::p2pY(40));
@@ -301,6 +300,7 @@ if(playerDefeated){
     endTurn = true;
 
     textThreadRunning = false;
+    winThreadRunning = false;
     if(textThread.joinable()){
 
         textThread.join();
@@ -574,7 +574,7 @@ const void Battle::playerAttacks(){
                         seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
                         generator.seed(seed);
                         r = itemDistribution(generator);
-                        int lvl = 10;
+                        int lvl = 10;       ///WHAT is this?
 
 							if (r >= 50) {
 
@@ -854,7 +854,10 @@ void Battle::runMenuSelection(){
 
             }
 
-            ///
+            if(enemies.size() > 1){
+
+                return;
+            }
         }
 
         if(enemyMenu->isSelected() && playerTurn){

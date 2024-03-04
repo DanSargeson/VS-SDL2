@@ -126,6 +126,9 @@ public:
 
 	void resetHP();
 
+	void equipWeapon(int index);
+	void equipArmour(int index);
+
     std::string getName() { return m_name; }
 
 	int getDamage();
@@ -166,6 +169,8 @@ public:
 
 	std::shared_ptr<Item> getItem(int index);
 	void removeItem(int index);
+
+	inline void addItem(shared_ptr<Item>item) { this->inv.addItemVectorSmart(item); }
 
 	void addComponent(class Component* comp);
 	void removeComponent(class Component* comp);

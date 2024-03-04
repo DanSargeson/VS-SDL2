@@ -24,6 +24,7 @@ Enemy::Enemy(int lvl) : Entity(){
     //this->level = rand() % (level - 2);
     level = lvl;
 
+
     unsigned seed;
     std::default_random_engine generator;
     seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
@@ -41,6 +42,15 @@ Enemy::Enemy(int lvl) : Entity(){
     updateStats(true);
     ///skillComponent->calculateSkills(attributeComponent);
     createAttackComponent();
+
+
+    if(level > 5){
+
+        Weapon tempW((level - 4), 1);
+        auto tempWe = make_shared<Weapon>(tempW);
+        this->addItem(tempWe);
+        this->equipWeapon(0);
+    }
 }
 
 Enemy::~Enemy(){
