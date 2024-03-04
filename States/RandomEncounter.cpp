@@ -12,6 +12,15 @@ RandomEncounter::RandomEncounter(int faction){
 
     getDynamicText()->setString("");
 
+    textThreadRunning = true;
+
+    builderText = "";
+    copyText = "";
+    textMsg = "";
+
+    getEnemyText()->setColour(255, 0, 0, 0);
+    textBuildCounter = 0;
+
     choice = -1;
 
     int playerLvlMin = getActiveCharacter()->getLevel();
@@ -48,8 +57,13 @@ RandomEncounter::RandomEncounter(int faction){
 
 RandomEncounter::~RandomEncounter(){
 
+    if(textThread.joinable()){
+
+        textThread.join();
+    }
+
     getData()->dynamicText->clearText();
-    getData()->enemyText->clearText();
+    getEnemyText()->clearText();
 //    State::~State();
     State::refreshGUI();
 }
@@ -62,9 +76,10 @@ void RandomEncounter::refreshGUI(){
     getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 
     if(firstEncounter){
-    std::string msg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
-    msg += "\"" + file->loadRandomDialogue() +  "\"";
-    getData()->mainText->setString(msg, true, 720);
+    textMsg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
+    //msg += "\"" + file->loadRandomDialogue() +  "\"";
+    copyText = "\"" + file->loadRandomDialogue() +  "\"";
+    getData()->mainText->setString(textMsg, true, 720);
 
     unlockedCharm = false;
 
@@ -109,7 +124,7 @@ void RandomEncounter::refreshGUI(){
 
             //Charm
                 if(unlockedCharm){
-                    getData()->enemyText->clearText();
+                    ///getData()->enemyText->clearText();
                     if(charm()){
 
                         getData()->dynamicText->setString("The stranger is impressed by your wit. Faction rep gained.");
@@ -126,8 +141,8 @@ void RandomEncounter::refreshGUI(){
                             msg += "\nFaction rep decreased slightly.";
                             getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
                         }
-
-                        getData()->enemyText->setString(msg);
+                        getEnemyText()->setColour(255, 0, 0, 0);
+                        getEnemyText()->setString(msg, true);
                         menu->setActive(false);
                     }
                 }
@@ -150,8 +165,8 @@ void RandomEncounter::refreshGUI(){
                 else{
 
                     //barter
-                    getData()->enemyText->clearText();
-                    getData()->dynamicText->setString("The stranger has no items...");
+                    ///getEnemyText()->clearText();
+                    getEnemyText()->setString("The stranger has no items...");
                     menu->setActive(false);
                 }
 
@@ -161,8 +176,8 @@ void RandomEncounter::refreshGUI(){
                 if(unlockedCharm){
 
                     //barter
-                    getData()->enemyText->clearText();
-                    getData()->dynamicText->setString("The stranger has no items...");
+                    ///getEnemyText()->clearText();
+                    getEnemyText()->setString("The stranger has no items...");
                 }
                 else{
 
@@ -177,6 +192,17 @@ void RandomEncounter::refreshGUI(){
 void RandomEncounter::update(const float& dt)
 {
 
+    if(textThreadRunning){
+
+        updateText();
+    }
+    else{
+
+        if(textThread.joinable()){
+
+            textThread.join();
+        }
+    }
 }
 
 void RandomEncounter::runMenuSelection(){
@@ -203,7 +229,7 @@ void RandomEncounter::runMenuSelection(){
 
             //Charm
                 if(unlockedCharm){
-                    getData()->enemyText->clearText();
+                    ///getData()->enemyText->clearText();
                     if(charm()){
 
                         int rando = getRandomValue(1, 5);
@@ -226,7 +252,7 @@ void RandomEncounter::runMenuSelection(){
                             getData()->getActiveCharacter()->loseRep(npc->getFaction(), 1);
                         }
 
-                        getData()->dynamicText->setString(msg, true);
+                        getEnemyText()->setString(msg, true);
                         menu->setActive(false);
                     }
                 }
@@ -249,8 +275,8 @@ void RandomEncounter::runMenuSelection(){
                 else{
 
                     //barter
-                    getData()->enemyText->clearText();
-                    getData()->dynamicText->setString("The stranger has no items...");
+                    ///getData()->enemyText->clearText();
+                    getEnemyText()->setString("The stranger has no items...");
                     menu->setActive(false);
                 }
 
@@ -260,8 +286,8 @@ void RandomEncounter::runMenuSelection(){
                 if(unlockedCharm){
 
                     //barter
-                    getData()->enemyText->clearText();
-                    getData()->dynamicText->setString("The stranger has no items...");
+                    getEnemyText()->clearText();
+                    getEnemyText()->setString("The stranger has no items...");
                 }
                 else{
 
@@ -274,19 +300,65 @@ void RandomEncounter::runMenuSelection(){
 
 }
 
+void RandomEncounter::startTextThread(){
+
+    textThreadRunning = true;
+    textThread = std::thread(&RandomEncounter::updateText, this);
+}
+
+
+void RandomEncounter::updateText(){
+
+    if(builderText != copyText){
+
+            menu->setActive(false);
+
+    // loop through each character in the text
+        // output one character
+        // flush to make sure the output is not delayed
+        builderText.push_back(copyText[textBuildCounter]);
+        //mTextTexture->loadFromRenderedText(Engine::GetInstance()->GetRenderer(), copy_text, mTextColour, *mFont, true, 80);
+
+        //mTextTexture->render(Engine::GetInstance()->GetRenderer(),  mOutline.x + offsetX, mOutline.y + offsetY);
+        // sleep 60 milliseconds
+        ///std::this_thread::sleep_for(std::chrono::milliseconds(600));
+        std::string temp = textMsg;
+        temp += builderText;
+        //temp += builderText;
+
+        getMainText()->setString(temp, true);
+        //getMainText()->render();
+       // std::this_thread::sleep_for(std::chrono::milliseconds(60));
+       //L_Deay(700);
+        textBuildCounter++;
+    }
+
+    else{
+
+        builderText = "";
+        textBuildCounter = 0;
+        textThreadRunning = false;
+        menu->setActive(true);
+    }
+}
+
 void RandomEncounter::updateEvents(SDL_Event& e){
 
     menu->update(e);
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
 
-        if(!menu->getActive()){
-
-            Engine::GetInstance()->PopState();
-        }
-        else{
+        if(!textThreadRunning && menu->getActive()){
 
             runMenuSelection();
+
+            return;
+        }
+
+        if(!menu->getActive() && !textThreadRunning){
+
+            SDL_Delay(100);
+            Engine::GetInstance()->PopState();
         }
     }
 
@@ -310,15 +382,32 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 void RandomEncounter::render(){
 
     menu->render();
-    getData()->mainText->render();
+
+    if(textThreadRunning){
+
+        std::string temp = textMsg;
+        temp += builderText;
+        getMainText()->setString(temp, true);
+        getMainText()->render();
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        //return;
+    }else{
+
+        std::string temp = textMsg;
+        temp += copyText;
+        getMainText()->setString(temp, true);
+        getMainText()->render();
+    }
+    ///getData()->mainText->render();
 
     if(getData()->dynamicText->getString() != ""){
 
         getData()->dynamicText->render();
     }
-    if(getData()->enemyText->getString() != ""){
+    if(getEnemyText()->getString() != ""){
 
-        getData()->enemyText->render();
+        getEnemyText()->render();
     }
 }
 
@@ -412,7 +501,7 @@ void RandomEncounter::attemptSteal(){
                         msg += "\n\n" + npc->getFactionStr() + " faction rep down";
                         getData()->getActiveCharacter()->loseRep(npc->getFaction(), 5);
                     }
-                    getData()->enemyText->setString(msg, true, 880);
+                    getEnemyText()->setString(msg, true, 880);
                 }
 
 }

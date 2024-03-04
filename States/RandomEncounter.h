@@ -17,6 +17,9 @@ class RandomEncounter : public State{
         void runMenuSelection();
         void render();
 
+        void updateText();
+        void startTextThread();
+
         void refreshGUI();
         bool charm();
         bool rob();
@@ -33,4 +36,13 @@ class RandomEncounter : public State{
         bool firstEncounter;
         bool unlockedCharm;
         int choice;
+
+         std::thread textThread;
+         bool textThreadRunning;
+//         bool firstEncounter;
+        std::string textMsg;
+
+         std::string copyText;
+         std::string builderText;
+         int textBuildCounter;
 };
