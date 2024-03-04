@@ -46,6 +46,7 @@ RandomEncounter::RandomEncounter(int faction){
 //    menu.reset();
     menu = std::make_shared<GUI::Menu>();
 
+    copyText = "\"" + file->loadRandomDialogue() +  "\"";
 
     refreshGUI();
 
@@ -70,15 +71,11 @@ RandomEncounter::~RandomEncounter(){
 
 void RandomEncounter::refreshGUI(){
 
-    State::refreshGUI();
-
-    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
-    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
+    ///State::refreshGUI();
 
     if(firstEncounter){
     textMsg = "You are approached by a commoner of the " + npc->getFactionStr() + " faction.\n\n\n";
     //msg += "\"" + file->loadRandomDialogue() +  "\"";
-    copyText = "\"" + file->loadRandomDialogue() +  "\"";
     getData()->mainText->setString(textMsg, true, 720);
 
     unlockedCharm = false;
@@ -186,6 +183,9 @@ void RandomEncounter::refreshGUI(){
 
             }
         }
+
+    getEnemyText()->setPosition(GUI::p2pX(20), GUI::p2pY(40));
+    getDynamicText()->setPosition(GUI::p2pX(20), GUI::p2pY(50));
 }
 
 
