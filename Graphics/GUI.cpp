@@ -1045,9 +1045,12 @@ void GUI::Menu::update(SDL_Event& e){
 
             if(!isSelected()){
 
-                detachCursor = true;
-                textSelector.x = outline.x + 1;
-                textSelector.y = outline.y;
+                if(options.size() > 4){
+
+                    detachCursor = true;
+                    textSelector.x = outline.x + 1;
+                    textSelector.y = outline.y;
+                }
             }
 
             detachCursor = true;
@@ -1070,14 +1073,17 @@ void GUI::Menu::update(SDL_Event& e){
 
             if(!isSelected()){
 
-                detachCursor = true;
-                textSelector.x = outline.x + 1;
-                textSelector.y = outline.y;
+                if(options.size() > 4){
+
+                    detachCursor = true;
+                    textSelector.x = outline.x + 1;
+                    textSelector.y = outline.y;
+                }
             }
 
             detachCursor = true;
             textSelector.y += textSelector.h;
-            if((textSelector.y + textSelector.h) > (outline.y + outline.h)){
+            if((textSelector.y + textSelector.h) >= (outline.y + outline.h)){
 
                 textSelector.y = (outline.y + outline.h) - textSelector.h;
 
