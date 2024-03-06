@@ -716,6 +716,7 @@ void Battle::updateEvents(SDL_Event& e){
     enemyMenu->update(e);
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+        ///TODO: = Can check for key repeat and if quick battle is unlocked turn it off
         runMenuSelection();
         if(endTurn){
 

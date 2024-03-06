@@ -127,26 +127,26 @@ void CharacterCreator::initGUI(){
     mSprites["VIT_MINUS"] = spriteMinusVit;
 
 
-    mSprites["AGILITY_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(32.f));
-    mSprites["AGILITY_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(32.f));
+    mSprites["AGILITY_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(31));
+    mSprites["AGILITY_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(31));
 
-    mSprites["CHA_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(41.5f));
-    mSprites["CHA_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(41.5f));
+    mSprites["CHA_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(40));
+    mSprites["CHA_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(40));
 
-    mSprites["DEX_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(51.f));
-    mSprites["DEX_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(51.f));
+    mSprites["DEX_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(50));
+    mSprites["DEX_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(50));
 
-    mSprites["INT_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(60.f));
-    mSprites["INT_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(60.f));
+    mSprites["INT_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(59));
+    mSprites["INT_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(59));
 
-    mSprites["LUCK_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(69.5f));
-    mSprites["LUCK_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(69.5f));
+    mSprites["LUCK_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(69));
+    mSprites["LUCK_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(69));
 
-    mSprites["STR_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(79.f));
-    mSprites["STR_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(79.f));
+    mSprites["STR_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(78));
+    mSprites["STR_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(78));
 
-    mSprites["VIT_PLUS"]->setPositionFloat(GUI::p2pX(36.f), GUI::p2pY(88.f));
-    mSprites["VIT_MINUS"]->setPositionFloat(GUI::p2pX(12.f), GUI::p2pY(88.f));
+    mSprites["VIT_PLUS"]->setPosition(GUI::p2pX(36), GUI::p2pY(87));
+    mSprites["VIT_MINUS"]->setPosition(GUI::p2pX(14), GUI::p2pY(87));
 }
 
 void CharacterCreator::initText(){
@@ -508,7 +508,7 @@ void CharacterCreator::updateEvents(SDL_Event& e){
                 if(mSprites["AGILITY_MINUS"]->intersects(x, y)){
 
                     //Increase Skill
-                    if(temp->getAttribute(AGILITY) > 0){
+                    if(temp->getAttribute(AGILITY) > 1){
 
                         temp->decreaseAttribute(AGILITY);
                         pointsToSpend++;

@@ -74,7 +74,7 @@ public:
 
     std::string saveName;
 
-    int activeCharacter;
+    int activeCharacter = 0;
     std::vector<std::shared_ptr<Player>> characters;
 
     std::vector<std::shared_ptr<class State>>* states;
