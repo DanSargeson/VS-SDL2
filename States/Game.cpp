@@ -140,8 +140,15 @@ void Game::update(const float& dt){
         case 2:
             textBox->setActive(true);
             textBox->setHeader("Information Screen");
-            textBox->setText("Here you will find information about the area you are currently in\n\nPress ENTER to close");
+            textBox->setText("Here you will find your character details information.\n\nPress ENTER to continue...");
             textBox->setPosition(GUI::p2pX(40), GUI::p2pY(30));
+            break;
+
+        case 3:
+            textBox->setActive(true);
+            textBox->setHeader("SCREEN NAVIGATION");
+            textBox->setText("You can see your skill levels, faction standings and character details by selecting the corresponding button.\n\nPress ENTER to close...");
+            textBox->setPosition(GUI::p2pX(20), GUI::p2pY(1));
             break;
 
         default:
@@ -324,7 +331,7 @@ void Game::initButtons(){
     mButtons["FACTIONS"]->setRenderText("Factions");
 
     mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 60.5f, 11.8f, 4.1f, charSize);
-    mButtons["ATTRIBUTES"]->setRenderText("Attributes");
+    mButtons["ATTRIBUTES"]->setRenderText("Character Sheet");
 
 //    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
 //    mButtons["INVENTORY"]->setRenderText("Inventory");
@@ -336,7 +343,7 @@ void Game::updateEvents(SDL_Event& e){
 
     menu->update(e);
 
-    if(e.type == SDL_MOUSEBUTTONDOWN){
+    if(e.type == SDL_MOUSEBUTTONDOWN && !getData()->getTutorial()){
 
          //BUTTONS START HERE
         if (mButtons["SKILLS"]->isPressed(e.button)) {
@@ -402,7 +409,7 @@ void Game::updateEvents(SDL_Event& e){
 
             if(StateData::GetInstance()->getTutorial() == true){
 
-                if(tutorialCount < 2){
+                if(tutorialCount < 3){
 
                     tutorialCount++;
 
@@ -497,6 +504,14 @@ void Game::render(){
             getMainText()->render();
             textBox->render();
 
+        }
+        if(tutorialCount == 3){
+
+            for(auto i : mButtons){
+
+                i.second->renderButtons();
+            }
+            textBox->render();
         }
        } //END TUTORIAL
         textBox->render();

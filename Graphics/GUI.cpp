@@ -276,8 +276,8 @@ GUI::Text::Text(int x, int y, int w, int h, bool border){
 		mFiller.w = mOutline.w + 4;
 		mFiller.h = mOutline.h + 4;
 
-		offsetX = 10;
-		offsetY = 10;
+		offsetX = 30;
+		offsetY = 20;
 	}
 	else {
 
