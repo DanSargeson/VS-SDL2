@@ -148,7 +148,11 @@ void FactionEncounter::updateEvents(SDL_Event& e)
 
         if(!textThreadRunning){
 
-            Engine::GetInstance()->PopState();
+            int c = file->getCurrDiagID();
+            if(file->getCurrDiagID() == 0){
+
+                Engine::GetInstance()->PopState();
+            }
         }
 
         return;

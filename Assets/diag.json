@@ -70,17 +70,28 @@
     	"faction": "Red",
     	"dialogueId" : 4,
     	"text" : "Hmmm, perhaps next time you won't be so rude",
-    	"nextDialogue": 0,
-    	"responses" : []
+    	"nextDialogue": 0, 
+    	"responses" : [
+	    {
+		"id" : 1,
+		"text" : "Bye",
+		"nextDialogue" : 0	
+	    }
+	]
     },
     
     {
     	"id": 5,
     	"faction": "Red",
-    	"dialogueId":5,
+    	"dialogueId": 5,
     	"text": "I hope to meet you again soon",
     	"nextDialogue": 0,
-    	"responses": []
+    	"responses": [{
+		
+		"id" : 1, 
+		"text" : "Bye", 
+		"nextDialogue" : 0
+	}]
     },
     {
 

@@ -140,14 +140,14 @@ void Game::update(const float& dt){
         case 2:
             textBox->setActive(true);
             textBox->setHeader("Information Screen");
-            textBox->setText("Here you will find your character details information.\n\nPress ENTER to continue...");
+            textBox->setText("Here you will find your the overview of your character information.\n\nPress ENTER to continue...");
             textBox->setPosition(GUI::p2pX(40), GUI::p2pY(30));
             break;
 
         case 3:
             textBox->setActive(true);
             textBox->setHeader("SCREEN NAVIGATION");
-            textBox->setText("You can see your skill levels, faction standings and character details by selecting the corresponding button.\n\nPress ENTER to close...");
+            textBox->setText("You can see your skill levels, faction standings and character overview by selecting the corresponding button.\n\nPress ENTER to close...");
             textBox->setPosition(GUI::p2pX(20), GUI::p2pY(1));
             break;
 
@@ -191,6 +191,9 @@ void Game::runMenuSelection(){
 
                 std::uniform_int_distribution<int> eventDistribution(1, 6);
                 int eventToss = eventDistribution(generator);
+
+                ///DEBUG
+                eventToss = 1;
 
                 getMainText()->setString("You travel into parts unknown...");
                 SDL_Delay(200);
@@ -331,7 +334,7 @@ void Game::initButtons(){
     mButtons["FACTIONS"]->setRenderText("Factions");
 
     mButtons["ATTRIBUTES"] = new GUI::Button(57.f, 60.5f, 11.8f, 4.1f, charSize);
-    mButtons["ATTRIBUTES"]->setRenderText("Character Sheet");
+    mButtons["ATTRIBUTES"]->setRenderText("Character");
 
 //    mButtons["INVENTORY"] = new GUI::Button(65.f, 65.5f, 11.8f, 4.1f, charSize);
 //    mButtons["INVENTORY"]->setRenderText("Inventory");
