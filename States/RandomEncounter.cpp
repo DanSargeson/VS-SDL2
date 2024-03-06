@@ -346,7 +346,15 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
     menu->update(e);
 
-    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN)){
+    if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_RETURN) && e.key.repeat == 0){
+
+        if(textThreadRunning){
+
+            textThreadRunning = false;
+            menu->setActive(true);
+
+            return;
+        }
 
         if(!textThreadRunning && menu->getActive()){
 
