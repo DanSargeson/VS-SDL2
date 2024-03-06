@@ -31,7 +31,6 @@ void StateData::initFonts(){
 State::State() {
 
 this->quit = false;
-//currentState = 0;
 keyTimeMax = 0.5f;
 keyTime = 0.f;
 
