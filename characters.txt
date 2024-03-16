@@ -1,5 +1,5 @@
 Dan 92809 15 156 420 3990 33 2 4 5 5 1 4 2 
-100 100 160 164 180 128 100 100 
+101 100 160 165 180 129 100 101 
 0 Iron 12 1 11 22 1 
 1 Iron 3 1 27 0 1 Iron 11 1 18 1 1 Iron 5 1 32 2 1 Iron 12 1 33 3 
 0 Rusty 12 0 6 13 1 0 Rusty 9 0 3 6 2 0 Rusty 11 0 3 6 2 0 Rusty 6 0 3 6 1 0 Rusty 11 0 4 9 2 0 Rusty 7 0 3 7 2 0 Rusty 6 0 5 10 0 0 Rusty 12 0 5 10 0 0 Rusty 5 0 3 7 2 0 Rusty 12 0 6 12 2 0 Rusty 6 0 5 10 0 0 Rusty 11 0 3 6 2 0 Rusty 10 0 4 9 1 0 Rusty 2 0 6 13 2 0 Rusty 11 0 4 9 2 0 Rusty 2 0 3 6 2 0 Rusty 5 0 3 7 2 0 Rusty 6 0 3 6 1 0 Rusty 2 0 6 12 0 0 Rusty 6 0 3 6 1 0 Rusty 11 0 4 9 2 0 Iron 5 1 7 14 2 0 Rusty 7 0 7 14 0 0 Iron 7 1 7 14 2 0 Rusty 6 0 7 14 0 0 Rusty 8 0 4 9 2 0 Rusty 4 0 3 6 2 0 Rusty 12 0 7 14 0 0 Rusty 4 0 6 13 1 0 Iron 12 1 10 20 0 0 Rusty 10 0 4 9 1 0 Rusty 12 0 6 13 1 0 Rusty 4 0 3 6 1 0 Rusty 4 0 4 9 2 0 Rusty 7 0 6 13 2 0 Rusty 10 0 5 11 2 0 Rusty 1 0 3 6 2 
@@ -32,5 +32,17 @@ kjhffjfj 92809 1 1 25 0 1 1 2 1 2 1 2 1
 100 100 45 104 110 100 100 100 
 
 
+
+
+Dan 92809 1 8 25 11 1 2 2 1 1 1 1 2 
+100 100 100 100 100 101 100 100 
+
+
+
+1 Rusty 1 0 13 0 
+dffdlfkdl 92809 1 6 50 13 3 1 2 2 2 1 1 1 
+100 100 100 101 100 100 100 100 
+
+1 White 7 0 21 0 
 
 

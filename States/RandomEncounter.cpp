@@ -34,14 +34,10 @@ RandomEncounter::RandomEncounter(int faction){
 
     int npcLevel = getRandomValue(playerLvlMin, (getActiveCharacter()->getLevel() + 3));
 
-    npc = std::make_shared<NPC>(faction, npcLevel);
+    npc = std::make_shared<NPC>(npcLevel);
 
     file = std::make_shared<LoadFiles>(filename, 0);
 
-//    npc->createDialogueComponent();
-//    npc->createFactionComponent();
-//    npc->createAttributeComponent(npcLevel, true, true);
-//    npc->createSkillComponent();
 
 //    menu.reset();
     menu = std::make_shared<GUI::Menu>();

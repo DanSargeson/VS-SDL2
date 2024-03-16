@@ -3,12 +3,12 @@
 std::vector<string> Armour::names;
 
 void Armour::initNames() {
-	Armour::names.push_back("Rusty");
-	Armour::names.push_back("Iron");
-	Armour::names.push_back("Glass");
-	Armour::names.push_back("Titanium");
-	Armour::names.push_back("Mythril");
-	Armour::names.push_back("Diamond");
+	Armour::names.push_back("White");
+	Armour::names.push_back("Black");
+	Armour::names.push_back("Red");
+	Armour::names.push_back("Blue");
+	Armour::names.push_back("Green");
+	Armour::names.push_back("Gold");
 }
 
 Armour::Armour() : Item() {

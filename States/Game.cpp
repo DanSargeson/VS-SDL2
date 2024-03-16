@@ -243,7 +243,7 @@ void Game::runMenuSelection(){
 
                    if(getData()->getActiveCharacter()->getRep(randomValue) >= 160){      ///TODO: Magic number
 
-                        Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(randomValue));
+                        Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>());
                     }
                     else{
 

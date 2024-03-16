@@ -4,6 +4,7 @@
 #include "DialogueComponent.h"
 #include "AttributeComponent.h"
 #include "SkillComponent.h"
+#include "State.h"
 
 int NPC::characterID = 0;
 
@@ -19,18 +20,39 @@ std::string NPC::getFactionStr(){
     return fact;
 }
 
-NPC::NPC(int faction, int level){
+NPC::NPC(int level){
 
 	this->createFactionComponent();
 	this->type = NPC_TYPE::PEASANT;
 
-	this->faction = faction;
+	int low = 2; ///TODO: BLACJ AND WHITE ARE 0 AND 1
+	int high = FACTIONS::TOTAL_FACTIONS - 1;
+	int randomIndex = 0;
+	   // Use std::random_device to obtain a seed for the random number generator
+                std::random_device rd;
+
+                // Use std::mt19937 as the random number generator
+                std::mt19937 gen(rd());
+
+                // Use std::uniform_int_distribution to generate random indices
+                std::uniform_int_distribution<> dis(low, high);
+
+                // Generate a random index
+                randomIndex = dis(gen);
+
+                // Access the corresponding element in the set
+//                int randomValue = numbers[randomIndex];
+
+
+
+	this->faction = randomIndex;
 	this->questGiver = false;
 	this->companion = false;
 	this->dialogue = " ";
 	this->seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
 	this->generator.seed(seed);
 
+	//TODO add a Colour counter and make this dirtribute pixels.
 	std::uniform_int_distribution<int> goldDistribution(1, 500);
 	int randomGold = goldDistribution(generator);
 

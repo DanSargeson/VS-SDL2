@@ -14,12 +14,12 @@
 vector<string> Weapon::vecNames;
 
 void Weapon::initVecNames() {
-	Weapon::vecNames.push_back("Rusty");
-	Weapon::vecNames.push_back("Iron");
-	Weapon::vecNames.push_back("Titanium");
-	Weapon::vecNames.push_back("Mythril");
-	Weapon::vecNames.push_back("Glass");
-	Weapon::vecNames.push_back("Diamond");
+	Weapon::vecNames.push_back("White");
+	Weapon::vecNames.push_back("Black");
+	Weapon::vecNames.push_back("Red");
+	Weapon::vecNames.push_back("Blue");
+	Weapon::vecNames.push_back("Green");
+	Weapon::vecNames.push_back("Gold");
 }
 
 Weapon::Weapon() : Item() {
