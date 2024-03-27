@@ -34,7 +34,38 @@ RandomEncounter::RandomEncounter(int faction){
 
     int npcLevel = getRandomValue(playerLvlMin, (getActiveCharacter()->getLevel() + 3));
 
-    npc = std::make_shared<NPC>(npcLevel);
+    npc = std::make_shared<NPC>(npcLevel, faction);
+
+    switch(faction){
+
+    case 4: ///GREEN
+        getMainText()->setBgColour(0, 100, 0, 255);
+        break;
+
+    case 3: ///BLUE
+        getMainText()->setBgColour(0, 0, 100, 255);
+        break;
+
+    case 2: ///RED
+        getMainText()->setBgColour(100, 0, 0, 255);
+        break;
+
+    case 5: ///BROWN
+        getMainText()->setBgColour(150, 75, 0, 255);
+        break;
+
+    case 6: ///AQUA
+        getMainText()->setBgColour(0, 200, 200, 255);
+        break;
+
+    case 7: ///PURPLE
+        getMainText()->setBgColour(160, 32, 240, 255);
+        break;
+
+    default:
+        getMainText()->setBgColour(0, 0, 0, 255);
+        break;
+    }
 
     file = std::make_shared<LoadFiles>(filename, 0);
 
@@ -54,6 +85,7 @@ RandomEncounter::RandomEncounter(int faction){
 
 RandomEncounter::~RandomEncounter(){
 
+    getMainText()->setBgColour(0, 0, 0, 255);
     if(textThread.joinable()){
 
         textThread.join();
@@ -385,7 +417,6 @@ void RandomEncounter::updateEvents(SDL_Event& e){
 
 void RandomEncounter::render(){
 
-    menu->render();
 
     if(textThreadRunning){
 
@@ -413,6 +444,8 @@ void RandomEncounter::render(){
 
         getEnemyText()->render();
     }
+
+    menu->render();
 }
 
 bool RandomEncounter::charm(){
