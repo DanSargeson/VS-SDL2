@@ -86,6 +86,8 @@ namespace GUI{
 
 		int getTextWidth();
 
+		void setBgColour(int r, int g, int b, int a);
+
 		int getTextHeight();
 
 		void render();
@@ -127,7 +129,9 @@ namespace GUI{
 
 		SDL_Rect mOutline;
 		SDL_Rect mFiller;
+		SDL_Rect mFactionBg;
 		SDL_Color mTextColour;
+		SDL_Color mBackgroundColour;
 		TTF_Font* mFont;
 
 		int mFontSize;

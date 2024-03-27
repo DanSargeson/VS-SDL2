@@ -263,6 +263,14 @@ GUI::Text::Text(int x, int y, int w, int h, bool border){
 	percentX = x;
 	percentY = y;
 
+
+    //FULL SCREEN FOR BACKGROUND COLOUR.
+	SDL_DisplayMode DM;
+    SDL_GetCurrentDisplayMode(0, &DM);
+    auto Width = DM.w;
+    auto Height = DM.h;
+    mFactionBg = {0, 0, Width, Height};
+
 	if (mBorder) {
 
 		mOutline.x = GUI::p2pXi(x);
@@ -278,6 +286,8 @@ GUI::Text::Text(int x, int y, int w, int h, bool border){
 
 		offsetX = 30;
 		offsetY = 20;
+
+		mBackgroundColour = { 0, 0, 0, 255 };
 	}
 	else {
 
@@ -328,6 +338,15 @@ void GUI::Text::update()
 
 }
 
+
+void GUI::Text::setBgColour(int r, int g, int b, int a){
+
+    mBackgroundColour.r = r;
+    mBackgroundColour.g = g;
+    mBackgroundColour.b = b;
+    mBackgroundColour.a = a;
+}
+
 int GUI::Text::getTextWidth() {
 
 	return mTextTexture->getWidth();
@@ -341,10 +360,13 @@ int GUI::Text::getTextHeight() {
 
 void GUI::Text::render(){
 
-	SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
+
+    SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_BLEND);
 
 	if (mBorder) {
 
+        SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), mBackgroundColour.r, mBackgroundColour.g, mBackgroundColour.b, mBackgroundColour.a);
+        SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &mFactionBg);
 		SDL_Rect bg = mOutline;
 		SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
 		SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &bg);
@@ -361,6 +383,8 @@ void GUI::Text::render(){
 			SDL_RenderDrawRect(Engine::GetInstance()->GetRenderer(), &mOutline);
 		}
 	}
+
+	SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), mTextColour.r, mTextColour.g, mTextColour.b, mTextColour.a);
 	mTextTexture->render(Engine::GetInstance()->GetRenderer(), mOutline.x + offsetX, mOutline.y + offsetY);
 	SDL_SetRenderDrawBlendMode(Engine::GetInstance()->GetRenderer(), SDL_BLENDMODE_NONE);
 }
@@ -1083,7 +1107,7 @@ void GUI::Menu::update(SDL_Event& e){
 
             detachCursor = true;
             textSelector.y += textSelector.h;
-            if((textSelector.y + textSelector.h) >= (outline.y + outline.h)){
+            if((textSelector.y + textSelector.h) > (outline.y + outline.h)){
 
                 textSelector.y = (outline.y + outline.h) - textSelector.h;
 
