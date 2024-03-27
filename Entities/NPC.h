@@ -104,7 +104,7 @@ private:
 
 public:
 
-	NPC(int level);
+	NPC(int level, int faction=-1);
 	NPC(int faction, std::string fileName, int id);
 	NPC(int faction, bool questGiver, std::string dialgoue);
 	virtual ~NPC();

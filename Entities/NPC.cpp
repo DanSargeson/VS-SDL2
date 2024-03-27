@@ -20,10 +20,13 @@ std::string NPC::getFactionStr(){
     return fact;
 }
 
-NPC::NPC(int level){
+NPC::NPC(int level, int faction){        ///TODO FACTION IS SETTING RANDOMLY HERE<<<<
 
 	this->createFactionComponent();
 	this->type = NPC_TYPE::PEASANT;
+
+
+	if(faction == -1){
 
 	int low = 2; ///TODO: BLACJ AND WHITE ARE 0 AND 1
 	int high = FACTIONS::TOTAL_FACTIONS - 1;
@@ -42,10 +45,12 @@ NPC::NPC(int level){
 
                 // Access the corresponding element in the set
 //                int randomValue = numbers[randomIndex];
-
-
-
 	this->faction = randomIndex;
+	}
+	else{
+
+        this->faction = faction;
+	}
 	this->questGiver = false;
 	this->companion = false;
 	this->dialogue = " ";
