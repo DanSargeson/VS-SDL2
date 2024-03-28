@@ -296,6 +296,8 @@ void Game::runMenuSelection(){
                 else{
                     ///menu->setActive(false);
                     getEnemyText()->setString("No Points to Spend.");
+
+                    return;
                 }
             }
 
@@ -309,6 +311,8 @@ void Game::runMenuSelection(){
                     getDynamicText()->setString("You awake feeling well rested");
                     getEnemyText()->setColour(255, 0, 0, 0);
                     getEnemyText()->setString("Lost 10 gold");
+
+                    return;
                 }
                 else{
 

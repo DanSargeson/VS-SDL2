@@ -76,3 +76,9 @@ dskjfhf 92809 2 24 330 9 2 1 1 2 1 1 4 1
 
 
 
+kjghjfd 92809 5 54 1045 225 17 1 2 2 3 1 4 1 
+100 100 -210 209 250 100 100 155 
+0 Black 10 1 8 16 2 
+1 Black 3 1 26 0 1 Black 12 1 33 2 1 Black 11 1 30 3 
+0 White 10 0 3 7 1 0 White 3 0 6 12 2 0 White 6 0 5 11 1 0 White 4 0 3 7 1 0 White 5 0 6 13 0 0 White 7 0 7 14 2 0 White 2 0 2 5 1 0 White 2 0 6 13 2 0 White 7 0 6 13 0 0 White 9 0 5 11 1 0 White 2 0 4 8 2 0 White 5 0 2 5 0 
+1 White 3 0 19 0 1 White 5 0 16 0 1 White 7 0 14 0 1 Black 9 1 22 0 1 White 11 0 15 3 

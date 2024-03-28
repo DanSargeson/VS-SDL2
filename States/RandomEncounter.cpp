@@ -15,6 +15,7 @@ RandomEncounter::RandomEncounter(int faction){
     textThreadRunning = true;
 
     textTimer = std::make_shared<GameTimer>();
+    textTimer->start();
     builderText = "";
     copyText = "";
     textMsg = "";
@@ -386,8 +387,7 @@ void RandomEncounter::updateEvents(SDL_Event& e){
             textThreadRunning = false;
             menu->setActive(true);
 
-            textTimer->start();
-
+            textTimer->restart();
             return;
         }
 
