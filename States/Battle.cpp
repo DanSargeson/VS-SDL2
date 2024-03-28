@@ -539,6 +539,7 @@ const void Battle::playerAttacks(){
                             startWinThread();
 						}
 
+                        ///TODO THIS NEEDS TO BE IT'S OWN FUNCTION!!!!
 						//ITEM ROLL
 						seed = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
 
@@ -594,7 +595,10 @@ const void Battle::playerAttacks(){
 									endMsg += tempAw->getName() + " " + tempAw->getTypeStr() + "\n";
 								}
 							}
-                        ///getDynamicText()->setString(endMsg, true, GUI::p2pY(80));
+
+
+							///TODO THINK THIS IS END OF ITEM ROLL?????
+
                         battleCloseMsg->setText(endMsg);
 						enemies.erase(enemies.begin() + choice);
 						enemyText.erase(enemyText.begin() + choice);

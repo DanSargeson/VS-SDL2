@@ -7,10 +7,10 @@ FactionComponent::FactionComponent(Entity* owner) : Component(owner){
 	mFactions.push_back(Faction(FACTIONS::WHITE));
 	mFactions.push_back(Faction(FACTIONS::RED));
 	mFactions.push_back(Faction(FACTIONS::BLUE));
-	mFactions.push_back(Faction(FACTIONS::GREEN));
-	mFactions.push_back(Faction(FACTIONS::BROWN));
-	mFactions.push_back(Faction(FACTIONS::AQUA));
+	mFactions.push_back(Faction(FACTIONS::YELLOW));
+	mFactions.push_back(Faction(FACTIONS::ORANGE));
 	mFactions.push_back(Faction(FACTIONS::PURPLE));
+	mFactions.push_back(Faction(FACTIONS::GREEN));
 }
 
 FactionComponent::~FactionComponent(){
@@ -64,9 +64,9 @@ void FactionComponent::calculateReputation(int faction) {
 
 		switch (faction) {
 
-		case FACTIONS::AQUA:
+		case FACTIONS::PURPLE:
 			//this->
-			mFactions[FACTIONS::AQUA].setLevel(REPUTATION::REVERED);
+			mFactions[FACTIONS::PURPLE].setLevel(REPUTATION::REVERED);
 			break;
 
 		case FACTIONS::BLACK:
@@ -77,21 +77,21 @@ void FactionComponent::calculateReputation(int faction) {
 
 			break;
 
-		case FACTIONS::BROWN:
+		case FACTIONS::ORANGE:
 
 			break;
 
-		case FACTIONS::GREEN:
+		case FACTIONS::YELLOW:
 
-			//GREEN ARE SUSPICIOUS AGAINST BLUE AND RED UNTIL THE PLAYER INTERVENES
+			//YELLOW ARE SUSPICIOUS AGAINST BLUE AND slightly against RED UNTIL THE PLAYER INTERVENES
 
-			mFactions[FACTIONS::GREEN].setLevel(REPUTATION::REVERED);
+			mFactions[FACTIONS::YELLOW].setLevel(REPUTATION::REVERED);
 			mFactions[FACTIONS::BLUE].setLevel(rep);
 			mFactions[FACTIONS::RED].setLevel(rep);
 
 			break;
 
-		case FACTIONS::PURPLE:
+		case FACTIONS::GREEN:
 
 			break;
 
@@ -208,8 +208,8 @@ void FactionComponent::loadFactions(int black, int white, int red, int blue, int
 	mFactions[FACTIONS::WHITE].setLevel(white);
 	mFactions[FACTIONS::RED].setLevel(red);
 	mFactions[FACTIONS::BLUE].setLevel(blue);
-	mFactions[FACTIONS::GREEN].setLevel(green);
-	mFactions[FACTIONS::BROWN].setLevel(brown);
-	mFactions[FACTIONS::AQUA].setLevel(aqua);
-	mFactions[FACTIONS::PURPLE].setLevel(purple);
+	mFactions[FACTIONS::YELLOW].setLevel(green);
+	mFactions[FACTIONS::ORANGE].setLevel(brown);
+	mFactions[FACTIONS::PURPLE].setLevel(aqua);
+	mFactions[FACTIONS::GREEN].setLevel(purple);
 }

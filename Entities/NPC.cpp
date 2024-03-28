@@ -161,16 +161,16 @@ void NPC::initBackground(SDL_Renderer* rend) {
 		fileName += "Red.png";
 		break;
 
-	case FACTIONS::AQUA:
-		fileName += "Aqua.png";
+	case FACTIONS::YELLOW:
+		fileName += "Yellow.png";
 		break;
 
 	case FACTIONS::BLUE:
 		fileName += "Blue.png";
 		break;
 
-	case FACTIONS::BROWN:
-		fileName += "Brown.png";
+	case FACTIONS::ORANGE:
+		fileName += "Orange.png";
 		break;
 
 	case FACTIONS::GREEN:

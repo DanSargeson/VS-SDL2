@@ -112,9 +112,9 @@
     {
 
         "id" : 1,
-        "faction": "Green",
+        "faction": "Yellow",
         "dialogueId" : 1,
-        "text": "Hi, I'm the GREEN leader",
+        "text": "Hi, I'm the YELLOW leader",
         "nextDialogue" : 2,
         "responses": [
             {
@@ -127,9 +127,9 @@
     {
 
         "id" : 1,
-        "faction": "Aqua",
+        "faction": "Purple",
         "dialogueId" : 1,
-        "text": "Huh? I'm the leader of the AQUA faction, get out of my way",
+        "text": "Huh? I'm the leader of the PURPLE faction, get out of my way",
         "nextDialogue" : 2,
         "responses": [
             {
@@ -143,9 +143,9 @@
 
 
         "id" : 1,
-        "faction": "Brown",
+        "faction": "Orange",
         "dialogueId" : 1,
-        "text": "BROWN tribe stronk",
+        "text": "ORANGE tribe stronk",
         "nextDialogue" : 2,
         "responses": [
             {
@@ -158,9 +158,9 @@
     {
 
         "id" : 1,
-        "faction": "Purple",
+        "faction": "Green",
         "dialogueId" : 1,
-        "text": "I am the PURPLE leader",
+        "text": "I am the GREEN leader",
         "nextDialogue" : 2,
         "responses": [
             {

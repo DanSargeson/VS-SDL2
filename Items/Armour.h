@@ -3,6 +3,8 @@
 
 #include "Item.h"
 
+const int factionWeight = 25;   ///USED TO SORT THE COLOUR
+
 enum armourType {
 	HEAD = 0,
 	CHEST,

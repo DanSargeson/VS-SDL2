@@ -14,6 +14,7 @@ RandomEncounter::RandomEncounter(int faction){
 
     textThreadRunning = true;
 
+    textTimer = std::make_shared<GameTimer>();
     builderText = "";
     copyText = "";
     textMsg = "";
@@ -38,8 +39,8 @@ RandomEncounter::RandomEncounter(int faction){
 
     switch(faction){
 
-    case 4: ///GREEN
-        getMainText()->setBgColour(0, 100, 0, 255);
+    case 4: ///YELLOW
+        getMainText()->setBgColour(100, 100, 0, 255);
         break;
 
     case 3: ///BLUE
@@ -50,16 +51,16 @@ RandomEncounter::RandomEncounter(int faction){
         getMainText()->setBgColour(100, 0, 0, 255);
         break;
 
-    case 5: ///BROWN
-        getMainText()->setBgColour(150, 75, 0, 255);
+    case 5: ///ORANGE
+        getMainText()->setBgColour(255, 165, 0, 255);
         break;
 
-    case 6: ///AQUA
-        getMainText()->setBgColour(0, 200, 200, 255);
-        break;
-
-    case 7: ///PURPLE
+    case 6: ///PURPLE
         getMainText()->setBgColour(160, 32, 240, 255);
+        break;
+
+    case 7: ///GREEN
+        getMainText()->setBgColour(0, 100, 0, 255);
         break;
 
     default:
@@ -266,6 +267,10 @@ void RandomEncounter::runMenuSelection(){
                         getData()->dynamicText->setString(msg, true, 680);
                         getData()->getActiveCharacter()->gainRep(npc->getFaction(), 5);
                         getData()->getActiveCharacter()->gainXP(totalXP);
+                        if(getData()->getActiveCharacter()->getExp() >= getData()->getActiveCharacter()->getExpNext()){
+
+                            getData()->getActiveCharacter()->levelUp();
+						}
                         //getData()->getActiveCharacter()->increaseSkill(7); //7 == SKILLS::PERSUASION
 
                         menu->setActive(false);
@@ -381,10 +386,12 @@ void RandomEncounter::updateEvents(SDL_Event& e){
             textThreadRunning = false;
             menu->setActive(true);
 
+            textTimer->start();
+
             return;
         }
 
-        if(!textThreadRunning && menu->getActive()){
+        if(!textThreadRunning && menu->getActive() && textTimer->getTicks() > 200){
 
             runMenuSelection();
 

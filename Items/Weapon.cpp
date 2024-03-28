@@ -13,6 +13,11 @@
 
 vector<string> Weapon::vecNames;
 
+
+///Rock/Paper/Scissors. RED > GREEN > BLUE > RED
+/// WHITE/BLACK are their own thing, they are each effective against the base colours but weak against gold.
+/// GOLD beats white/black. Normal against red/green/blue
+
 void Weapon::initVecNames() {
 	Weapon::vecNames.push_back("White");
 	Weapon::vecNames.push_back("Black");

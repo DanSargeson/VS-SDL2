@@ -3,7 +3,7 @@
 
 int FactionEncounter::position = 1;
 
-FactionEncounter::FactionEncounter(){
+FactionEncounter::FactionEncounter(int faction){
 
     firstEncounter = true;
 
@@ -21,7 +21,7 @@ FactionEncounter::FactionEncounter(){
 
     json_file = "Assets/diag.json";
 
-    npc = std::make_shared<NPC>(1); // TODO:: NEED TO FIX THIS
+    npc = std::make_shared<NPC>(1, faction); // TODO:: NEED TO FIX THIS
     file = std::make_shared<LoadFiles>(m_fileName, 1);
 
     npc->createDialogueComponent();
@@ -186,7 +186,6 @@ void FactionEncounter::refreshGUI(){
 void FactionEncounter::render()
 {
 
-    menu->render();
     if(textThreadRunning){
 
         getMainText()->setString(builderText);
@@ -208,5 +207,7 @@ void FactionEncounter::render()
 
         getDynamicText()->render();
     }
+
+    menu->render();
 }
 

@@ -16,10 +16,10 @@ enum FACTIONS {
 	WHITE,
 	RED,
 	BLUE,
-	GREEN,
-	BROWN,
-	AQUA,
+	YELLOW,
+	ORANGE,
 	PURPLE,
+	GREEN,
 	TOTAL_FACTIONS
 };
 
@@ -109,8 +109,8 @@ private:
 
 			switch (faction) {
 
-			case FACTIONS::AQUA:
-				this->name = "Aqua";
+			case FACTIONS::PURPLE:
+				this->name = "Purple";
 				break;
 
 			case FACTIONS::BLACK:
@@ -121,16 +121,16 @@ private:
 				this->name = "Blue";
 				break;
 
-			case FACTIONS::BROWN:
-				this->name = "Brown";
+			case FACTIONS::ORANGE:
+				this->name = "Orange";
 				break;
 
 			case FACTIONS::GREEN:
 				this->name = "Green";
 				break;
 
-			case FACTIONS::PURPLE:
-				this->name = "Purple";
+			case FACTIONS::YELLOW:
+				this->name = "Yellow";
 				break;
 
 			case FACTIONS::RED:

@@ -192,9 +192,6 @@ void Game::runMenuSelection(){
                 std::uniform_int_distribution<int> eventDistribution(1, 6);
                 int eventToss = eventDistribution(generator);
 
-                ///DEBUG
-                eventToss = 1;
-
                 getMainText()->setString("You travel into parts unknown...");
                 SDL_Delay(200);
                 StateData::GetInstance()->getActiveCharacter()->travel();
@@ -205,33 +202,57 @@ void Game::runMenuSelection(){
 
                /*** BEGIN RANDOM VALUE **/
                std::vector<int> numbers = {2, 3, 4};
-                int randomValue = getRandomValue(0, numbers.size() - 1);
+                int randomValue = getRandomValue(numbers[0], numbers.back());
                 /*** END RANDOM VALUE **/
 
 
                 if(getData()->getActiveCharacter()->getRep(randomValue) >= 110){
 
+                ///TODO Bring this back, this is unlocking the secondary
                     switch(randomValue){
 
                         case 2:
-                            //RED, can include
-                            numbers.push_back(5);   //BROWN, NEEDS TO CHANGE!!
+                            //RED, decreases YELLOW factions rank
+                            if(getData()->getActiveCharacter()->getRep(3) >= 110){
+
+                                numbers.push_back(6);   ///PURPLE
+                            }
+                            else if(getData()->getActiveCharacter()->getRep(4) >= 100){
+
+                                numbers.push_back(5);   ///ORANGE
+                            }
                             break;
 
                         case 3:
                             //BLUE
-                            numbers.push_back(6);     //AQUA NEED TO CHANGE!!
+                            if(getData()->getActiveCharacter()->getRep(2) >= 110){
+
+                                numbers.push_back(6);   ///PURPLE
+                            }
+                            else if(getData()->getActiveCharacter()->getRep(4) >= 100){
+
+                                numbers.push_back(7);   ///ORANGE
+                            }
+                            ///numbers.push_back(6);     //PURPLE NEED TO CHANGE!!
                             break;
 
                         case 4:
-                            //GREEN;
-                            numbers.push_back(7); //PURPLE NEED TO CHANGE!!
+                            //YELLOW;
+                            if(getData()->getActiveCharacter()->getRep(2) >= 110){
+
+                                numbers.push_back(5);   ///ORANGE
+                            }
+                            else if(getData()->getActiveCharacter()->getRep(3) >= 100){
+
+                                numbers.push_back(7);   ///GREEN
+                            }
+                            ///numbers.push_back(7); //GREEN NEED TO CHANGE!!
                             break;
                     }
-                }
 
-                int randomIndex = getRandomValue(0, numbers.size() - 1);
-                randomValue = numbers[randomIndex];
+                    int randomIndex = getRandomValue(0, numbers.size() - 1);
+                    randomValue = numbers[randomIndex];
+                }
 
 
 //               if(eventToss <= 2){
@@ -243,7 +264,7 @@ void Game::runMenuSelection(){
 
                    if(getData()->getActiveCharacter()->getRep(randomValue) >= 160){      ///TODO: Magic number
 
-                        Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>());
+                        Engine::GetInstance()->AddState(std::make_shared<FactionEncounter>(randomValue));
                     }
                     else{
 
@@ -269,7 +290,6 @@ void Game::runMenuSelection(){
                 if(getActiveCharacter()->getAttributePoints() > 0){
 
                     //TODO: INCREASE ATTRIBUTE POINTS
-
                     Engine::GetInstance()->AddState(std::make_shared<IncreaseAttributes>());
 
                 }
@@ -474,10 +494,10 @@ void Game::render(){
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 0, 0, 0, 255);
     SDL_RenderClear(Engine::GetInstance()->GetRenderer());
-    menu->render();
     getMainText()->render();
     getDynamicText()->render();
     getEnemyText()->render();
+    menu->render();
 
 
     for (auto i : mButtons) {

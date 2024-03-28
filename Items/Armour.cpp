@@ -3,6 +3,12 @@
 std::vector<string> Armour::names;
 
 void Armour::initNames() {
+
+    ///TODO:
+    /// FACTIONS ARE WHTA YOU COLECT, THEY AFFECT WHAT COLOURS YOU GET BASE IT ON RGB == 100 to start, they unlock secpmd off that
+    ///Start on 40 depending on if you pikc RGB, corruption  == - 1of that
+
+
 	Armour::names.push_back("White");
 	Armour::names.push_back("Black");
 	Armour::names.push_back("Red");
